@@ -27,6 +27,7 @@ import frc.robot.subsystems.Elevator;
 import frc.robot.subsystems.Claw;
 import frc.robot.subsystems.SSM;
 import frc.robot.subsystems.SSM.States;
+import frc.robot.subsystems.Climber;
 // import frc.robot.subsystems.PoseEstimator;
 
 public class RobotContainer {
@@ -40,6 +41,7 @@ public class RobotContainer {
     private final SSM m_SSM = new SSM(m_arm, m_elevator);        // Defaults to DISABLED - no action until trigger
     // private final SSM m_SSM = new SSM(m_arm, m_elevator, SSM.States.L1);   // Alternative constructor, starts moving to initial state given 
     public final CommandSwerveDrivetrain drivetrain;
+    public final Climber m_Climber = new Climber();
 
     private final SendableChooser<Command> autoChooser;
 
@@ -115,6 +117,9 @@ public class RobotContainer {
         m_operatorBoard.button(5)
             .and(driverController.leftTrigger()) // This ensures both conditions must be met
             .onTrue(new InstantCommand(() -> m_SSM.setState(SSM.States.BARGE)));
+        m_operatorBoard.button(10)
+            .and(driverController.pov(270)) // This ensures both conditions must be met
+            .onTrue(new InstantCommand(() ->m_Climber.prepClimb(.50*ClimberConstants.kWheelRotRatio, .25*ClimberConstants.kRotationGearRatio)));
 
         driverController.leftTrigger().onFalse(new InstantCommand(() -> m_SSM.setState(SSM.States.LOADINGSTATION)));
     }
