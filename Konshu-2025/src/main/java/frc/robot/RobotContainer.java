@@ -19,14 +19,14 @@ import edu.wpi.first.wpilibj2.command.button.CommandGenericHID;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 import frc.robot.constants.*;
-import frc.robot.command.DriveCommands;
+import frc.robot.commands.DriveCommands;
 import frc.robot.subsystems.Arm;
 import frc.robot.subsystems.CommandSwerveDrivetrain;
 import frc.robot.generated.TunerConstants;
 import frc.robot.subsystems.Elevator;
 import frc.robot.subsystems.Claw;
-import frc.robot.subsystems.SSM2;
-import frc.robot.subsystems.SSM2.States;
+import frc.robot.subsystems.SSM;
+import frc.robot.subsystems.SSM.States;
 // import frc.robot.subsystems.PoseEstimator;
 
 public class RobotContainer {
@@ -37,9 +37,9 @@ public class RobotContainer {
     private final Arm m_arm = new Arm();
     private final Claw m_claw = new Claw();
     private final CommandGenericHID m_operatorBoard = new CommandGenericHID(1);
-    private final SSM2 m_SSM2 = new SSM2(m_arm, m_elevator);        // Defaults to DISABLED - no action until trigger
+    private final SSM m_SSM2 = new SSM(m_arm, m_elevator);        // Defaults to DISABLED - no action until trigger
     // private final SSM2 m_SSM2 = new SSM2(m_arm, m_elevator, SSM2.States.L1);   // Alternative constructor, starts moving to initial state given
-    private SSM2.States m_queuedState = SSM2.States.DISABLED;   
+    private SSM.States m_queuedState = SSM.States.DISABLED;   
     public final CommandSwerveDrivetrain drivetrain;
 
     private final SendableChooser<Command> autoChooser;
@@ -124,27 +124,27 @@ public class RobotContainer {
         // Create a trigger for another button press while the left trigger is held down
         m_operatorBoard.button(12)
             .and(driverController.leftTrigger()) // This ensures both conditions must be met
-            .onTrue(new InstantCommand(() -> m_SSM2.setState(SSM2.States.L1)));
+            .onTrue(new InstantCommand(() -> m_SSM2.setState(SSM.States.L1)));
         m_operatorBoard.button(9)
             .and(driverController.leftTrigger()) // This ensures both conditions must be met
-            .onTrue(new InstantCommand(() -> m_SSM2.setState(SSM2.States.L2)));
+            .onTrue(new InstantCommand(() -> m_SSM2.setState(SSM.States.L2)));
         m_operatorBoard.button(6)
             .and(driverController.leftTrigger()) // This ensures both conditions must be met
-            .onTrue(new InstantCommand(() -> m_SSM2.setState(SSM2.States.L3)));
+            .onTrue(new InstantCommand(() -> m_SSM2.setState(SSM.States.L3)));
         m_operatorBoard.button(3)
             .and(driverController.leftTrigger()) // This ensures both conditions must be met
-            .onTrue(new InstantCommand(() -> m_SSM2.setState(SSM2.States.L4)));
+            .onTrue(new InstantCommand(() -> m_SSM2.setState(SSM.States.L4)));
         m_operatorBoard.button(1)
             .and(driverController.leftTrigger()) // This ensures both conditions must be met
-            .onTrue(new InstantCommand(() -> m_SSM2.setState(SSM2.States.LOADINGSTATION)));
+            .onTrue(new InstantCommand(() -> m_SSM2.setState(SSM.States.LOADINGSTATION)));
         m_operatorBoard.button(4)
             .and(driverController.leftTrigger()) // This ensures both conditions must be met
-            .onTrue(new InstantCommand(() -> m_SSM2.setState(SSM2.States.PROCESSOR)));
+            .onTrue(new InstantCommand(() -> m_SSM2.setState(SSM.States.PROCESSOR)));
         m_operatorBoard.button(5)
             .and(driverController.leftTrigger()) // This ensures both conditions must be met
-            .onTrue(new InstantCommand(() -> m_SSM2.setState(SSM2.States.BARGE)));
+            .onTrue(new InstantCommand(() -> m_SSM2.setState(SSM.States.BARGE)));
 
-        driverController.leftTrigger().onFalse(new InstantCommand(() -> m_SSM2.setState(SSM2.States.LOADINGSTATION)));
+        driverController.leftTrigger().onFalse(new InstantCommand(() -> m_SSM2.setState(SSM.States.LOADINGSTATION)));
         // m_operatorBoard.button(9).onTrue(new InstantCommand(() -> setQueuedState(SSM2.States.L2)))
         //     .driverController.leftTrigger().onTrue((new InstantCommand(() -> m_SSM2.setState(SSM2.States.L2))));
         // m_operatorBoard.button(6).onTrue(new InstantCommand(() -> setQueuedState(SSM2.States.L3)))
