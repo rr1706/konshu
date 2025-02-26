@@ -37,9 +37,8 @@ public class RobotContainer {
     private final Arm m_arm = new Arm();
     private final Claw m_claw = new Claw();
     private final CommandGenericHID m_operatorBoard = new CommandGenericHID(1);
-    private final SSM m_SSM2 = new SSM(m_arm, m_elevator);        // Defaults to DISABLED - no action until trigger
-    // private final SSM2 m_SSM2 = new SSM2(m_arm, m_elevator, SSM2.States.L1);   // Alternative constructor, starts moving to initial state given
-    private SSM.States m_queuedState = SSM.States.DISABLED;   
+    private final SSM m_SSM = new SSM(m_arm, m_elevator);        // Defaults to DISABLED - no action until trigger
+    // private final SSM m_SSM = new SSM(m_arm, m_elevator, SSM.States.L1);   // Alternative constructor, starts moving to initial state given 
     public final CommandSwerveDrivetrain drivetrain;
 
     private final SendableChooser<Command> autoChooser;
@@ -85,89 +84,46 @@ public class RobotContainer {
         // driverController.x().onTrue(drivetrain.setControl(() -> PositionVoltage(6)));
         
         driverController.b().onTrue(new InstantCommand(() -> m_claw.runAlgaeIn(-.7)));
-        driverController.a().onTrue(new InstantCommand(() -> m_claw.runCoralIn(.7)).andThen(new InstantCommand(() -> m_SSM2.setState(States.LOADINGSTATION))))
+        driverController.a().onTrue(new InstantCommand(() -> m_claw.runCoralIn(.7)).andThen(new InstantCommand(() -> m_SSM.setState(States.LOADINGSTATION))))
             .onFalse(new InstantCommand(() -> m_claw.runCoralIn(0.2))); 
 
         driverController.rightBumper().onTrue(new InstantCommand(() -> m_claw.runAlgaeIn(.7))
-            .andThen(new InstantCommand(() -> m_SSM2.setState(States.GROUNDALGAE))));
+            .andThen(new InstantCommand(() -> m_SSM.setState(States.GROUNDALGAE))));
  
         driverController.rightTrigger().onTrue(new InstantCommand(() -> m_claw.runAlgaeIn(-.7))
             .andThen(new InstantCommand(() ->  m_claw.runCoralOut(1.0))));
 
-        // Set new queued state to be used in the next SSM2 periodic call
-        // driverController.leftTrigger().onTrue((new InstantCommand(() -> m_SSM2.setState(m_queuedState)))); 
-
-// 2DO: See if this works to revert to L1 when trigger is released
-        // Set new queued state to be used in the next SSM2 periodic call, revert to stow on trigger release
-
-
-        // Store the button push so it's ready to use when the trigger is pulled
-        // m_operatorBoard.button(12).onTrue(new InstantCommand(() -> setQueuedState(SSM2.States.L1)));
-        // m_operatorBoard.button(9).onTrue(new InstantCommand(() -> setQueuedState(SSM2.States.L2)));
-        // m_operatorBoard.button(6).onTrue(new InstantCommand(() -> setQueuedState(SSM2.States.L3)));
-        // m_operatorBoard.button(3).onTrue(new InstantCommand(() -> setQueuedState(SSM2.States.L4)));
-        // m_operatorBoard.button(1).onTrue(new InstantCommand(() -> setQueuedState(SSM2.States.LOADINGSTATION)));
-        // m_operatorBoard.button(4).onTrue(new InstantCommand(() -> setQueuedState(SSM2.States.PROCESSOR)));
-        // m_operatorBoard.button(5).onTrue(new InstantCommand(() -> setQueuedState(SSM2.States.BARGE)));
-
-
-// 2DO: See if this works to change state when button pushed AND trigger is held
-
-        // m_operatorBoard.button(12).onTrue(new InstantCommand(() -> setQueuedState(SSM2.States.L1)
-        //     .driverController.leftTrigger().onTrue((new InstantCommand(() -> m_SSM2.setState(SSM2.States.L1))))));
-        // Create a trigger for when the left trigger is held down
-        // Trigger leftTriggerHeld = new Trigger(() -> driverController.leftTrigger().getAsBoolean());
-
-        // leftTriggerHeld.onFalse((new InstantCommand(() -> m_SSM2.setState(States.LOADINGSTATION))));
-        // .onFalse((new InstantCommand(() -> m_SSM2.setState(SSM2.States.L1))));  
-
         // Create a trigger for another button press while the left trigger is held down
         m_operatorBoard.button(12)
             .and(driverController.leftTrigger()) // This ensures both conditions must be met
-            .onTrue(new InstantCommand(() -> m_SSM2.setState(SSM.States.L1)));
+            .onTrue(new InstantCommand(() -> m_SSM.setState(SSM.States.L1)));
         m_operatorBoard.button(9)
             .and(driverController.leftTrigger()) // This ensures both conditions must be met
-            .onTrue(new InstantCommand(() -> m_SSM2.setState(SSM.States.L2)));
+            .onTrue(new InstantCommand(() -> m_SSM.setState(SSM.States.L2)));
         m_operatorBoard.button(6)
             .and(driverController.leftTrigger()) // This ensures both conditions must be met
-            .onTrue(new InstantCommand(() -> m_SSM2.setState(SSM.States.L3)));
+            .onTrue(new InstantCommand(() -> m_SSM.setState(SSM.States.L3)));
         m_operatorBoard.button(3)
             .and(driverController.leftTrigger()) // This ensures both conditions must be met
-            .onTrue(new InstantCommand(() -> m_SSM2.setState(SSM.States.L4)));
+            .onTrue(new InstantCommand(() -> m_SSM.setState(SSM.States.L4)));
         m_operatorBoard.button(1)
             .and(driverController.leftTrigger()) // This ensures both conditions must be met
-            .onTrue(new InstantCommand(() -> m_SSM2.setState(SSM.States.LOADINGSTATION)));
+            .onTrue(new InstantCommand(() -> m_SSM.setState(SSM.States.LOADINGSTATION)));
         m_operatorBoard.button(4)
             .and(driverController.leftTrigger()) // This ensures both conditions must be met
-            .onTrue(new InstantCommand(() -> m_SSM2.setState(SSM.States.PROCESSOR)));
+            .onTrue(new InstantCommand(() -> m_SSM.setState(SSM.States.PROCESSOR)));
         m_operatorBoard.button(5)
             .and(driverController.leftTrigger()) // This ensures both conditions must be met
-            .onTrue(new InstantCommand(() -> m_SSM2.setState(SSM.States.BARGE)));
+            .onTrue(new InstantCommand(() -> m_SSM.setState(SSM.States.BARGE)));
 
-        driverController.leftTrigger().onFalse(new InstantCommand(() -> m_SSM2.setState(SSM.States.LOADINGSTATION)));
-        // m_operatorBoard.button(9).onTrue(new InstantCommand(() -> setQueuedState(SSM2.States.L2)))
-        //     .driverController.leftTrigger().onTrue((new InstantCommand(() -> m_SSM2.setState(SSM2.States.L2))));
-        // m_operatorBoard.button(6).onTrue(new InstantCommand(() -> setQueuedState(SSM2.States.L3)))
-        //     .driverController.leftTrigger().onTrue((new InstantCommand(() -> m_SSM2.setState(SSM2.States.L3))));
-        // m_operatorBoard.button(3).onTrue(new InstantCommand(() -> setQueuedState(SSM2.States.L4)))
-        //     .driverController.leftTrigger().onTrue((new InstantCommand(() -> m_SSM2.setState(SSM2.States.L4))));
-        // m_operatorBoard.button(1).onTrue(new InstantCommand(() -> setQueuedState(SSM2.States.LOADINGSTATION)))
-        //     .driverController.leftTrigger().onTrue((new InstantCommand(() -> m_SSM2.setState(SSM2.States.LOADINGSTATION))));
-        // m_operatorBoard.button(4).onTrue(new InstantCommand(() -> setQueuedState(SSM2.States.PROCESSOR)))
-        //     .driverController.leftTrigger().onTrue((new InstantCommand(() -> m_SSM2.setState(SSM2.States.PROCESSOR))));
-        // m_operatorBoard.button(5).onTrue(new InstantCommand(() -> setQueuedState(SSM2.States.BARGE)))
-        //     .driverController.leftTrigger()onTrue((new InstantCommand(() -> m_SSM2.setState(SSM2.States.BARGE))));
-
+        driverController.leftTrigger().onFalse(new InstantCommand(() -> m_SSM.setState(SSM.States.LOADINGSTATION)));
     }
 
 
     public void configureNamedCommands() {
-
-
-        NamedCommands.registerCommand("Score", new InstantCommand(() -> m_SSM2.setState(States.L4)).andThen(new WaitCommand(0.9)).andThen((new InstantCommand(() -> m_claw.runCoralOut(.7)))));
-        NamedCommands.registerCommand("LoadingStation",new InstantCommand(() -> m_claw.runCoralIn(.7)).andThen(new InstantCommand(() -> m_SSM2.setState(States.LOADINGSTATION))));
+        NamedCommands.registerCommand("Score", new InstantCommand(() -> m_SSM.setState(States.L4)).andThen(new WaitCommand(0.9)).andThen((new InstantCommand(() -> m_claw.runCoralOut(.7)))));
+        NamedCommands.registerCommand("LoadingStation",new InstantCommand(() -> m_claw.runCoralIn(.7)).andThen(new InstantCommand(() -> m_SSM.setState(States.LOADINGSTATION))));
         NamedCommands.registerCommand("ClawLowSpeed",new InstantCommand(() -> m_claw.runCoralIn(.2)));
-
     }
 
 
