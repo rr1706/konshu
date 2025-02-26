@@ -16,4 +16,29 @@ public class IntakeConstants {
     public static final double kIntakeHandoff = 1.0;
     public static final double kRollersInSpeed = 1.0;
     public static final double kRollersOutSpeed = 1.0;
+
+    public static final double kPAlgaeIntake = 1.0;
+    public static final double kDAlgaeIntake = 1.0;
+    public static final double kIAlgaeIntake = 1.0;
+    public static final double kAAlgaeIntake = 1.0;
+    public static final double kGAlgaeIntake = 1.0;
+    public static final double kSAlgaeIntake = 1.0;
+    public static final double kVAlgaeIntake = 1.0;
+    public static final double kAccelerationAglaeIntake = 1.0;
+    public static final double kVelocityAglaeIntake = 1.0;
+
+    public static final double kUpperLimit = 1.0;
+    public static final double kLowerLimit = 1.0;
+
+    public static final double kAlgaeIntakeNeutral = 1.0; 
+    public static final double kStatorCurrent = 80.0;
+    public static final double kSupplyCurrent = 40.0;
+
+
+
+
+
+    
+
+
 }
