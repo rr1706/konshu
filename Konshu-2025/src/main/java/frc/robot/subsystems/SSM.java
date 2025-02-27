@@ -53,6 +53,7 @@ public class SSM extends SubsystemBase{
 
         if (m_setpoint == States.DISABLED) return;
 
+        // Adjust the slew rate based on the setpoint
         switch (m_setpoint) {
             case L4:
             case BARGE:
@@ -98,23 +99,10 @@ public class SSM extends SubsystemBase{
     }
 
 
-    double map(double x, double in_min, double in_max, double out_min, double out_max) {
-      return (x - in_min) * (out_max - out_min) / (in_max - in_min) + out_min;
-    }
-
-    public void periodic() {
+     public void periodic() {
 
         if (m_setpoint != m_queuedSetpoint) newState(m_queuedSetpoint);  // Check for new state commanded
         if (m_setpoint == States.DISABLED) return;
-
-        // if ((m_es > ElevatorConstants.kElevatorL3)&&(m_es < ElevatorConstants.kElevatorBarge)) {
-        //     DriveCommands.updateSlew(
-        //         map(m_es, ElevatorConstants.kElevatorL3, ElevatorConstants.kElevatorBarge, 10.0, 3.4),
-        //         map(m_es, ElevatorConstants.kElevatorL3, ElevatorConstants.kElevatorBarge, 10.0, 3.4),
-        //         map(m_es, ElevatorConstants.kElevatorL3, ElevatorConstants.kElevatorBarge, 30.0, 15.0));
-        // } else DriveCommands.updateSlew(10.0, 10.0, 30.0);
-        // SmartDashboard.putNumber("slewx&y", map(m_es, ElevatorConstants.kElevatorL3, ElevatorConstants.kElevatorBarge, 10.0, 3.4));
-        // SmartDashboard.putNumber("slewr", map(m_es, ElevatorConstants.kElevatorL3, ElevatorConstants.kElevatorBarge, 30.0, 15.0));
 
         if (m_armPauseHigh && (m_elevator.getPosition() > ElevatorConstants.kElevatorHighDanger)) {           // Elevator going up
             m_arm.setPosition(m_as);                     // Cleared, continue to final setpoint

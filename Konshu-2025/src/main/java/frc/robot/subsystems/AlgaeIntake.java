@@ -1,5 +1,4 @@
 package frc.robot.subsystems;
-import com.ctre.phoenix6.controls.Follower;
 import com.ctre.phoenix6.controls.MotionMagicVoltage;
 import com.ctre.phoenix6.hardware.TalonFX;
 import com.ctre.phoenix6.signals.GravityTypeValue;
@@ -8,30 +7,43 @@ import com.ctre.phoenix6.StatusSignal;
 import com.ctre.phoenix6.configs.*;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import frc.robot.constants.ElevatorConstants;
 import frc.robot.constants.IntakeConstants;
+
+import com.ctre.phoenix.motorcontrol.TalonSRXControlMode;
+import com.ctre.phoenix.motorcontrol.can.TalonSRX;
+import com.ctre.phoenix.motorcontrol.can.TalonSRXConfiguration;
+
+// Example usage of a TalonSRX motor controller
+//TalonSRX motor = new TalonSRX(0); // creates a new TalonSRX with ID 0
+
+//TalonSRXConfiguration config = new TalonSRXConfiguration();
+//config.peakCurrentLimit = 40; // the peak current, in amps
+//config.peakCurrentDuration = 1500; // the time at the peak current before the limit triggers, in ms
+//config.continuousCurrentLimit = 30; // the current to maintain if the peak limit is triggered
+//motor.configAllSettings(config); // apply the config settings; this selects the quadrature encoder
+
+//motor.set(TalonSRXControlMode.PercentOutput, 0.5); // runs the motor at 50% power
 
 
 public class AlgaeIntake extends SubsystemBase{
-    private final TalonFX m_AlgaeIntakeFX = new TalonFX(15);
+    private final TalonFX m_algaeintakeFX = new TalonFX(15);
+    TalonSRX m_algaeintakeSRX = new TalonSRX(16);
+    TalonSRXConfiguration config = new TalonSRXConfiguration();
     public double m_setPoint = getPosition();
-    private double m_ffvolts = 0;
-    private SoftwareLimitSwitchConfigs m_limits;
 
-    
     public AlgaeIntake() {
 
-        m_AlgaeIntakeFX.getConfigurator().apply(new CurrentLimitsConfigs()
+        m_algaeintakeFX.getConfigurator().apply(new CurrentLimitsConfigs()
         .withStatorCurrentLimit(IntakeConstants.kStatorCurrent)
         .withStatorCurrentLimitEnable(true)
         .withSupplyCurrentLimit(IntakeConstants.kSupplyCurrent)
         .withSupplyCurrentLimitEnable(true));
 
-        m_AlgaeIntakeFX.getConfigurator().apply(new MotionMagicConfigs()
+        m_algaeintakeFX.getConfigurator().apply(new MotionMagicConfigs()
         .withMotionMagicAcceleration(IntakeConstants.kAccelerationAglaeIntake)
         .withMotionMagicCruiseVelocity(IntakeConstants.kVelocityAglaeIntake));
     
-        m_AlgaeIntakeFX.getConfigurator().apply( new Slot0Configs()
+        m_algaeintakeFX.getConfigurator().apply( new Slot0Configs()
         .withKP(IntakeConstants.kPAlgaeIntake)
         .withKI(IntakeConstants.kIAlgaeIntake)
         .withKD(IntakeConstants.kDAlgaeIntake)
@@ -39,50 +51,52 @@ public class AlgaeIntake extends SubsystemBase{
         .withKS(IntakeConstants.kSAlgaeIntake)
         .withKV(IntakeConstants.kVAlgaeIntake)
         .withKA(IntakeConstants.kAAlgaeIntake));
-
-        m_AlgaeIntakeFX.getConfigurator().apply(m_limits = new SoftwareLimitSwitchConfigs()
+        
+        m_algaeintakeFX.getConfigurator().apply(new SoftwareLimitSwitchConfigs()
         .withForwardSoftLimitEnable(true)
-        .withForwardSoftLimitThreshold(IntakeConstants.kUpperLimit/ElevatorConstants.kInchPerRotation)
+        .withForwardSoftLimitThreshold(IntakeConstants.kUpperLimit/IntakeConstants.kInchPerRotation)
         .withReverseSoftLimitEnable(true)
-        .withReverseSoftLimitThreshold(IntakeConstants.kLowerLimit/ElevatorConstants.kInchPerRotation));
+        .withReverseSoftLimitThreshold(IntakeConstants.kLowerLimit/IntakeConstants.kInchPerRotation));
 
-        m_AlgaeIntakeFX.setNeutralMode(NeutralModeValue.Brake);
-                                        
+        m_algaeintakeFX.setNeutralMode(NeutralModeValue.Brake); 
+        
+        config.peakCurrentLimit = 40; // the peak current, in amps
+        config.peakCurrentDuration = 1500; // the time at the peak current before the limit triggers, in ms
+        config.continuousCurrentLimit = 30; // the current to maintain if the peak limit is triggered
+        m_algaeintakeSRX.configAllSettings(config); // apply the config settings; this selects the quadrature encoder
     }
     
-
-
-    public double getPosition() {      //make own inch per rotation for intake
-        return (ElevatorConstants.kInchPerRotation*m_AlgaeIntakeFX.getPosition().getValueAsDouble());
-
-        }
-    public void setPosition(double position){        
-        m_setPoint = position;
-        m_AlgaeIntakeFX.setControl(new MotionMagicVoltage(position/ElevatorConstants.kInchPerRotation).withFeedForward(m_ffvolts).withOverrideBrakeDurNeutral(true));
+    public double getPosition() {      //Inches
+        return (IntakeConstants.kInchPerRotation*m_algaeintakeFX.getPosition().getValueAsDouble());
     }
-    public void enableLimits(boolean limitsState){
-        m_limits.ReverseSoftLimitEnable = limitsState;
-        m_limits.ForwardSoftLimitEnable = limitsState;
-        m_AlgaeIntakeFX.getConfigurator().apply(m_limits);
-    } 
+
+    public void setPosition(double position) {       // Inches  
+        m_setPoint = position;
+        m_algaeintakeFX.setControl(new MotionMagicVoltage(position/IntakeConstants.kInchPerRotation));
+    }
+
+    public void setRollers(double speed) {
+        m_algaeintakeSRX.set(TalonSRXControlMode.PercentOutput, IntakeConstants.kSpeed);
+    }
     
     public void stop() {
-        m_AlgaeIntakeFX.set(0);
+        m_algaeintakeFX.set(0);
     }
 
     @SuppressWarnings("rawtypes")
     public StatusSignal getCurrent() {
-        return (m_AlgaeIntakeFX.getSupplyCurrent());
+        return (m_algaeintakeFX.getSupplyCurrent());
     }
-   /*public void jogging(boolean direction){
-        if (direction == true){
-            setPosition(getPosition()+0.5*ElevatorConstants.kInchPerRotation);
+
+   public void jogging(boolean direction){
+        if (direction == true) {
+            setPosition(getPosition()+0.5);
         }
-        else{
-            setPosition(getPosition()-0.5*ElevatorConstants.kInchPerRotation);
+        else {
+            setPosition(getPosition()-0.5);
         }
 
-    }*/
+    }
 
     @Override
     public void periodic() {
