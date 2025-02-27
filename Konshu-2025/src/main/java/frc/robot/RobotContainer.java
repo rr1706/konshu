@@ -28,6 +28,7 @@ import frc.robot.subsystems.Claw;
 import frc.robot.subsystems.SSM;
 import frc.robot.subsystems.SSM.States;
 import frc.robot.subsystems.AlgaeIntake;
+import frc.robot.subsystems.Climber;
 // import frc.robot.subsystems.PoseEstimator;
 
 public class RobotContainer {
