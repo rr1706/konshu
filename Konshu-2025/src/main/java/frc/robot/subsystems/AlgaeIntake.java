@@ -76,16 +76,16 @@ public class AlgaeIntake extends SubsystemBase{
     }
 
     public void setRollers(double speed) {
-        m_algaeintakeSRX.set(TalonSRXControlMode.PercentOutput, IntakeConstants.kSpeed);
+        m_algaeintakeSRX.set(TalonSRXControlMode.PercentOutput, speed);
     }
     
     public void stop() {
         m_algaeintakeFX.set(0);
     }
 
-    @SuppressWarnings("rawtypes")
-    public StatusSignal getCurrent() {
-        return (m_algaeintakeFX.getSupplyCurrent());
+    // @SuppressWarnings("rawtypes")
+    public double getCurrent() {
+        return (m_algaeintakeFX.getSupplyCurrent().getValueAsDouble());
     }
 
    public void jogging(boolean direction){
@@ -101,7 +101,7 @@ public class AlgaeIntake extends SubsystemBase{
     @Override
     public void periodic() {
         SmartDashboard.putNumber("Algae Intake Position", getPosition());
-        SmartDashboard.putNumber("Algae Intake Current", getCurrent().getValueAsDouble());
+        SmartDashboard.putNumber("Algae Intake Current", getCurrent());
         SmartDashboard.putNumber("Algae Intake Set Point", m_setPoint);
     }
     }
