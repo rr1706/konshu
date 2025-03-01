@@ -110,10 +110,10 @@ public class SSM extends SubsystemBase{
         } else if (m_armPauseLow && (m_elevator.getPosition() > ElevatorConstants.kElevatorLowDanger)) {      // Elevator going up
             m_arm.setPosition(m_as);                     // Cleared, continue to final setpoint
             m_armPauseLow = false;
-        } else if (m_elevatorPauseHigh && (m_arm.getPosition() < ArmConstants.kArmHighDanger)) {              // Elevator going down
+        } else if (m_elevatorPauseHigh && (m_arm.getPosition() > ArmConstants.kArmHighDanger)) {              // Elevator going down
             m_elevator.setPosition(m_es);                // Cleared, continue to final setpoint
             m_elevatorPauseHigh = false;
-        } else if (m_elevatorPauseLow && (m_arm.getPosition() > ArmConstants.kArmLowDanger)) {                // Elevator going down
+        } else if (m_elevatorPauseLow && (m_arm.getPosition() < ArmConstants.kArmLowDanger)) {                // Elevator going down
             m_elevator.setPosition(m_es);                // Cleared, continue to final setpoint
             m_elevatorPauseLow = false;
         }
