@@ -3,6 +3,7 @@ import com.ctre.phoenix6.controls.Follower;
 import com.ctre.phoenix6.controls.MotionMagicVoltage;
 import com.ctre.phoenix6.hardware.TalonFX;
 import com.ctre.phoenix6.signals.GravityTypeValue;
+import com.ctre.phoenix6.signals.InvertedValue;
 import com.ctre.phoenix6.signals.NeutralModeValue;
 import com.ctre.phoenix6.StatusSignal;
 import com.ctre.phoenix6.configs.*;
@@ -17,6 +18,8 @@ public class Elevator extends SubsystemBase {
                 public double m_setPoint = getPosition();
                 private double m_ffvolts = 0;
                 private SoftwareLimitSwitchConfigs m_limits;
+                private TalonFXConfiguration m_elevatorrightCfg = new TalonFXConfiguration();
+
             
                 public Elevator() {
                     m_ElevatorLeftFX.setControl(new Follower(9, true).withUpdateFreqHz(100));
@@ -57,9 +60,11 @@ public class Elevator extends SubsystemBase {
                         .withReverseSoftLimitThreshold(ElevatorConstants.kULowerLimitElevator/ElevatorConstants.kInchPerRotation));
 
                     m_ElevatorRightFX.setNeutralMode(NeutralModeValue.Brake);
+
+                    m_elevatorrightCfg.MotorOutput.Inverted = InvertedValue.Clockwise_Positive;
+                    m_ElevatorRightFX.getConfigurator().apply(m_elevatorrightCfg);
                                         
                 }
-//9 is inverted, 74.5 upper rotations soft limit, p = 2.5, d = .1, 
     public void setPosition(double position){        // Position in inches
 // 2DO: Need to set m_ffvolts based on position and what we are carrying
         m_setPoint = position;
