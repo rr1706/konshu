@@ -32,14 +32,17 @@ public class CoralArm extends SubsystemBase{
     if (measurement != null && measurement.status == LaserCan.LASERCAN_STATUS_VALID_MEASUREMENT) {
          System.out.println("The target is " + measurement.distance_mm + "mm away!");
          if (measurement.distance_mm < 23.0){
-            m_Nova.setPercent(.5);
-    }   else {
             m_Nova.setPercent(0.0);
+    }   else {
+            m_Nova.setPercent(0.5);
         }
 }    else {       
          System.out.println("Oh no! The target is out of range, or we can't get a reliable measurement!");
+         m_Nova.setPercent(0.0);
+
 //             // You can still use distance_mm in here, if you're ok tolerating a clamped
 //             // value or an unreliable measurement.
+}
 }
 }
 
