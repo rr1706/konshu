@@ -35,7 +35,7 @@ public class ArmConstants {
   // kElevatorHighDanger - elevator must be higher than this to safely move arm above kArmHighDanger
   // KElevatorLowDanter - elevator must be higher than this to safely move arm below kArmLowDanger
   public static final double kArmHighDanger = 10.0; 
-  public static final double kArmLowDanger = -21.0;   // 2do - need to set still!
+  public static final double kArmLowDanger = 60.0;   // 2do - need to set still!
 
   public static class ArmCurrents {
     public static final double kSupplyCurrent = 30.0;   // Amps
