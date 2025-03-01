@@ -23,12 +23,12 @@ public class ElevatorConstants {
     public static final double kElevatorPositionFactor = 1.0; 
     public static final double kElevatorNeutral = 1.0; 
     public static final boolean elevatorConfigforwardSoftLimitEnabled = true;
-    public static final double kElevatorL1 =22.0;       // These are in inches
-    public static final double kElevatorL2 = 21.67; 
-    public static final double kElevatorL3 = 36.7; 
-    public static final double kElevatorL4 = 64 ; 
+    public static final double kElevatorL1 = 8.6;       // These are in inches
+    public static final double kElevatorL2 = 21.0; 
+    public static final double kElevatorL3 = 37.2; 
+    public static final double kElevatorL4 = 64.1; 
     public static final double kElevatorLoadingStation = 20.8; 
-    public static final double kElevatorProcessor = 12.25;
+    public static final double kElevatorProcessor = 0.0;
     public static final double kElevatorBarge = 68.11; 
     public static final double kElevatorZero = 0.0;
     public static final double kElelvatorGroundAlgae = 15;  
@@ -55,8 +55,8 @@ public class ElevatorConstants {
     // These are the constants for the arm stayout zones
     // kElevatorHighDanger - elevator must be higher than this to safely move arm above kArmHighDanger
     // KElevatorLowDanter - elevator must be higher than this to safely move arm below kArmLowDanger
-    public static final double kElevatorHighDanger = 21.0;  // 20.25 was number from CAD, but add margin to give motor timme to stop
-    public static final double kElevatorLowDanger = 11.0;   // 10.0 was number from CAD, but add margin to give motor time to stop
+    public static final double kElevatorHighDanger = 20.8;
+    public static final double kElevatorLowDanger = 11.0;       // 2do - need to set still!
 
     public static class ElevatorCurrents {
         public static final double kElevatorNeutral = 1.0; 

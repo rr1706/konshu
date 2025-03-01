@@ -77,19 +77,19 @@ public class SSM extends SubsystemBase{
 
         if (m_elevator.getPosition() < m_es) {                      // If elevator going up...
             m_elevator.setPosition(m_es);                           // Going up, always start elevator to setpoint
-            if ((m_as > ArmConstants.kArmHighDanger) && (m_elevator.getPosition() < ElevatorConstants.kElevatorHighDanger)) {
+            if ((m_as < ArmConstants.kArmHighDanger) && (m_elevator.getPosition() < ElevatorConstants.kElevatorHighDanger)) {
                 m_arm.setPosition(ArmConstants.kArmHighDanger);     // Pause arm at high danger before moving farther up
                 m_armPauseHigh = true;
-            } else if ((m_as < ArmConstants.kArmLowDanger) && (m_elevator.getPosition() < ElevatorConstants.kElevatorLowDanger)) {
+            } else if ((m_as > ArmConstants.kArmLowDanger) && (m_elevator.getPosition() < ElevatorConstants.kElevatorLowDanger)) {
                 m_arm.setPosition(ArmConstants.kArmLowDanger);      // Pause arm at low danger before moving farther down
                 m_armPauseLow = true;
             } else m_arm.setPosition(m_as);                         // No constraints, move arm to final setpoint
         } else {
             m_arm.setPosition(m_as);                                // Going down, always start arm to setpoint
-            if ((m_es < ElevatorConstants.kElevatorHighDanger) && (m_arm.getPosition() > ArmConstants.kArmHighDanger)) {
+            if ((m_es < ElevatorConstants.kElevatorHighDanger) && (m_arm.getPosition() < ArmConstants.kArmHighDanger)) {
                 m_elevator.setPosition(ElevatorConstants.kElevatorHighDanger);     // Pause elevator at high danger before moving farther down
                 m_elevatorPauseHigh = true;
-            } else if ((m_es < ElevatorConstants.kElevatorLowDanger) && (m_arm.getPosition() < ArmConstants.kArmLowDanger)) {
+            } else if ((m_es < ElevatorConstants.kElevatorLowDanger) && (m_arm.getPosition() > ArmConstants.kArmLowDanger)) {
                 m_elevator.setPosition(ElevatorConstants.kElevatorLowDanger);      // Pause elevator at low danger before moving farther down
                 m_elevatorPauseLow = true;
             } else {
