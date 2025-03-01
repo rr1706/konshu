@@ -4,6 +4,7 @@ import com.ctre.phoenix6.configs.CANcoderConfiguration;
 import com.ctre.phoenix6.configs.CurrentLimitsConfigs;
 import com.ctre.phoenix6.configs.FeedbackConfigs;
 import com.ctre.phoenix6.configs.MotionMagicConfigs;
+import com.ctre.phoenix6.configs.MotorOutputConfigs;
 import com.ctre.phoenix6.configs.Slot0Configs;
 import com.ctre.phoenix6.configs.SoftwareLimitSwitchConfigs;
 import com.ctre.phoenix6.configs.TalonFXConfiguration;
@@ -25,7 +26,6 @@ public class Arm extends SubsystemBase {
     private Slot0Configs m_Slot0Configs;
     private CANcoder m_cancoder = new CANcoder(5, "rio");
     private double m_setpoint = getPosition();
-    private TalonFXConfiguration m_armCfg = new TalonFXConfiguration();
 
     public Arm() {
         m_armFX.getConfigurator().apply(new CurrentLimitsConfigs()
@@ -71,8 +71,7 @@ public class Arm extends SubsystemBase {
             m_feedbackConfig.RotorToSensorRatio = ArmConstants.kArmGearRatio/ArmConstants.kArmRotorToSensor;
             m_armFX.getConfigurator().apply(m_feedbackConfig); 
 
-            m_armCfg.MotorOutput.Inverted = InvertedValue.Clockwise_Positive;
-            m_armFX.getConfigurator().apply(m_armCfg);
+        m_armFX.getConfigurator().apply(new MotorOutputConfigs().withInverted(InvertedValue.Clockwise_Positive));
     }
 
     // Get the position of the motor in degrees from hortizontal
