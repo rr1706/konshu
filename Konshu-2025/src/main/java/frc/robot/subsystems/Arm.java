@@ -71,7 +71,7 @@ public class Arm extends SubsystemBase {
             m_feedbackConfig.RotorToSensorRatio = ArmConstants.kArmGearRatio/ArmConstants.kArmRotorToSensor;
             m_armFX.getConfigurator().apply(m_feedbackConfig); 
 
-        m_armFX.getConfigurator().apply(new MotorOutputConfigs().withInverted(InvertedValue.Clockwise_Positive));
+        m_armFX.getConfigurator().apply(new MotorOutputConfigs().withInverted(InvertedValue.CounterClockwise_Positive));
     }
 
     // Get the position of the motor in degrees from hortizontal
@@ -96,11 +96,11 @@ public class Arm extends SubsystemBase {
     public void jogging(boolean direction) {
         double count = 0;
         if (direction) {
-            setPosition(getPosition() + 2.0);
+            setPosition(getPosition() + 4.0);
             count += 1.0;
             SmartDashboard.putNumber("Count", count);
         } else {
-            setPosition(getPosition() - 2.0);
+            setPosition(getPosition() - 4.0);
             count += 1.0;
             SmartDashboard.putNumber("Count", count);
         }
