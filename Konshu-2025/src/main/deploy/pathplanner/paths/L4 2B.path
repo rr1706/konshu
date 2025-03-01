@@ -1,0 +1,80 @@
+{
+  "version": "2025.0",
+  "waypoints": [
+    {
+      "anchor": {
+        "x": 1.7293074324324322,
+        "y": 7.355152027027026
+      },
+      "prevControl": null,
+      "nextControl": {
+        "x": 2.2573522974964115,
+        "y": 6.728700067829577
+      },
+      "isLocked": false,
+      "linkedName": "Path 2 LS 1"
+    },
+    {
+      "anchor": {
+        "x": 3.7155405405405406,
+        "y": 5.082347972972972
+      },
+      "prevControl": {
+        "x": 3.6068412162162162,
+        "y": 5.388682432432431
+      },
+      "nextControl": null,
+      "isLocked": false,
+      "linkedName": "L4 2B End"
+    }
+  ],
+  "rotationTargets": [],
+  "constraintZones": [
+    {
+      "name": "Constraints Zone",
+      "minWaypointRelativePos": 0.6002214839424111,
+      "maxWaypointRelativePos": 1.0,
+      "constraints": {
+        "maxVelocity": 4.73,
+        "maxAcceleration": 3.0,
+        "maxAngularVelocity": 540.0,
+        "maxAngularAcceleration": 720.0,
+        "nominalVoltage": 12.0,
+        "unlimited": false
+      }
+    }
+  ],
+  "pointTowardsZones": [],
+  "eventMarkers": [
+    {
+      "name": "2B",
+      "waypointRelativePos": 0.6998892580288,
+      "endWaypointRelativePos": null,
+      "command": {
+        "type": "named",
+        "data": {
+          "name": "Score"
+        }
+      }
+    }
+  ],
+  "globalConstraints": {
+    "maxVelocity": 4.73,
+    "maxAcceleration": 5.0,
+    "maxAngularVelocity": 540.0,
+    "maxAngularAcceleration": 720.0,
+    "nominalVoltage": 12.0,
+    "unlimited": false
+  },
+  "goalEndState": {
+    "velocity": 0,
+    "rotation": -59.99999999999999
+  },
+  "reversed": false,
+  "folder": "L4 - 3A - 2A - 2B",
+  "idealStartingState": {
+    "velocity": 0,
+    "rotation": -53.0
+  },
+  "useDefaultConstraints": false
+}

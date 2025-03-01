@@ -38,8 +38,8 @@ public class ArmConstants {
   public static final double kArmLowDanger = -21.0;
 
   public static class ArmCurrents {
-    public static final double kSupplyCurrent = 70.0;   // Amps
-    public static final double kStatorCurrent = 120.0;
+    public static final double kSupplyCurrent = 30.0;   // Amps
+    public static final double kStatorCurrent = 50.0;
   }
 
 }

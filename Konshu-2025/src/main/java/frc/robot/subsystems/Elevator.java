@@ -13,8 +13,8 @@ import frc.robot.constants.ElevatorConstants;
 
 public class Elevator extends SubsystemBase {
 
-    public final static TalonFX m_ElevatorRightFX = new TalonFX(9, "Drivetrain");
-        public final static TalonFX m_ElevatorLeftFX = new TalonFX(10, "Drivetrain");
+    public final static TalonFX m_ElevatorRightFX = new TalonFX(9, "*");
+        public final static TalonFX m_ElevatorLeftFX = new TalonFX(10, "*");
                 public double m_setPoint = getPosition();
                 private double m_ffvolts = 0;
                 private SoftwareLimitSwitchConfigs m_limits;
@@ -51,6 +51,7 @@ public class Elevator extends SubsystemBase {
                         .withKV(ElevatorConstants.kVElevator)
                         .withKA(ElevatorConstants.kAElevator)
                         .withGravityType(GravityTypeValue.Elevator_Static));
+                        
 
                     // Steve:  Added divide by InchPerRotation
                     m_ElevatorRightFX.getConfigurator().apply(m_limits = new SoftwareLimitSwitchConfigs()
@@ -62,7 +63,7 @@ public class Elevator extends SubsystemBase {
                     m_ElevatorRightFX.setNeutralMode(NeutralModeValue.Brake);
 
                     m_elevatorrightCfg.MotorOutput.Inverted = InvertedValue.Clockwise_Positive;
-                    m_ElevatorRightFX.getConfigurator().apply(m_elevatorrightCfg);
+                    // m_ElevatorRightFX.getConfigurator().apply(m_elevatorrightCfg);
                                         
                 }
     public void setPosition(double position){        // Position in inches
@@ -100,9 +101,13 @@ public class Elevator extends SubsystemBase {
 
    public void jogging(boolean direction){
         if (direction == true){
+            SmartDashboard.putNumber("Elevator Position", getPosition());
+
             setPosition(getPosition()+0.5*ElevatorConstants.kInchPerRotation);
         }
         else{
+            SmartDashboard.putNumber("Elevator Position", getPosition());
+
             setPosition(getPosition()-0.5*ElevatorConstants.kInchPerRotation);
         }
 

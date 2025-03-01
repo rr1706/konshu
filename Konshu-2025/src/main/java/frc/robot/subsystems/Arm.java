@@ -23,7 +23,7 @@ public class Arm extends SubsystemBase {
     private final TalonFX m_armFX = new TalonFX(11, "rio");
     private SoftwareLimitSwitchConfigs m_limits;
     private Slot0Configs m_Slot0Configs;
-    private CANcoder m_cancoder = new CANcoder(5, "rio");
+    private CANcoder m_cancoder = new CANcoder(11, "rio");
     private double m_setpoint = getPosition();
     private TalonFXConfiguration m_armCfg = new TalonFXConfiguration();
 
@@ -71,8 +71,8 @@ public class Arm extends SubsystemBase {
             m_feedbackConfig.RotorToSensorRatio = ArmConstants.kArmGearRatio/ArmConstants.kArmRotorToSensor;
             m_armFX.getConfigurator().apply(m_feedbackConfig); 
 
-            m_armCfg.MotorOutput.Inverted = InvertedValue.Clockwise_Positive;
-            m_armFX.getConfigurator().apply(m_armCfg);
+            // m_armCfg.MotorOutput.Inverted = InvertedValue.Clockwise_Positive;
+            // m_armFX.getConfigurator().apply(m_armCfg);
     }
 
     // Get the position of the motor in degrees from hortizontal
@@ -95,10 +95,15 @@ public class Arm extends SubsystemBase {
     }
 
     public void jogging(boolean direction) {
+        double count = 0;
         if (direction) {
-            setPosition(getPosition() + 5.0);
+            setPosition(getPosition() + 2.0);
+            count += 1.0;
+            SmartDashboard.putNumber("Count", count);
         } else {
-            setPosition(getPosition() - 5.0);
+            setPosition(getPosition() - 2.0);
+            count += 1.0;
+            SmartDashboard.putNumber("Count", count);
         }
 
     }

@@ -79,14 +79,14 @@ public class RobotContainer {
     private void configureBindings() {
         driverController.start().onTrue(DriveCommands.resetFieldOrientation(drivetrain));
 
-        // driverController.rightBumper().onTrue(new InstantCommand(() -> m_elevator.jogging(false)));
+        driverController.rightBumper().onTrue(new InstantCommand(() -> m_elevator.jogging(false)));
         driverController.leftBumper().onTrue(new InstantCommand(() -> m_elevator.jogging(true)));
 
-        driverController.povUp().onTrue(new InstantCommand(() -> m_algaeintake.jogging(true)));
-        driverController.povDown().onTrue(new InstantCommand(() -> m_algaeintake.jogging(false)));
+        // driverController.povUp().onTrue(new InstantCommand(() -> m_algaeintake.jogging(true)));
+        // driverController.povDown().onTrue(new InstantCommand(() -> m_algaeintake.jogging(false)));
 
-        //driverController.povDown().onTrue(new InstantCommand(() -> m_arm.jogging(false)));
-        //driverController.povUp().onTrue(new InstantCommand(() -> m_arm.jogging(true)));
+        driverController.povUp().onTrue(new InstantCommand(() -> m_arm.jogging(false)));
+        driverController.povDown().onTrue(new InstantCommand(() -> m_arm.jogging(true)));
         //driverController.povDown().onTrue(new InstantCommand(() -> m_arm.jogging(false)));
        // driverController.povLeft().onTrue(new InstantCommand(() -> m_claw.runCoralIn(.7)).andThen(new InstantCommand(() ->m_arm.setPosition(ArmConstants.kArmFeeder))));
        // driverController.povRight().onTrue(new InstantCommand(() -> m_claw.runCoralOut(.7)))
@@ -103,8 +103,8 @@ public class RobotContainer {
  
         //driverController.rightTrigger().onTrue(new InstantCommand(() -> m_claw.runAlgaeIn(-.7))
             //.andThen(new InstantCommand(() ->  m_claw.runCoralOut(1.0))));
-        driverController.rightTrigger().onTrue(new InstantCommand(() -> m_coralarm.runCoral(.7)));
-        driverController.rightTrigger().onFalse(new InstantCommand(() -> m_coralarm.runCoral(0.0)));
+        // driverController.rightTrigger().onTrue(new InstantCommand(() -> m_coralarm.runCoral(.7)));
+        // driverController.rightTrigger().onFalse(new InstantCommand(() -> m_coralarm.runCoral(0.0)));
 
         // Create a trigger for another button press while the left trigger is held down
         m_operatorBoard.button(12)
@@ -137,9 +137,9 @@ public class RobotContainer {
 
 
     public void configureNamedCommands() {
-        NamedCommands.registerCommand("Score", new InstantCommand(() -> m_SSM.setState(States.L4)).andThen(new WaitCommand(0.9)).andThen((new InstantCommand(() -> m_coralarm.runCoral(.7)))));
-        NamedCommands.registerCommand("LoadingStation",new InstantCommand(() -> m_coralarm.runCoral(.7)).andThen(new InstantCommand(() -> m_SSM.setState(States.LOADINGSTATION))));
-        NamedCommands.registerCommand("ClawLowSpeed",new InstantCommand(() -> m_coralarm.runCoral(.2)));
+    //     NamedCommands.registerCommand("Score", new InstantCommand(() -> m_SSM.setState(States.L4)).andThen(new WaitCommand(0.9)).andThen((new InstantCommand(() -> m_coralarm.runCoral(.7)))));
+    //     NamedCommands.registerCommand("LoadingStation",new InstantCommand(() -> m_coralarm.runCoral(.7)).andThen(new InstantCommand(() -> m_SSM.setState(States.LOADINGSTATION))));
+    //     NamedCommands.registerCommand("ClawLowSpeed",new InstantCommand(() -> m_coralarm.runCoral(.2)));
     }
 
 
