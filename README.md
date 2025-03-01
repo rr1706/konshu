@@ -1,15 +1,15 @@
 # konshu
 # Subsystem	CAN ID	Type	Owner
-# Drive	1	Krakens	
-# Drive	2	Krakens	
-# Drive	3	Krakens	
-# Drive	4	Krakens	
-# Drive	5	Krakens	
-# Drive	6	Krakens	
-# Drive	7	Krakens	
-# Drive	8	Krakens	
-# Elevator	9	Krakens	
-# Elevator	10	Krakens	
+# Drive	1	Krakens	Drive FL
+# Drive	2	Krakens	Az FL
+# Drive	3	Krakens	Drive FR
+# Drive	4	Krakens	Az FR
+# Drive	5	Krakens	Drive RR
+# Drive	6	Krakens	Az RR
+# Drive	7	Krakens	Drive RL
+# Drive	8	Krakens	Az RL
+# Elevator Right 9	Krakens	
+# Elevator Left	10	Krakens	
 # Arm	11	Krakens	
 # Algae on Arm	12	Krakens	
 # Coral on Arm	13	Nova	

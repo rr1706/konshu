@@ -17,11 +17,11 @@ public class ArmConstants {
   public static final double kArmGearRatio = (50.0/8.0)*(48.0/20.0)*(48.0/14.0);   // alpha was (44.0/8.0)*(40.0/20.0)*(48.0/14.0);
   public static final double kArmRotorToSensor = 22.0/18.0;
 
-  public static final double kArmL1 = 124.0;      // Degrees from arm hortizontal
-  public static final double kArmL2 = 124.0;
-  public static final double kArmL3 = 124.0;
-  public static final double kArmL4 = 131.0;
-  public static final double kArmProcessor = -52.0;
+  public static final double kArmL1 = 17.7;      // Degrees from arm hortizontal
+  public static final double kArmL2 = 26.8;
+  public static final double kArmL3 = 26.8;
+  public static final double kArmL4 = 33.75;
+  public static final double kArmProcessor = 60.0;
   public static final double kArmBarge = 115.0; 
   public static final double kArmFeeder = -56.0;
   public static final double kArmGroundAlgae = -47.0;
@@ -34,8 +34,8 @@ public class ArmConstants {
   // These are the constants for the arm stayout zones
   // kElevatorHighDanger - elevator must be higher than this to safely move arm above kArmHighDanger
   // KElevatorLowDanter - elevator must be higher than this to safely move arm below kArmLowDanger
-  public static final double kArmHighDanger = 30.0; 
-  public static final double kArmLowDanger = -21.0;
+  public static final double kArmHighDanger = 10.0; 
+  public static final double kArmLowDanger = -21.0;   // 2do - need to set still!
 
   public static class ArmCurrents {
     public static final double kSupplyCurrent = 30.0;   // Amps
