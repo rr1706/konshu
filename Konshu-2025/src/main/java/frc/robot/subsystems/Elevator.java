@@ -18,9 +18,7 @@ public class Elevator extends SubsystemBase {
                 public double m_setPoint = getPosition();
                 private double m_ffvolts = 0;
                 private SoftwareLimitSwitchConfigs m_limits;
-                private TalonFXConfiguration m_elevatorrightCfg = new TalonFXConfiguration();
 
-            
                 public Elevator() {
                     m_ElevatorLeftFX.setControl(new Follower(9, true).withUpdateFreqHz(100));
 
@@ -62,9 +60,7 @@ public class Elevator extends SubsystemBase {
 
                     m_ElevatorRightFX.setNeutralMode(NeutralModeValue.Brake);
 
-                    m_elevatorrightCfg.MotorOutput.Inverted = InvertedValue.Clockwise_Positive;
-                    // m_ElevatorRightFX.getConfigurator().apply(m_elevatorrightCfg);
-                                        
+                    m_ElevatorRightFX.getConfigurator().apply(new MotorOutputConfigs().withInverted(InvertedValue.Clockwise_Positive));                       
                 }
     public void setPosition(double position){        // Position in inches
 // 2DO: Need to set m_ffvolts based on position and what we are carrying
