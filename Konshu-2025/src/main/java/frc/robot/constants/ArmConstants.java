@@ -10,7 +10,7 @@ public class ArmConstants {
   public static final double kArmV = 0.78;   // Output per unit of target velocity (volts/rps)
   public static final double kArmA = 0.01;   // Output per unit of target accelleration (volts/rps/rps)
 
-  public static final double kArmCruiseVelocity = 1.1;
+  public static final double kArmCruiseVelocity = .3;
   public static final double kArmAcceleration = 4.0;
   // public static final double kArmJerk = 8000.0;
 
@@ -23,7 +23,7 @@ public class ArmConstants {
   public static final double kArmL4 = 33.75;
   public static final double kArmProcessor = 60.0;
   public static final double kArmBarge = 115.0; 
-  public static final double kArmFeeder = -56.0;
+  public static final double kArmFeeder = 25.0;
   public static final double kArmGroundAlgae = -47.0;
 
   public static final double kArmLowerLimit = kArmFeeder;   // Degrees from arm horizontal
