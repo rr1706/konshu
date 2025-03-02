@@ -9,6 +9,7 @@ import frc.robot.subsystems.Elevator;
 import frc.robot.constants.ArmConstants;
 import frc.robot.constants.ElevatorConstants;
 import frc.robot.commands.DriveCommands;
+import frc.robot.subsystems.FunnelMotor;
 
 public class SSM extends SubsystemBase{
     private final Arm m_arm;

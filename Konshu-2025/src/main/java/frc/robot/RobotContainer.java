@@ -20,11 +20,13 @@ import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 import frc.robot.constants.*;
 import frc.robot.commands.DriveCommands;
+import frc.robot.commands.IntakeFromFunnel;
 import frc.robot.subsystems.Arm;
 import frc.robot.subsystems.CommandSwerveDrivetrain;
 import frc.robot.subsystems.CoralArm;
 import frc.robot.generated.TunerConstants;
 import frc.robot.subsystems.Elevator;
+import frc.robot.subsystems.FunnelMotor;
 //import frc.robot.subsystems.Claw;
 import frc.robot.subsystems.SSM;
 import frc.robot.subsystems.SSM.States;
@@ -35,10 +37,11 @@ import frc.robot.subsystems.Climber;
 
 public class RobotContainer {
     private final CommandXboxController driverController = 
-        new CommandXboxController(DriveConstants.OperatorConstants.DRIVER_CONTROLLER_PORT);
+    new CommandXboxController(DriveConstants.OperatorConstants.DRIVER_CONTROLLER_PORT);
     //  drivetrain;
     private final Elevator m_elevator = new Elevator();
     private final Arm m_arm = new Arm();
+    private final FunnelMotor m_FunnelMotor = new FunnelMotor();
     //private final Claw m_claw = new Claw();
     private final CommandGenericHID m_operatorBoard = new CommandGenericHID(1);
     private final SSM m_SSM = new SSM(m_arm, m_elevator);        // Defaults to DISABLED - no action until trigger
@@ -47,7 +50,7 @@ public class RobotContainer {
     public final CommandSwerveDrivetrain drivetrain;
     public final Climber m_Climber = new Climber();
     public final CoralArm m_coralarm = new CoralArm();
-
+    public final FunnelMotor m_Funnel = new FunnelMotor();
     private final SendableChooser<Command> autoChooser;
 
     public RobotContainer() {
@@ -95,15 +98,15 @@ public class RobotContainer {
         // driverController.x().onTrue(drivetrain.setControl(() -> PositionVoltage(6)));
         
        // driverController.b().onTrue(new InstantCommand(() -> m_claw.runAlgaeIn(-.7)));
-        //driverController.a().onTrue(new InstantCommand(() -> m_claw.runCoralIn(.7)).andThen(new InstantCommand(() -> m_SSM.setState(States.LOADINGSTATION))))
-          //  .onFalse(new InstantCommand(() -> m_claw.runCoralIn(0.2))); 
+        driverController.a().onFalse(new InstantCommand(() -> m_FunnelMotor.runCoralIn(-.7)).andThen(new IntakeFromFunnel(m_coralarm)).andThen(new InstantCommand(() -> m_SSM.setState(States.LOADINGSTATION))));
+        //    .onFalse(new InstantCommand(() -> m_FunnelMotor.runCoralIn(-.7)).andThen(new IntakeFromFunnel(m_coralarm))); 
 
         //driverController.rightBumper().onTrue(new InstantCommand(() -> m_claw.runAlgaeIn(.7))
            // .andThen(new InstantCommand(() -> m_SSM.setState(States.GROUNDALGAE))));
  
         //driverController.rightTrigger().onTrue(new InstantCommand(() -> m_claw.runAlgaeIn(-.7))
             //.andThen(new InstantCommand(() ->  m_claw.runCoralOut(1.0))));
-        // driverController.rightTrigger().onTrue(new InstantCommand(() -> m_coralarm.runCoral(.7)));
+        driverController.rightTrigger().whileTrue((m_coralarm.runCoralCmd(-25.0)));
         // driverController.rightTrigger().onFalse(new InstantCommand(() -> m_coralarm.runCoral(0.0)));
 
         // Create a trigger for another button press while the left trigger is held down
@@ -130,8 +133,12 @@ public class RobotContainer {
             .onTrue(new InstantCommand(() -> m_SSM.setState(SSM.States.BARGE)));
         m_operatorBoard.button(10)
             .and(driverController.pov(270)) // This ensures both conditions must be met
-            .onTrue(new InstantCommand(() ->m_Climber.prepClimb(.50*ClimberConstants.kWheelRotRatio, .25*ClimberConstants.kRotationGearRatio)));
-
+            .onTrue(new InstantCommand(() ->m_Climber.prepClimb(.50*ClimberConstants.kWheelRotRatio, .25)));
+        m_operatorBoard.button(11)
+            .and(driverController.pov(270)) // This ensures both conditions must be met
+            .onTrue(new InstantCommand(() ->m_Climber.prepClimb(.50*ClimberConstants.kWheelRotRatio, .1)));
+        
+        // driverController.leftBumper().onTrue(new InstantCommand(() ->m_FunnelMotor.runCoralIn(-.7)).andThen(new IntakeFromFunnel(m_coralarm)));
         driverController.leftTrigger().onFalse(new InstantCommand(() -> m_SSM.setState(SSM.States.LOADINGSTATION)));
     }
 
