@@ -33,13 +33,13 @@ public class ElevatorConstants {
     public static final double kElevatorZero = 0.0;
     public static final double kElelvatorGroundAlgae = 15;  
     public static final double kPulleyRadius = 0.5; 
-    public static final double klowAlgeaGrab = 20.88;
-    public static final double kHighAlgeaGrab = 41.23;
     public static final double kl1SafeToMoveMax = 2;
     public static final double kl2SafeToMoveMin = 18.65;
     public static final double kl3SafeToMoveMin = 34.5;
     public static final double kl4SafeToMoveMin = 60;
     public static final double kAlgeaIntakeTransfer = 13.21;
+    public static final double kLowAlgeaGrab = 0;
+    public static final double kHighAlgeaGrab = 0;
 
     public static final double kUpperLimitElevator = 72.7;    // Inches
     public static final double kULowerLimitElevator = 0;
