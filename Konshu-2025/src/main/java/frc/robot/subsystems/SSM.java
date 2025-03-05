@@ -13,7 +13,7 @@ import frc.robot.commands.DriveCommands;
 public class SSM extends SubsystemBase{
     private final Arm m_arm;
     private final Elevator m_elevator;
-    public enum States {DISABLED, L1, L2, L3, L4, LOADINGSTATION, PROCESSOR, BARGE, GROUNDALGAE};
+    public enum States {DISABLED, L1, L2, L3, L4, LOADINGSTATION, PROCESSOR, BARGE, GROUNDALGAE, ALGAELOW, ALGAEHIGH};
     private boolean m_elevatorPauseHigh, m_elevatorPauseLow, m_armPauseHigh, m_armPauseLow;
     private States m_setpoint, m_queuedSetpoint;
     private double m_as, m_es;
