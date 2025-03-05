@@ -1,15 +1,7 @@
 package frc.robot.commands;
-
-import java.util.Optional;
-
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Translation2d;
-import edu.wpi.first.wpilibj.DriverStation;
-import edu.wpi.first.wpilibj.DriverStation.Alliance;
 import edu.wpi.first.wpilibj2.command.Command;
-import frc.robot.constants.AutoAlignConstants;
-import frc.robot.constants.ButtonConstants;
-import frc.robot.commands.PIDRotateToTrajectory;
 import frc.robot.constants.ArmConstants;
 import frc.robot.subsystems.CommandSwerveDrivetrain;
 import frc.robot.subsystems.Arm;
@@ -37,8 +29,7 @@ public class RotateArmToTarget extends Command {
     private final CommandSwerveDrivetrain drivetrain;
     private final Elevator elevator;
     private final Arm arm;
-    // alignMode can be "LEFT", "RIGHT", or "ALGAE"
-    private final AlignMode alignMode;
+    private final AlignMode alignMode;    // alignMode can be LEFT, RIGHT, or ALGAE
     
     // These will be updated via button polling.
     private Translation2d targetTranslation = new Translation2d(0.0, 0.0);
@@ -54,7 +45,6 @@ public class RotateArmToTarget extends Command {
         this.drivetrain = drivetrain;
         this.elevator = elevator;
         this.arm = arm;
-//        this.alignMode = alignMode.toUpperCase(); // ensure uppercase for consistency
         this.alignMode = alignMode;
         addRequirements(arm, elevator, drivetrain);
     }
