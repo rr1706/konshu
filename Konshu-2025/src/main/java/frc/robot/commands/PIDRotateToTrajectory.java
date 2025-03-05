@@ -27,9 +27,7 @@ public class PIDRotateToTrajectory extends Command {
     private final DoubleSupplier leftRight;
     private final AlignMode alignMode;
 
-    // These will be updated via button polling.
-    private Translation2d m_Translation = null;
-    private Rotation2d m_Rotation = null;
+    // Updated via button polling
     private Pose2d m_Pose = null;
 
     // PID controller for rotation. Tune gains and constraints as needed.
@@ -67,27 +65,25 @@ public class PIDRotateToTrajectory extends Command {
     @Override
     public void execute() {
         m_Pose = ReefTargetCalculator.calculateTargetTranslation(alignMode);
-        m_Translation = m_Pose.getTranslation();
-        m_Rotation = m_Pose.getRotation();
-        if (m_Translation == null) {
+        if (m_Pose == null) {
             // No valid reef button pressed – optionally mark the command as finished.
             return;
         }
-        double [] target_array ={m_Translation.getX(), m_Translation.getY()};
-        SmartDashboard.putNumberArray("Target",target_array);
+
         Pose2d currentPose = drivetrain.getState().Pose;
         double currentAngle = currentPose.getRotation().getRadians();
         SmartDashboard.putNumber("CurrentAngle", currentAngle);
-        Translation2d robotToGoal = m_Translation.minus(currentPose.getTranslation());
- //       double distToGoal = robotToGoal.getDistance(new Translation2d());
-
 
         double targetAngle;
         // For ALGAE mode, use the preset rotation; otherwise, compute the angle from the target translation.
-        if (alignMode == AlignMode.ALGAE) {
-            targetAngle = m_Rotation.getRadians();
-        } else {
+        if (alignMode == AlignMode.ALGAE) {     // m_Pose only has rotation populated
+            targetAngle = m_Pose.getRotation().getRadians();
+        } else {                                // m_Pose only has translation populated
+            double [] target_array ={m_Pose.getTranslation().getX(), m_Pose.getTranslation().getY()};
+            SmartDashboard.putNumberArray("Target",target_array);
+            Translation2d robotToGoal = m_Pose.getTranslation().minus(currentPose.getTranslation());
             targetAngle = robotToGoal.getAngle().getRadians();
+//          double distToGoal = robotToGoal.getDistance(new Translation2d());
         }
 
         SmartDashboard.putString("Align Mode", alignMode.toString());
