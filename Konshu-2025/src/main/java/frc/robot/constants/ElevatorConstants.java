@@ -24,22 +24,22 @@ public class ElevatorConstants {
     public static final double kElevatorNeutral = 1.0; 
     public static final boolean elevatorConfigforwardSoftLimitEnabled = true;
     public static final double kElevatorL1 = 8.6;       // These are in inches
-    public static final double kElevatorL2 = 21.0; 
+    public static final double kElevatorL2 = 23.0; 
     public static final double kElevatorL3 = 37.2; 
-    public static final double kElevatorL4 = 64.1; 
-    public static final double kElevatorLoadingStation = 20.8; 
+    public static final double kElevatorL4 = 70.1; 
+    public static final double kElevatorLoadingStation = 0.5; 
     public static final double kElevatorProcessor = 0.0;
     public static final double kElevatorBarge = 68.11; 
     public static final double kElevatorZero = 0.0;
     public static final double kElelvatorGroundAlgae = 15;  
     public static final double kPulleyRadius = 0.5; 
-    public static final double klowAlgeaGrab = 20.88;
-    public static final double kHighAlgeaGrab = 41.23;
     public static final double kl1SafeToMoveMax = 2;
     public static final double kl2SafeToMoveMin = 18.65;
     public static final double kl3SafeToMoveMin = 34.5;
     public static final double kl4SafeToMoveMin = 60;
     public static final double kAlgeaIntakeTransfer = 13.21;
+    public static final double kLowAlgeaGrab = 0;
+    public static final double kHighAlgeaGrab = 0;
 
     public static final double kUpperLimitElevator = 72.7;    // Inches
     public static final double kULowerLimitElevator = 0;
@@ -60,7 +60,7 @@ public class ElevatorConstants {
 
     public static class ElevatorCurrents {
         public static final double kElevatorNeutral = 1.0; 
-        public static final double kStatorCurrent = 80.0;
+        public static final double kStatorCurrent = 60.0;
         public static final double kSupplyCurrent = 40.0;
     }
 }

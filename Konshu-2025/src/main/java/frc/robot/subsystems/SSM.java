@@ -9,6 +9,7 @@ import frc.robot.subsystems.Elevator;
 import frc.robot.constants.ArmConstants;
 import frc.robot.constants.ElevatorConstants;
 import frc.robot.commands.DriveCommands;
+import frc.robot.subsystems.FunnelMotor;
 
 public class SSM extends SubsystemBase{
     private final Arm m_arm;
@@ -138,6 +139,8 @@ public class SSM extends SubsystemBase{
             case PROCESSOR -> ElevatorConstants.kElevatorProcessor;
             case BARGE -> ElevatorConstants.kElevatorBarge;
             case GROUNDALGAE -> ElevatorConstants.kElelvatorGroundAlgae;
+            case LowAlgeaGrab -> ElevatorConstants.kHighAlgeaGrab;
+            case HighAlgeaGrab -> ElevatorConstants.kLowAlgeaGrab;   
             default -> 0.0;
         };
     }
@@ -152,6 +155,8 @@ public class SSM extends SubsystemBase{
             case PROCESSOR -> ArmConstants.kArmProcessor;
             case BARGE -> ArmConstants.kArmBarge;
             case GROUNDALGAE -> ArmConstants.kArmGroundAlgae;
+            case LowAlgeaGrab -> ArmConstants.kArmAlgeaGrab;
+            case HighAlgeaGrab -> ArmConstants.kArmAlgeaGrab;
             default -> 0.0;
         };
     }

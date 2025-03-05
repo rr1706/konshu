@@ -99,18 +99,19 @@ public class Elevator extends SubsystemBase {
         if (direction == true){
             SmartDashboard.putNumber("Elevator Position", getPosition());
 
-            setPosition(getPosition()+0.5*ElevatorConstants.kInchPerRotation);
+            setPosition(getPosition()+1.0*ElevatorConstants.kInchPerRotation);
         }
         else{
             SmartDashboard.putNumber("Elevator Position", getPosition());
 
-            setPosition(getPosition()-0.5*ElevatorConstants.kInchPerRotation);
+            setPosition(getPosition()-1.0*ElevatorConstants.kInchPerRotation);
         }
 
     }
 
     @Override
     public void periodic() {
+        // if getPosition() < 
         SmartDashboard.putNumber("Elevator Position", getPosition());
         SmartDashboard.putNumber("Left Elevator Current", getCurrentLeft().getValueAsDouble());
         SmartDashboard.putNumber("Right Elevator Current", getCurrentRight().getValueAsDouble());
