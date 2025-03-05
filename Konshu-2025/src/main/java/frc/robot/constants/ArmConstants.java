@@ -25,6 +25,7 @@ public class ArmConstants {
   public static final double kArmBarge = 115.0; 
   public static final double kArmFeeder = 11.0;
   public static final double kArmGroundAlgae = -47.0;
+  public static final double kArmAlgeaGrab = 0;
 
   public static final double kArmLowerLimit = 10.0;   // Degrees from arm horizontal
   public static final double kArmUpperLimit = kArmL4;       // Degrees from arm horizontal
