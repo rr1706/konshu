@@ -1,7 +1,5 @@
 package frc.robot.subsystems;
 
-import java.nio.DoubleBuffer;
-
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.subsystems.Arm;
@@ -9,9 +7,8 @@ import frc.robot.subsystems.Elevator;
 import frc.robot.constants.ArmConstants;
 import frc.robot.constants.ElevatorConstants;
 import frc.robot.commands.DriveCommands;
-import frc.robot.subsystems.FunnelMotor;
 
-public class SSM extends SubsystemBase{
+public class SSM extends SubsystemBase {
     private final Arm m_arm;
     private final Elevator m_elevator;
     public enum States {DISABLED, L1, L2, L3, L4, LOADINGSTATION, PROCESSOR, BARGE, GROUNDALGAE, ALGAELOW, ALGAEHIGH};
