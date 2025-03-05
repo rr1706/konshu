@@ -79,7 +79,7 @@ public class PIDRotateToTrajectory extends Command {
         double currentAngle = currentPose.getRotation().getRadians();
         SmartDashboard.putNumber("CurrentAngle", currentAngle);
         Translation2d robotToGoal = m_Translation.minus(currentPose.getTranslation());
-        double distToGoal = robotToGoal.getDistance(new Translation2d());
+ //       double distToGoal = robotToGoal.getDistance(new Translation2d());
 
 
         double targetAngle;

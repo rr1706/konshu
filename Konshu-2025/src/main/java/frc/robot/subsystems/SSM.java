@@ -139,8 +139,8 @@ public class SSM extends SubsystemBase{
             case PROCESSOR -> ElevatorConstants.kElevatorProcessor;
             case BARGE -> ElevatorConstants.kElevatorBarge;
             case GROUNDALGAE -> ElevatorConstants.kElelvatorGroundAlgae;
-            case LowAlgeaGrab -> ElevatorConstants.kHighAlgeaGrab;
-            case HighAlgeaGrab -> ElevatorConstants.kLowAlgeaGrab;   
+            case ALGAEHIGH -> ElevatorConstants.kHighAlgeaGrab;
+            case ALGAELOW -> ElevatorConstants.kLowAlgeaGrab;   
             default -> 0.0;
         };
     }
@@ -155,8 +155,8 @@ public class SSM extends SubsystemBase{
             case PROCESSOR -> ArmConstants.kArmProcessor;
             case BARGE -> ArmConstants.kArmBarge;
             case GROUNDALGAE -> ArmConstants.kArmGroundAlgae;
-            case LowAlgeaGrab -> ArmConstants.kArmAlgeaGrab;
-            case HighAlgeaGrab -> ArmConstants.kArmAlgeaGrab;
+            case ALGAEHIGH -> ArmConstants.kArmAlgeaGrab;
+            case ALGAELOW -> ArmConstants.kArmAlgeaGrab;
             default -> 0.0;
         };
     }

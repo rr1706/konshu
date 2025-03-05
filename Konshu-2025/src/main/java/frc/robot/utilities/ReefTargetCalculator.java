@@ -2,7 +2,6 @@ package frc.robot.utilities;
 
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.wpilibj.DriverStation;
-import frc.robot.commands.PIDRotateToTrajectory;
 import frc.robot.constants.AutoAlignConstants;
 import frc.robot.constants.ButtonConstants;
 
