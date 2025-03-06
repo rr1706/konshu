@@ -137,8 +137,8 @@ public class RobotContainer {
         bindAlign(ButtonConstants.kL3Right, SSM.States.L3, ReefTargetCalculator.AlignMode.RIGHT);
         bindAlign(ButtonConstants.kL3Left,  SSM.States.L3, ReefTargetCalculator.AlignMode.LEFT);
         bindAlign(ButtonConstants.kL3Right, SSM.States.L3, ReefTargetCalculator.AlignMode.RIGHT);
-        // bindAlign(ButtonConstants.kLowAlgae,  SSM.States.ALGAELOW, ReefTargetCalculator.AlignMode.ALGAE);
-        // bindAlign(ButtonConstants.kHighAlgae, SSM.States.ALGAEHIGH, ReefTargetCalculator.AlignMode.ALGAE);
+        bindAlign(ButtonConstants.kLowAlgae,  SSM.States.ALGAELOW, ReefTargetCalculator.AlignMode.ALGAE);
+        bindAlign(ButtonConstants.kHighAlgae, SSM.States.ALGAEHIGH, ReefTargetCalculator.AlignMode.ALGAE);
 
         m_operatorBoard.button(10)
             .and(driverController.pov(270)) // This ensures both conditions must be met
