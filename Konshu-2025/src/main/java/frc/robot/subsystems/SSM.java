@@ -54,7 +54,7 @@ public class SSM extends SubsystemBase {
 
         if (m_setpoint == States.DISABLED) return;
 
-        if (IntakeFromFunnel.CoralHalted && ((m_setpoint == States.L4) || 
+        if (IntakeFromFunnel.getCoralHalted() && ((m_setpoint == States.L4) || 
             (m_setpoint == States.L3) || (m_setpoint == States.L2) || 
             (m_setpoint == States.L1))) return;
 
