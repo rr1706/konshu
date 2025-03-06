@@ -5,6 +5,7 @@
 package frc.robot.commands;
 
 import frc.robot.subsystems.CoralArm;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 
 /**
@@ -54,6 +55,8 @@ public class IntakeFromFunnel extends Command {
         CoralHalted = false;
         coralArm.runCoral(-25.0);
       }
+      SmartDashboard.putBoolean("CoralHalted", CoralHalted);
+      
       // If the measurement is not valid, stop the motor.
       coralArm.runCoral(0);
   }

@@ -11,7 +11,7 @@ public class ReefTargetCalculator {
      * Calculates the target translation based on the current alliance,
      * the state of reef (Coral) buttons, and the specified alignment mode.
  
-     * @return the selected target Translation2d, or null if no button is pressed.
+     * @return the selected target Pose2d, or null if no button is pressed.
      */
     public static Pose2d calculateTargetTranslation(AlignMode alignMode) {
         // Normalize alignment mode to uppercase.
@@ -102,5 +102,3 @@ public class ReefTargetCalculator {
         return null;
     }
 }
-
-

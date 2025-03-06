@@ -4,10 +4,14 @@ import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.geometry.Translation2d;
+import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.InstantCommand;
+import frc.robot.constants.ButtonConstants;
 import frc.robot.constants.DriveConstants;
 import frc.robot.subsystems.CommandSwerveDrivetrain;
+import frc.robot.subsystems.SSM;
 import frc.robot.utilities.ReefTargetCalculator;
 import frc.robot.commands.DriveCommands;
 import frc.robot.utilities.ReefTargetCalculator.AlignMode;
@@ -26,7 +30,8 @@ public class PIDRotateToTrajectory extends Command {
     private final CommandSwerveDrivetrain drivetrain;
     private final DoubleSupplier forwardBack;
     private final DoubleSupplier leftRight;
-    private final AlignMode alignMode;
+    private AlignMode alignMode;
+    private final SSM m_SSM;
 
     // Updated via button polling
     private Pose2d m_Pose = null;
@@ -44,11 +49,11 @@ public class PIDRotateToTrajectory extends Command {
     public PIDRotateToTrajectory(CommandSwerveDrivetrain drivetrain,
                                  DoubleSupplier forwardBack,
                                  DoubleSupplier leftRight,
-                                 AlignMode alignMode) {
+                                 SSM ssm) {
         this.drivetrain = drivetrain;
         this.forwardBack = forwardBack;
         this.leftRight = leftRight;
-        this.alignMode = alignMode;
+        this.m_SSM = ssm;
         
         // Enable continuous input for proper angle wrapping (from -π to π)
         rotPID.enableContinuousInput(-Math.PI, Math.PI);
@@ -63,8 +68,50 @@ public class PIDRotateToTrajectory extends Command {
         SmartDashboard.putNumber("Current Angle", currentAngle);
     }
 
+
     @Override
     public void execute() {
+
+        if (DriverStation.getStickButton(1, ButtonConstants.kL1Left)) {
+            m_SSM.setState(SSM.States.L1);
+            alignMode = ReefTargetCalculator.AlignMode.LEFT;
+        } else if (DriverStation.getStickButton(1, ButtonConstants.kL1Right)) {
+            m_SSM.setState(SSM.States.L1);
+            alignMode = ReefTargetCalculator.AlignMode.RIGHT;
+        } else if (DriverStation.getStickButton(1, ButtonConstants.kL2Left)) {
+            m_SSM.setState(SSM.States.L2);
+            alignMode = ReefTargetCalculator.AlignMode.LEFT;
+        } else if (DriverStation.getStickButton(1, ButtonConstants.kL2Right)) {
+            m_SSM.setState(SSM.States.L2);
+            alignMode = ReefTargetCalculator.AlignMode.RIGHT;
+        } else if (DriverStation.getStickButton(1, ButtonConstants.kL3Left)) {
+            m_SSM.setState(SSM.States.L3);
+            alignMode = ReefTargetCalculator.AlignMode.LEFT;
+        } else if (DriverStation.getStickButton(1, ButtonConstants.kL3Right)) {
+            m_SSM.setState(SSM.States.L3);
+            alignMode = ReefTargetCalculator.AlignMode.RIGHT;
+        } else if (DriverStation.getStickButton(1, ButtonConstants.kL4Left)) {
+            m_SSM.setState(SSM.States.L4);
+            alignMode = ReefTargetCalculator.AlignMode.LEFT;
+        } else if (DriverStation.getStickButton(1, ButtonConstants.kL4Right)) {
+            m_SSM.setState(SSM.States.L4);
+            alignMode = ReefTargetCalculator.AlignMode.RIGHT;
+        } else if (DriverStation.getStickButton(1, ButtonConstants.kLowAlgae)) {
+            m_SSM.setState(SSM.States.ALGAELOW);
+            alignMode = ReefTargetCalculator.AlignMode.ALGAE;
+        } else if (DriverStation.getStickButton(1, ButtonConstants.kHighAlgae)) {
+            m_SSM.setState(SSM.States.ALGAEHIGH);
+            alignMode = ReefTargetCalculator.AlignMode.ALGAE;
+        } else if (DriverStation.getStickButton(1, ButtonConstants.kBarge)) {
+            m_SSM.setState(SSM.States.BARGE);
+            return;
+        } else if (DriverStation.getStickButton(1, ButtonConstants.kProcessor)) {
+            m_SSM.setState(SSM.States.PROCESSOR);
+            return;
+        } else {
+            return;
+        }
+
         m_Pose = ReefTargetCalculator.calculateTargetTranslation(alignMode);
         if (m_Pose == null) {
             // No valid reef button pressed – optionally mark the command as finished.

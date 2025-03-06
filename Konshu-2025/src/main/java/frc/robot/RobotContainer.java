@@ -129,14 +129,21 @@ public class RobotContainer {
         //     .and(driverController.leftTrigger()) // This ensures both conditions must be met
         //     .onTrue(new InstantCommand(() -> m_SSM.setState(SSM.States.BARGE)));
 
-        bindAlign(ButtonConstants.kL1Left,  SSM.States.L1, ReefTargetCalculator.AlignMode.LEFT);
-        bindAlign(ButtonConstants.kL1Right, SSM.States.L1, ReefTargetCalculator.AlignMode.RIGHT);
-        bindAlign(ButtonConstants.kL2Left,  SSM.States.L2, ReefTargetCalculator.AlignMode.LEFT);
-        bindAlign(ButtonConstants.kL2Right, SSM.States.L2, ReefTargetCalculator.AlignMode.RIGHT);
-        bindAlign(ButtonConstants.kL3Left,  SSM.States.L3, ReefTargetCalculator.AlignMode.LEFT);
-        bindAlign(ButtonConstants.kL3Right, SSM.States.L3, ReefTargetCalculator.AlignMode.RIGHT);
-        bindAlign(ButtonConstants.kL3Left,  SSM.States.L3, ReefTargetCalculator.AlignMode.LEFT);
-        bindAlign(ButtonConstants.kL3Right, SSM.States.L3, ReefTargetCalculator.AlignMode.RIGHT);
+        driverController.leftTrigger().whileTrue(new PIDRotateToTrajectory(
+                    drivetrain,
+                    () -> driverController.getLeftY(),
+                    () -> driverController.getLeftX(),
+                    m_SSM
+                ));
+                
+        // bindAlign(ButtonConstants.kL1Left,  SSM.States.L1, ReefTargetCalculator.AlignMode.LEFT);
+        // bindAlign(ButtonConstants.kL1Right, SSM.States.L1, ReefTargetCalculator.AlignMode.RIGHT);
+        // bindAlign(ButtonConstants.kL2Left,  SSM.States.L2, ReefTargetCalculator.AlignMode.LEFT);
+        // bindAlign(ButtonConstants.kL2Right, SSM.States.L2, ReefTargetCalculator.AlignMode.RIGHT);
+        // bindAlign(ButtonConstants.kL3Left,  SSM.States.L3, ReefTargetCalculator.AlignMode.LEFT);
+        // bindAlign(ButtonConstants.kL3Right, SSM.States.L3, ReefTargetCalculator.AlignMode.RIGHT);
+        // bindAlign(ButtonConstants.kL3Left,  SSM.States.L3, ReefTargetCalculator.AlignMode.LEFT);
+        // bindAlign(ButtonConstants.kL3Right, SSM.States.L3, ReefTargetCalculator.AlignMode.RIGHT);
         // bindAlign(ButtonConstants.kLowAlgae,  SSM.States.ALGAELOW, ReefTargetCalculator.AlignMode.ALGAE);
         // bindAlign(ButtonConstants.kHighAlgae, SSM.States.ALGAEHIGH, ReefTargetCalculator.AlignMode.ALGAE);
 
@@ -151,24 +158,23 @@ public class RobotContainer {
         driverController.leftTrigger().onFalse(new InstantCommand(() -> m_SSM.setState(SSM.States.LOADINGSTATION)));
     }
 
-    /**
-     * @param buttonConstant the button constant from ButtonConstants
-     * @param state the SSM2 state to set
-     * @param alignMode the alignment mode (LEFT, RIGHT, or ALGAE)
-     */
-    private void bindAlign(int buttonConstant, SSM.States state, AlignMode alignMode) {
-        m_operatorBoard.button(buttonConstant)
-            .and(driverController.leftTrigger())
-            .whileTrue(
-                new InstantCommand(() -> m_SSM.setState(state))
-                    .andThen(new PIDRotateToTrajectory(
-                        drivetrain,
-                        () -> driverController.getLeftY(),
-                        () -> driverController.getLeftX(),
-                        alignMode
-                    ))
-            );
-    }
+    // /**
+    //  * @param buttonConstant the button constant from ButtonConstants
+    //  * @param state the SSM2 state to set
+    //  * @param alignMode the alignment mode (LEFT, RIGHT, or ALGAE)
+    //  */
+    // private void bindAlign(int buttonConstant, SSM.States state, AlignMode alignMode) {
+    //     m_operatorBoard.button(buttonConstant)
+    //         .and(driverController.leftTrigger())
+    //         .whileTrue(
+    //             new PIDRotateToTrajectory(
+    //                     drivetrain,
+    //                     () -> driverController.getLeftY(),
+    //                     () -> driverController.getLeftX(),
+    //                     m_SSM
+    //                 )
+    //         );
+    // }
 
     public void configureNamedCommands() {
     //     NamedCommands.registerCommand("Score", new InstantCommand(() -> m_SSM.setState(States.L4)).andThen(new WaitCommand(0.9)).andThen((new InstantCommand(() -> m_coralarm.runCoral(.7)))));
