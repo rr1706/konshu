@@ -1,5 +1,7 @@
 package frc.robot.subsystems;
 
+import com.ctre.phoenix6.hardware.core.CoreCANdi;
+
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.subsystems.Arm;
@@ -7,6 +9,7 @@ import frc.robot.subsystems.Elevator;
 import frc.robot.constants.ArmConstants;
 import frc.robot.constants.ElevatorConstants;
 import frc.robot.commands.DriveCommands;
+import frc.robot.commands.IntakeFromFunnel;
 
 public class SSM extends SubsystemBase {
     private final Arm m_arm;
@@ -50,6 +53,10 @@ public class SSM extends SubsystemBase {
         SmartDashboard.putString("m_setpoint", m_setpoint.toString());
 
         if (m_setpoint == States.DISABLED) return;
+
+        if (IntakeFromFunnel.CoralHalted && ((m_setpoint == States.L4) || 
+            (m_setpoint == States.L3) || (m_setpoint == States.L2) || 
+            (m_setpoint == States.L1))) return;
 
         // Adjust the slew rate based on the setpoint
         switch (m_setpoint) {
