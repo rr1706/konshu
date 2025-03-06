@@ -1,6 +1,6 @@
 package frc.robot.subsystems;
 
-import java.nio.DoubleBuffer;
+import com.ctre.phoenix6.hardware.core.CoreCANdi;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
@@ -9,12 +9,12 @@ import frc.robot.subsystems.Elevator;
 import frc.robot.constants.ArmConstants;
 import frc.robot.constants.ElevatorConstants;
 import frc.robot.commands.DriveCommands;
-import frc.robot.subsystems.FunnelMotor;
+import frc.robot.commands.IntakeFromFunnel;
 
-public class SSM extends SubsystemBase{
+public class SSM extends SubsystemBase {
     private final Arm m_arm;
     private final Elevator m_elevator;
-    public enum States {DISABLED, L1, L2, L3, L4, LOADINGSTATION, PROCESSOR, BARGE, GROUNDALGAE, LowAlgeaGrab, HighAlgeaGrab};
+    public enum States {DISABLED, L1, L2, L3, L4, LOADINGSTATION, PROCESSOR, BARGE, GROUNDALGAE, ALGAELOW, ALGAEHIGH};
     private boolean m_elevatorPauseHigh, m_elevatorPauseLow, m_armPauseHigh, m_armPauseLow;
     private States m_setpoint, m_queuedSetpoint;
     private double m_as, m_es;
@@ -53,6 +53,10 @@ public class SSM extends SubsystemBase{
         SmartDashboard.putString("m_setpoint", m_setpoint.toString());
 
         if (m_setpoint == States.DISABLED) return;
+
+        if (IntakeFromFunnel.CoralHalted && ((m_setpoint == States.L4) || 
+            (m_setpoint == States.L3) || (m_setpoint == States.L2) || 
+            (m_setpoint == States.L1))) return;
 
         // Adjust the slew rate based on the setpoint
         switch (m_setpoint) {
@@ -139,8 +143,8 @@ public class SSM extends SubsystemBase{
             case PROCESSOR -> ElevatorConstants.kElevatorProcessor;
             case BARGE -> ElevatorConstants.kElevatorBarge;
             case GROUNDALGAE -> ElevatorConstants.kElelvatorGroundAlgae;
-            case LowAlgeaGrab -> ElevatorConstants.kHighAlgeaGrab;
-            case HighAlgeaGrab -> ElevatorConstants.kLowAlgeaGrab;   
+            case ALGAEHIGH -> ElevatorConstants.kHighAlgeaGrab;
+            case ALGAELOW -> ElevatorConstants.kLowAlgeaGrab;   
             default -> 0.0;
         };
     }
@@ -155,8 +159,8 @@ public class SSM extends SubsystemBase{
             case PROCESSOR -> ArmConstants.kArmProcessor;
             case BARGE -> ArmConstants.kArmBarge;
             case GROUNDALGAE -> ArmConstants.kArmGroundAlgae;
-            case LowAlgeaGrab -> ArmConstants.kArmAlgeaGrab;
-            case HighAlgeaGrab -> ArmConstants.kArmAlgeaGrab;
+            case ALGAEHIGH -> ArmConstants.kArmAlgeaGrab;
+            case ALGAELOW -> ArmConstants.kArmAlgeaGrab;
             default -> 0.0;
         };
     }

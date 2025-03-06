@@ -25,7 +25,8 @@ import edu.wpi.first.wpilibj2.command.Command;
  * </pre>
  */
 public class IntakeFromFunnel extends Command {
-  
+  public static boolean CoralHalted = false;
+
   private final CoralArm coralArm;
   
   /**
@@ -48,7 +49,9 @@ public class IntakeFromFunnel extends Command {
 
       if (Measurement < 23) {
         coralArm.runCoral(0);
+        CoralHalted = true;       // Used by SSM to disable states L1-L4
       } else {
+        CoralHalted = false;
         coralArm.runCoral(-25.0);
       }
       // If the measurement is not valid, stop the motor.

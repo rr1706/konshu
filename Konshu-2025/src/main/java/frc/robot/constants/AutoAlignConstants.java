@@ -1,8 +1,5 @@
 package frc.robot.constants;
-
-import static edu.wpi.first.units.Units.*;
 import edu.wpi.first.math.geometry.Rotation2d;
-import frc.robot.generated.TunerConstants;
 import edu.wpi.first.math.geometry.Translation2d;
 
 public final class AutoAlignConstants {
