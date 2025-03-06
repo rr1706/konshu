@@ -11,8 +11,8 @@ public class ClimberConstants {
   public static final double kFullClimbPos = -15;
   public static final double kUpperSoftLimit = 80;
   public static final double kLowerSoftLimit = -15;
-  public static final double kCruiseVelocity = 40;
-  public static final double kAcceleration = 100;
+  public static final double kCruiseVelocity = 80;
+  public static final double kAcceleration = 200;
 
 
 

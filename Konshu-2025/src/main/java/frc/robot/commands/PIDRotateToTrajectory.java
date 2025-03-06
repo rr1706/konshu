@@ -1,6 +1,7 @@
 package frc.robot.commands;
 import java.util.function.DoubleSupplier;
 import edu.wpi.first.math.controller.PIDController;
+import edu.wpi.first.math.filter.SlewRateLimiter;
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.geometry.Translation2d;
@@ -32,8 +33,6 @@ public class PIDRotateToTrajectory extends Command {
     private final DoubleSupplier forwardBack;
     private final DoubleSupplier leftRight;
     private final SSM m_SSM;
-    private final Arm m_arm;
-    private final Elevator m_elevator;
     private States m_state;
     private AlignMode m_alignMode;
 
@@ -57,8 +56,6 @@ public class PIDRotateToTrajectory extends Command {
         this.drivetrain = drivetrain;
         this.forwardBack = forwardBack;
         this.leftRight = leftRight;
-        this.m_arm = arm;
-        this.m_elevator = el;
         this.m_SSM = ssm;
         
         // Enable continuous input for proper angle wrapping (from -π to π)
@@ -119,14 +116,11 @@ public class PIDRotateToTrajectory extends Command {
             m_alignMode = ReefTargetCalculator.AlignMode.ALGAE;
         } else if (DriverStation.getStickButton(1, ButtonConstants.kBarge)) {
             m_SSM.setState(SSM.States.BARGE);
-            return;
         } else if (DriverStation.getStickButton(1, ButtonConstants.kProcessor)) {
             m_SSM.setState(SSM.States.PROCESSOR);
-            return;
-        } else return;            // No level button pressed - do nothing
+        } // No level button pressed - do nothing
 
         m_Pose = ReefTargetCalculator.calculateTargetTranslation(m_alignMode);
-        if (m_Pose == null) return;  // No reef button pressed – optionally mark the command as finished
             
         Pose2d currentPose = drivetrain.getState().Pose;
         double currentAngle = currentPose.getRotation().getRadians();
@@ -172,10 +166,13 @@ public class PIDRotateToTrajectory extends Command {
         // Compute the PID controller output.
         double rotationOutput = rotPID.calculate(currentAngle, targetAngle);
         SmartDashboard.putNumber("Rot Out", rotationOutput);
+
+        SlewRateLimiter slewX = DriveCommands.m_slewX;
+        SlewRateLimiter slewY = DriveCommands.m_slewY;
         // Compute translation speeds from joystick inputs with a custom curve.
         double transAdjustment = adjustInputCurve(forwardBack.getAsDouble(), leftRight.getAsDouble(), 0.7, 0.3);
-        double velocityX = DriveCommands.m_slewX.calculate(-forwardBack.getAsDouble() * DriveConstants.MAX_SPEED * transAdjustment);
-        double velocityY = DriveCommands.m_slewY.calculate(-leftRight.getAsDouble() * DriveConstants.MAX_SPEED * transAdjustment);
+        double velocityX = slewX.calculate(-forwardBack.getAsDouble() * DriveConstants.MAX_SPEED * transAdjustment);
+        double velocityY = slewY.calculate(-leftRight.getAsDouble() * DriveConstants.MAX_SPEED * transAdjustment);
 
         // Build and apply the CTRE swerve request.
         SwerveRequest request = baseRequest

@@ -51,7 +51,7 @@ public class RobotContainer {
     private final AlgaeIntake m_algaeintake = new AlgaeIntake();
     // private final SSM m_SSM = new SSM(m_arm, m_elevator, SSM.States.L1);   // Alternative constructor, starts moving to initial state given 
     public final CommandSwerveDrivetrain drivetrain;
-    public final Climber m_Climber = new Climber();
+    public final Climber m_climber = new Climber();
     public final CoralArm m_coralarm = new CoralArm();
     public final FunnelMotor m_Funnel = new FunnelMotor();
     private final SendableChooser<Command> autoChooser;
@@ -91,19 +91,18 @@ public class RobotContainer {
         driverController.povUp().onTrue(new InstantCommand(() -> m_arm.jogging(false)));
         driverController.povDown().onTrue(new InstantCommand(() -> m_arm.jogging(true)));
         
-        driverController.a().onTrue(new InstantCommand(() -> m_FunnelMotor.runCoralIn(-.5)).andThen(new IntakeFromFunnel(m_coralarm)).andThen(new InstantCommand(() -> m_SSM.setState(States.LOADINGSTATION))));
-        driverController.x().onTrue(new InstantCommand(() -> m_Climber.prepClimb()));
-        driverController.b().whileTrue(new InstantCommand(() -> m_Climber.Climb()));
+        //driverController.a().onTrue(new InstantCommand(() -> m_FunnelMotor.runCoralIn(-.5)).andThen(new IntakeFromFunnel(m_coralarm)).andThen(new InstantCommand(() -> m_SSM.setState(States.LOADINGSTATION))));
+        driverController.x().onTrue(new InstantCommand(() -> m_climber.prepClimb()));
+        driverController.b().onTrue(new InstantCommand(() -> m_climber.Climb())).onFalse(new InstantCommand(()->m_climber.stop()));
 
-        driverController.rightTrigger().whileTrue((m_coralarm.runCoralCmd(-0.7)));
+        driverController.rightTrigger().whileTrue((m_coralarm.runCoralCmd(-0.7))).onFalse(new InstantCommand(() -> m_FunnelMotor.runCoralIn(-.5)).alongWith(new IntakeFromFunnel(m_coralarm)));
 
         driverController.leftTrigger().whileTrue(new PIDRotateToTrajectory(
                     drivetrain,
                     () -> driverController.getLeftY(),
                     () -> driverController.getLeftX(),
-                    m_arm, m_elevator, m_SSM));
+                    m_arm, m_elevator, m_SSM)).onFalse(new InstantCommand(() -> m_SSM.setState(SSM.States.LOADINGSTATION)));
                 
-        driverController.leftTrigger().onFalse(new InstantCommand(() -> m_SSM.setState(SSM.States.LOADINGSTATION)));
     }
 
 
