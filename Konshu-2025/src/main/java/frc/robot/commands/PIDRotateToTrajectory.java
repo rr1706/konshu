@@ -109,7 +109,7 @@ public class PIDRotateToTrajectory extends Command {
             m_state = SSM.States.L4;
             m_SSM.setState(m_state);
             m_alignMode = ReefTargetCalculator.AlignMode.RIGHT;
-        } else if (DriverStation.getStickButton(1, ButtonConstants.kLowAlgae)) {
+        } else if (DriverStation.getStickButton(2, ButtonConstants.kLowAlgae)) {
             m_state = SSM.States.ALGAELOW;
             m_SSM.setState(m_state);
             m_alignMode = ReefTargetCalculator.AlignMode.ALGAE;
@@ -117,10 +117,10 @@ public class PIDRotateToTrajectory extends Command {
             m_state = SSM.States.ALGAEHIGH;
             m_SSM.setState(m_state);
             m_alignMode = ReefTargetCalculator.AlignMode.ALGAE;
-        } else if (DriverStation.getStickButton(1, ButtonConstants.kBarge)) {
+        } else if (DriverStation.getStickButton(2, ButtonConstants.kBarge)) {
             m_SSM.setState(SSM.States.BARGE);
             return;
-        } else if (DriverStation.getStickButton(1, ButtonConstants.kProcessor)) {
+        } else if (DriverStation.getStickButton(2, ButtonConstants.kProcessor)) {
             m_SSM.setState(SSM.States.PROCESSOR);
             return;
         } else return;            // No level button pressed - do nothing
