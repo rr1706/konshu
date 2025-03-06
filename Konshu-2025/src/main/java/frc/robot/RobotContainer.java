@@ -21,6 +21,7 @@ import edu.wpi.first.wpilibj2.command.button.Trigger;
 import frc.robot.constants.*;
 import frc.robot.commands.DriveCommands;
 import frc.robot.commands.IntakeFromFunnel;
+import frc.robot.commands.PIDRotateToTrajectory;
 import frc.robot.subsystems.Arm;
 import frc.robot.subsystems.CommandSwerveDrivetrain;
 import frc.robot.subsystems.CoralArm;
@@ -30,6 +31,8 @@ import frc.robot.subsystems.FunnelMotor;
 //import frc.robot.subsystems.Claw;
 import frc.robot.subsystems.SSM;
 import frc.robot.subsystems.SSM.States;
+import frc.robot.utilities.ReefTargetCalculator;
+import frc.robot.utilities.ReefTargetCalculator.AlignMode;
 import frc.robot.subsystems.AlgaeIntake;
 import frc.robot.subsystems.Climber;
 
@@ -93,44 +96,50 @@ public class RobotContainer {
         //driverController.povDown().onTrue(new InstantCommand(() -> m_arm.jogging(false)));
        // driverController.povLeft().onTrue(new InstantCommand(() -> m_claw.runCoralIn(.7)).andThen(new InstantCommand(() ->m_arm.setPosition(ArmConstants.kArmFeeder))));
        // driverController.povRight().onTrue(new InstantCommand(() -> m_claw.runCoralOut(.7)))
-                                    //.onFalse(new InstantCommand(() -> m_claw.stopBoth()));
-        // driverController.a().onTrue(new InstantCommand(() -> m_claw.runAlgaeIn(.7)));
-        // driverController.x().onTrue(drivetrain.setControl(() -> PositionVoltage(6)));
         
-       // driverController.b().onTrue(new InstantCommand(() -> m_claw.runAlgaeIn(-.7)));
-        driverController.a().onFalse(new InstantCommand(() -> m_FunnelMotor.runCoralIn(-.7)).andThen(new IntakeFromFunnel(m_coralarm)).andThen(new InstantCommand(() -> m_SSM.setState(States.LOADINGSTATION))));
+        driverController.a().onTrue(new InstantCommand(() -> m_FunnelMotor.runCoralIn(-.5)).andThen(new IntakeFromFunnel(m_coralarm)).andThen(new InstantCommand(() -> m_SSM.setState(States.LOADINGSTATION))));
         //    .onFalse(new InstantCommand(() -> m_FunnelMotor.runCoralIn(-.7)).andThen(new IntakeFromFunnel(m_coralarm))); 
+        driverController.b().onTrue(new InstantCommand(() -> m_Climber.prepClimb(.50, .25)));
+        driverController.b().onFalse(new InstantCommand(() -> m_Climber.prepClimb(0, 0)));
+        
 
-        //driverController.rightBumper().onTrue(new InstantCommand(() -> m_claw.runAlgaeIn(.7))
-           // .andThen(new InstantCommand(() -> m_SSM.setState(States.GROUNDALGAE))));
- 
-        //driverController.rightTrigger().onTrue(new InstantCommand(() -> m_claw.runAlgaeIn(-.7))
-            //.andThen(new InstantCommand(() ->  m_claw.runCoralOut(1.0))));
-        driverController.rightTrigger().whileTrue((m_coralarm.runCoralCmd(-25.0)));
+        driverController.rightTrigger().whileTrue((m_coralarm.runCoralCmd(-40.0)));
         // driverController.rightTrigger().onFalse(new InstantCommand(() -> m_coralarm.runCoral(0.0)));
 
         // Create a trigger for another button press while the left trigger is held down
-        m_operatorBoard.button(12)
-            .and(driverController.leftTrigger()) // This ensures both conditions must be met
-            .onTrue(new InstantCommand(() -> m_SSM.setState(SSM.States.L1)));
-        m_operatorBoard.button(9)
-            .and(driverController.leftTrigger()) // This ensures both conditions must be met
-            .onTrue(new InstantCommand(() -> m_SSM.setState(SSM.States.L2)));
-        m_operatorBoard.button(6)
-            .and(driverController.leftTrigger()) // This ensures both conditions must be met
-            .onTrue(new InstantCommand(() -> m_SSM.setState(SSM.States.L3)));
-        m_operatorBoard.button(3)
-            .and(driverController.leftTrigger()) // This ensures both conditions must be met
-            .onTrue(new InstantCommand(() -> m_SSM.setState(SSM.States.L4)));
-        m_operatorBoard.button(1)
-            .and(driverController.leftTrigger()) // This ensures both conditions must be met
-            .onTrue(new InstantCommand(() -> m_SSM.setState(SSM.States.LOADINGSTATION)));
-        m_operatorBoard.button(4)
-            .and(driverController.leftTrigger()) // This ensures both conditions must be met
-            .onTrue(new InstantCommand(() -> m_SSM.setState(SSM.States.PROCESSOR)));
-        m_operatorBoard.button(5)
-            .and(driverController.leftTrigger()) // This ensures both conditions must be met
-            .onTrue(new InstantCommand(() -> m_SSM.setState(SSM.States.BARGE)));
+        // m_operatorBoard.button(12)
+        //     .and(driverController.leftTrigger()) // This ensures both conditions must be met
+        //     .onTrue(new InstantCommand(() -> m_SSM.setState(SSM.States.L1)));
+        // m_operatorBoard.button(9)
+        //     .and(driverController.leftTrigger()) // This ensures both conditions must be met
+        //     .onTrue(new InstantCommand(() -> m_SSM.setState(SSM.States.L2)));
+        // m_operatorBoard.button(6)
+        //     .and(driverController.leftTrigger()) // This ensures both conditions must be met
+        //     .onTrue(new InstantCommand(() -> m_SSM.setState(SSM.States.L3)));
+        // m_operatorBoard.button(3)
+        //     .and(driverController.leftTrigger()) // This ensures both conditions must be met
+        //     .onTrue(new InstantCommand(() -> m_SSM.setState(SSM.States.L4)));
+        // m_operatorBoard.button(1)
+        //     .and(driverController.leftTrigger()) // This ensures both conditions must be met
+        //     .onTrue(new InstantCommand(() -> m_SSM.setState(SSM.States.LOADINGSTATION)));
+        // m_operatorBoard.button(4)
+        //     .and(driverController.leftTrigger()) // This ensures both conditions must be met
+        //     .onTrue(new InstantCommand(() -> m_SSM.setState(SSM.States.PROCESSOR)));
+        // m_operatorBoard.button(5)
+        //     .and(driverController.leftTrigger()) // This ensures both conditions must be met
+        //     .onTrue(new InstantCommand(() -> m_SSM.setState(SSM.States.BARGE)));
+
+        bindAlign(ButtonConstants.kL1Left,  SSM.States.L1, ReefTargetCalculator.AlignMode.LEFT);
+        bindAlign(ButtonConstants.kL1Right, SSM.States.L1, ReefTargetCalculator.AlignMode.RIGHT);
+        bindAlign(ButtonConstants.kL2Left,  SSM.States.L2, ReefTargetCalculator.AlignMode.LEFT);
+        bindAlign(ButtonConstants.kL2Right, SSM.States.L2, ReefTargetCalculator.AlignMode.RIGHT);
+        bindAlign(ButtonConstants.kL3Left,  SSM.States.L3, ReefTargetCalculator.AlignMode.LEFT);
+        bindAlign(ButtonConstants.kL3Right, SSM.States.L3, ReefTargetCalculator.AlignMode.RIGHT);
+        bindAlign(ButtonConstants.kL3Left,  SSM.States.L3, ReefTargetCalculator.AlignMode.LEFT);
+        bindAlign(ButtonConstants.kL3Right, SSM.States.L3, ReefTargetCalculator.AlignMode.RIGHT);
+        // bindAlign(ButtonConstants.kLowAlgae,  SSM.States.ALGAELOW, ReefTargetCalculator.AlignMode.ALGAE);
+        // bindAlign(ButtonConstants.kHighAlgae, SSM.States.ALGAEHIGH, ReefTargetCalculator.AlignMode.ALGAE);
+
         m_operatorBoard.button(10)
             .and(driverController.pov(270)) // This ensures both conditions must be met
             .onTrue(new InstantCommand(() ->m_Climber.prepClimb(.50*ClimberConstants.kWheelRotRatio, .25)));
@@ -142,6 +151,24 @@ public class RobotContainer {
         driverController.leftTrigger().onFalse(new InstantCommand(() -> m_SSM.setState(SSM.States.LOADINGSTATION)));
     }
 
+    /**
+     * @param buttonConstant the button constant from ButtonConstants
+     * @param state the SSM2 state to set
+     * @param alignMode the alignment mode (LEFT, RIGHT, or ALGAE)
+     */
+    private void bindAlign(int buttonConstant, SSM.States state, AlignMode alignMode) {
+        m_operatorBoard.button(buttonConstant)
+            .and(driverController.leftTrigger())
+            .whileTrue(
+                new InstantCommand(() -> m_SSM.setState(state))
+                    .andThen(new PIDRotateToTrajectory(
+                        drivetrain,
+                        () -> driverController.getLeftY(),
+                        () -> driverController.getLeftX(),
+                        alignMode
+                    ))
+            );
+    }
 
     public void configureNamedCommands() {
     //     NamedCommands.registerCommand("Score", new InstantCommand(() -> m_SSM.setState(States.L4)).andThen(new WaitCommand(0.9)).andThen((new InstantCommand(() -> m_coralarm.runCoral(.7)))));

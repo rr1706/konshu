@@ -10,6 +10,7 @@ import com.ctre.phoenix6.swerve.*;
 import com.ctre.phoenix6.swerve.SwerveModuleConstants.*;
 
 import edu.wpi.first.math.Matrix;
+import edu.wpi.first.math.VecBuilder;
 import edu.wpi.first.math.numbers.N1;
 import edu.wpi.first.math.numbers.N3;
 import edu.wpi.first.units.measure.*;
@@ -51,7 +52,7 @@ public class TunerConstants {
 
     // The stator current at which the wheels start to slip;
     // This needs to be tuned to your individual robot
-    private static final Current kSlipCurrent = Amps.of(120.0);
+    private static final Current kSlipCurrent = Amps.of(60.0);
 
     // Initial configs for the drive and steer motors and the azimuth encoder; these cannot be null.
     // Some configs will be overwritten; check the `with*InitialConfigs()` API documentation.
@@ -78,7 +79,7 @@ public class TunerConstants {
 
     // Every 1 rotation of the azimuth results in kCoupleRatio drive motor turns;
     // This may need to be tuned to your individual robot
-    private static final double kCoupleRatio = 0;
+    private static final double kCoupleRatio = (12.0/36.0);
 
     private static final double kDriveGearRatio = 6.75;
     private static final double kSteerGearRatio = 25;
@@ -129,7 +130,7 @@ public class TunerConstants {
     private static final int kFrontLeftDriveMotorId = 1;
     private static final int kFrontLeftSteerMotorId = 2;
     private static final int kFrontLeftEncoderId = 2;
-    private static final Angle kFrontLeftEncoderOffset = Rotations.of(-0.0068359375);
+    private static final Angle kFrontLeftEncoderOffset = Rotations.of(-0.173828125);
     private static final boolean kFrontLeftSteerMotorInverted = false;
     private static final boolean kFrontLeftEncoderInverted = false;
 
@@ -140,7 +141,7 @@ public class TunerConstants {
     private static final int kFrontRightDriveMotorId = 3;
     private static final int kFrontRightSteerMotorId = 4;
     private static final int kFrontRightEncoderId = 4;
-    private static final Angle kFrontRightEncoderOffset = Rotations.of(-0.023681640625);
+    private static final Angle kFrontRightEncoderOffset = Rotations.of(-0.176025390625);
     private static final boolean kFrontRightSteerMotorInverted = false;
     private static final boolean kFrontRightEncoderInverted = false;
 
@@ -197,9 +198,10 @@ public class TunerConstants {
      */
     public static CommandSwerveDrivetrain createDrivetrain() {
         return new CommandSwerveDrivetrain(
-            DrivetrainConstants, FrontLeft, FrontRight, BackLeft, BackRight
+            DrivetrainConstants, 250,VecBuilder.fill(0.229,0.229,0.229),VecBuilder.fill(10,10,400),FrontLeft, FrontRight, BackLeft, BackRight
         );
     }
+
 
 
     /**

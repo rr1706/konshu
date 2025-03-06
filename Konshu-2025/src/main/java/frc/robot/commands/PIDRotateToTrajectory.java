@@ -17,6 +17,7 @@ import frc.robot.constants.ButtonConstants;
 import frc.robot.constants.DriveConstants;
 import frc.robot.subsystems.CommandSwerveDrivetrain;
 import frc.robot.utilities.ReefTargetCalculator;
+import frc.robot.commands.DriveCommands;
 import frc.robot.utilities.ReefTargetCalculator.AlignMode;
 
 import com.ctre.phoenix6.swerve.SwerveRequest;
@@ -110,8 +111,8 @@ public class PIDRotateToTrajectory extends Command {
         SmartDashboard.putNumber("Rot Out", rotationOutput);
         // Compute translation speeds from joystick inputs with a custom curve.
         double transAdjustment = adjustInputCurve(forwardBack.getAsDouble(), leftRight.getAsDouble(), 0.7, 0.3);
-        double velocityX = -forwardBack.getAsDouble() * DriveConstants.MAX_SPEED * transAdjustment;
-        double velocityY = -leftRight.getAsDouble() * DriveConstants.MAX_SPEED * transAdjustment;
+        double velocityX = DriveCommands.m_slewX.calculate(-forwardBack.getAsDouble() * DriveConstants.MAX_SPEED * transAdjustment);
+        double velocityY = DriveCommands.m_slewY.calculate(-leftRight.getAsDouble() * DriveConstants.MAX_SPEED * transAdjustment);
 
         // Build and apply the CTRE swerve request.
         SwerveRequest request = baseRequest
@@ -124,11 +125,6 @@ public class PIDRotateToTrajectory extends Command {
     @Override
     public void end(boolean interrupted) {
         // Stop the drivetrain for safety.
-        SwerveRequest request = baseRequest
-                .withVelocityX(0)
-                .withVelocityY(0)
-                .withRotationalRate(0);
-        drivetrain.setControl(request);
     }
 
 

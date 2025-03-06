@@ -25,12 +25,12 @@ public class ArmConstants {
   public static final double kArmBarge = 115.0; 
   public static final double kArmFeeder = 11.0;
   public static final double kArmGroundAlgae = -47.0;
-  public static final double kArmAlgeaGrab = 0;
+  public static final double kArmAlgeaGrab = 38;
 
   public static final double kArmLowerLimit = 10.0;   // Degrees from arm horizontal
   public static final double kArmUpperLimit = kArmL4;       // Degrees from arm horizontal
 
-  public static final double kMangentOffSet = 0.68; // Rotations
+  public static final double kMangentOffSet = 0.72; // Rotations
 
   // These are the constants for the arm stayout zones
   // kElevatorHighDanger - elevator must be higher than this to safely move arm above kArmHighDanger

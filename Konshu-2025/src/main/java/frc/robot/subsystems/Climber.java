@@ -91,10 +91,10 @@ public Climber() {
 
 
     public void prepClimb(double percent, double angle) {
-        m_climberLeftFX.setPosition(angle);
-        m_climberRightFx.setPosition(angle);
-        m_NovaLeft.setPercent(percent);
-        m_NovaRight.setPercent(percent);
+        m_climberLeftFX.setPosition(angle*ClimberConstants.kRotationGearRatio);
+        m_climberRightFx.setPosition(angle*ClimberConstants.kRotationGearRatio);
+        m_NovaLeft.setPercent(percent*ClimberConstants.kWheelRotRatio);
+        m_NovaRight.setPercent(percent*ClimberConstants.kWheelRotRatio);
         // return prepClimb(percent, angle);
     }
 
