@@ -10,6 +10,8 @@ public class ReefTargetCalculator {
     /**
      * Calculates the target translation based on the current alliance,
      * the state of reef (Coral) buttons, and the specified alignment mode.
+     * Note that for LEFT and RIGHT only the Translation2d is currently used, but the Rotation2d
+     * is also returned for future use by the dithering code (adjust the elevation/arm rotation slightly)
  
      * @return the selected target Pose2d, or null if no button is pressed.
      */
@@ -22,38 +24,38 @@ public class ReefTargetCalculator {
         if (alliance == DriverStation.Alliance.Blue) {
             if (DriverStation.getStickButton(1, ButtonConstants.kCoralA)) {
                 switch (alignMode) {
-                    case LEFT -> new Pose2d(AutoAlignConstants.BlueAllianceConstants.kAL, null);
-                    case RIGHT -> new Pose2d(AutoAlignConstants.BlueAllianceConstants.kAR, null); 
+                    case LEFT -> new Pose2d(AutoAlignConstants.BlueAllianceConstants.kAL, AutoAlignConstants.BlueAllianceConstants.kAAlgea);
+                    case RIGHT -> new Pose2d(AutoAlignConstants.BlueAllianceConstants.kAR, AutoAlignConstants.BlueAllianceConstants.kAAlgea); 
                     case ALGAE -> new Pose2d(null, AutoAlignConstants.BlueAllianceConstants.kAAlgea);
                 }
             } else if (DriverStation.getStickButton(1, ButtonConstants.kCoralB)) {
                 switch (alignMode) {
-                    case LEFT -> new Pose2d(AutoAlignConstants.BlueAllianceConstants.kBL, null);
-                    case RIGHT -> new Pose2d(AutoAlignConstants.BlueAllianceConstants.kBR, null);
+                    case LEFT -> new Pose2d(AutoAlignConstants.BlueAllianceConstants.kBL, AutoAlignConstants.BlueAllianceConstants.kBAlgea);
+                    case RIGHT -> new Pose2d(AutoAlignConstants.BlueAllianceConstants.kBR, AutoAlignConstants.BlueAllianceConstants.kBAlgea);
                     case ALGAE -> new Pose2d(null, AutoAlignConstants.BlueAllianceConstants.kBAlgea);  
                 }
             } else if (DriverStation.getStickButton(1, ButtonConstants.kCoralC)) {
                 switch (alignMode) {
-                    case LEFT -> new Pose2d(AutoAlignConstants.BlueAllianceConstants.kCL, null);
-                    case RIGHT -> new Pose2d(AutoAlignConstants.BlueAllianceConstants.kCR, null);
+                    case LEFT -> new Pose2d(AutoAlignConstants.BlueAllianceConstants.kCL, AutoAlignConstants.BlueAllianceConstants.kCAlgea);
+                    case RIGHT -> new Pose2d(AutoAlignConstants.BlueAllianceConstants.kCR, AutoAlignConstants.BlueAllianceConstants.kCAlgea);
                     case ALGAE -> new Pose2d(null, AutoAlignConstants.BlueAllianceConstants.kCAlgea);
                 }
             } else if (DriverStation.getStickButton(1, ButtonConstants.kCoralD)) {
                 switch (alignMode) {
-                    case LEFT -> new Pose2d(AutoAlignConstants.BlueAllianceConstants.kDL, null);
-                    case RIGHT -> new Pose2d(AutoAlignConstants.BlueAllianceConstants.kDR, null);
+                    case LEFT -> new Pose2d(AutoAlignConstants.BlueAllianceConstants.kDL, AutoAlignConstants.BlueAllianceConstants.kDAlgea);
+                    case RIGHT -> new Pose2d(AutoAlignConstants.BlueAllianceConstants.kDR, AutoAlignConstants.BlueAllianceConstants.kDAlgea);
                     case ALGAE -> new Pose2d(null, AutoAlignConstants.BlueAllianceConstants.kDAlgea);
                 }
             } else if (DriverStation.getStickButton(1, ButtonConstants.kCoralE)) {
                 switch (alignMode) {
-                    case LEFT -> new Pose2d(AutoAlignConstants.BlueAllianceConstants.kEL, null);
-                    case RIGHT -> new Pose2d(AutoAlignConstants.BlueAllianceConstants.kER, null);
+                    case LEFT -> new Pose2d(AutoAlignConstants.BlueAllianceConstants.kEL, AutoAlignConstants.BlueAllianceConstants.kEAlgea);
+                    case RIGHT -> new Pose2d(AutoAlignConstants.BlueAllianceConstants.kER, AutoAlignConstants.BlueAllianceConstants.kEAlgea);
                     case ALGAE -> new Pose2d(null, AutoAlignConstants.BlueAllianceConstants.kEAlgea);
                 }
             } else if (DriverStation.getStickButton(1, ButtonConstants.kCoralF)) {
                 switch (alignMode) {
-                    case LEFT -> new Pose2d(AutoAlignConstants.BlueAllianceConstants.kFL, null);
-                    case RIGHT -> new Pose2d(AutoAlignConstants.BlueAllianceConstants.kFR, null);
+                    case LEFT -> new Pose2d(AutoAlignConstants.BlueAllianceConstants.kFL, AutoAlignConstants.BlueAllianceConstants.kFAlgea);
+                    case RIGHT -> new Pose2d(AutoAlignConstants.BlueAllianceConstants.kFR, AutoAlignConstants.BlueAllianceConstants.kFAlgea);
                     case ALGAE -> new Pose2d(null, AutoAlignConstants.BlueAllianceConstants.kFAlgea);
                 }
             }
@@ -62,38 +64,38 @@ public class ReefTargetCalculator {
         else  {
             if (DriverStation.getStickButton(1, ButtonConstants.kCoralA)) {
                 switch (alignMode) {
-                    case LEFT -> new Pose2d(AutoAlignConstants.RedAllianceConstants.kAL, null);
-                    case RIGHT -> new Pose2d(AutoAlignConstants.RedAllianceConstants.kAR, null);
+                    case LEFT -> new Pose2d(AutoAlignConstants.RedAllianceConstants.kAL, AutoAlignConstants.RedAllianceConstants.kAAlgea);
+                    case RIGHT -> new Pose2d(AutoAlignConstants.RedAllianceConstants.kAR, AutoAlignConstants.RedAllianceConstants.kAAlgea);
                     case ALGAE -> new Pose2d(null, AutoAlignConstants.RedAllianceConstants.kAAlgea);
                 }
             } else if (DriverStation.getStickButton(1, ButtonConstants.kCoralB)) {
                 switch (alignMode) {
-                    case LEFT -> new Pose2d(AutoAlignConstants.RedAllianceConstants.kBL, null);
-                    case RIGHT -> new Pose2d(AutoAlignConstants.RedAllianceConstants.kBR, null);
+                    case LEFT -> new Pose2d(AutoAlignConstants.RedAllianceConstants.kBL, AutoAlignConstants.RedAllianceConstants.kBAlgea);
+                    case RIGHT -> new Pose2d(AutoAlignConstants.RedAllianceConstants.kBR, AutoAlignConstants.RedAllianceConstants.kBAlgea);
                     case ALGAE -> new Pose2d(null, AutoAlignConstants.RedAllianceConstants.kBAlgea);  
                 }
             } else if (DriverStation.getStickButton(1, ButtonConstants.kCoralC)) {
                 switch (alignMode) {
-                    case LEFT -> new Pose2d(AutoAlignConstants.RedAllianceConstants.kCL, null);
-                    case RIGHT -> new Pose2d(AutoAlignConstants.RedAllianceConstants.kCR, null);
+                    case LEFT -> new Pose2d(AutoAlignConstants.RedAllianceConstants.kCL, AutoAlignConstants.RedAllianceConstants.kCAlgea);
+                    case RIGHT -> new Pose2d(AutoAlignConstants.RedAllianceConstants.kCR,AutoAlignConstants.RedAllianceConstants.kCAlgea);
                     case ALGAE -> new Pose2d(null, AutoAlignConstants.RedAllianceConstants.kCAlgea);
                 }
             } else if (DriverStation.getStickButton(1, ButtonConstants.kCoralD)) {
                 switch (alignMode) {
-                    case LEFT -> new Pose2d(AutoAlignConstants.RedAllianceConstants.kDL, null);
-                    case RIGHT -> new Pose2d(AutoAlignConstants.RedAllianceConstants.kDR, null);
+                    case LEFT -> new Pose2d(AutoAlignConstants.RedAllianceConstants.kDL, AutoAlignConstants.RedAllianceConstants.kDAlgea);
+                    case RIGHT -> new Pose2d(AutoAlignConstants.RedAllianceConstants.kDR, AutoAlignConstants.RedAllianceConstants.kDAlgea);
                     case ALGAE -> new Pose2d(null, AutoAlignConstants.RedAllianceConstants.kDAlgea);
                 }
             } else if (DriverStation.getStickButton(1, ButtonConstants.kCoralE)) {
                 switch (alignMode) {
-                    case LEFT -> new Pose2d(AutoAlignConstants.RedAllianceConstants.kEL, null);
-                    case RIGHT -> new Pose2d(AutoAlignConstants.RedAllianceConstants.kER, null);
+                    case LEFT -> new Pose2d(AutoAlignConstants.RedAllianceConstants.kEL, AutoAlignConstants.RedAllianceConstants.kEAlgea);
+                    case RIGHT -> new Pose2d(AutoAlignConstants.RedAllianceConstants.kER, AutoAlignConstants.RedAllianceConstants.kEAlgea);
                     case ALGAE -> new Pose2d(null, AutoAlignConstants.RedAllianceConstants.kEAlgea);
                 }
             } else if (DriverStation.getStickButton(1, ButtonConstants.kCoralF)) {
                 switch (alignMode) {
-                    case LEFT -> new Pose2d(AutoAlignConstants.RedAllianceConstants.kFL, null);
-                    case RIGHT -> new Pose2d(AutoAlignConstants.RedAllianceConstants.kFR, null);
+                    case LEFT -> new Pose2d(AutoAlignConstants.RedAllianceConstants.kFL, AutoAlignConstants.RedAllianceConstants.kFAlgea);
+                    case RIGHT -> new Pose2d(AutoAlignConstants.RedAllianceConstants.kFR, AutoAlignConstants.RedAllianceConstants.kFAlgea);
                     case ALGAE -> new Pose2d(null, AutoAlignConstants.RedAllianceConstants.kFAlgea);
                 }
             }

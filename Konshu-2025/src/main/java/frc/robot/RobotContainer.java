@@ -101,8 +101,7 @@ public class RobotContainer {
                     drivetrain,
                     () -> driverController.getLeftY(),
                     () -> driverController.getLeftX(),
-                    m_SSM
-                ));
+                    m_arm, m_elevator, m_SSM));
                 
         driverController.leftTrigger().onFalse(new InstantCommand(() -> m_SSM.setState(SSM.States.LOADINGSTATION)));
     }
