@@ -26,7 +26,7 @@ import edu.wpi.first.wpilibj2.command.Command;
  * </pre>
  */
 public class IntakeFromFunnel extends Command {
-  public static boolean CoralHalted = false;
+  private static boolean CoralHalted = false;
 
   private final CoralArm coralArm;
   
@@ -40,6 +40,10 @@ public class IntakeFromFunnel extends Command {
     // Declare subsystem dependencies.
     addRequirements(coralArm);
   }
+
+  public static boolean getCoralHalted() {
+    return CoralHalted;
+  } 
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override

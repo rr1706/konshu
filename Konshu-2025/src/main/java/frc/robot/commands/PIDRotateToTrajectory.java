@@ -106,7 +106,7 @@ public class PIDRotateToTrajectory extends Command {
             m_state = SSM.States.L4;
             m_SSM.setState(m_state);
             m_alignMode = ReefTargetCalculator.AlignMode.RIGHT;
-        } else if (DriverStation.getStickButton(1, ButtonConstants.kLowAlgae)) {
+        } else if (DriverStation.getStickButton(2, ButtonConstants.kLowAlgae)) {
             m_state = SSM.States.ALGAELOW;
             m_SSM.setState(m_state);
             m_alignMode = ReefTargetCalculator.AlignMode.ALGAE;
@@ -114,7 +114,7 @@ public class PIDRotateToTrajectory extends Command {
             m_state = SSM.States.ALGAEHIGH;
             m_SSM.setState(m_state);
             m_alignMode = ReefTargetCalculator.AlignMode.ALGAE;
-        } else if (DriverStation.getStickButton(1, ButtonConstants.kBarge)) {
+        } else if (DriverStation.getStickButton(2, ButtonConstants.kBarge)) {
             m_SSM.setState(SSM.States.BARGE);
         } else if (DriverStation.getStickButton(1, ButtonConstants.kProcessor)) {
             m_SSM.setState(SSM.States.PROCESSOR);
@@ -156,7 +156,7 @@ public class PIDRotateToTrajectory extends Command {
             // double anglefactor = 1.0 - Math.cos(theta.getRadians());
             // double distfactor = Math.max(0.0, 1.0 - dist/MAX_DIST);
             // double ElevatorDither = elevatorNominal + ELEVATOR_MAX_DITHER_ROTATION*anglefactor + ELEVATOR_MAX_DITHER_DIST*distfactor;
-            // double ArmDither = armNominal - ARM_MAX_DITHER_ROTATION*anglefactor - ARM_MAX_DITHER_DIST*distfactor;
+            // double ArmDither = armNominal + ARM_MAX_DITHER_ROTATION*anglefactor + ARM_MAX_DITHER_DIST*distfactor;
             // m_elevator.setPosition(ElevatorDither);
             // m_arm.setPosition(ArmDither*180.0/Math.PI);
         }
