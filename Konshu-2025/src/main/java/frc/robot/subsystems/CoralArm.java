@@ -22,9 +22,9 @@ public class CoralArm extends SubsystemBase{
         // m_Nova.setInversion(true);
         m_Nova = new ThriftyNova(10, MotorType.MINION);
         m_Nova.setMaxCurrent(CurrentType.STATOR, 60.0);
-        m_Nova.setMaxCurrent(CurrentType.SUPPLY, 30.0);
-        m_Nova.setVoltageCompensation(10.0);
-        m_Nova.pid0.setFF(0.0000133);
+        m_Nova.setMaxCurrent(CurrentType.SUPPLY, 50.0);
+        m_Nova.setVoltageCompensation(0.0);
+        m_Nova.pid0.setFF(0.0000266);
         m_Nova.pid0.setP(0.00003);
 
         lc = new LaserCan(10);
@@ -39,7 +39,7 @@ public class CoralArm extends SubsystemBase{
 
     public void runCoral(double speed) {
 
-        m_Nova.setVelocity(speed*42.0);
+        m_Nova.set(speed);
         // m_Nova.setInverted(true);
 
     }
