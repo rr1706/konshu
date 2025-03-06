@@ -133,7 +133,7 @@ public class SSM extends SubsystemBase {
         SmartDashboard.putString("m_queuedSetPoint", m_queuedSetpoint.toString());
     }
 
-    private double getScoringElevatorPosition(States state) {
+    public double getScoringElevatorPosition(States state) {
         return switch (state) {
             case L1 -> ElevatorConstants.kElevatorL1;
             case L2 -> ElevatorConstants.kElevatorL2;
@@ -149,7 +149,7 @@ public class SSM extends SubsystemBase {
         };
     }
 
-    private double getScoringArmPosition(States state) {
+    public double getScoringArmPosition(States state) {
         return switch (state) {
             case L1 -> ArmConstants.kArmL1;
             case L2 -> ArmConstants.kArmL2;

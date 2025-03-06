@@ -12,6 +12,7 @@ import frc.robot.constants.ButtonConstants;
 import frc.robot.constants.DriveConstants;
 import frc.robot.subsystems.CommandSwerveDrivetrain;
 import frc.robot.subsystems.SSM;
+import frc.robot.subsystems.SSM.States;
 import frc.robot.utilities.ReefTargetCalculator;
 import frc.robot.commands.DriveCommands;
 import frc.robot.utilities.ReefTargetCalculator.AlignMode;
@@ -126,13 +127,23 @@ public class PIDRotateToTrajectory extends Command {
         // For ALGAE mode, use the preset rotation; otherwise, compute the angle from the target translation.
         if (alignMode == AlignMode.ALGAE) {     // m_Pose only has rotation populated
             targetAngle = m_Pose.getRotation().getRadians();
-        } else {                                // m_Pose only has translation populated
+        } else {
             double [] target_array ={m_Pose.getTranslation().getX(), m_Pose.getTranslation().getY()};
             SmartDashboard.putNumberArray("Target",target_array);
             Translation2d robotToGoal = m_Pose.getTranslation().minus(currentPose.getTranslation());
             targetAngle = robotToGoal.getAngle().getRadians();
-//          double distToGoal = robotToGoal.getDistance(new Translation2d());
-        }
+
+//          Put dither code here - adjust elevation and arm angle as a function of distance (d),
+//          and angle between coral hex normal and current pose angle (theta),
+//          delta off the current elevator nominal height and arm nominal angle for the current state.
+
+//          double d = robotToGoal.getDistance(new Translation2d());    // Distance to post from robot
+//          Rotation2d theta = m_Pose.getRotation().minus(currentPose.getRotation());    // Delta from coral wall normal
+//          double ElevatorNominal = getScoringElevatorPosition(m_state);   // Need to add and set m_state in above switch
+//          double ArmNominal = getScoringArmPosition(m_state);             // Need to add amd set m_state in above switch
+
+//          Will need to bring in arm and elevator subsystems to be able to set their new dithered position
+//          Do we need to also vary the eject speed based on d?
 
         SmartDashboard.putString("Align Mode", alignMode.toString());
         SmartDashboard.putNumber("Target Angle", targetAngle);
