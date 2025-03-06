@@ -54,15 +54,17 @@ public class IntakeFromFunnel extends Command {
 
       if (Measurement < 23) {
         coralArm.runCoral(0);
-        CoralHalted = true;       // Used by SSM to disable states L1-L4
+        
+        CoralHalted = true;
+        SmartDashboard.putBoolean("Coral Halted", CoralHalted);       // Used by SSM to disable states L1-L4
       } else {
         CoralHalted = false;
-        coralArm.runCoral(-25.0);
+        coralArm.runCoral(-.2);
       }
       SmartDashboard.putBoolean("CoralHalted", CoralHalted);
       
       // If the measurement is not valid, stop the motor.
-      coralArm.runCoral(0);
+      // coralArm.runCoral(0);
   }
 
   // Called once the command ends or is interrupted.

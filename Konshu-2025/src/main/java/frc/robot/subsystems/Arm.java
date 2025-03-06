@@ -34,7 +34,6 @@ public class Arm extends SubsystemBase {
             .withSupplyCurrentLimit(ArmConstants.ArmCurrents.kSupplyCurrent)
             .withSupplyCurrentLimitEnable(true));
            
-        m_armFX.setNeutralMode(NeutralModeValue.Brake);
 
         m_limits = new SoftwareLimitSwitchConfigs()
         .withForwardSoftLimitEnable(true)
@@ -72,6 +71,8 @@ public class Arm extends SubsystemBase {
             m_armFX.getConfigurator().apply(m_feedbackConfig); 
 
         m_armFX.getConfigurator().apply(new MotorOutputConfigs().withInverted(InvertedValue.CounterClockwise_Positive));
+        m_armFX.setNeutralMode(NeutralModeValue.Brake);
+
     }
 
     // Get the position of the motor in degrees from hortizontal
