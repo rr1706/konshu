@@ -7,17 +7,17 @@ import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
-import edu.wpi.first.wpilibj2.command.InstantCommand;
 import frc.robot.constants.ButtonConstants;
 import frc.robot.constants.DriveConstants;
 import frc.robot.subsystems.CommandSwerveDrivetrain;
 import frc.robot.subsystems.SSM;
 import frc.robot.subsystems.SSM.States;
 import frc.robot.utilities.ReefTargetCalculator;
-import frc.robot.commands.DriveCommands;
 import frc.robot.utilities.ReefTargetCalculator.AlignMode;
 import com.ctre.phoenix6.swerve.SwerveRequest;
 import com.ctre.phoenix6.swerve.SwerveModule.DriveRequestType;
+import frc.robot.subsystems.Arm;
+import frc.robot.subsystems.Elevator;
 
 /**
  * PIDRotateToTrajectory rotates the robot to face a target (selected via joystick button polling)
@@ -31,8 +31,11 @@ public class PIDRotateToTrajectory extends Command {
     private final CommandSwerveDrivetrain drivetrain;
     private final DoubleSupplier forwardBack;
     private final DoubleSupplier leftRight;
-    private AlignMode alignMode;
     private final SSM m_SSM;
+    private final Arm m_arm;
+    private final Elevator m_elevator;
+    private States m_state;
+    private AlignMode m_alignMode;
 
     // Updated via button polling
     private Pose2d m_Pose = null;
@@ -50,17 +53,19 @@ public class PIDRotateToTrajectory extends Command {
     public PIDRotateToTrajectory(CommandSwerveDrivetrain drivetrain,
                                  DoubleSupplier forwardBack,
                                  DoubleSupplier leftRight,
-                                 SSM ssm) {
+                                 Arm arm, Elevator el, SSM ssm) {
         this.drivetrain = drivetrain;
         this.forwardBack = forwardBack;
         this.leftRight = leftRight;
+        this.m_arm = arm;
+        this.m_elevator = el;
         this.m_SSM = ssm;
         
         // Enable continuous input for proper angle wrapping (from -π to π)
         rotPID.enableContinuousInput(-Math.PI, Math.PI);
         rotPID.setTolerance(0.05);
         
-        addRequirements(drivetrain);
+        addRequirements(drivetrain, ssm, arm, el);
     }
 
     @Override
@@ -69,63 +74,67 @@ public class PIDRotateToTrajectory extends Command {
         SmartDashboard.putNumber("Current Angle", currentAngle);
     }
 
-
     @Override
     public void execute() {
 
         if (DriverStation.getStickButton(1, ButtonConstants.kL1Left)) {
-            m_SSM.setState(SSM.States.L1);
-            alignMode = ReefTargetCalculator.AlignMode.LEFT;
+            m_state = SSM.States.L1;
+            m_SSM.setState(m_state);
+            m_alignMode = ReefTargetCalculator.AlignMode.LEFT;
         } else if (DriverStation.getStickButton(1, ButtonConstants.kL1Right)) {
-            m_SSM.setState(SSM.States.L1);
-            alignMode = ReefTargetCalculator.AlignMode.RIGHT;
+            m_state = SSM.States.L1;
+            m_SSM.setState(m_state);
+            m_alignMode = ReefTargetCalculator.AlignMode.RIGHT;
         } else if (DriverStation.getStickButton(1, ButtonConstants.kL2Left)) {
-            m_SSM.setState(SSM.States.L2);
-            alignMode = ReefTargetCalculator.AlignMode.LEFT;
+            m_state = SSM.States.L2;
+            m_SSM.setState(m_state);
+            m_alignMode = ReefTargetCalculator.AlignMode.LEFT;
         } else if (DriverStation.getStickButton(1, ButtonConstants.kL2Right)) {
-            m_SSM.setState(SSM.States.L2);
-            alignMode = ReefTargetCalculator.AlignMode.RIGHT;
+            m_state = SSM.States.L2;
+            m_SSM.setState(m_state);
+            m_alignMode = ReefTargetCalculator.AlignMode.RIGHT;
         } else if (DriverStation.getStickButton(1, ButtonConstants.kL3Left)) {
-            m_SSM.setState(SSM.States.L3);
-            alignMode = ReefTargetCalculator.AlignMode.LEFT;
+            m_state = SSM.States.L3;
+            m_SSM.setState(m_state);
+            m_alignMode = ReefTargetCalculator.AlignMode.LEFT;
         } else if (DriverStation.getStickButton(1, ButtonConstants.kL3Right)) {
-            m_SSM.setState(SSM.States.L3);
-            alignMode = ReefTargetCalculator.AlignMode.RIGHT;
+            m_state = SSM.States.L3;
+            m_SSM.setState(m_state);
+            m_alignMode = ReefTargetCalculator.AlignMode.RIGHT;
         } else if (DriverStation.getStickButton(1, ButtonConstants.kL4Left)) {
-            m_SSM.setState(SSM.States.L4);
-            alignMode = ReefTargetCalculator.AlignMode.LEFT;
+            m_state = SSM.States.L4;
+            m_SSM.setState(m_state);
+            m_alignMode = ReefTargetCalculator.AlignMode.LEFT;
         } else if (DriverStation.getStickButton(1, ButtonConstants.kL4Right)) {
-            m_SSM.setState(SSM.States.L4);
-            alignMode = ReefTargetCalculator.AlignMode.RIGHT;
+            m_state = SSM.States.L4;
+            m_SSM.setState(m_state);
+            m_alignMode = ReefTargetCalculator.AlignMode.RIGHT;
         } else if (DriverStation.getStickButton(1, ButtonConstants.kLowAlgae)) {
-            m_SSM.setState(SSM.States.ALGAELOW);
-            alignMode = ReefTargetCalculator.AlignMode.ALGAE;
+            m_state = SSM.States.ALGAELOW;
+            m_SSM.setState(m_state);
+            m_alignMode = ReefTargetCalculator.AlignMode.ALGAE;
         } else if (DriverStation.getStickButton(1, ButtonConstants.kHighAlgae)) {
-            m_SSM.setState(SSM.States.ALGAEHIGH);
-            alignMode = ReefTargetCalculator.AlignMode.ALGAE;
+            m_state = SSM.States.ALGAEHIGH;
+            m_SSM.setState(m_state);
+            m_alignMode = ReefTargetCalculator.AlignMode.ALGAE;
         } else if (DriverStation.getStickButton(1, ButtonConstants.kBarge)) {
             m_SSM.setState(SSM.States.BARGE);
             return;
         } else if (DriverStation.getStickButton(1, ButtonConstants.kProcessor)) {
             m_SSM.setState(SSM.States.PROCESSOR);
             return;
-        } else {
-            return;
-        }
+        } else return;            // No level button pressed - do nothing
 
-        m_Pose = ReefTargetCalculator.calculateTargetTranslation(alignMode);
-        if (m_Pose == null) {
-            // No valid reef button pressed – optionally mark the command as finished.
-            return;
-        }
-
+        m_Pose = ReefTargetCalculator.calculateTargetTranslation(m_alignMode);
+        if (m_Pose == null) return;  // No reef button pressed – optionally mark the command as finished
+            
         Pose2d currentPose = drivetrain.getState().Pose;
         double currentAngle = currentPose.getRotation().getRadians();
         SmartDashboard.putNumber("CurrentAngle", currentAngle);
 
         double targetAngle;
         // For ALGAE mode, use the preset rotation; otherwise, compute the angle from the target translation.
-        if (alignMode == AlignMode.ALGAE) {     // m_Pose only has rotation populated
+        if (m_alignMode == AlignMode.ALGAE) {     // m_Pose only has rotation populated
             targetAngle = m_Pose.getRotation().getRadians();
         } else {
             double [] target_array ={m_Pose.getTranslation().getX(), m_Pose.getTranslation().getY()};
@@ -133,19 +142,32 @@ public class PIDRotateToTrajectory extends Command {
             Translation2d robotToGoal = m_Pose.getTranslation().minus(currentPose.getTranslation());
             targetAngle = robotToGoal.getAngle().getRadians();
 
-//          Put dither code here - adjust elevation and arm angle as a function of distance (d),
-//          and angle between coral hex normal and current pose angle (theta),
-//          delta off the current elevator nominal height and arm nominal angle for the current state.
+//      Dither - adjust elevation and arm angle as a function of distance (d) from the coral post AND
+//      the angle between coral wall normal and current pose angle (theta) AND
+//      the elevator nominal height and arm nominal angle for the current state.
 
-//          double d = robotToGoal.getDistance(new Translation2d());    // Distance to post from robot
-//          Rotation2d theta = m_Pose.getRotation().minus(currentPose.getRotation());    // Delta from coral wall normal
-//          double ElevatorNominal = getScoringElevatorPosition(m_state);   // Need to add and set m_state in above switch
-//          double ArmNominal = getScoringArmPosition(m_state);             // Need to add amd set m_state in above switch
+//      Set ArmNominimal and ElevatorNominal constants to be when the robot at MAX_DIST away and aligned normal to the coral wall
 
-//          Will need to bring in arm and elevator subsystems to be able to set their new dithered position
-//          Do we need to also vary the eject speed based on d?
+//      2DO: Do we want to also vary the eject speed based on m_d?
 
-        SmartDashboard.putString("Align Mode", alignMode.toString());
+            // double dist = robotToGoal.getDistance(new Translation2d());    // Distance to post from robot
+            // Rotation2d theta = m_Pose.getRotation().minus(currentPose.getRotation());    // Angle from coral wall normal
+            // double elevatorNominal = m_SSM.getScoringElevatorPosition(m_state);   // Need to add and set m_state in above switch
+            // double armNominal = m_SSM.getScoringArmPosition(m_state);             // Need to add amd set m_state in above switch
+            // final double MAX_DIST = 30.0;                       // Max distance from the post in inches to start dithering based on distance
+            // final double ELEVATOR_MAX_DITHER_ROTATION = 3.0;    // Max elevator dither in inches based on angle from coral wall normal
+            // final double ARM_MAX_DITHER_ROTATION = 5.0;         // Max arm dither in degrees based on angle from coral wall normal
+            // final double ELEVATOR_MAX_DITHER_DIST = 6.0;        // Max elevator dither in inches based on distance from post
+            // final double ARM_MAX_DITHER_DIST = 10.0;            // Max arm dither in degrees based on distance from post
+            // double anglefactor = 1.0 - Math.cos(theta.getRadians());
+            // double distfactor = Math.max(0.0, 1.0 - dist/MAX_DIST);
+            // double ElevatorDither = elevatorNominal + ELEVATOR_MAX_DITHER_ROTATION*anglefactor + ELEVATOR_MAX_DITHER_DIST*distfactor;
+            // double ArmDither = armNominal - ARM_MAX_DITHER_ROTATION*anglefactor - ARM_MAX_DITHER_DIST*distfactor;
+            // m_elevator.setPosition(ElevatorDither);
+            // m_arm.setPosition(ArmDither*180.0/Math.PI);
+        }
+
+        SmartDashboard.putString("Align Mode", m_alignMode.toString());
         SmartDashboard.putNumber("Target Angle", targetAngle);
         // Compute the PID controller output.
         double rotationOutput = rotPID.calculate(currentAngle, targetAngle);

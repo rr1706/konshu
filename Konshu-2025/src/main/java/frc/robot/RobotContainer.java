@@ -133,8 +133,7 @@ public class RobotContainer {
                     drivetrain,
                     () -> driverController.getLeftY(),
                     () -> driverController.getLeftX(),
-                    m_SSM
-                ));
+                    m_arm, m_elevator, m_SSM));
                 
         // bindAlign(ButtonConstants.kL1Left,  SSM.States.L1, ReefTargetCalculator.AlignMode.LEFT);
         // bindAlign(ButtonConstants.kL1Right, SSM.States.L1, ReefTargetCalculator.AlignMode.RIGHT);
