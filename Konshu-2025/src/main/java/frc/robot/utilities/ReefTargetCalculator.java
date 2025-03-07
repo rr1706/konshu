@@ -101,7 +101,7 @@ public class ReefTargetCalculator {
             }
         }
         // No button pressed returns null.
-        return null;
+        return new Pose2d();
     }
 }
 

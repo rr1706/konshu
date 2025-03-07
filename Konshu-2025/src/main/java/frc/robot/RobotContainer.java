@@ -47,6 +47,8 @@ public class RobotContainer {
     private final FunnelMotor m_FunnelMotor = new FunnelMotor();
     //private final Claw m_claw = new Claw();
     private final CommandGenericHID m_operatorBoard = new CommandGenericHID(1);
+    private final CommandGenericHID m_operatorBoard2 = new CommandGenericHID(2);
+
     private final SSM m_SSM = new SSM(m_arm, m_elevator);        // Defaults to DISABLED - no action until trigger
     private final AlgaeIntake m_algaeintake = new AlgaeIntake();
     // private final SSM m_SSM = new SSM(m_arm, m_elevator, SSM.States.L1);   // Alternative constructor, starts moving to initial state given 

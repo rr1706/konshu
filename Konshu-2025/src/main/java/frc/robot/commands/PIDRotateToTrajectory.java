@@ -37,7 +37,7 @@ public class PIDRotateToTrajectory extends Command {
     private AlignMode m_alignMode;
 
     // Updated via button polling
-    private Pose2d m_Pose = null;
+    private Pose2d m_Pose = new Pose2d();
 
     // PID controller for rotation. Tune gains and constraints as needed.
     private final PIDController rotPID = new PIDController(
@@ -120,6 +120,7 @@ public class PIDRotateToTrajectory extends Command {
             m_SSM.setState(SSM.States.PROCESSOR);
         } // No level button pressed - do nothing
 
+        
         m_Pose = ReefTargetCalculator.calculateTargetTranslation(m_alignMode);
             
         Pose2d currentPose = drivetrain.getState().Pose;

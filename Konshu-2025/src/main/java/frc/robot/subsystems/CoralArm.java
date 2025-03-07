@@ -62,7 +62,7 @@ public class CoralArm extends SubsystemBase{
     public void periodic() {
     LaserCan.Measurement measurement = lc.getMeasurement();
     if (measurement != null && measurement.status == LaserCan.LASERCAN_STATUS_VALID_MEASUREMENT) {
-        System.out.println("The target is " + measurement.distance_mm + "mm away!");
+        // System.out.println("The target is " + measurement.distance_mm + "mm away!");
         SmartDashboard.putNumber(getName(), measurement.distance_mm);
     //      if (measurement.distance_mm < 23.0){
     //         m_Nova.setPercent(0);
