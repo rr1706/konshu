@@ -1,6 +1,7 @@
 package frc.robot.commands;
 import java.util.function.DoubleSupplier;
 import edu.wpi.first.math.controller.PIDController;
+import edu.wpi.first.math.filter.SlewRateLimiter;
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.geometry.Translation2d;
@@ -33,8 +34,6 @@ public class PIDRotateToTrajectory extends Command {
     private final DoubleSupplier leftRight;
     private final DoubleSupplier rotation;
     private final SSM m_SSM;
-    private final Arm m_arm;
-    private final Elevator m_elevator;
     private States m_state;
     private AlignMode m_alignMode;
     private boolean m_goforPID = true;
@@ -185,8 +184,8 @@ public class PIDRotateToTrajectory extends Command {
 
         // Compute translation speeds from joystick inputs with a custom curve.
         double transAdjustment = adjustInputCurve(forwardBack.getAsDouble(), leftRight.getAsDouble(), 0.7, 0.3);
-        double velocityX = DriveCommands.m_slewX.calculate(-forwardBack.getAsDouble() * DriveConstants.MAX_SPEED * transAdjustment);
-        double velocityY = DriveCommands.m_slewY.calculate(-leftRight.getAsDouble() * DriveConstants.MAX_SPEED * transAdjustment);
+        double velocityX = slewX.calculate(-forwardBack.getAsDouble() * DriveConstants.MAX_SPEED * transAdjustment);
+        double velocityY = slewY.calculate(-leftRight.getAsDouble() * DriveConstants.MAX_SPEED * transAdjustment);
 
         // Build and apply the CTRE swerve request.
         SwerveRequest request = baseRequest
