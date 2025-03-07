@@ -32,9 +32,11 @@ public class PIDRotateToTrajectory extends Command {
     private final CommandSwerveDrivetrain drivetrain;
     private final DoubleSupplier forwardBack;
     private final DoubleSupplier leftRight;
+    private final DoubleSupplier rotation;
     private final SSM m_SSM;
     private States m_state;
     private AlignMode m_alignMode;
+    private boolean m_goforPID = true;
 
     // Updated via button polling
     private Pose2d m_Pose = new Pose2d();
@@ -52,10 +54,14 @@ public class PIDRotateToTrajectory extends Command {
     public PIDRotateToTrajectory(CommandSwerveDrivetrain drivetrain,
                                  DoubleSupplier forwardBack,
                                  DoubleSupplier leftRight,
+                                 DoubleSupplier rotation,
                                  Arm arm, Elevator el, SSM ssm) {
         this.drivetrain = drivetrain;
         this.forwardBack = forwardBack;
         this.leftRight = leftRight;
+        this.rotation = rotation;   
+        this.m_arm = arm;
+        this.m_elevator = el;
         this.m_SSM = ssm;
         
         // Enable continuous input for proper angle wrapping (from -π to π)
@@ -73,7 +79,9 @@ public class PIDRotateToTrajectory extends Command {
 
     @Override
     public void execute() {
+        double rotationOutput;
 
+        m_goforPID = false;
         if (DriverStation.getStickButton(1, ButtonConstants.kL1Left)) {
             m_state = SSM.States.L1;
             m_SSM.setState(m_state);
@@ -116,60 +124,64 @@ public class PIDRotateToTrajectory extends Command {
             m_alignMode = ReefTargetCalculator.AlignMode.ALGAE;
         } else if (DriverStation.getStickButton(2, ButtonConstants.kBarge)) {
             m_SSM.setState(SSM.States.BARGE);
-        } else if (DriverStation.getStickButton(1, ButtonConstants.kProcessor)) {
+            m_goforPID = false;
+        } else if (DriverStation.getStickButton(2, ButtonConstants.kProcessor)) {
             m_SSM.setState(SSM.States.PROCESSOR);
-        } // No level button pressed - do nothing
+            m_goforPID = false;
+        } else m_goforPID = false;            // No level button pressed - do nothing
 
+        if (m_goforPID) m_Pose = ReefTargetCalculator.calculateTargetTranslation(m_alignMode);
+        if (m_Pose == null) m_goforPID = false;  // No reef button pressed – optionally mark the command as finished
         
-        m_Pose = ReefTargetCalculator.calculateTargetTranslation(m_alignMode);
-            
-        Pose2d currentPose = drivetrain.getState().Pose;
-        double currentAngle = currentPose.getRotation().getRadians();
-        SmartDashboard.putNumber("CurrentAngle", currentAngle);
+        if (m_goforPID) {
+            Pose2d currentPose = drivetrain.getState().Pose;
+            double currentAngle = currentPose.getRotation().getRadians();
+            SmartDashboard.putNumber("CurrentAngle", currentAngle);
 
-        double targetAngle;
-        // For ALGAE mode, use the preset rotation; otherwise, compute the angle from the target translation.
-        if (m_alignMode == AlignMode.ALGAE) {     // m_Pose only has rotation populated
-            targetAngle = m_Pose.getRotation().getRadians();
-        } else {
-            double [] target_array ={m_Pose.getTranslation().getX(), m_Pose.getTranslation().getY()};
-            SmartDashboard.putNumberArray("Target",target_array);
-            Translation2d robotToGoal = m_Pose.getTranslation().minus(currentPose.getTranslation());
-            targetAngle = robotToGoal.getAngle().getRadians();
+            double targetAngle;
+            // For ALGAE mode, use the preset rotation; otherwise, compute the angle from the target translation.
+            if (m_alignMode == AlignMode.ALGAE) {     // m_Pose only has rotation populated
+                targetAngle = m_Pose.getRotation().getRadians();
+            } else {
+              double [] target_array ={m_Pose.getTranslation().getX(), m_Pose.getTranslation().getY()};
+              SmartDashboard.putNumberArray("Target",target_array);
+              Translation2d robotToGoal = m_Pose.getTranslation().minus(currentPose.getTranslation());
+              targetAngle = robotToGoal.getAngle().getRadians();
 
-//      Dither - adjust elevation and arm angle as a function of distance (d) from the coral post AND
+//      Dither - adjust elevation and arm angle as a function of distance (dist) from the coral post AND
 //      the angle between coral wall normal and current pose angle (theta) AND
 //      the elevator nominal height and arm nominal angle for the current state.
-
 //      Set ArmNominimal and ElevatorNominal constants to be when the robot at MAX_DIST away and aligned normal to the coral wall
 
 //      2DO: Do we want to also vary the eject speed based on m_d?
 
-            // double dist = robotToGoal.getDistance(new Translation2d());    // Distance to post from robot
-            // Rotation2d theta = m_Pose.getRotation().minus(currentPose.getRotation());    // Angle from coral wall normal
-            // double elevatorNominal = m_SSM.getScoringElevatorPosition(m_state);   // Need to add and set m_state in above switch
-            // double armNominal = m_SSM.getScoringArmPosition(m_state);             // Need to add amd set m_state in above switch
-            // final double MAX_DIST = 30.0;                       // Max distance from the post in inches to start dithering based on distance
-            // final double ELEVATOR_MAX_DITHER_ROTATION = 3.0;    // Max elevator dither in inches based on angle from coral wall normal
-            // final double ARM_MAX_DITHER_ROTATION = 5.0;         // Max arm dither in degrees based on angle from coral wall normal
-            // final double ELEVATOR_MAX_DITHER_DIST = 6.0;        // Max elevator dither in inches based on distance from post
-            // final double ARM_MAX_DITHER_DIST = 10.0;            // Max arm dither in degrees based on distance from post
-            // double anglefactor = 1.0 - Math.cos(theta.getRadians());
-            // double distfactor = Math.max(0.0, 1.0 - dist/MAX_DIST);
-            // double ElevatorDither = elevatorNominal + ELEVATOR_MAX_DITHER_ROTATION*anglefactor + ELEVATOR_MAX_DITHER_DIST*distfactor;
-            // double ArmDither = armNominal + ARM_MAX_DITHER_ROTATION*anglefactor + ARM_MAX_DITHER_DIST*distfactor;
-            // m_elevator.setPosition(ElevatorDither);
-            // m_arm.setPosition(ArmDither*180.0/Math.PI);
+                // double dist = robotToGoal.getDistance(new Translation2d());    // Distance to post from robot
+                // Rotation2d theta = m_Pose.getRotation().minus(currentPose.getRotation());    // Angle from coral wall normal
+                // double elevatorNominal = m_SSM.getScoringElevatorPosition(m_state);   // Need to add and set m_state in above switch
+                // double armNominal = m_SSM.getScoringArmPosition(m_state);             // Need to add amd set m_state in above switch
+                // final double MAX_DIST = 30.0;                       // Max distance from the post in inches to start dithering based on distance
+                // final double ELEVATOR_MAX_DITHER_ROTATION = 3.0;    // Max elevator dither in inches based on angle from coral wall normal
+                // final double ARM_MAX_DITHER_ROTATION = 5.0;         // Max arm dither in degrees based on angle from coral wall normal
+                // final double ELEVATOR_MAX_DITHER_DIST = 6.0;        // Max elevator dither in inches based on distance from post
+                // final double ARM_MAX_DITHER_DIST = 10.0;            // Max arm dither in degrees based on distance from post
+                // double anglefactor = 1.0 - Math.cos(theta.getRadians());
+                // double distfactor = Math.max(0.0, 1.0 - dist/MAX_DIST);
+                // double ElevatorDither = elevatorNominal + ELEVATOR_MAX_DITHER_ROTATION*anglefactor + ELEVATOR_MAX_DITHER_DIST*distfactor;
+                // double ArmDither = armNominal + ARM_MAX_DITHER_ROTATION*anglefactor + ARM_MAX_DITHER_DIST*distfactor;
+                // m_elevator.setPosition(ElevatorDither);
+                // m_arm.setPosition(ArmDither*180.0/Math.PI);
+            }
+
+            SmartDashboard.putString("Align Mode", m_alignMode.toString());
+            SmartDashboard.putNumber("Target Angle", targetAngle);
+            // Compute the PID controller output.
+            rotationOutput = rotPID.calculate(currentAngle, targetAngle);
+            SmartDashboard.putNumber("Rot Out", rotationOutput);
+        } else {
+            double rotCurveAdjustment = DriveCommands.adjustRotCurve(rotation.getAsDouble(), 0.7, 0.3);
+            rotationOutput =  DriveCommands.m_slewRot.calculate(-rotation.getAsDouble() * DriveConstants.MAX_ANGULAR_RATE*rotCurveAdjustment); 
         }
 
-        SmartDashboard.putString("Align Mode", m_alignMode.toString());
-        SmartDashboard.putNumber("Target Angle", targetAngle);
-        // Compute the PID controller output.
-        double rotationOutput = rotPID.calculate(currentAngle, targetAngle);
-        SmartDashboard.putNumber("Rot Out", rotationOutput);
-
-        SlewRateLimiter slewX = DriveCommands.m_slewX;
-        SlewRateLimiter slewY = DriveCommands.m_slewY;
         // Compute translation speeds from joystick inputs with a custom curve.
         double transAdjustment = adjustInputCurve(forwardBack.getAsDouble(), leftRight.getAsDouble(), 0.7, 0.3);
         double velocityX = slewX.calculate(-forwardBack.getAsDouble() * DriveConstants.MAX_SPEED * transAdjustment);
