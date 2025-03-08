@@ -37,47 +37,10 @@ public class LED extends SubsystemBase
 //   this.algaeArm = algaearm;
     m_led = new AddressableLED(9);
     m_led.setLength(m_ledBuffer.getLength());
-    defaultLEDs();
+    leftStrand(m_white, true);
+    rightStrand(m_white, true);
     m_led.setData(m_ledBuffer); 
     m_led.start();
-  }
-
-  // default state - holding nothing - white solid (not flashing)
-  public void defaultLEDs() {
-    // check if holdCoral() and holdAlgae() are false then show default LEDs
-    if (!holdCoral() && !holdAlgae()) {
-        leftStrand(m_white, true);
-        rightStrand(m_white, true);
-    }
-  }
-
-  // holding coral - pink solid flashing 
-  public boolean holdCoral() {
-    boolean isHoldingCoral = coralArm.haveCoral();
-
-    if (isHoldingCoral) {
-        // set LEDs to pink flashing
-        leftStrand(m_pink, false);
-        rightStrand(m_pink, false);
-    }
-
-    return isHoldingCoral;
-  }
-
-  // holding algae - green solid flashing
-  public boolean holdAlgae() {
-
-    //TODO
-    boolean isHoldingAlgae = false;
-//   boolean isHoldingAlgae = algaeArm.haveAlgae();
-
-    if (isHoldingAlgae) {     
-        // set LEDs to green flashing
-        leftStrand(m_green, false);
-        rightStrand(m_green, false);
-    }
-
-    return isHoldingAlgae;
   }
 
   // left strand LED - lights up when any of the states are in effect
@@ -109,11 +72,24 @@ public class LED extends SubsystemBase
     right.applyTo(rightLEDs);
   }
 
-    public void periodic() {
+  public void periodic() {
+    // Sets all to pink with coral, green with algae, or white if neither
+    if (coralArm.haveCoral()) {     // set LEDs to pink flashing
+      leftStrand(m_pink, false);
+      rightStrand(m_pink, false);
+ // } else if (algaeArm.haveAlgae()) {
+    } else if (false) {             // set LEDs to green flashing
+      leftStrand(m_green, false);
+      rightStrand(m_green, false);
+    } else {
+      leftStrand(m_white, true);
+      rightStrand(m_white, true);
+    }
+    m_led.setData(m_ledBuffer);   // Send our output to the LED strips
+  }
+}
 
-        defaultLEDs();    // Sets all to pink with coral, green with algae, or white if neither
-
-        // TODO: How/when do we want to use this?  
+ // TODO: How/when do we want to use this?  
 
         // if (ReefTargetCalculator.left.getAsBoolean() == true) {
         //     leftStrand(m_green, true); }
@@ -125,8 +101,3 @@ public class LED extends SubsystemBase
         // else {
         //     rightStrand(m_pink, true);
         // }
-
-        m_led.setData(m_ledBuffer);   // Send our output to the LED strips
-    }
-
-}
