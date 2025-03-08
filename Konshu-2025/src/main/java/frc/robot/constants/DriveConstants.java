@@ -6,7 +6,7 @@ import frc.robot.generated.TunerConstants;
 
 public final class DriveConstants {
         public static final double MAX_SPEED = TunerConstants.kSpeedAt12Volts.in(MetersPerSecond);
-        public static final double MAX_ANGULAR_RATE = RotationsPerSecond.of(0.75).in(RadiansPerSecond);
+        public static final double MAX_ANGULAR_RATE = RotationsPerSecond.of(1.0).in(RadiansPerSecond);
         public static final double DRIVE_DEADBAND = 0.006;
         public static final double ROTATION_DEADBAND = 0.006;
 

@@ -54,17 +54,20 @@ public class SSM extends SubsystemBase {
 
         if (m_setpoint == States.DISABLED) return;
 
-        if (IntakeFromFunnel.getCoralHalted() && ((m_setpoint == States.L4) || 
-            (m_setpoint == States.L3) || (m_setpoint == States.L2) || 
-            (m_setpoint == States.L1))) return;
+        // if  ((m_setpoint == States.L4) || 
+        //     (m_setpoint == States.L3) || (m_setpoint == States.L2) || 
+        //     (m_setpoint == States.L1)) return;
 
         // Adjust the slew rate based on the setpoint
         switch (m_setpoint) {
             case L4:
             case BARGE:
-                if (m_slewMode != 1) DriveCommands.updateSlew(3.4, 3.4, 15.0);
-                m_slewMode = 1;
+                if (m_slewMode != 1) DriveCommands.updateSlew(3.4, 3.4, 30.0);
+                    m_slewMode = 1;
             break;
+            case L3:
+                if (m_slewMode != 1) DriveCommands.updateSlew(5, 5, 30.0);
+                    m_slewMode = 1;
             default:
                 if (m_slewMode !=2) DriveCommands.updateSlew(10.0, 10.0, 30.0);
                 m_slewMode = 2;

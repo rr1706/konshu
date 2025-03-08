@@ -63,7 +63,7 @@ public Climber() {
         m_climberRightFx.getConfigurator().apply(m_Slot0Configs);
         m_NovaRight.setInversion(true);
         m_climberRightFx.getConfigurator().apply(new MotorOutputConfigs().withInverted(InvertedValue.Clockwise_Positive));
-        m_climberRightFx.setNeutralMode(NeutralModeValue.Coast);
+        m_climberRightFx.setNeutralMode(NeutralModeValue.Brake);
 
       
     }

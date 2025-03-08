@@ -18,7 +18,7 @@ import frc.robot.utilities.ReefTargetCalculator.AlignMode;
 import com.ctre.phoenix6.swerve.SwerveRequest;
 import com.ctre.phoenix6.swerve.SwerveModule.DriveRequestType;
 import frc.robot.subsystems.Arm;
-import frc.robot.subsystems.Elevator;
+// import frc.robot.subsystems.Elevator;
 
 /**
  * PIDRotateToTrajectory rotates the robot to face a target (selected via joystick button polling)
@@ -43,7 +43,7 @@ public class PIDRotateToTrajectory extends Command {
 
     // PID controller for rotation. Tune gains and constraints as needed.
     private final PIDController rotPID = new PIDController(
-            6.0, 0.0, 0.0    );
+            15.0, 0.0, 0.5    );
 
     // Base CTRE FieldCentric swerve request (using velocity control)
     private final SwerveRequest.FieldCentric baseRequest = new SwerveRequest.FieldCentric()
@@ -55,33 +55,31 @@ public class PIDRotateToTrajectory extends Command {
                                  DoubleSupplier forwardBack,
                                  DoubleSupplier leftRight,
                                  DoubleSupplier rotation,
-                                 Arm arm, Elevator el, SSM ssm) {
+                                  SSM ssm) {
         this.drivetrain = drivetrain;
         this.forwardBack = forwardBack;
         this.leftRight = leftRight;
         this.rotation = rotation;   
-        this.m_arm = arm;
-        this.m_elevator = el;
+        // this.m_arm = arm;
+        // this.m_elevator = el;
         this.m_SSM = ssm;
         
         // Enable continuous input for proper angle wrapping (from -π to π)
         rotPID.enableContinuousInput(-Math.PI, Math.PI);
         rotPID.setTolerance(0.05);
         
-        addRequirements(drivetrain, ssm, arm, el);
+        addRequirements(drivetrain, ssm);
     }
 
     @Override
     public void initialize() {
-        double currentAngle = drivetrain.getPigeon2().getRotation2d().getRadians();
-        SmartDashboard.putNumber("Current Angle", currentAngle);
     }
 
     @Override
     public void execute() {
         double rotationOutput;
 
-        m_goforPID = false;
+        m_goforPID = true;
         if (DriverStation.getStickButton(1, ButtonConstants.kL1Left)) {
             m_state = SSM.States.L1;
             m_SSM.setState(m_state);
@@ -132,7 +130,7 @@ public class PIDRotateToTrajectory extends Command {
 
         if (m_goforPID) m_Pose = ReefTargetCalculator.calculateTargetTranslation(m_alignMode);
         if (m_Pose == null) m_goforPID = false;  // No reef button pressed – optionally mark the command as finished
-        
+        SmartDashboard.putBoolean("goForPID", m_goforPID);
         if (m_goforPID) {
             Pose2d currentPose = drivetrain.getState().Pose;
             double currentAngle = currentPose.getRotation().getRadians();
@@ -148,32 +146,12 @@ public class PIDRotateToTrajectory extends Command {
               Translation2d robotToGoal = m_Pose.getTranslation().minus(currentPose.getTranslation());
               targetAngle = robotToGoal.getAngle().getRadians();
 
-//      Dither - adjust elevation and arm angle as a function of distance (dist) from the coral post AND
-//      the angle between coral wall normal and current pose angle (theta) AND
-//      the elevator nominal height and arm nominal angle for the current state.
-//      Set ArmNominimal and ElevatorNominal constants to be when the robot at MAX_DIST away and aligned normal to the coral wall
-
-//      2DO: Do we want to also vary the eject speed based on m_d?
-
-                // double dist = robotToGoal.getDistance(new Translation2d());    // Distance to post from robot
-                // Rotation2d theta = m_Pose.getRotation().minus(currentPose.getRotation());    // Angle from coral wall normal
-                // double elevatorNominal = m_SSM.getScoringElevatorPosition(m_state);   // Need to add and set m_state in above switch
-                // double armNominal = m_SSM.getScoringArmPosition(m_state);             // Need to add amd set m_state in above switch
-                // final double MAX_DIST = 30.0;                       // Max distance from the post in inches to start dithering based on distance
-                // final double ELEVATOR_MAX_DITHER_ROTATION = 3.0;    // Max elevator dither in inches based on angle from coral wall normal
-                // final double ARM_MAX_DITHER_ROTATION = 5.0;         // Max arm dither in degrees based on angle from coral wall normal
-                // final double ELEVATOR_MAX_DITHER_DIST = 6.0;        // Max elevator dither in inches based on distance from post
-                // final double ARM_MAX_DITHER_DIST = 10.0;            // Max arm dither in degrees based on distance from post
-                // double anglefactor = 1.0 - Math.cos(theta.getRadians());
-                // double distfactor = Math.max(0.0, 1.0 - dist/MAX_DIST);
-                // double ElevatorDither = elevatorNominal + ELEVATOR_MAX_DITHER_ROTATION*anglefactor + ELEVATOR_MAX_DITHER_DIST*distfactor;
-                // double ArmDither = armNominal + ARM_MAX_DITHER_ROTATION*anglefactor + ARM_MAX_DITHER_DIST*distfactor;
-                // m_elevator.setPosition(ElevatorDither);
-                // m_arm.setPosition(ArmDither*180.0/Math.PI);
             }
 
             SmartDashboard.putString("Align Mode", m_alignMode.toString());
             SmartDashboard.putNumber("Target Angle", targetAngle);
+            Double DifferenceinAngle = targetAngle - currentAngle;
+            SmartDashboard.putNumber("Difference In Angle", DifferenceinAngle);
             // Compute the PID controller output.
             rotationOutput = rotPID.calculate(currentAngle, targetAngle);
             SmartDashboard.putNumber("Rot Out", rotationOutput);
@@ -184,8 +162,8 @@ public class PIDRotateToTrajectory extends Command {
 
         // Compute translation speeds from joystick inputs with a custom curve.
         double transAdjustment = adjustInputCurve(forwardBack.getAsDouble(), leftRight.getAsDouble(), 0.7, 0.3);
-        double velocityX = slewX.calculate(-forwardBack.getAsDouble() * DriveConstants.MAX_SPEED * transAdjustment);
-        double velocityY = slewY.calculate(-leftRight.getAsDouble() * DriveConstants.MAX_SPEED * transAdjustment);
+        double velocityX = DriveCommands.m_slewX.calculate(-forwardBack.getAsDouble() * DriveConstants.MAX_SPEED * transAdjustment);
+        double velocityY = DriveCommands.m_slewY.calculate(-leftRight.getAsDouble() * DriveConstants.MAX_SPEED * transAdjustment);
 
         // Build and apply the CTRE swerve request.
         SwerveRequest request = baseRequest
@@ -197,6 +175,7 @@ public class PIDRotateToTrajectory extends Command {
 
     @Override
     public void end(boolean interrupted) {
+        m_SSM.setState(States.LOADINGSTATION);
         // Stop the drivetrain for safety.
     }
 

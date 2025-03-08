@@ -40,6 +40,7 @@ import edu.wpi.first.wpilibj2.command.Subsystem;
 import edu.wpi.first.wpilibj2.command.sysid.SysIdRoutine;
 import frc.robot.LimelightHelpers;
 import frc.robot.LimelightHelpers.PoseEstimate;
+import frc.robot.constants.VisionConstants;
 import frc.robot.generated.TunerConstants.TunerSwerveDrivetrain;
 
 /**
@@ -175,7 +176,7 @@ public class CommandSwerveDrivetrain extends TunerSwerveDrivetrain implements Su
                 m_hasAppliedOperatorPerspective = true;
             });
         }
-        updateWithVision("limelight-alpha");
+        updateWithVision("limelight-front");
         
         // SmartDashboard.putData("Pose Drive", (Sendable) getState().Pose);
         m_field.setRobotPose(getState().Pose);
@@ -232,16 +233,24 @@ public class CommandSwerveDrivetrain extends TunerSwerveDrivetrain implements Su
 
     public void updateWithVision(String limelightName){
         PoseEstimate poseEstimate = LimelightHelpers.getBotPoseEstimate_wpiBlue(limelightName);
+        if (LimelightHelpers.validPoseEstimate(poseEstimate)){
+
         double ta = poseEstimate.avgTagArea;
+        double timestamp = poseEstimate.timestampSeconds;
+        double tagCount = poseEstimate.tagCount;
+
         SmartDashboard.putNumber("TA", ta);
-        if(poseEstimate.tagCount >=2 && ta >= 0.3){
-            addVisionMeasurement(poseEstimate.pose, poseEstimate.timestampSeconds,VecBuilder.fill(8,8,200));
+        if(ta >= 0.25 && tagCount == 1) {
+            addVisionMeasurement(poseEstimate.pose, timestamp,VecBuilder.fill(VisionConstants.Tag_N1_2.get(ta),
+            VisionConstants.Tag_N1_2.get(ta),VisionConstants.Tag_N3.get(ta)));
         }
-        else if(ta>=6 && poseEstimate.tagCount == 1) {
-            addVisionMeasurement(poseEstimate.pose, poseEstimate.timestampSeconds,VecBuilder.fill(1,1,200));
+
+        else if(ta >= 0.1 && tagCount >= 2) {
+            addVisionMeasurement(poseEstimate.pose, timestamp,VecBuilder.fill(VisionConstants.MultTag_N1_2.get(ta),
+            VisionConstants.MultTag_N1_2.get(ta),VisionConstants.MultTag_N3.get(ta)));
+
         }
-        else if(poseEstimate.tagCount == 1 && getState().Pose.getTranslation().getDistance(poseEstimate.pose.getTranslation()) <= 1.0){
-            addVisionMeasurement(poseEstimate.pose, poseEstimate.timestampSeconds,VecBuilder.fill(40,40,1000));
     }
-    }
+}
+
 }

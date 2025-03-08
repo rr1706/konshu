@@ -45,7 +45,8 @@ public class CoralArm extends SubsystemBase{
     }
 
     public Command runCoralCmd(double speed){
-        return startEnd(()->runCoral(speed), ()->stop());
+        return startEnd(()->runCoral(speed), 
+        ()->stop());
     }
 
     public void stop(){

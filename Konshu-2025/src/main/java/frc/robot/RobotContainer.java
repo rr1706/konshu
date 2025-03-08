@@ -28,6 +28,7 @@ import frc.robot.subsystems.CoralArm;
 import frc.robot.generated.TunerConstants;
 import frc.robot.subsystems.Elevator;
 import frc.robot.subsystems.FunnelMotor;
+import frc.robot.subsystems.LED;
 //import frc.robot.subsystems.Claw;
 import frc.robot.subsystems.SSM;
 import frc.robot.subsystems.SSM.States;
@@ -45,6 +46,7 @@ public class RobotContainer {
     private final Elevator m_elevator = new Elevator();
     private final Arm m_arm = new Arm();
     private final FunnelMotor m_FunnelMotor = new FunnelMotor();
+    private final LED m_Led = new LED();
     //private final Claw m_claw = new Claw();
     private final CommandGenericHID m_operatorBoard = new CommandGenericHID(1);
     private final CommandGenericHID m_operatorBoard2 = new CommandGenericHID(2);
@@ -93,25 +95,35 @@ public class RobotContainer {
         driverController.povUp().onTrue(new InstantCommand(() -> m_arm.jogging(false)));
         driverController.povDown().onTrue(new InstantCommand(() -> m_arm.jogging(true)));
         
-        //driverController.a().onTrue(new InstantCommand(() -> m_FunnelMotor.runCoralIn(-.5)).andThen(new IntakeFromFunnel(m_coralarm)).andThen(new InstantCommand(() -> m_SSM.setState(States.LOADINGSTATION))));
+        driverController.leftTrigger().onFalse(new InstantCommand(() -> m_FunnelMotor.runCoralIn(-.5)).alongWith(new IntakeFromFunnel(m_coralarm)));
         driverController.x().onTrue(new InstantCommand(() -> m_climber.prepClimb()));
         driverController.b().onTrue(new InstantCommand(() -> m_climber.Climb())).onFalse(new InstantCommand(()->m_climber.stop()));
 
-        driverController.rightTrigger().whileTrue((m_coralarm.runCoralCmd(-0.7))).onFalse(new InstantCommand(() -> m_FunnelMotor.runCoralIn(-.5)).alongWith(new IntakeFromFunnel(m_coralarm)));
+        driverController.rightTrigger().whileTrue((m_coralarm.runCoralCmd(-0.7)))
+            .onFalse(new InstantCommand(() -> m_FunnelMotor.runCoralIn(-.5)).alongWith(new IntakeFromFunnel(m_coralarm)));
 
         driverController.leftTrigger().whileTrue(new PIDRotateToTrajectory(
                     drivetrain,
                     () -> driverController.getLeftY(),
                     () -> driverController.getLeftX(),
                     () -> driverController.getRightX(),
-                    m_arm, m_elevator, m_SSM));
+                    m_SSM));
                 
     }
 
-
     public void configureNamedCommands() {
-    }
+        NamedCommands.registerCommand("Score", 
+                (new WaitCommand(.5))
+                .andThen(m_coralarm.runCoralCmd(-0.7).withTimeout(.2)));
+        NamedCommands.registerCommand("GoL4", 
+            new InstantCommand(() -> m_SSM.setState(States.L4)));
+        NamedCommands.registerCommand("LoadingStation",
+            new InstantCommand(() -> m_SSM.setState(States.LOADINGSTATION));
 
+            new InstantCommand(() -> m_FunnelMotor.runCoralIn(-.5)).alongWith(new IntakeFromFunnel(m_coralarm))));
+        NamedCommands.registerCommand("ClawLowSpeed",
+            new InstantCommand(() -> m_coralarm.runCoralCmd(-0.7)));
+    }
 
     /**
      *
@@ -124,5 +136,7 @@ public class RobotContainer {
 
     }
 
-
+    public Command getTeleInitCommand(){
+        return new InstantCommand(()->m_climber.setPosition(25.0));
+    }
 }

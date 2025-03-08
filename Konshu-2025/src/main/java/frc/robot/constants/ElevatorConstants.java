@@ -24,7 +24,7 @@ public class ElevatorConstants {
     public static final double kElevatorNeutral = 1.0; 
     public static final boolean elevatorConfigforwardSoftLimitEnabled = true;
     public static final double kElevatorL1 = 8.6;       // These are in inches
-    public static final double kElevatorL2 = 23.0; 
+    public static final double kElevatorL2 = 22.0; 
     public static final double kElevatorL3 = 37.2; 
     public static final double kElevatorL4 = 70.1; 
     public static final double kElevatorLoadingStation = 0.5; 
