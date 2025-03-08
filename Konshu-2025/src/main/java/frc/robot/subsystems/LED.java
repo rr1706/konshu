@@ -13,10 +13,10 @@ import frc.robot.subsystems.CoralArm;
 
 public class LED extends SubsystemBase
 {
-  Color m_black = new Color (0,0,0); // used for FLASHING - actually in grb
-  Color m_green = new Color(255, 0, 0); // ALGAE - green actually in grb
-  Color m_pink = new Color (105, 255, 180); // CORAL - pink actually in grb
-  Color m_white = new Color (255,255,255); // DEFAULT not holding anything - white actually in grb
+  Color m_black = new Color (0,0,0); // used for FLASHING 
+  Color m_green = new Color(255, 0, 0); // ALGAE - green 
+  Color m_blue = new Color (0, 0, 255); // CORAL - blue 
+  Color m_white = new Color (255,255,255); // DEFAULT not holding anything
 
   private final CoralArm coralArm;
   // private final AlgaeArm algaeArm;
@@ -41,6 +41,22 @@ public class LED extends SubsystemBase
     rightStrand(m_white, true);
     m_led.setData(m_ledBuffer); 
     m_led.start();
+  }
+  
+  public void periodic() {
+    // Sets all to blue with coral, green with algae, or white if neither
+    if (coralArm.haveCoral()) {     // set LEDs to blue flashing
+      leftStrand(m_blue, false);
+      rightStrand(m_blue, false);
+ // } else if (algaeArm.haveAlgae()) {
+    } else if (false) {             // set LEDs to green flashing
+      leftStrand(m_green, false);
+      rightStrand(m_green, false);
+    } else {
+      leftStrand(m_white, true);
+      rightStrand(m_white, true);
+    }
+    m_led.setData(m_ledBuffer);   // Send our output to the LED strips
   }
 
   // left strand LED - lights up when any of the states are in effect
@@ -70,22 +86,6 @@ public class LED extends SubsystemBase
 
     // Apply the LED pattern to the data buffer
     right.applyTo(rightLEDs);
-  }
-
-  public void periodic() {
-    // Sets all to pink with coral, green with algae, or white if neither
-    if (coralArm.haveCoral()) {     // set LEDs to pink flashing
-      leftStrand(m_pink, false);
-      rightStrand(m_pink, false);
- // } else if (algaeArm.haveAlgae()) {
-    } else if (false) {             // set LEDs to green flashing
-      leftStrand(m_green, false);
-      rightStrand(m_green, false);
-    } else {
-      leftStrand(m_white, true);
-      rightStrand(m_white, true);
-    }
-    m_led.setData(m_ledBuffer);   // Send our output to the LED strips
   }
 }
 
