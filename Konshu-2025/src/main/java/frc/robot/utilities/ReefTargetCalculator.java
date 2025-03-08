@@ -6,6 +6,7 @@ import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.wpilibj.DriverStation;
 import frc.robot.constants.AutoAlignConstants;
 import frc.robot.constants.ButtonConstants;
+import frc.robot.Robot;
 
 public class ReefTargetCalculator {
     public enum AlignMode {LEFT, RIGHT, ALGAE};
@@ -32,6 +33,7 @@ public class ReefTargetCalculator {
                             case LEFT: 
                             left = () -> true; 
                             right = () -> false; 
+                            Robot.buttonlog.append("CoralA Left");
                             return new Pose2d(AutoAlignConstants.BlueAllianceConstants.kAL, AutoAlignConstants.BlueAllianceConstants.kAAlgea);
                             case RIGHT: 
                             left = () -> false; 
