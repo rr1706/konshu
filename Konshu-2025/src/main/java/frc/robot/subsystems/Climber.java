@@ -51,7 +51,6 @@ public Climber() {
         m_climberRightFx.getConfigurator().apply(new MotionMagicConfigs()
                 .withMotionMagicAcceleration(ClimberConstants.kAcceleration)
                 .withMotionMagicCruiseVelocity(ClimberConstants.kCruiseVelocity));
-                // .withMotionMagicJerk(ArmConstants.kArmJerk));
                 
         m_Slot0Configs = new Slot0Configs()
                 .withKG(0)
@@ -79,8 +78,7 @@ public Climber() {
     }
 
     public void stop() {
-        // m_climberLeftFX.set(0);
-        m_climberRightFx.set(0);
+        m_climberRightFx.stopMotor();
     }
 
     public void setPosition(double pos) {
@@ -106,10 +104,6 @@ public Climber() {
         m_NovaLeft.setPercent(0);
         m_NovaRight.setPercent(0);
         // return prepClimb(percent, angle);
-    }
-
-    public void runIndefinitely() {
-        m_climberRightFx.setVoltage(-10.0);
     }
 
    

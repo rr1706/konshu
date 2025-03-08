@@ -28,6 +28,7 @@ import frc.robot.subsystems.CoralArm;
 import frc.robot.generated.TunerConstants;
 import frc.robot.subsystems.Elevator;
 import frc.robot.subsystems.FunnelMotor;
+import frc.robot.subsystems.LED;
 //import frc.robot.subsystems.Claw;
 import frc.robot.subsystems.SSM;
 import frc.robot.subsystems.SSM.States;
@@ -45,13 +46,16 @@ public class RobotContainer {
     private final Elevator m_elevator = new Elevator();
     private final Arm m_arm = new Arm();
     private final FunnelMotor m_FunnelMotor = new FunnelMotor();
+    private final LED m_Led = new LED();
     //private final Claw m_claw = new Claw();
     private final CommandGenericHID m_operatorBoard = new CommandGenericHID(1);
+    private final CommandGenericHID m_operatorBoard2 = new CommandGenericHID(2);
+
     private final SSM m_SSM = new SSM(m_arm, m_elevator);        // Defaults to DISABLED - no action until trigger
     private final AlgaeIntake m_algaeintake = new AlgaeIntake();
     // private final SSM m_SSM = new SSM(m_arm, m_elevator, SSM.States.L1);   // Alternative constructor, starts moving to initial state given 
     public final CommandSwerveDrivetrain drivetrain;
-    public final Climber m_Climber = new Climber();
+    public final Climber m_climber = new Climber();
     public final CoralArm m_coralarm = new CoralArm();
     public final FunnelMotor m_Funnel = new FunnelMotor();
     private final SendableChooser<Command> autoChooser;
@@ -91,25 +95,35 @@ public class RobotContainer {
         driverController.povUp().onTrue(new InstantCommand(() -> m_arm.jogging(false)));
         driverController.povDown().onTrue(new InstantCommand(() -> m_arm.jogging(true)));
         
-        driverController.a().onTrue(new InstantCommand(() -> m_FunnelMotor.runCoralIn(-.5)).andThen(new IntakeFromFunnel(m_coralarm)).andThen(new InstantCommand(() -> m_SSM.setState(States.LOADINGSTATION))));
-        driverController.x().onTrue(new InstantCommand(() -> m_Climber.prepClimb()));
-        driverController.b().whileTrue(new InstantCommand(() -> m_Climber.Climb()));
+        driverController.leftTrigger().onFalse(new InstantCommand(() -> m_FunnelMotor.runCoralIn(-.5)).alongWith(new IntakeFromFunnel(m_coralarm)));
+        driverController.x().onTrue(new InstantCommand(() -> m_climber.prepClimb()));
+        driverController.b().onTrue(new InstantCommand(() -> m_climber.Climb())).onFalse(new InstantCommand(()->m_climber.stop()));
 
-        driverController.rightTrigger().whileTrue((m_coralarm.runCoralCmd(-0.7)));
+        driverController.rightTrigger().whileTrue((m_coralarm.runCoralCmd(-0.7)))
+            .onFalse(new InstantCommand(() -> m_FunnelMotor.runCoralIn(-.5)).alongWith(new IntakeFromFunnel(m_coralarm)));
 
         driverController.leftTrigger().whileTrue(new PIDRotateToTrajectory(
                     drivetrain,
                     () -> driverController.getLeftY(),
                     () -> driverController.getLeftX(),
-                    m_arm, m_elevator, m_SSM));
+                    () -> driverController.getRightX(),
+                    m_SSM));
                 
-        driverController.leftTrigger().onFalse(new InstantCommand(() -> m_SSM.setState(SSM.States.LOADINGSTATION)));
     }
-
 
     public void configureNamedCommands() {
-    }
+        NamedCommands.registerCommand("Score", 
+                (new WaitCommand(.5))
+                .andThen(m_coralarm.runCoralCmd(-0.7).withTimeout(.2)));
+        NamedCommands.registerCommand("GoL4", 
+            new InstantCommand(() -> m_SSM.setState(States.L4)));
+        NamedCommands.registerCommand("LoadingStation",
+            new InstantCommand(() -> m_SSM.setState(States.LOADINGSTATION));
 
+            new InstantCommand(() -> m_FunnelMotor.runCoralIn(-.5)).alongWith(new IntakeFromFunnel(m_coralarm))));
+        NamedCommands.registerCommand("ClawLowSpeed",
+            new InstantCommand(() -> m_coralarm.runCoralCmd(-0.7)));
+    }
 
     /**
      *
@@ -122,5 +136,7 @@ public class RobotContainer {
 
     }
 
-
+    public Command getTeleInitCommand(){
+        return new InstantCommand(()->m_climber.setPosition(25.0));
+    }
 }

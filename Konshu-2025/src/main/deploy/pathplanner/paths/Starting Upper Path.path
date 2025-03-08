@@ -3,25 +3,25 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 7.799208603896103,
-        "y": 3.3198660714285713
+        "x": 7.797784090909091,
+        "y": 3.3220028409090907
       },
       "prevControl": null,
       "nextControl": {
-        "x": 6.787804383116883,
-        "y": 3.2700081168831168
+        "x": 6.7863798701298705,
+        "y": 3.272144886363636
       },
       "isLocked": false,
-      "linkedName": null
+      "linkedName": "Starting Upper Path"
     },
     {
       "anchor": {
-        "x": 4.99291801948052,
-        "y": 2.864021915584416
+        "x": 5.000168918918919,
+        "y": 2.7996621621621616
       },
       "prevControl": {
-        "x": 5.141515784751471,
-        "y": 2.6629778802178343
+        "x": 5.14876668418987,
+        "y": 2.59861812679558
       },
       "nextControl": null,
       "isLocked": false,
@@ -48,19 +48,19 @@
   "eventMarkers": [
     {
       "name": "score_point",
-      "waypointRelativePos": 0.3974358974358919,
+      "waypointRelativePos": 0.4956949569495729,
       "endWaypointRelativePos": null,
       "command": {
         "type": "named",
         "data": {
-          "name": "Score"
+          "name": "GoL4"
         }
       }
     }
   ],
   "globalConstraints": {
     "maxVelocity": 4.73,
-    "maxAcceleration": 5.0,
+    "maxAcceleration": 2.0,
     "maxAngularVelocity": 540.0,
     "maxAngularAcceleration": 720.0,
     "nominalVoltage": 12.0,
