@@ -37,8 +37,9 @@ public class LED extends SubsystemBase
 //   this.algaeArm = algaearm;
     m_led = new AddressableLED(9);
     m_led.setLength(m_ledBuffer.getLength());
-    m_led.start();
     defaultLEDs();
+    m_led.setData(m_ledBuffer); 
+    m_led.start();
   }
 
   // default state - holding nothing - white solid (not flashing)
