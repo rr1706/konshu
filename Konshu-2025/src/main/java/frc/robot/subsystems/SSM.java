@@ -9,7 +9,6 @@ import frc.robot.subsystems.Elevator;
 import frc.robot.constants.ArmConstants;
 import frc.robot.constants.ElevatorConstants;
 import frc.robot.commands.DriveCommands;
-import frc.robot.commands.IntakeFromFunnel;
 
 public class SSM extends SubsystemBase {
     private final Arm m_arm;
@@ -53,10 +52,6 @@ public class SSM extends SubsystemBase {
         SmartDashboard.putString("m_setpoint", m_setpoint.toString());
 
         if (m_setpoint == States.DISABLED) return;
-
-        // if  ((m_setpoint == States.L4) || 
-        //     (m_setpoint == States.L3) || (m_setpoint == States.L2) || 
-        //     (m_setpoint == States.L1)) return;
 
         // Adjust the slew rate based on the setpoint
         switch (m_setpoint) {
