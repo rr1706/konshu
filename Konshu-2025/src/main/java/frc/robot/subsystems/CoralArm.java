@@ -56,9 +56,12 @@ public class CoralArm extends SubsystemBase{
     public int getMeasurement() {
         LaserCan.Measurement measurement = lc.getMeasurement();
         return (measurement.distance_mm);
-
-
     }
+
+    public boolean haveCoral() {
+        return (getMeasurement() < 23);
+    }
+
     // @Override
     public void periodic() {
     LaserCan.Measurement measurement = lc.getMeasurement();

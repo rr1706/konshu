@@ -46,7 +46,7 @@ public class RobotContainer {
     private final Elevator m_elevator = new Elevator();
     private final Arm m_arm = new Arm();
     private final FunnelMotor m_FunnelMotor = new FunnelMotor();
-    private final LED m_Led = new LED();
+
     //private final Claw m_claw = new Claw();
     private final CommandGenericHID m_operatorBoard = new CommandGenericHID(1);
     private final CommandGenericHID m_operatorBoard2 = new CommandGenericHID(2);
@@ -57,6 +57,7 @@ public class RobotContainer {
     public final CommandSwerveDrivetrain drivetrain;
     public final Climber m_climber = new Climber();
     public final CoralArm m_coralarm = new CoralArm();
+    private final LED m_Led = new LED(m_coralarm);
     public final FunnelMotor m_Funnel = new FunnelMotor();
     private final SendableChooser<Command> autoChooser;
 
