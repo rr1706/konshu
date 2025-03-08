@@ -33,7 +33,6 @@ public class ReefTargetCalculator {
                             case LEFT: 
                             left = () -> true; 
                             right = () -> false; 
-                            Robot.buttonlog.append("CoralA Left");
                             return new Pose2d(AutoAlignConstants.BlueAllianceConstants.kAL, AutoAlignConstants.BlueAllianceConstants.kAAlgea);
                             case RIGHT: 
                             left = () -> false; 

@@ -119,9 +119,8 @@ public class RobotContainer {
         NamedCommands.registerCommand("GoL4", 
             new InstantCommand(() -> m_SSM.setState(States.L4)));
         NamedCommands.registerCommand("LoadingStation",
-            new InstantCommand(() -> m_SSM.setState(States.LOADINGSTATION));
-
-            new InstantCommand(() -> m_FunnelMotor.runCoralIn(-.5)).alongWith(new IntakeFromFunnel(m_coralarm)));
+            new InstantCommand(() -> m_SSM.setState(States.LOADINGSTATION))
+            .andThen(new InstantCommand(() -> m_FunnelMotor.runCoralIn(-.5)).alongWith(new IntakeFromFunnel(m_coralarm))));
         NamedCommands.registerCommand("ClawLowSpeed",
             new InstantCommand(() -> m_coralarm.runCoralCmd(-0.7)));
     }

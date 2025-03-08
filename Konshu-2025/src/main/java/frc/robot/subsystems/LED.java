@@ -50,7 +50,7 @@ public class LED extends SubsystemBase
 
   // holding coral - pink solid flashing 
   public boolean holdCoral() {
-    boolean isHoldingCoral = coralArm.haveCoral(); // update this with some method of finding hold status - Boolean from CLAW
+    boolean isHoldingCoral = coralArm.haveCoral();
 
     if (isHoldingCoral) {
         // set LEDs to white flashing
@@ -65,7 +65,7 @@ public class LED extends SubsystemBase
   public boolean holdAlgae() {
 
     //TODO
-    boolean isHoldingAlgae = false; // update this with some method of finding hold status - Boolean from CLAW
+    boolean isHoldingAlgae = false; // update this with some method of finding hold status - Boolean
 
     if (isHoldingAlgae) {     
         // set LEDs to green flashing

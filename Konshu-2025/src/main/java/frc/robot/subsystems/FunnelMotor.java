@@ -5,8 +5,6 @@ import com.ctre.phoenix6.hardware.TalonFX;
 import com.ctre.phoenix6.signals.NeutralModeValue;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
-import au.grapplerobotics.LaserCan;
-import au.grapplerobotics.ConfigurationFailedException;
 import edu.wpi.first.wpilibj.TimedRobot;
 
 public class FunnelMotor extends SubsystemBase {
