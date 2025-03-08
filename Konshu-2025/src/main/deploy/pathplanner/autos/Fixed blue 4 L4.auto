@@ -50,24 +50,24 @@
                 "data": {
                   "waitTime": 0.25
                 }
-              }
-            ]
-          }
-        },
-        {
-          "type": "race",
-          "data": {
-            "commands": [
-              {
-                "type": "path",
-                "data": {
-                  "pathName": "Loading Station 2"
-                }
               },
               {
-                "type": "named",
+                "type": "race",
                 "data": {
-                  "name": "Run Funnel"
+                  "commands": [
+                    {
+                      "type": "named",
+                      "data": {
+                        "name": "LoadingStation"
+                      }
+                    },
+                    {
+                      "type": "named",
+                      "data": {
+                        "name": "Run Funnel"
+                      }
+                    }
+                  ]
                 }
               }
             ]
@@ -113,24 +113,24 @@
                 "data": {
                   "waitTime": 0.25
                 }
-              }
-            ]
-          }
-        },
-        {
-          "type": "race",
-          "data": {
-            "commands": [
-              {
-                "type": "path",
-                "data": {
-                  "pathName": "Loading Station 2"
-                }
               },
               {
-                "type": "named",
+                "type": "race",
                 "data": {
-                  "name": "Run Funnel"
+                  "commands": [
+                    {
+                      "type": "named",
+                      "data": {
+                        "name": "LoadingStation"
+                      }
+                    },
+                    {
+                      "type": "named",
+                      "data": {
+                        "name": "Run Funnel"
+                      }
+                    }
+                  ]
                 }
               }
             ]
@@ -149,12 +149,6 @@
               {
                 "type": "named",
                 "data": {
-                  "name": "Score"
-                }
-              },
-              {
-                "type": "named",
-                "data": {
                   "name": "LoadingStation"
                 }
               }
@@ -169,6 +163,12 @@
                 "type": "wait",
                 "data": {
                   "waitTime": 0.25
+                }
+              },
+              {
+                "type": "named",
+                "data": {
+                  "name": "ClawLowSpeed"
                 }
               }
             ]
