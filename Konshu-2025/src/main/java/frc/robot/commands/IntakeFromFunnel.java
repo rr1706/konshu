@@ -45,6 +45,7 @@ public class IntakeFromFunnel extends Command {
   public void execute() {
     // Retrieve the latest measurement from the LaserCan sensor.
     int Measurement = coralArm.getMeasurement();
+ //   boolean HaveCoral = coralArm.haveCoral();
     
       if (Measurement < 23) {
         coralArm.runCoral(0);

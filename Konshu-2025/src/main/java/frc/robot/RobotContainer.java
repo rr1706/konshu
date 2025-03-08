@@ -57,7 +57,11 @@ public class RobotContainer {
     public final CommandSwerveDrivetrain drivetrain;
     public final Climber m_climber = new Climber();
     public final CoralArm m_coralarm = new CoralArm();
+//  public final AlgeaArm m_algaearm = new AlgeaArm();
+
     private final LED m_Led = new LED(m_coralarm);
+//  private final LED m_Led = new LED(m_coralarm, m_algeaarm);
+
     public final FunnelMotor m_Funnel = new FunnelMotor();
     private final SendableChooser<Command> autoChooser;
 

@@ -20,6 +20,7 @@ public class LED extends SubsystemBase
 
   final boolean m_isSolid = true; // !is_solid for flashing
   private final CoralArm coralArm;
+  // private final AlgaeArm algaeArm;
 
   // PWM port 9 Must be a PWM header, not MXP or DIO
   AddressableLED m_led;
@@ -32,7 +33,9 @@ public class LED extends SubsystemBase
   AddressableLEDBufferView rightLEDs = m_ledBuffer.createView(48, 95);
 
   public LED(CoralArm coralarm) {
+// publich LED(CoralArm coralarm, AlgaeArm algaearm) {
     this.coralArm = coralarm;
+//   this.algaeArm = algaearm;
     m_led = new AddressableLED(9);
     m_led.setLength(m_ledBuffer.getLength());
     m_led.start();
@@ -65,7 +68,8 @@ public class LED extends SubsystemBase
   public boolean holdAlgae() {
 
     //TODO
-    boolean isHoldingAlgae = false; // update this with some method of finding hold status - Boolean
+    boolean isHoldingAlgae = false;
+//   boolean isHoldingAlgae = algaeArm.haveAlgae();
 
     if (isHoldingAlgae) {     
         // set LEDs to green flashing
@@ -105,7 +109,9 @@ public class LED extends SubsystemBase
 
     public void periodic() {
 
-        defaultLEDs();
+        defaultLEDs();    // Sets all to pink with coral, green with algae, or white if neither
+
+        // TODO: How/when do we want to use this?  
 
         // if (ReefTargetCalculator.left.getAsBoolean() == true) {
         //     leftStrand(m_green, m_isSolid); }
