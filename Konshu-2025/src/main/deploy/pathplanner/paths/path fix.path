@@ -3,25 +3,25 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 1.8376217532467534,
-        "y": 0.8340909090909088
+        "x": 3.9815137987012985,
+        "y": 2.864021915584416
       },
       "prevControl": null,
       "nextControl": {
-        "x": 3.0124168352139664,
-        "y": 1.3495622205663174
+        "x": 4.422864939304217,
+        "y": 3.1944857698350746
       },
       "isLocked": false,
-      "linkedName": "Loading Station"
+      "linkedName": null
     },
     {
       "anchor": {
-        "x": 3.2726434426229503,
-        "y": 3.8511782786885242
+        "x": 1.752150974025974,
+        "y": 0.9836647727272725
       },
       "prevControl": {
-        "x": 1.8552530205450288,
-        "y": 3.8155654540132
+        "x": 1.5507058437488075,
+        "y": 0.8342596423894193
       },
       "nextControl": null,
       "isLocked": false,
@@ -32,11 +32,11 @@
   "constraintZones": [
     {
       "name": "Constraints Zone",
-      "minWaypointRelativePos": 0.6408364083640838,
+      "minWaypointRelativePos": 0.5781057810578099,
       "maxWaypointRelativePos": 1.0,
       "constraints": {
         "maxVelocity": 4.73,
-        "maxAcceleration": 2.0,
+        "maxAcceleration": 1.0,
         "maxAngularVelocity": 540.0,
         "maxAngularAcceleration": 720.0,
         "nominalVoltage": 12.0,
@@ -48,12 +48,12 @@
   "eventMarkers": [
     {
       "name": "score_point",
-      "waypointRelativePos": 0.82,
+      "waypointRelativePos": 0.622386223862239,
       "endWaypointRelativePos": null,
       "command": {
         "type": "named",
         "data": {
-          "name": "Score"
+          "name": "GoL4"
         }
       }
     }
@@ -68,7 +68,7 @@
   },
   "goalEndState": {
     "velocity": 0.0,
-    "rotation": 0.0
+    "rotation": 46.88818800674096
   },
   "reversed": false,
   "folder": null,

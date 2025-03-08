@@ -1,6 +1,5 @@
 package frc.robot.subsystems;
 
-import au.grapplerobotics.LaserCan;
 import edu.wpi.first.wpilibj.AddressableLED;
 import edu.wpi.first.wpilibj.AddressableLEDBuffer;
 import edu.wpi.first.wpilibj.AddressableLEDBufferView;
@@ -10,6 +9,7 @@ import edu.wpi.first.wpilibj.LEDPattern;
 import edu.wpi.first.wpilibj.LEDPattern.GradientType;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.util.Color;
+import frc.robot.subsystems.CoralArm;
 
 public class LED extends SubsystemBase
 {
@@ -19,45 +19,43 @@ public class LED extends SubsystemBase
   Color m_white = new Color (255,255,255); // DEFAULT not holding anything - white actually in grb
 
   final boolean m_isSolid = true; // !is_solid for flashing
+  private final CoralArm coralArm;
+  // private final AlgaeArm algaeArm;
 
   // PWM port 9 Must be a PWM header, not MXP or DIO
-  AddressableLED m_led = new AddressableLED(9);
+  AddressableLED m_led;
 
-  // Reuse buffer
+  // Reuse buffers
   // Default to a length of 120, start empty output
   // Length is expensive to set, so only set it once, then just update data
   AddressableLEDBuffer m_ledBuffer = new AddressableLEDBuffer(96);
+  AddressableLEDBufferView leftLEDs = m_ledBuffer.createView(0, 47);
+  AddressableLEDBufferView rightLEDs = m_ledBuffer.createView(48, 95);
 
-  public void LEDs() 
-  {
+  public LED(CoralArm coralarm) {
+// publich LED(CoralArm coralarm, AlgaeArm algaearm) {
+    this.coralArm = coralarm;
+//   this.algaeArm = algaearm;
+    m_led = new AddressableLED(9);
     m_led.setLength(m_ledBuffer.getLength());
-
-    defaultLEDs();      
-
-    // Set the data
-    m_led.setData(m_ledBuffer);
     m_led.start();
+    defaultLEDs();
   }
 
   // default state - holding nothing - white solid not flashing
-  public void defaultLEDs()
-  {
+  public void defaultLEDs() {
     // check if holdCoral() and holdAlgae() are false then show default LEDs
-    if (!holdCoral() && !holdAlgae())
-    {
+    if (!holdCoral() && !holdAlgae()) {
         leftStrand(m_white, m_isSolid);
         rightStrand(m_white, m_isSolid);
     }
   }
 
   // holding coral - pink solid flashing 
-  public boolean holdCoral()
-  {
-    //TODO
-    boolean isHoldingCoral = false; // update this with some method of finding hold status - Boolean from CLAW
+  public boolean holdCoral() {
+    boolean isHoldingCoral = coralArm.haveCoral();
 
-    if (isHoldingCoral)
-    {
+    if (isHoldingCoral) {
         // set LEDs to white flashing
         leftStrand(m_pink, !m_isSolid);
         rightStrand(m_pink, !m_isSolid);
@@ -67,13 +65,13 @@ public class LED extends SubsystemBase
   }
 
   // holding algae - green solid flashing
-  public boolean holdAlgae()
-  {
-    //TODO
-    boolean isHoldingAlgae = false; // update this with some method of finding hold status - Boolean from CLAW
+  public boolean holdAlgae() {
 
-    if (isHoldingAlgae)
-    {     
+    //TODO
+    boolean isHoldingAlgae = false;
+//   boolean isHoldingAlgae = algaeArm.haveAlgae();
+
+    if (isHoldingAlgae) {     
         // set LEDs to green flashing
         leftStrand(m_green, !m_isSolid);
         rightStrand(m_green, !m_isSolid);
@@ -83,72 +81,50 @@ public class LED extends SubsystemBase
   }
 
   // left strand LED - lights up when any of the states are in effect
-  public void leftStrand(Color ledColor, boolean ledPattern)
-  {
-    // Create the view for the section of the strip on the left side of the robot.
-    // This section spans LEDs from index 0 through index 59, inclusive.
-    AddressableLEDBufferView leftLEDs = m_ledBuffer.createView(0, 47);
-
+  public void leftStrand(Color ledColor, boolean ledPattern) {
     // LED pattern and color
     // Create an LED pattern that sets the entire strip to solid or flashing color
     LEDPattern left;
 
-    if (ledPattern == m_isSolid)
-    {
-      left = LEDPattern.solid(ledColor);
-    }
-    else
-    {
-      left = LEDPattern.gradient(GradientType.kDiscontinuous, ledColor, m_black);
-    }
+    if (ledPattern == m_isSolid) left = LEDPattern.solid(ledColor);
+    else left = LEDPattern.gradient(GradientType.kDiscontinuous, ledColor, m_black);
     
     // Apply the LED pattern to the data buffer
     left.applyTo(leftLEDs);
-
-    // Write the data to the LED strip
-    m_led.setData(m_ledBuffer);
   }
 
   // right strand LED - lights up when any of the states are in effect
-  public void rightStrand(Color ledColor, boolean ledPattern)
-  {
-    // Create the view for the section of the strip on the right side of the robot.
-    // This section spans LEDs from index 60 through index 119, inclusive.
-    AddressableLEDBufferView rightLEDs = m_ledBuffer.createView(48, 95);
-    
+  public void rightStrand(Color ledColor, boolean ledPattern) {
+
     // LED pattern and color
     // Create an LED pattern that sets the entire strip to solid or flashing color
     LEDPattern right;
 
-    if (ledPattern == m_isSolid)
-    {
-      right = LEDPattern.solid(ledColor);
-    }
-    else
-    {
-      right = LEDPattern.gradient(GradientType.kDiscontinuous, ledColor, m_black);
-    }
+    if (ledPattern == m_isSolid) right = LEDPattern.solid(ledColor);
+    else right = LEDPattern.gradient(GradientType.kDiscontinuous, ledColor, m_black);
     
     // Apply the LED pattern to the data buffer
     right.applyTo(rightLEDs);
-
-    // Write the data to the LED strip
-    m_led.setData(m_ledBuffer);
-
   }
 
     public void periodic() {
-        LEDs();
-        if (ReefTargetCalculator.left.getAsBoolean() == true){
-            leftStrand(m_green, m_isSolid); }
-        else {
-            leftStrand(m_pink, m_isSolid);
-        }
-        if (ReefTargetCalculator.right.getAsBoolean() == true){
-            rightStrand(m_green, m_isSolid); }
-        else {
-            rightStrand(m_pink, m_isSolid);
-        }
+
+        defaultLEDs();    // Sets all to pink with coral, green with algae, or white if neither
+
+        // TODO: How/when do we want to use this?  
+
+        // if (ReefTargetCalculator.left.getAsBoolean() == true) {
+        //     leftStrand(m_green, m_isSolid); }
+        // else {
+        //     leftStrand(m_pink, m_isSolid);
+        // }
+        // if (ReefTargetCalculator.right.getAsBoolean() == true) {
+        //     rightStrand(m_green, m_isSolid); }
+        // else {
+        //     rightStrand(m_pink, m_isSolid);
+        // }
+
+        m_led.setData(m_ledBuffer);   // Send our output to the LED strips
     }
 
 }

@@ -29,5 +29,10 @@ public class AlgaeArm extends SubsystemBase {
         public double getAlgaeRollerStatorCurrent() {
             return m_AlgaeFX.getStatorCurrent().getValueAsDouble();
         }
+
+        // TODO: made up number for current - need to verify this
+        public boolean haveAlgae() {
+            return getAlgaeRollerStatorCurrent() > 20;
+        }
     }
 

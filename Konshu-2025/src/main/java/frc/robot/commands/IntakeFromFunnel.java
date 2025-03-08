@@ -26,7 +26,6 @@ import edu.wpi.first.wpilibj2.command.Command;
  * </pre>
  */
 public class IntakeFromFunnel extends Command {
-  private static boolean CoralHalted = false;
 
   private final CoralArm coralArm;
   
@@ -41,30 +40,18 @@ public class IntakeFromFunnel extends Command {
     addRequirements(coralArm);
   }
 
-  public static boolean getCoralHalted() {
-    return CoralHalted;
-  } 
-
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
     // Retrieve the latest measurement from the LaserCan sensor.
     int Measurement = coralArm.getMeasurement();
+ //   boolean HaveCoral = coralArm.haveCoral();
     
-
       if (Measurement < 23) {
         coralArm.runCoral(0);
-        
-        // CoralHalted = true;
-        SmartDashboard.putBoolean("Coral Halted", CoralHalted);       // Used by SSM to disable states L1-L4
       } else {
-        // CoralHalted = false;
         coralArm.runCoral(-.2);
       }
-      SmartDashboard.putBoolean("CoralHalted", CoralHalted);
-      
-      // If the measurement is not valid, stop the motor.
-      // coralArm.runCoral(0);
   }
 
   // Called once the command ends or is interrupted.

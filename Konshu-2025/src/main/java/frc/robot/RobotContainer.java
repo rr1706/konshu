@@ -46,7 +46,7 @@ public class RobotContainer {
     private final Elevator m_elevator = new Elevator();
     private final Arm m_arm = new Arm();
     private final FunnelMotor m_FunnelMotor = new FunnelMotor();
-    private final LED m_Led = new LED();
+
     //private final Claw m_claw = new Claw();
     private final CommandGenericHID m_operatorBoard = new CommandGenericHID(1);
     private final CommandGenericHID m_operatorBoard2 = new CommandGenericHID(2);
@@ -57,6 +57,11 @@ public class RobotContainer {
     public final CommandSwerveDrivetrain drivetrain;
     public final Climber m_climber = new Climber();
     public final CoralArm m_coralarm = new CoralArm();
+//  public final AlgeaArm m_algaearm = new AlgeaArm();
+
+    private final LED m_Led = new LED(m_coralarm);
+//  private final LED m_Led = new LED(m_coralarm, m_algeaarm);
+
     public final FunnelMotor m_Funnel = new FunnelMotor();
     private final SendableChooser<Command> autoChooser;
 
@@ -112,7 +117,7 @@ public class RobotContainer {
     }
 
     public void configureNamedCommands() {
-        NamedCommands.registerCommand("Score", 
+        NamedCommands.registerCommand("ScoreL4", 
                 (new WaitCommand(.5))
                 .andThen(m_coralarm.runCoralCmd(-0.7).withTimeout(.2)));
         NamedCommands.registerCommand("GoL4", 
@@ -123,6 +128,11 @@ public class RobotContainer {
             new InstantCommand(() -> m_FunnelMotor.runCoralIn(-.5)).alongWith(new IntakeFromFunnel(m_coralarm));
         NamedCommands.registerCommand("ClawLowSpeed",
             new InstantCommand(() -> m_coralarm.runCoralCmd(-0.7)));
+        NamedCommands.registerCommand("GoLoadingStationPOS",
+            new InstantCommand(() -> m_SSM.setState(States.LOADINGSTATION)));
+        NamedCommands.registerCommand("Run Funnel",
+            new InstantCommand(() -> m_FunnelMotor.runCoralIn(-.5)).alongWith(new IntakeFromFunnel(m_coralarm)));
+
     }
 
     /**
