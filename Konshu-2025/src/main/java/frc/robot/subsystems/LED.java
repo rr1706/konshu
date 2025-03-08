@@ -1,6 +1,5 @@
 package frc.robot.subsystems;
 
-import au.grapplerobotics.LaserCan;
 import edu.wpi.first.wpilibj.AddressableLED;
 import edu.wpi.first.wpilibj.AddressableLEDBuffer;
 import edu.wpi.first.wpilibj.AddressableLEDBufferView;
@@ -28,13 +27,10 @@ public class LED extends SubsystemBase
   // Length is expensive to set, so only set it once, then just update data
   AddressableLEDBuffer m_ledBuffer = new AddressableLEDBuffer(96);
 
-  public void LEDs() 
+  public LED()
   {
     m_led.setLength(m_ledBuffer.getLength());
-
-    defaultLEDs();      
-
-    // Set the data
+    defaultLEDs();   
     m_led.setData(m_ledBuffer);
     m_led.start();
   }
@@ -138,7 +134,6 @@ public class LED extends SubsystemBase
   }
 
     public void periodic() {
-        LEDs();
         if (ReefTargetCalculator.left.getAsBoolean() == true){
             leftStrand(m_green, m_isSolid); }
         else {
