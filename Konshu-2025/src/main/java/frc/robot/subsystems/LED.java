@@ -61,12 +61,12 @@ public class LED extends SubsystemBase
   }
 
   // left strand LED - lights up when any of the states are in effect
-  public void leftStrand(Color ledColor, boolean ledPattern) {
+  public void leftStrand(Color ledColor, boolean solid) {
     // LED pattern and color
     // Create an LED pattern that sets the entire strip to solid or flashing color
     LEDPattern left;
 
-    // if (ledPattern) left = LEDPattern.solid(ledColor);
+    // if (solid) left = LEDPattern.solid(ledColor);
     // else left = LEDPattern.gradient(GradientType.kDiscontinuous, ledColor, m_black);
     left = LEDPattern.solid(ledColor);
 
@@ -75,14 +75,14 @@ public class LED extends SubsystemBase
   }
 
   // right strand LED - lights up when any of the states are in effect
-  public void rightStrand(Color ledColor, boolean ledPattern) {
+  public void rightStrand(Color ledColor, boolean solid) {
 
     // LED pattern and color
     // Create an LED pattern that sets the entire strip to solid or flashing color
     LEDPattern right;
 
-    SmartDashboard.putBoolean("ledPattern", ledPattern);
-    if (ledPattern) right = LEDPattern.solid(ledColor);
+    SmartDashboard.putBoolean("LED solid", solid);
+    if (solid) right = LEDPattern.solid(ledColor);
     else right = LEDPattern.gradient(GradientType.kContinuous, ledColor, m_black, m_green, m_blue, m_white);
 
     // Apply the LED pattern to the data buffer
