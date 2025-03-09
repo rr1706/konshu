@@ -13,7 +13,7 @@ import frc.robot.subsystems.CoralArm;
 
 public class LED extends SubsystemBase
 {
-  Color m_black = new Color (0,0,0); // used for FLASHING 
+  Color m_black = new Color (0,50,0); // used for FLASHING 
   Color m_green = new Color(255, 0, 0); // ALGAE - green 
   Color m_blue = new Color (0, 0, 255); // CORAL - blue 
   Color m_white = new Color (0,200,0); // DEFAULT not holding anything
@@ -81,7 +81,7 @@ public class LED extends SubsystemBase
     LEDPattern right;
 
     if (ledPattern) right = LEDPattern.solid(ledColor);
-    else right = LEDPattern.gradient(GradientType.kContinuous, ledColor, m_black);
+    else right = LEDPattern.gradient(GradientType.kDiscontinuous, ledColor, m_black);
 
     // Apply the LED pattern to the data buffer
     right.applyTo(rightLEDs);
