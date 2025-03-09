@@ -80,9 +80,8 @@ public class LED extends SubsystemBase
     // Create an LED pattern that sets the entire strip to solid or flashing color
     LEDPattern right;
 
-    // if (ledPattern) right = LEDPattern.solid(ledColor);
-    // else right = LEDPattern.gradient(GradientType.kDiscontinuous, ledColor, m_black);
-    right = LEDPattern.solid(ledColor);
+    if (ledPattern) right = LEDPattern.solid(ledColor);
+    else right = LEDPattern.gradient(GradientType.kDiscontinuous, ledColor, m_black);
 
     // Apply the LED pattern to the data buffer
     right.applyTo(rightLEDs);
