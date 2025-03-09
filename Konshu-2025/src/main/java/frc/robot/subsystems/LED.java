@@ -15,7 +15,7 @@ public class LED extends SubsystemBase
 {
   Color m_black = new Color (0,0,0); // used for FLASHING - actually in grb
   Color m_green = new Color(255, 0, 0); // ALGAE - green actually in grb
-  Color m_pink = new Color (105, 255, 180); // CORAL - pink actually in grb
+  Color m_pink = new Color (0, 0, 255); // CORAL - pink actually in grb
   Color m_white = new Color (255,255,255); // DEFAULT not holding anything - white actually in grb
 
   final boolean m_isSolid = true; // !is_solid for flashing

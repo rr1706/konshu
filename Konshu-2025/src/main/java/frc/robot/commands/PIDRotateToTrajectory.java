@@ -160,10 +160,10 @@ public class PIDRotateToTrajectory extends Command {
             rotationOutput =  DriveCommands.m_slewRot.calculate(-rotation.getAsDouble() * DriveConstants.MAX_ANGULAR_RATE*rotCurveAdjustment); 
         }
 
-        // Compute translation speeds from joystick inputs with a custom curve.
+        // Compute translation speeds from joystick inputs with a custom curve.\
         double transAdjustment = adjustInputCurve(forwardBack.getAsDouble(), leftRight.getAsDouble(), 0.7, 0.3);
-        double velocityX = DriveCommands.m_slewX.calculate(-forwardBack.getAsDouble() * DriveConstants.MAX_SPEED * transAdjustment);
-        double velocityY = DriveCommands.m_slewY.calculate(-leftRight.getAsDouble() * DriveConstants.MAX_SPEED * transAdjustment);
+        double velocityX = DriveCommands.m_slewX.calculate(-forwardBack.getAsDouble() * DriveConstants.MAX_SPEED *.7* transAdjustment);
+        double velocityY = DriveCommands.m_slewY.calculate(-leftRight.getAsDouble() * DriveConstants.MAX_SPEED * .7*transAdjustment);
 
         // Build and apply the CTRE swerve request.
         SwerveRequest request = baseRequest

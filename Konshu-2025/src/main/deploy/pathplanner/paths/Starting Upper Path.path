@@ -8,32 +8,32 @@
       },
       "prevControl": null,
       "nextControl": {
-        "x": 6.7863798701298705,
-        "y": 3.272144886363636
+        "x": 6.267857142857142,
+        "y": 1.7457792207792204
       },
       "isLocked": false,
       "linkedName": "Starting Upper Path"
     },
     {
       "anchor": {
-        "x": 5.000168918918919,
-        "y": 2.7996621621621616
+        "x": 5.021408279220779,
+        "y": 2.778551136363636
       },
       "prevControl": {
-        "x": 5.14876668418987,
-        "y": 2.59861812679558
+        "x": 5.861870941558442,
+        "y": 2.2514813311688306
       },
       "nextControl": null,
       "isLocked": false,
-      "linkedName": "End of Start"
+      "linkedName": null
     }
   ],
   "rotationTargets": [],
   "constraintZones": [
     {
       "name": "Constraints Zone",
-      "minWaypointRelativePos": 0.5645756457564571,
-      "maxWaypointRelativePos": 1.0,
+      "minWaypointRelativePos": 0.3,
+      "maxWaypointRelativePos": 0.5,
       "constraints": {
         "maxVelocity": 4.73,
         "maxAcceleration": 2.5,
@@ -48,7 +48,7 @@
   "eventMarkers": [
     {
       "name": "score_point",
-      "waypointRelativePos": 0.4956949569495729,
+      "waypointRelativePos": 0.25,
       "endWaypointRelativePos": null,
       "command": {
         "type": "named",
@@ -68,7 +68,7 @@
   },
   "goalEndState": {
     "velocity": 0,
-    "rotation": 119.63838368815121
+    "rotation": 118.61045966596515
   },
   "reversed": false,
   "folder": null,

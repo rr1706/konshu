@@ -3,13 +3,13 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 1.8376217532467534,
-        "y": 0.8340909090909088
+        "x": 1.5883319805194804,
+        "y": 0.734375
       },
       "prevControl": null,
       "nextControl": {
-        "x": 3.0124168352139664,
-        "y": 1.3495622205663174
+        "x": 2.7631270624866935,
+        "y": 1.2498463114754084
       },
       "isLocked": false,
       "linkedName": "Loading Station"
@@ -53,7 +53,7 @@
       "command": {
         "type": "named",
         "data": {
-          "name": "Score"
+          "name": "GoL4"
         }
       }
     }

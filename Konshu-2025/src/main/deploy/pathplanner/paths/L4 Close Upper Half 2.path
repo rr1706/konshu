@@ -3,25 +3,25 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 1.8376217532467534,
-        "y": 0.8340909090909088
+        "x": 1.5883319805194804,
+        "y": 0.734375
       },
       "prevControl": null,
       "nextControl": {
-        "x": 2.410957201447059,
-        "y": 1.3718192966289662
+        "x": 2.161667428719786,
+        "y": 1.2721033875380572
       },
       "isLocked": false,
       "linkedName": "Loading Station"
     },
     {
       "anchor": {
-        "x": 3.639630681818182,
-        "y": 3.013595779220779
+        "x": 3.6609983766233767,
+        "y": 2.921002435064935
       },
       "prevControl": {
-        "x": 3.4540119211104936,
-        "y": 2.8461273473497486
+        "x": 3.4753796159156884,
+        "y": 2.7535340031939044
       },
       "nextControl": null,
       "isLocked": false,
@@ -60,7 +60,7 @@
   ],
   "globalConstraints": {
     "maxVelocity": 4.73,
-    "maxAcceleration": 3.0,
+    "maxAcceleration": 3.5,
     "maxAngularVelocity": 540.0,
     "maxAngularAcceleration": 720.0,
     "nominalVoltage": 12.0,
@@ -68,7 +68,7 @@
   },
   "goalEndState": {
     "velocity": 0.0,
-    "rotation": 52.69605172201661
+    "rotation": 59.99999999999999
   },
   "reversed": false,
   "folder": null,
