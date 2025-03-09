@@ -31,13 +31,13 @@ public class Robot extends TimedRobot {
   public Robot() {
     // Instantiate our RobotContainer.  This will perform all our button bindings, and put our
     // autonomous chooser on the dashboard.
+    m_robotContainer = new RobotContainer();
     // Starts recording to data log
     DataLogManager.start();
     // Record both DS control and joystick data
     DriverStation.startDataLog(DataLogManager.getLog());
       DataLog log = DataLogManager.getLog();
     buttonLog = new StringLogEntry(log, "/button");
-    m_robotContainer = new RobotContainer();
     // CanBridge.runTCP();
   }
 
