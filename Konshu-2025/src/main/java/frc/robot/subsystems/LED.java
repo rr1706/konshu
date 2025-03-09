@@ -16,7 +16,7 @@ public class LED extends SubsystemBase
   Color m_black = new Color (0,0,0); // used for FLASHING 
   Color m_green = new Color(255, 0, 0); // ALGAE - green 
   Color m_blue = new Color (0, 0, 255); // CORAL - blue 
-  Color m_white = new Color (255,255,255); // DEFAULT not holding anything
+  Color m_white = new Color (255,0,0); // DEFAULT not holding anything
 
   private final CoralArm coralArm;
   // private final AlgaeArm algaeArm;
