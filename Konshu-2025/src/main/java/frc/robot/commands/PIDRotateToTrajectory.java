@@ -8,6 +8,7 @@ import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
+import frc.robot.Robot;
 import frc.robot.constants.ButtonConstants;
 import frc.robot.constants.DriveConstants;
 import frc.robot.subsystems.CommandSwerveDrivetrain;
@@ -84,48 +85,60 @@ public class PIDRotateToTrajectory extends Command {
             m_state = SSM.States.L1;
             m_SSM.setState(m_state);
             m_alignMode = ReefTargetCalculator.AlignMode.LEFT;
+            Robot.buttonLog.append("L1Left");
         } else if (DriverStation.getStickButton(1, ButtonConstants.kL1Right)) {
             m_state = SSM.States.L1;
             m_SSM.setState(m_state);
             m_alignMode = ReefTargetCalculator.AlignMode.RIGHT;
+            Robot.buttonLog.append("L1Right");
         } else if (DriverStation.getStickButton(1, ButtonConstants.kL2Left)) {
             m_state = SSM.States.L2;
             m_SSM.setState(m_state);
             m_alignMode = ReefTargetCalculator.AlignMode.LEFT;
+            Robot.buttonLog.append("L2Left");
         } else if (DriverStation.getStickButton(1, ButtonConstants.kL2Right)) {
             m_state = SSM.States.L2;
             m_SSM.setState(m_state);
             m_alignMode = ReefTargetCalculator.AlignMode.RIGHT;
+            Robot.buttonLog.append("L2Right");
         } else if (DriverStation.getStickButton(1, ButtonConstants.kL3Left)) {
             m_state = SSM.States.L3;
             m_SSM.setState(m_state);
             m_alignMode = ReefTargetCalculator.AlignMode.LEFT;
+            Robot.buttonLog.append("L3Left");
         } else if (DriverStation.getStickButton(1, ButtonConstants.kL3Right)) {
             m_state = SSM.States.L3;
             m_SSM.setState(m_state);
             m_alignMode = ReefTargetCalculator.AlignMode.RIGHT;
+            Robot.buttonLog.append("L3Right");
         } else if (DriverStation.getStickButton(1, ButtonConstants.kL4Left)) {
             m_state = SSM.States.L4;
             m_SSM.setState(m_state);
             m_alignMode = ReefTargetCalculator.AlignMode.LEFT;
+            Robot.buttonLog.append("L4Left");
         } else if (DriverStation.getStickButton(1, ButtonConstants.kL4Right)) {
             m_state = SSM.States.L4;
             m_SSM.setState(m_state);
             m_alignMode = ReefTargetCalculator.AlignMode.RIGHT;
+            Robot.buttonLog.append("L4Right");
         } else if (DriverStation.getStickButton(2, ButtonConstants.kLowAlgae)) {
             m_state = SSM.States.ALGAELOW;
             m_SSM.setState(m_state);
             m_alignMode = ReefTargetCalculator.AlignMode.ALGAE;
+            Robot.buttonLog.append("LowAlgae");
         } else if (DriverStation.getStickButton(1, ButtonConstants.kHighAlgae)) {
             m_state = SSM.States.ALGAEHIGH;
             m_SSM.setState(m_state);
             m_alignMode = ReefTargetCalculator.AlignMode.ALGAE;
+            Robot.buttonLog.append("HighAlgae");
         } else if (DriverStation.getStickButton(2, ButtonConstants.kBarge)) {
             m_SSM.setState(SSM.States.BARGE);
             m_goforPID = false;
+            Robot.buttonLog.append("Barge");
         } else if (DriverStation.getStickButton(2, ButtonConstants.kProcessor)) {
             m_SSM.setState(SSM.States.PROCESSOR);
             m_goforPID = false;
+            Robot.buttonLog.append("Processor");
         } else m_goforPID = false;            // No level button pressed - do nothing
 
         if (m_goforPID) m_Pose = ReefTargetCalculator.calculateTargetTranslation(m_alignMode);

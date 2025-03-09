@@ -13,12 +13,11 @@ import frc.robot.subsystems.CoralArm;
 
 public class LED extends SubsystemBase
 {
-  Color m_black = new Color (0,0,0); // used for FLASHING - actually in grb
-  Color m_green = new Color(255, 0, 0); // ALGAE - green actually in grb
-  Color m_pink = new Color (0, 0, 255); // CORAL - pink actually in grb
-  Color m_white = new Color (255,255,255); // DEFAULT not holding anything - white actually in grb
+  Color m_black = new Color (0,0,0); // used for FLASHING 
+  Color m_green = new Color(255, 0, 0); // ALGAE - green 
+  Color m_blue = new Color (0, 0, 255); // CORAL - blue 
+  Color m_white = new Color (255,255,255); // DEFAULT not holding anything
 
-  final boolean m_isSolid = true; // !is_solid for flashing
   private final CoralArm coralArm;
   // private final AlgaeArm algaeArm;
 
@@ -38,46 +37,26 @@ public class LED extends SubsystemBase
 //   this.algaeArm = algaearm;
     m_led = new AddressableLED(9);
     m_led.setLength(m_ledBuffer.getLength());
+    leftStrand(m_white, true);
+    rightStrand(m_white, true);
+    m_led.setData(m_ledBuffer); 
     m_led.start();
-    defaultLEDs();
   }
-
-  // default state - holding nothing - white solid not flashing
-  public void defaultLEDs() {
-    // check if holdCoral() and holdAlgae() are false then show default LEDs
-    if (!holdCoral() && !holdAlgae()) {
-        leftStrand(m_white, m_isSolid);
-        rightStrand(m_white, m_isSolid);
+  
+  public void periodic() {
+    // Sets all to blue with coral, green with algae, or white if neither
+    if (coralArm.haveCoral()) {     // set LEDs to blue flashing
+      leftStrand(m_blue, false);
+      rightStrand(m_blue, false);
+ // } else if (algaeArm.haveAlgae()) {
+    } else if (false) {             // set LEDs to green flashing
+      leftStrand(m_green, false);
+      rightStrand(m_green, false);
+    } else {
+      leftStrand(m_white, true);
+      rightStrand(m_white, true);
     }
-  }
-
-  // holding coral - pink solid flashing 
-  public boolean holdCoral() {
-    boolean isHoldingCoral = coralArm.haveCoral();
-
-    if (isHoldingCoral) {
-        // set LEDs to white flashing
-        leftStrand(m_pink, !m_isSolid);
-        rightStrand(m_pink, !m_isSolid);
-    }
-
-    return isHoldingCoral;
-  }
-
-  // holding algae - green solid flashing
-  public boolean holdAlgae() {
-
-    //TODO
-    boolean isHoldingAlgae = false;
-//   boolean isHoldingAlgae = algaeArm.haveAlgae();
-
-    if (isHoldingAlgae) {     
-        // set LEDs to green flashing
-        leftStrand(m_green, !m_isSolid);
-        rightStrand(m_green, !m_isSolid);
-    }
-
-    return isHoldingAlgae;
+    m_led.setData(m_ledBuffer);   // Send our output to the LED strips
   }
 
   // left strand LED - lights up when any of the states are in effect
@@ -86,9 +65,10 @@ public class LED extends SubsystemBase
     // Create an LED pattern that sets the entire strip to solid or flashing color
     LEDPattern left;
 
-    if (ledPattern == m_isSolid) left = LEDPattern.solid(ledColor);
-    else left = LEDPattern.gradient(GradientType.kDiscontinuous, ledColor, m_black);
-    
+    // if (ledPattern) left = LEDPattern.solid(ledColor);
+    // else left = LEDPattern.gradient(GradientType.kDiscontinuous, ledColor, m_black);
+    left = LEDPattern.solid(ledColor);
+
     // Apply the LED pattern to the data buffer
     left.applyTo(leftLEDs);
   }
@@ -100,31 +80,23 @@ public class LED extends SubsystemBase
     // Create an LED pattern that sets the entire strip to solid or flashing color
     LEDPattern right;
 
-    if (ledPattern == m_isSolid) right = LEDPattern.solid(ledColor);
+    if (ledPattern) right = LEDPattern.solid(ledColor);
     else right = LEDPattern.gradient(GradientType.kDiscontinuous, ledColor, m_black);
-    
+
     // Apply the LED pattern to the data buffer
     right.applyTo(rightLEDs);
   }
+}
 
-    public void periodic() {
-
-        defaultLEDs();    // Sets all to pink with coral, green with algae, or white if neither
-
-        // TODO: How/when do we want to use this?  
+ // TODO: How/when do we want to use this?  
 
         // if (ReefTargetCalculator.left.getAsBoolean() == true) {
-        //     leftStrand(m_green, m_isSolid); }
+        //     leftStrand(m_green, true); }
         // else {
-        //     leftStrand(m_pink, m_isSolid);
+        //     leftStrand(m_pink, true);
         // }
         // if (ReefTargetCalculator.right.getAsBoolean() == true) {
-        //     rightStrand(m_green, m_isSolid); }
+        //     rightStrand(m_green, true); }
         // else {
-        //     rightStrand(m_pink, m_isSolid);
+        //     rightStrand(m_pink, true);
         // }
-
-        m_led.setData(m_ledBuffer);   // Send our output to the LED strips
-    }
-
-}

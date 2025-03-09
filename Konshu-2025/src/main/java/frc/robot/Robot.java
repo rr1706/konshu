@@ -9,6 +9,8 @@ import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import edu.wpi.first.wpilibj.DriverStation;
+import edu.wpi.first.util.datalog.DataLog;
+import edu.wpi.first.util.datalog.StringLogEntry;
 // import au.grapplerobotics.CanBridge;
 
 /**
@@ -21,7 +23,7 @@ public class Robot extends TimedRobot {
   private Command m_teleInitCommand;
 
   private final RobotContainer m_robotContainer;
-
+  public static StringLogEntry buttonLog;
   /**
    * This function is run when the robot is first started up and should be used for any
    * initialization code.
@@ -33,6 +35,8 @@ public class Robot extends TimedRobot {
     DataLogManager.start();
     // Record both DS control and joystick data
     DriverStation.startDataLog(DataLogManager.getLog());
+      DataLog log = DataLogManager.getLog();
+    buttonLog = new StringLogEntry(log, "/button");
     m_robotContainer = new RobotContainer();
     // CanBridge.runTCP();
   }
