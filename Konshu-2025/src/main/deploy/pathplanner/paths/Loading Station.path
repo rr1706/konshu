@@ -3,25 +3,25 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 5.000168918918919,
-        "y": 2.7996621621621616
+        "x": 5.021408279220779,
+        "y": 2.778551136363636
       },
       "prevControl": null,
       "nextControl": {
-        "x": 5.434645379957881,
-        "y": 2.443533915408914
+        "x": 5.455884740259741,
+        "y": 2.4224228896103885
       },
       "isLocked": false,
       "linkedName": "End of Start"
     },
     {
       "anchor": {
-        "x": 1.8376217532467534,
-        "y": 0.8340909090909088
+        "x": 1.5883319805194804,
+        "y": 0.734375
       },
       "prevControl": {
-        "x": 1.5880771931295983,
-        "y": 0.8190073910683893
+        "x": 1.9159699675324688,
+        "y": 0.8554586038961031
       },
       "nextControl": null,
       "isLocked": false,
@@ -47,15 +47,15 @@
   "pointTowardsZones": [],
   "eventMarkers": [
     {
-      "name": "",
+      "name": "Loading Event",
       "waypointRelativePos": 0.0,
-      "endWaypointRelativePos": null,
+      "endWaypointRelativePos": 0.0,
       "command": null
     }
   ],
   "globalConstraints": {
     "maxVelocity": 4.73,
-    "maxAcceleration": 3.0,
+    "maxAcceleration": 3.5,
     "maxAngularVelocity": 540.0,
     "maxAngularAcceleration": 720.0,
     "nominalVoltage": 12.0,
@@ -69,7 +69,7 @@
   "folder": null,
   "idealStartingState": {
     "velocity": 0,
-    "rotation": 119.63838368815121
+    "rotation": 118.61045966596515
   },
   "useDefaultConstraints": false
 }

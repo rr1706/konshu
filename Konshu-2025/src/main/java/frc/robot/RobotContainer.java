@@ -118,16 +118,10 @@ public class RobotContainer {
 
     public void configureNamedCommands() {
         NamedCommands.registerCommand("ScoreL4", 
-                (new WaitCommand(.5))
-                .andThen(m_coralarm.runCoralCmd(-0.7).withTimeout(.2)));
+                (new WaitCommand(.35))
+                .andThen(m_coralarm.runCoralCmd(-0.7).withTimeout(.3)));
         NamedCommands.registerCommand("GoL4", 
-            new InstantCommand(() -> m_SSM.setState(States.L4)));
-        NamedCommands.registerCommand("LoadingStation",
-            new InstantCommand(() -> m_SSM.setState(States.LOADINGSTATION)));
-
-            new InstantCommand(() -> m_FunnelMotor.runCoralIn(-.5)).alongWith(new IntakeFromFunnel(m_coralarm));
-        NamedCommands.registerCommand("ClawLowSpeed",
-            new InstantCommand(() -> m_coralarm.runCoralCmd(-0.7)));
+            new InstantCommand(() -> m_SSM.setState(States.L3)));
         NamedCommands.registerCommand("GoLoadingStationPOS",
             new InstantCommand(() -> m_SSM.setState(States.LOADINGSTATION)));
         NamedCommands.registerCommand("Run Funnel",
