@@ -1,35 +1,27 @@
 package frc.robot.commands;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import com.ctre.phoenix6.signals.MotorArrangementValue;
+import com.thethriftybot.ThriftyNova.MotorType;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
+import frc.robot.subsystems.AlgaeArm;
+import frc.robot.subsystems.AlgaeIntake;
 import frc.robot.subsystems.Arm;
+import frc.robot.subsystems.Climber;
+import frc.robot.subsystems.CommandSwerveDrivetrain;
+import frc.robot.subsystems.CoralArm;
+import frc.robot.subsystems.Elevator;
+import frc.robot.subsystems.FunnelMotor;
 
-public class HealthCheck extends SubsystemBase {
-    private final Arm m_arm = new Arm();
-
-    @Override
-    public void periodic() {
-        SmartDashboard.putNumber("Elevator 9 Stator Current", getCurrent());
-        SmartDashboard.putNumber("Elevator 10 Stator Current", getPosition());
-        SmartDashboard.putNumber("Arm Stator Current", getCurrent());
-        SmartDashboard.putNumber("Claw Stator Current", m_setpoint);
-        SmartDashboard.putNumber("Drive 1 Stator Current", m_setpoint);
-        SmartDashboard.putNumber("Drive 2 Stator Current", m_setpoint);
-        SmartDashboard.putNumber("Drive 3 Stator Current", m_setpoint);
-        SmartDashboard.putNumber("Drive 4 Stator Current", m_setpoint);
-        SmartDashboard.putNumber("Drive 5 Stator Current", m_setpoint);
-        SmartDashboard.putNumber("Drive 6 Stator Current", m_setpoint);
-        SmartDashboard.putNumber("Drive 7 Stator Current", m_setpoint);
-        SmartDashboard.putNumber("Drive 8 Stator Current", m_setpoint);
-        SmartDashboard.putNumber("Algae on Arm Stator Current", m_setpoint);
-        SmartDashboard.putNumber("Coral on Arm Stator Current", m_setpoint);
-        SmartDashboard.putNumber("Funnel Stator Current", m_setpoint);
-        SmartDashboard.putNumber("Algae Intake Stator Current", m_setpoint);
-        SmartDashboard.putNumber("Claw Stator Current", m_setpoint);
-        SmartDashboard.putNumber("Climber 17 Stator Current", m_setpoint);
-        SmartDashboard.putNumber("Climber 18 Stator Current", m_setpoint);
-        SmartDashboard.putNumber("Climber 19 Stator Current", m_setpoint);
-        SmartDashboard.putNumber("Climber 20 Stator Current", m_setpoint);
-
-
-    }
+public class HealthCheck extends SequentialCommandGroup{
+    private Arm arm;
+    private AlgaeArm algaearm;
+    private AlgaeIntake algaeintake;
+    private Climber climber;
+    private CommandSwerveDrivetrain drive;
+    private CoralArm coralarm;
+    private 
 }
+
+
