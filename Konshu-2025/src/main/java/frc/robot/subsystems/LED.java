@@ -81,6 +81,7 @@ public class LED extends SubsystemBase
     // Create an LED pattern that sets the entire strip to solid or flashing color
     LEDPattern right;
 
+    SmartDashboard.putBoolean("ledPattern", ledPattern);
     if (ledPattern) right = LEDPattern.solid(ledColor);
     else right = LEDPattern.gradient(GradientType.kContinuous, ledColor, m_black, m_green, m_blue, m_white);
 
