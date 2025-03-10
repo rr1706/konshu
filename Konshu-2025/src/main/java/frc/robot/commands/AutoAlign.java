@@ -8,6 +8,7 @@ import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.Robot;
+import frc.robot.constants.AutoAlignConstants;
 import frc.robot.constants.ButtonConstants;
 import frc.robot.constants.DriveConstants;
 import frc.robot.subsystems.CommandSwerveDrivetrain;
@@ -162,7 +163,7 @@ public class AutoAlign extends Command {
             SmartDashboard.putNumber("Distance to target", dist);
             SmartDashboard.putNumber("Angle to Post (deg)", theta.getRadians()*360.0/Math.PI);
 
-            elevatorOffset = 0.0;
+   //         elevatorOffset = AutoAlignConstants.ElevatorAutoAlign.get(dist);
             
 
         } else {
