@@ -9,6 +9,7 @@ import frc.robot.commands.DriveCommands;
 public class SSM extends SubsystemBase {
     private final Arm m_arm;
     private final Elevator m_elevator;
+    private static int m_slewMode = 0;
 
     public enum States {
         DISABLED, L1, L2, L3, L4, LOADINGSTATION, PROCESSOR, BARGE, GROUNDALGAE, ALGAELOW, ALGAEHIGH, Climb
@@ -56,7 +57,6 @@ public class SSM extends SubsystemBase {
     // KElevatorLowDanter - elevator must be higher than this to safely move arm
     // below kArmLowDanger
     private void newState(States state) {
-        int m_slewMode = 0;
 
         m_setpoint = state;
         SmartDashboard.putString("m_setpoint", m_setpoint.toString());
@@ -66,29 +66,34 @@ public class SSM extends SubsystemBase {
 
         // Adjust the slew rate based on the setpoint
         switch (m_setpoint) {
-            case L4:
-                if (m_slewMode != 1)
-                    DriveCommands.updateSlew(3.4, 3.4, 30.0);
-                m_slewMode = 1;
-                break;
-            case BARGE:
-                if (m_slewMode != 1)
-                    DriveCommands.updateSlew(3.4, 3.4, 30.0);
-                m_slewMode = 1;
-                break;
             case L3:
-                if (m_slewMode != 1)
-                    DriveCommands.updateSlew(5, 5, 30.0);
+            if (m_slewMode != 1) {
+                DriveCommands.updateSlew(5, 5, 30.0);
                 m_slewMode = 1;
+            }
+            break;
+            case L4:
+            case BARGE:
+                if (m_slewMode != 2) {
+                    DriveCommands.updateSlew(3.4, 3.4, 30.0);
+                    m_slewMode = 2;
+                }
+            break;
             default:
-                if (m_slewMode != 2)
+                if (m_slewMode != 3) {
                     DriveCommands.updateSlew(10.0, 10.0, 30.0);
-                m_slewMode = 2;
-                break;
+                    m_slewMode = 3;
+                }
+            break;
         }
 
         m_armSetpoint = getScoringArmPosition(m_setpoint)+m_armOffset; // Grab some local variables for mulit reuse efficiency
+        m_armSetpoint = Math.min(m_armSetpoint, ArmConstants.kArmUpperLimit);
+        m_armSetpoint = Math.max(m_armSetpoint, ArmConstants.kArmLowerLimit); 
+
         m_elevatorSetpoint = getScoringElevatorPosition(m_setpoint)+m_elevatorOffset;
+        m_elevatorSetpoint = Math.min(m_elevatorSetpoint, ElevatorConstants.kUpperLimitElevator);
+        m_elevatorSetpoint = Math.max(m_elevatorSetpoint, ElevatorConstants.kULowerLimitElevator);
 
         // Clear booleans
         m_armPauseHigh = false;
@@ -126,6 +131,11 @@ public class SSM extends SubsystemBase {
     }
 
     public void periodic() {
+
+        /// SAFETY CHECK - Make sure the arm is not inside of the elevator (start position
+        if ((m_elevator.getPosition() < ElevatorConstants.kElevatorHighDanger) &&
+            (m_arm.getPosition() < ArmConstants.kArmHighDanger)) 
+            setState(States.LOADINGSTATION);
 
         if (m_setpoint != m_queuedSetpoint)
             newState(m_queuedSetpoint); // Check for new state commanded
