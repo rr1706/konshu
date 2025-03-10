@@ -1,26 +1,33 @@
 package frc.robot.subsystems;
 
-import com.thethriftybot.ThriftyNova;
-import com.thethriftybot.ThriftyNova.CurrentType;
-import com.thethriftybot.ThriftyNova.MotorType;
+import com.ctre.phoenix6.configs.CurrentLimitsConfigs;
+import com.ctre.phoenix6.hardware.TalonFX;
+import com.ctre.phoenix6.signals.NeutralModeValue;
 
+import au.grapplerobotics.ConfigurationFailedException;
+import au.grapplerobotics.LaserCan;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import edu.wpi.first.wpilibj.TimedRobot;
 
 public class Funnel extends SubsystemBase {
-    public static final ThriftyNova m_InNova = new ThriftyNova(13, MotorType.MINION);
+    private final TalonFX m_InFX = new TalonFX(13, "Drivetrain");
 
     public Funnel() {
-        m_InNova.setMaxCurrent(CurrentType.STATOR, 50.0);
-        m_InNova.setMaxCurrent(CurrentType.SUPPLY, 40.0);
-        m_InNova.setVoltageCompensation(0.0);
+        m_InFX.getConfigurator().apply(new CurrentLimitsConfigs()
+            .withStatorCurrentLimit(40)
+            .withStatorCurrentLimitEnable(true)
+            .withSupplyCurrentLimit(40)
+            .withSupplyCurrentLimitEnable(false));
+
+        m_InFX.setNeutralMode(NeutralModeValue.Brake);
+        m_InFX.setInverted(true);
     }
 
     public void runCoralIn(double speed) {
-        m_InNova.set(speed);
+        m_InFX.set(speed);
     }
 
     public void stop() {
-        m_InNova.stopMotor();
+        m_InFX.stopMotor();
     }
-
 }

@@ -35,9 +35,9 @@ public class Arm extends SubsystemBase {
 
         m_limits = new SoftwareLimitSwitchConfigs()
         .withForwardSoftLimitEnable(true)
-        .withForwardSoftLimitThreshold(ArmConstants.kArmUpperLimit/360.0)
+        .withForwardSoftLimitThreshold(ArmConstants.kArmLowerLimit/360.0)
         .withReverseSoftLimitEnable(true)
-        .withReverseSoftLimitThreshold(ArmConstants.kArmLowerLimit/360.0);
+        .withReverseSoftLimitThreshold(ArmConstants.kArmUpperLimit/360.0);
         m_armFX.getConfigurator().apply(m_limits);
 
         m_armFX.getConfigurator().apply(new MotionMagicConfigs()
