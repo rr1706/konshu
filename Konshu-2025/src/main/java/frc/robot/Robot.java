@@ -11,6 +11,7 @@ import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.util.datalog.DataLog;
 import edu.wpi.first.util.datalog.StringLogEntry;
+import frc.robot.constants.AutoAlignConstants;
 // import au.grapplerobotics.CanBridge;
 
 /**
@@ -38,6 +39,8 @@ public class Robot extends TimedRobot {
     DriverStation.startDataLog(DataLogManager.getLog());
       DataLog log = DataLogManager.getLog();
     buttonLog = new StringLogEntry(log, "/button");
+    AutoAlignConstants.SetUpAutoAlignConstants();
+    
     // CanBridge.runTCP();
   }
 
