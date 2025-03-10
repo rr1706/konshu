@@ -10,8 +10,8 @@ public class Funnel extends SubsystemBase {
     public static final ThriftyNova m_InNova = new ThriftyNova(13, MotorType.MINION);
 
     public Funnel() {
-        m_InNova.setMaxCurrent(CurrentType.STATOR, 40.0);
-        m_InNova.setMaxCurrent(CurrentType.SUPPLY, 30.0);
+        m_InNova.setMaxCurrent(CurrentType.STATOR, 50.0);
+        m_InNova.setMaxCurrent(CurrentType.SUPPLY, 40.0);
         m_InNova.setVoltageCompensation(0.0);
     }
 
