@@ -1,9 +1,7 @@
 package frc.robot.commands;
 import java.util.function.DoubleSupplier;
 import edu.wpi.first.math.controller.PIDController;
-import edu.wpi.first.math.filter.SlewRateLimiter;
 import edu.wpi.first.math.geometry.Pose2d;
-import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -18,8 +16,6 @@ import frc.robot.utilities.ReefTargetCalculator;
 import frc.robot.utilities.ReefTargetCalculator.AlignMode;
 import com.ctre.phoenix6.swerve.SwerveRequest;
 import com.ctre.phoenix6.swerve.SwerveModule.DriveRequestType;
-import frc.robot.subsystems.Arm;
-// import frc.robot.subsystems.Elevator;
 
 /**
  * PIDRotateToTrajectory rotates the robot to face a target (selected via joystick button polling)
@@ -29,7 +25,7 @@ import frc.robot.subsystems.Arm;
  * the button polling code selects either a target Translation2d or a preset Rotation2d from the
  * AutoAlignConstants for the current alliance.
  */
-public class PIDRotateToTrajectory extends Command {
+public class AutoAlign extends Command {
     private final CommandSwerveDrivetrain drivetrain;
     private final DoubleSupplier forwardBack;
     private final DoubleSupplier leftRight;
@@ -52,7 +48,7 @@ public class PIDRotateToTrajectory extends Command {
             .withRotationalDeadband(DriveConstants.MAX_ANGULAR_RATE * DriveConstants.ROTATION_DEADBAND)
             .withDriveRequestType(DriveRequestType.Velocity);
 
-    public PIDRotateToTrajectory(CommandSwerveDrivetrain drivetrain,
+    public AutoAlign(CommandSwerveDrivetrain drivetrain,
                                  DoubleSupplier forwardBack,
                                  DoubleSupplier leftRight,
                                  DoubleSupplier rotation,

@@ -1,7 +1,5 @@
 package frc.robot.subsystems;
 
-import java.util.function.DoubleSupplier;
-
 import com.thethriftybot.ThriftyNova;
 import com.thethriftybot.ThriftyNova.CurrentType;
 import com.thethriftybot.ThriftyNova.MotorType;
@@ -19,7 +17,6 @@ public class CoralArm extends SubsystemBase{
     private LaserCan lc;
 
     public CoralArm(){
-        // m_Nova.setInversion(true);
         m_Nova = new ThriftyNova(10, MotorType.MINION);
         m_Nova.setMaxCurrent(CurrentType.STATOR, 60.0);
         m_Nova.setMaxCurrent(CurrentType.SUPPLY, 50.0);
@@ -38,10 +35,7 @@ public class CoralArm extends SubsystemBase{
     }
 
     public void runCoral(double speed) {
-
         m_Nova.set(speed);
-        // m_Nova.setInverted(true);
-
     }
 
     public Command runCoralCmd(double speed){
@@ -67,21 +61,7 @@ public class CoralArm extends SubsystemBase{
     public void periodic() {
     LaserCan.Measurement measurement = lc.getMeasurement();
     if (measurement != null && measurement.status == LaserCan.LASERCAN_STATUS_VALID_MEASUREMENT) {
-        // System.out.println("The target is " + measurement.distance_mm + "mm away!");
         SmartDashboard.putNumber(getName(), measurement.distance_mm);
-    //      if (measurement.distance_mm < 23.0){
-    //         m_Nova.setPercent(0);
-    // }   else {
-    //         m_Nova.setPercent(-0.15);
-    //     }
-// }    else {       
-//         //  System.out.println("Oh no! The target is out of range, or we can't get a reliable measurement!");
-//          m_Nova.setPercent(0.0);
-
-// //             // You can still use distance_mm in here, if you're ok tolerating a clamped
-// //             // value or an unreliable measurement.
-// }
-// }
     }
 
     SmartDashboard.putNumber("Coral Velo", m_Nova.getVelocity()/42.0);

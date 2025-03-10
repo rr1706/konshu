@@ -1,25 +1,17 @@
 package frc.robot.subsystems;
 
-import static edu.wpi.first.units.Units.*;
-
 import java.util.function.Supplier;
 
-import org.opencv.core.Mat;
 
-import com.ctre.phoenix6.SignalLogger;
 import com.ctre.phoenix6.Utils;
 import com.ctre.phoenix6.swerve.SwerveDrivetrainConstants;
 import com.ctre.phoenix6.swerve.SwerveModuleConstants;
 import com.ctre.phoenix6.swerve.SwerveRequest;
 
 import com.pathplanner.lib.auto.AutoBuilder;
-import com.pathplanner.lib.commands.PathPlannerAuto;
 import com.pathplanner.lib.config.PIDConstants;
 import com.pathplanner.lib.config.RobotConfig;
 import com.pathplanner.lib.controllers.PPHolonomicDriveController;
-import com.pathplanner.lib.trajectory.PathPlannerTrajectory;
-import com.pathplanner.lib.trajectory.PathPlannerTrajectoryState;
-import com.pathplanner.lib.util.PathPlannerLogging;
 
 import edu.wpi.first.math.Matrix;
 import edu.wpi.first.math.VecBuilder;
@@ -27,17 +19,13 @@ import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.numbers.N1;
 import edu.wpi.first.math.numbers.N3;
-import edu.wpi.first.util.sendable.Sendable;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.DriverStation.Alliance;
 import edu.wpi.first.wpilibj.Notifier;
-import edu.wpi.first.wpilibj.RobotController;
-import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.smartdashboard.Field2d;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.Subsystem;
-import edu.wpi.first.wpilibj2.command.sysid.SysIdRoutine;
 import frc.robot.LimelightHelpers;
 import frc.robot.LimelightHelpers.PoseEstimate;
 import frc.robot.constants.VisionConstants;
@@ -177,24 +165,16 @@ public class CommandSwerveDrivetrain extends TunerSwerveDrivetrain implements Su
             });
         }
         updateWithVision("limelight-front");
-        
-        // SmartDashboard.putData("Pose Drive", (Sendable) getState().Pose);
         m_field.setRobotPose(getState().Pose);
-        // SmartDashboard.putData("Pose Drive", (Sendable) getState().Pose);
         
         double[] driveposeArray = {
-            // drivePose.getX(), drivePose.getY(), drivePose.getRotation().getDegrees(),
-            // m_visionPose.getX(), m_visionPose.getY(), m_visionPose.getRotation().getDegrees(),
             getState().Pose.getX(), getState().Pose.getY(), getState().Pose.getRotation().getRadians()
         };        
         SmartDashboard.putNumberArray("Pose", driveposeArray);
         double abs_speed = Math.sqrt(Math.pow(getState().Speeds.vxMetersPerSecond, 2) + Math.pow(getState().Speeds.vyMetersPerSecond, 2));
         SmartDashboard.putNumber("Speed of Drive", abs_speed);
         
-        // SmartDashboard.putNumber("Speed of Drive", getState().Speeds.vxMetersPerSecond);
         SmartDashboard.putData(m_field);
-        // double desiredSpeed = getState().
-        // addVisionMeasurement(LimelightHelpers.getBotPose2d_wpiBlue("Alpha"), Timer.getFPGATimestamp(), VecBuilder.fill(1,1,200));
     }
 
     /**

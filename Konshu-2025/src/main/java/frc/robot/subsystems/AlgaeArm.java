@@ -1,11 +1,11 @@
 package frc.robot.subsystems;
 
 import com.ctre.phoenix6.configs.CurrentLimitsConfigs;
+import com.ctre.phoenix6.configs.MotorOutputConfigs;
 import com.ctre.phoenix6.hardware.TalonFX;
+import com.ctre.phoenix6.signals.InvertedValue;
 import com.ctre.phoenix6.signals.NeutralModeValue;
-import com.ctre.phoenix6.StatusSignal;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import edu.wpi.first.math.filter.Debouncer;
 
 public class AlgaeArm extends SubsystemBase {
         private final TalonFX m_AlgaeFX = new TalonFX(12);
@@ -13,10 +13,10 @@ public class AlgaeArm extends SubsystemBase {
             m_AlgaeFX.getConfigurator().apply(new CurrentLimitsConfigs()
                 .withStatorCurrentLimit(40)
                 .withStatorCurrentLimitEnable(true)
-                .withSupplyCurrentLimit(40)
+                .withSupplyCurrentLimit(30)
                 .withSupplyCurrentLimitEnable(true));
             m_AlgaeFX.setNeutralMode(NeutralModeValue.Brake);
-            m_AlgaeFX.setInverted(false);                    
+            m_AlgaeFX.getConfigurator().apply(new MotorOutputConfigs().withInverted(InvertedValue.CounterClockwise_Positive));                 
         }
     
         public void runAlgae(double speed) {
@@ -33,7 +33,7 @@ public class AlgaeArm extends SubsystemBase {
 
         // TODO: need to verify current value
         public boolean haveAlgae() {
-            return (getAlgaeRollerStatorCurrent() > 35);
+            return (getAlgaeRollerStatorCurrent() > 25);
         }
 
         // public boolean haveAlgae() {

@@ -1,6 +1,5 @@
 package frc.robot.constants;
 
-import edu.wpi.first.math.InterpolatingMatrixTreeMap;
 import edu.wpi.first.math.interpolation.InterpolatingDoubleTreeMap;
 
 public class VisionConstants {
