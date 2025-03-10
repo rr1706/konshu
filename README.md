@@ -21,3 +21,5 @@
 | Climber Rollers       | 19     | Nova          | Brenden  |
 | Climber Rollers       | 20     | Nova          | Brenden  |
 | Funnel Motor          | 21     | Kraken        | Ewan     |
+
+![IMG_1457](https://github.com/user-attachments/assets/d19d1caa-e594-4ae6-a64e-f291b1bed16a)
