@@ -3,6 +3,7 @@ import java.util.function.DoubleSupplier;
 import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Translation2d;
+import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
@@ -72,65 +73,58 @@ public class AutoAlign extends Command {
 
     @Override
     public void execute() {
-        double rotationOutput;
+        double rotationOutput, armOffset, elevatorOffset;
 
+        armOffset = 0.0;
+        elevatorOffset = 0.0;
+        m_state = SSM.States.LOADINGSTATION;    // Default to here if trigger with no button pressed
         m_goForPID = true;
         if (DriverStation.getStickButton(1, ButtonConstants.kL1Left)) {
             m_state = SSM.States.L1;
-            m_SSM.setState(m_state);
             m_alignMode = ReefTargetCalculator.AlignMode.LEFT;
             Robot.buttonLog.append("L1Left");
         } else if (DriverStation.getStickButton(1, ButtonConstants.kL1Right)) {
             m_state = SSM.States.L1;
-            m_SSM.setState(m_state);
             m_alignMode = ReefTargetCalculator.AlignMode.RIGHT;
             Robot.buttonLog.append("L1Right");
         } else if (DriverStation.getStickButton(1, ButtonConstants.kL2Left)) {
             m_state = SSM.States.L2;
-            m_SSM.setState(m_state);
             m_alignMode = ReefTargetCalculator.AlignMode.LEFT;
             Robot.buttonLog.append("L2Left");
         } else if (DriverStation.getStickButton(1, ButtonConstants.kL2Right)) {
             m_state = SSM.States.L2;
-            m_SSM.setState(m_state);
             m_alignMode = ReefTargetCalculator.AlignMode.RIGHT;
             Robot.buttonLog.append("L2Right");
         } else if (DriverStation.getStickButton(1, ButtonConstants.kL3Left)) {
             m_state = SSM.States.L3;
-            m_SSM.setState(m_state);
             m_alignMode = ReefTargetCalculator.AlignMode.LEFT;
             Robot.buttonLog.append("L3Left");
         } else if (DriverStation.getStickButton(1, ButtonConstants.kL3Right)) {
             m_state = SSM.States.L3;
-            m_SSM.setState(m_state);
             m_alignMode = ReefTargetCalculator.AlignMode.RIGHT;
             Robot.buttonLog.append("L3Right");
         } else if (DriverStation.getStickButton(1, ButtonConstants.kL4Left)) {
             m_state = SSM.States.L4;
-            m_SSM.setState(m_state);
             m_alignMode = ReefTargetCalculator.AlignMode.LEFT;
             Robot.buttonLog.append("L4Left");
         } else if (DriverStation.getStickButton(1, ButtonConstants.kL4Right)) {
             m_state = SSM.States.L4;
-            m_SSM.setState(m_state);
             m_alignMode = ReefTargetCalculator.AlignMode.RIGHT;
             Robot.buttonLog.append("L4Right");
         } else if (DriverStation.getStickButton(2, ButtonConstants.kLowAlgae)) {
             m_state = SSM.States.ALGAELOW;
-            m_SSM.setState(m_state);
             m_alignMode = ReefTargetCalculator.AlignMode.ALGAE;
             Robot.buttonLog.append("LowAlgae");
         } else if (DriverStation.getStickButton(1, ButtonConstants.kHighAlgae)) {
             m_state = SSM.States.ALGAEHIGH;
-            m_SSM.setState(m_state);
             m_alignMode = ReefTargetCalculator.AlignMode.ALGAE;
             Robot.buttonLog.append("HighAlgae");
         } else if (DriverStation.getStickButton(2, ButtonConstants.kBarge)) {
-            m_SSM.setState(SSM.States.BARGE);
+            m_state = SSM.States.BARGE;
             m_goForPID = false;
             Robot.buttonLog.append("Barge");
         } else if (DriverStation.getStickButton(2, ButtonConstants.kProcessor)) {
-            m_SSM.setState(SSM.States.PROCESSOR);
+            m_state = SSM.States.PROCESSOR;
             m_goForPID = false;
             Robot.buttonLog.append("Processor");
         } else m_goForPID = false;            // No level button pressed - do nothing
@@ -144,15 +138,14 @@ public class AutoAlign extends Command {
             SmartDashboard.putNumber("CurrentAngle", currentAngle);
 
             double targetAngle;
+            Translation2d robotToGoal = m_pose.getTranslation().minus(currentPose.getTranslation());
             // For ALGAE mode, use the preset rotation; otherwise, compute the angle from the target translation.
             if (m_alignMode == AlignMode.ALGAE) {     // m_pose only has rotation populated
                 targetAngle = m_pose.getRotation().getRadians();
             } else {
               double [] target_array ={m_pose.getTranslation().getX(), m_pose.getTranslation().getY()};
               SmartDashboard.putNumberArray("Target",target_array);
-              Translation2d robotToGoal = m_pose.getTranslation().minus(currentPose.getTranslation());
               targetAngle = robotToGoal.getAngle().getRadians();
-
             }
 
             SmartDashboard.putString("Align Mode", m_alignMode.toString());
@@ -162,10 +155,23 @@ public class AutoAlign extends Command {
             // Compute the PID controller output.
             rotationOutput = rotPID.calculate(currentAngle, targetAngle);
             SmartDashboard.putNumber("Rot Out", rotationOutput);
+
+            // Adjust elevator based on distance (and evantually delta angle) from post
+            double dist = m_pose.getTranslation().getDistance(currentPose.getTranslation());   // Distance to post from robot
+            Rotation2d theta = m_pose.getRotation().minus(currentPose.getRotation());    // Angle from coral wall normal
+            SmartDashboard.putNumber("Distance to target", dist);
+            SmartDashboard.putNumber("Angle to Post (deg)", theta.getRadians()*360.0/Math.PI);
+
+            elevatorOffset = 0.0;
+            
+
         } else {
             double rotCurveAdjustment = DriveCommands.adjustRotCurve(m_rotationSupplier.getAsDouble(), 0.7, 0.3);
             rotationOutput =  DriveCommands.m_slewRot.calculate(-m_rotationSupplier.getAsDouble() * DriveConstants.MAX_ANGULAR_RATE*rotCurveAdjustment); 
         }
+
+        // Set the state
+        m_SSM.setState(m_state, armOffset, elevatorOffset);
 
         // Compute translation speeds from joystick inputs with a custom curve.\
         double transAdjustment = adjustInputCurve(m_forwardBackSupplier.getAsDouble(), m_leftRightSupplier.getAsDouble(), 0.7, 0.3);

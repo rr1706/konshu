@@ -39,7 +39,7 @@ public class ElevatorConstants {
     public static final double kl4SafeToMoveMin = 60;
     public static final double kAlgeaIntakeTransfer = 13.21;
     public static final double kLowAlgeaGrab = 19.5;
-    public static final double kHighAlgeaGrab = 0;
+    public static final double kHighAlgeaGrab = kLowAlgeaGrab+15.75;
 
     public static final double kUpperLimitElevator = 72.7;    // Inches
     public static final double kULowerLimitElevator = 0;
