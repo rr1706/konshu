@@ -32,7 +32,6 @@ public class Arm extends SubsystemBase {
             .withStatorCurrentLimitEnable(true)
             .withSupplyCurrentLimit(ArmConstants.ArmCurrents.kSupplyCurrent)
             .withSupplyCurrentLimitEnable(true));
-           
 
         m_limits = new SoftwareLimitSwitchConfigs()
         .withForwardSoftLimitEnable(true)

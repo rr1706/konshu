@@ -66,5 +66,5 @@ public class CoralArm extends SubsystemBase{
 
     SmartDashboard.putNumber("Coral Velo", m_Nova.getVelocity()/42.0);
     SmartDashboard.putNumber("Coral Current", m_Nova.getStatorCurrent());
-}
+    }
 }
