@@ -23,7 +23,7 @@ public class ArmConstants {
   public static final double kArmL4 = 49.0;
   public static final double kArmProcessor = 65.0;
   public static final double kArmBarge = -45.0;
-  public static final double kArmFeeder = 11.0;
+  public static final double kArmFeeder = 14.1;
   public static final double kArmGroundAlgae = 15.0;
   public static final double kArmAlgeaGrab = 32.5;
 

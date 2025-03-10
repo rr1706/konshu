@@ -131,11 +131,12 @@ public class SSM extends SubsystemBase {
     }
 
     public void periodic() {
-
         /// SAFETY CHECK - Make sure the arm is not inside of the elevator (start position
         if ((m_elevator.getPosition() < ElevatorConstants.kElevatorHighDanger) &&
-            (m_arm.getPosition() < ArmConstants.kArmHighDanger)) 
-            setState(States.LOADINGSTATION);
+         (m_arm.getPosition() < ArmConstants.kArmHighDanger)) {
+                m_arm.setPosition(getScoringArmPosition(States.LOADINGSTATION));
+                return;
+        }
 
         if (m_setpoint != m_queuedSetpoint)
             newState(m_queuedSetpoint); // Check for new state commanded
