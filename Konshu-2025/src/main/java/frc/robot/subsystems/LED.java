@@ -18,7 +18,7 @@ public class LED extends SubsystemBase
   Color m_white = new Color (0,100,100); // DEFAULT not holding anything
 
   private final CoralArm coralArm;
-  // private final AlgaeArm algaeArm;
+  private final AlgaeArm algaeArm;
 
   // PWM port 9 Must be a PWM header, not MXP or DIO
   AddressableLED m_led;
@@ -30,10 +30,9 @@ public class LED extends SubsystemBase
   AddressableLEDBufferView leftLEDs = m_ledBuffer.createView(0, 47);
   AddressableLEDBufferView rightLEDs = m_ledBuffer.createView(48, 95);
 
-  public LED(CoralArm coralarm) {
-// publich LED(CoralArm coralarm, AlgaeArm algaearm) {
+public LED(CoralArm coralarm, AlgaeArm algaearm) {
     this.coralArm = coralarm;
-//   this.algaeArm = algaearm;
+    this.algaeArm = algaearm;
     m_led = new AddressableLED(9);
     m_led.setLength(m_ledBuffer.getLength());
     leftStrand(m_white, true);
@@ -47,11 +46,10 @@ public class LED extends SubsystemBase
     if (coralArm.haveCoral()) {     // set LEDs to blue flashing
       leftStrand(m_blue, false);
       rightStrand(m_blue, false);
- // } else if (algaeArm.haveAlgae()) {
-    // } else if (false) {             // set LEDs to green flashing
-    //   leftStrand(m_green, false);
-    //   rightStrand(m_green, false);
-    // } else {
+  } else if (algaeArm.haveAlgae()) {
+      leftStrand(m_green, false);
+      rightStrand(m_green, false);
+    } else {
       leftStrand(m_white, true);
       rightStrand(m_white, true);
     }

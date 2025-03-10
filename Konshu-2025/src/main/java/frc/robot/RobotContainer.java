@@ -38,7 +38,7 @@ public class RobotContainer {
     public final CoralArm m_coralArm = new CoralArm();
     public final AlgaeArm m_algaeArm = new AlgaeArm();
 
-    private final LED m_Led = new LED(m_coralArm);
+    private final LED m_Led = new LED(m_coralArm, m_algaeArm);
 
     private final SendableChooser<Command> autoChooser;
 

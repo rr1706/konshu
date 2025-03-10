@@ -55,8 +55,8 @@ public class ElevatorConstants {
     // These are the constants for the arm stayout zones
     // kElevatorHighDanger - elevator must be higher than this to safely move arm above kArmHighDanger
     // KElevatorLowDanter - elevator must be higher than this to safely move arm below kArmLowDanger
-    public static final double kElevatorHighDanger = 20.8;
-    public static final double kElevatorLowDanger = 11.0;       // 2do - need to set still!
+    public static final double kElevatorHighDanger = 21.0;
+    public static final double kElevatorLowDanger = 4.2;
 
     public static class ElevatorCurrents {
         public static final double kElevatorNeutral = 1.0; 
