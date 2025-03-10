@@ -5,26 +5,8 @@
 package frc.robot.commands;
 
 import frc.robot.subsystems.CoralArm;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 
-/**
- * This command polls the LaserCan sensor and sets the motor output on the CoralArm subsystem.
- * <p>
- * It mirrors the following periodic behavior:
- * <pre>
- *   LaserCan.Measurement measurement = lc.getMeasurement();
- *   if (measurement != null && measurement.status == LaserCan.LASERCAN_STATUS_VALID_MEASUREMENT) {
- *       if (measurement.distance_mm < 23.0) {
- *           m_Nova.setPercent(0);
- *       } else {
- *           m_Nova.setPercent(-0.15);
- *       }
- *   } else {
- *       m_Nova.setPercent(0.0);
- *   }
- * </pre>
- */
 public class IntakeFromFunnel extends Command {
 
   private final CoralArm coralArm;

@@ -6,11 +6,10 @@ import com.thethriftybot.ThriftyNova.MotorType;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
-public class FunnelMotor extends SubsystemBase {
-   // private final TalonFX m_InFX = new TalonFX(13, "Drivetrain");
+public class Funnel extends SubsystemBase {
     public static final ThriftyNova m_InNova = new ThriftyNova(13, MotorType.MINION);
 
-    public FunnelMotor() {
+    public Funnel() {
         m_InNova.setMaxCurrent(CurrentType.STATOR, 40.0);
         m_InNova.setMaxCurrent(CurrentType.SUPPLY, 30.0);
         m_InNova.setVoltageCompensation(10.0);

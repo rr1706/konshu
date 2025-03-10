@@ -26,17 +26,17 @@ import com.ctre.phoenix6.swerve.SwerveModule.DriveRequestType;
  * AutoAlignConstants for the current alliance.
  */
 public class AutoAlign extends Command {
-    private final CommandSwerveDrivetrain drivetrain;
-    private final DoubleSupplier forwardBack;
-    private final DoubleSupplier leftRight;
-    private final DoubleSupplier rotation;
+    private final CommandSwerveDrivetrain m_drivetrain;
+    private final DoubleSupplier m_forwardBackSupplier;
+    private final DoubleSupplier m_leftRightSupplier;
+    private final DoubleSupplier m_rotationSupplier;
     private final SSM m_SSM;
     private States m_state;
     private AlignMode m_alignMode;
-    private boolean m_goforPID = true;
+    private boolean m_goForPID = true;
 
     // Updated via button polling
-    private Pose2d m_Pose = new Pose2d();
+    private Pose2d m_pose = new Pose2d();
 
     // PID controller for rotation. Tune gains and constraints as needed.
     private final PIDController rotPID = new PIDController(
@@ -53,12 +53,10 @@ public class AutoAlign extends Command {
                                  DoubleSupplier leftRight,
                                  DoubleSupplier rotation,
                                   SSM ssm) {
-        this.drivetrain = drivetrain;
-        this.forwardBack = forwardBack;
-        this.leftRight = leftRight;
-        this.rotation = rotation;   
-        // this.m_arm = arm;
-        // this.m_elevator = el;
+        this.m_drivetrain = drivetrain;
+        this.m_forwardBackSupplier = forwardBack;
+        this.m_leftRightSupplier = leftRight;
+        this.m_rotationSupplier = rotation;   
         this.m_SSM = ssm;
         
         // Enable continuous input for proper angle wrapping (from -π to π)
@@ -76,7 +74,7 @@ public class AutoAlign extends Command {
     public void execute() {
         double rotationOutput;
 
-        m_goforPID = true;
+        m_goForPID = true;
         if (DriverStation.getStickButton(1, ButtonConstants.kL1Left)) {
             m_state = SSM.States.L1;
             m_SSM.setState(m_state);
@@ -129,30 +127,30 @@ public class AutoAlign extends Command {
             Robot.buttonLog.append("HighAlgae");
         } else if (DriverStation.getStickButton(2, ButtonConstants.kBarge)) {
             m_SSM.setState(SSM.States.BARGE);
-            m_goforPID = false;
+            m_goForPID = false;
             Robot.buttonLog.append("Barge");
         } else if (DriverStation.getStickButton(2, ButtonConstants.kProcessor)) {
             m_SSM.setState(SSM.States.PROCESSOR);
-            m_goforPID = false;
+            m_goForPID = false;
             Robot.buttonLog.append("Processor");
-        } else m_goforPID = false;            // No level button pressed - do nothing
+        } else m_goForPID = false;            // No level button pressed - do nothing
 
-        if (m_goforPID) m_Pose = ReefTargetCalculator.calculateTargetTranslation(m_alignMode);
-        if (m_Pose == null) m_goforPID = false;  // No reef button pressed – optionally mark the command as finished
-        SmartDashboard.putBoolean("goForPID", m_goforPID);
-        if (m_goforPID) {
-            Pose2d currentPose = drivetrain.getState().Pose;
+        if (m_goForPID) m_pose = ReefTargetCalculator.calculateTargetTranslation(m_alignMode);
+        if (m_pose == null) m_goForPID = false;  // No reef button pressed – optionally mark the command as finished
+        SmartDashboard.putBoolean("goForPID", m_goForPID);
+        if (m_goForPID) {
+            Pose2d currentPose = m_drivetrain.getState().Pose;
             double currentAngle = currentPose.getRotation().getRadians();
             SmartDashboard.putNumber("CurrentAngle", currentAngle);
 
             double targetAngle;
             // For ALGAE mode, use the preset rotation; otherwise, compute the angle from the target translation.
-            if (m_alignMode == AlignMode.ALGAE) {     // m_Pose only has rotation populated
-                targetAngle = m_Pose.getRotation().getRadians();
+            if (m_alignMode == AlignMode.ALGAE) {     // m_pose only has rotation populated
+                targetAngle = m_pose.getRotation().getRadians();
             } else {
-              double [] target_array ={m_Pose.getTranslation().getX(), m_Pose.getTranslation().getY()};
+              double [] target_array ={m_pose.getTranslation().getX(), m_pose.getTranslation().getY()};
               SmartDashboard.putNumberArray("Target",target_array);
-              Translation2d robotToGoal = m_Pose.getTranslation().minus(currentPose.getTranslation());
+              Translation2d robotToGoal = m_pose.getTranslation().minus(currentPose.getTranslation());
               targetAngle = robotToGoal.getAngle().getRadians();
 
             }
@@ -165,21 +163,21 @@ public class AutoAlign extends Command {
             rotationOutput = rotPID.calculate(currentAngle, targetAngle);
             SmartDashboard.putNumber("Rot Out", rotationOutput);
         } else {
-            double rotCurveAdjustment = DriveCommands.adjustRotCurve(rotation.getAsDouble(), 0.7, 0.3);
-            rotationOutput =  DriveCommands.m_slewRot.calculate(-rotation.getAsDouble() * DriveConstants.MAX_ANGULAR_RATE*rotCurveAdjustment); 
+            double rotCurveAdjustment = DriveCommands.adjustRotCurve(m_rotationSupplier.getAsDouble(), 0.7, 0.3);
+            rotationOutput =  DriveCommands.m_slewRot.calculate(-m_rotationSupplier.getAsDouble() * DriveConstants.MAX_ANGULAR_RATE*rotCurveAdjustment); 
         }
 
         // Compute translation speeds from joystick inputs with a custom curve.\
-        double transAdjustment = adjustInputCurve(forwardBack.getAsDouble(), leftRight.getAsDouble(), 0.7, 0.3);
-        double velocityX = DriveCommands.m_slewX.calculate(-forwardBack.getAsDouble() * DriveConstants.MAX_SPEED *.7* transAdjustment);
-        double velocityY = DriveCommands.m_slewY.calculate(-leftRight.getAsDouble() * DriveConstants.MAX_SPEED * .7*transAdjustment);
+        double transAdjustment = adjustInputCurve(m_forwardBackSupplier.getAsDouble(), m_leftRightSupplier.getAsDouble(), 0.7, 0.3);
+        double velocityX = DriveCommands.m_slewX.calculate(-m_forwardBackSupplier.getAsDouble() * DriveConstants.MAX_SPEED *.7* transAdjustment);
+        double velocityY = DriveCommands.m_slewY.calculate(-m_leftRightSupplier.getAsDouble() * DriveConstants.MAX_SPEED * .7*transAdjustment);
 
         // Build and apply the CTRE swerve request.
         SwerveRequest request = baseRequest
                 .withVelocityX(velocityX)
                 .withVelocityY(velocityY)
                 .withRotationalRate(rotationOutput);
-        drivetrain.setControl(request);
+        m_drivetrain.setControl(request);
     }
 
     @Override

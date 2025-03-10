@@ -48,10 +48,10 @@ public class LED extends SubsystemBase
       leftStrand(m_blue, false);
       rightStrand(m_blue, false);
  // } else if (algaeArm.haveAlgae()) {
-    } else if (false) {             // set LEDs to green flashing
-      leftStrand(m_green, false);
-      rightStrand(m_green, false);
-    } else {
+    // } else if (false) {             // set LEDs to green flashing
+    //   leftStrand(m_green, false);
+    //   rightStrand(m_green, false);
+    // } else {
       leftStrand(m_white, true);
       rightStrand(m_white, true);
     }
