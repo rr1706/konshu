@@ -17,6 +17,7 @@ public class SSM extends SubsystemBase {
     private boolean m_elevatorPauseHigh, m_elevatorPauseLow, m_armPauseHigh, m_armPauseLow;
     private States m_setpoint, m_queuedSetpoint;
     private double m_armSetpoint, m_elevatorSetpoint;
+    private double m_armOffset, m_elevatorOffset;
 
     // First constructor accepts a constant as an initial setpoint and starts moving
     // there immediately via periodic
@@ -35,6 +36,9 @@ public class SSM extends SubsystemBase {
         SmartDashboard.putBoolean("m_armPauseLow", m_armPauseLow);
         SmartDashboard.putBoolean("m_elevatorPauseHigh", m_elevatorPauseHigh);
         SmartDashboard.putBoolean("m_elevatorPauseLow", m_elevatorPauseLow);
+
+        m_armOffset = 0.0;
+        m_elevatorOffset = 0.0;
     }
 
     // Second constructor defaults to disabled (do nothing until SetState is first
@@ -83,8 +87,8 @@ public class SSM extends SubsystemBase {
                 break;
         }
 
-        m_armSetpoint = getScoringArmPosition(m_setpoint); // Grab some local variables for mulit reuse efficiency
-        m_elevatorSetpoint = getScoringElevatorPosition(m_setpoint);
+        m_armSetpoint = getScoringArmPosition(m_setpoint)+m_armOffset; // Grab some local variables for mulit reuse efficiency
+        m_elevatorSetpoint = getScoringElevatorPosition(m_setpoint)+m_elevatorOffset;
 
         // Clear booleans
         m_armPauseHigh = false;
@@ -151,6 +155,19 @@ public class SSM extends SubsystemBase {
     public void setState(States q) {
         m_queuedSetpoint = q;
         SmartDashboard.putString("m_queuedSetPoint", m_queuedSetpoint.toString());
+        m_armOffset = 0.0;
+        m_elevatorOffset = 0.0;
+    }
+
+    public void setState(States q, double armOffset, double elevatorOffset) {
+        m_queuedSetpoint = q;
+        SmartDashboard.putString("m_queuedSetPoint", m_queuedSetpoint.toString());
+        m_armOffset = armOffset;
+        m_elevatorOffset = elevatorOffset;
+    }
+
+    public States getState(){
+        return m_setpoint;
     }
 
     public double getScoringElevatorPosition(States state) {
@@ -163,7 +180,7 @@ public class SSM extends SubsystemBase {
             case PROCESSOR -> ElevatorConstants.kElevatorProcessor;
             case BARGE -> ElevatorConstants.kElevatorBarge;
             case GROUNDALGAE -> ElevatorConstants.kElelvatorGroundAlgae;
-            case ALGAEHIGH -> ElevatorConstants.kHighAlgeaGrab;
+            case ALGAEHIGH -> ElevatorConstants.kLowAlgeaGrab+15.75;
             case ALGAELOW -> ElevatorConstants.kLowAlgeaGrab;
             default -> 0.0;
         };

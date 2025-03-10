@@ -5,6 +5,7 @@ import com.pathplanner.lib.auto.NamedCommands;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.ConditionalCommand;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
@@ -12,6 +13,7 @@ import frc.robot.constants.*;
 import frc.robot.commands.AutoAlign;
 import frc.robot.commands.DriveCommands;
 import frc.robot.commands.IntakeFromFunnel;
+import frc.robot.subsystems.AlgaeArm;
 import frc.robot.subsystems.Arm;
 import frc.robot.subsystems.CommandSwerveDrivetrain;
 import frc.robot.subsystems.CoralArm;
@@ -33,9 +35,10 @@ public class RobotContainer {
     private final SSM m_SSM = new SSM(m_arm, m_elevator);
     public final CommandSwerveDrivetrain drivetrain;
     public final Climber m_climber = new Climber();
-    public final CoralArm m_coralarm = new CoralArm();
+    public final CoralArm m_coralArm = new CoralArm();
+    public final AlgaeArm m_algaeArm = new AlgaeArm();
 
-    private final LED m_Led = new LED(m_coralarm);
+    private final LED m_Led = new LED(m_coralArm);
 
     private final SendableChooser<Command> autoChooser;
 
@@ -69,12 +72,18 @@ public class RobotContainer {
         driverController.povUp().onTrue(new InstantCommand(() -> m_arm.jogging(false)));
         driverController.povDown().onTrue(new InstantCommand(() -> m_arm.jogging(true)));
         
-        driverController.leftTrigger().onFalse(new InstantCommand(() -> m_funnel.runCoralIn(-.7)).alongWith(new IntakeFromFunnel(m_coralarm)));
+        driverController.leftTrigger().onFalse(new InstantCommand(() -> m_funnel.runCoralIn(-.7)).alongWith(new IntakeFromFunnel(m_coralArm)));
         driverController.x().onTrue(new InstantCommand(() -> m_climber.prepClimb()));
         driverController.b().onTrue(new InstantCommand(() -> m_climber.Climb())).onFalse(new InstantCommand(()->m_climber.stop()));
 
-        driverController.rightTrigger().whileTrue((m_coralarm.runCoralCmd(-0.7)))
-            .onFalse(new InstantCommand(() -> m_funnel.runCoralIn(-.7)).alongWith(new IntakeFromFunnel(m_coralarm)));
+        driverController.rightTrigger().onTrue(new ConditionalCommand(m_algaeArm.spitAlgae(),m_coralArm.runCoralCmd(-0.7),()->{
+            return m_SSM.getState() == (SSM.States.BARGE) || m_SSM.getState() == (SSM.States.PROCESSOR);
+        }))
+            .onFalse(new InstantCommand(() -> m_funnel.runCoralIn(-.7)).alongWith(new IntakeFromFunnel(m_coralArm)));
+
+
+        //for testing ONLY
+        driverController.a().onTrue(m_algaeArm.grabAlgae(0.8));
 
         driverController.leftTrigger().whileTrue(new AutoAlign(
                     drivetrain,
@@ -88,13 +97,13 @@ public class RobotContainer {
     public void configureNamedCommands() {
         NamedCommands.registerCommand("ScoreL4", 
                 (new WaitCommand(.35))
-                .andThen(m_coralarm.runCoralCmd(-0.7).withTimeout(.3)));
+                .andThen(m_coralArm.runCoralCmd(-0.7).withTimeout(.3)));
         NamedCommands.registerCommand("GoL4", 
             new InstantCommand(() -> m_SSM.setState(States.L3)));
         NamedCommands.registerCommand("GoLoadingStationPOS",
             new InstantCommand(() -> m_SSM.setState(States.LOADINGSTATION)));
         NamedCommands.registerCommand("Run Funnel",
-            new InstantCommand(() -> m_funnel.runCoralIn(-.7)).alongWith(new IntakeFromFunnel(m_coralarm)));
+            new InstantCommand(() -> m_funnel.runCoralIn(-.7)).alongWith(new IntakeFromFunnel(m_coralArm)));
 
     }
 

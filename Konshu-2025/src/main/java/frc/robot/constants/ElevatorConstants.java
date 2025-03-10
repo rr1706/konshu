@@ -28,7 +28,7 @@ public class ElevatorConstants {
     public static final double kElevatorL3 = 37.2; 
     public static final double kElevatorL4 = 70.1; 
     public static final double kElevatorLoadingStation = 0.5; 
-    public static final double kElevatorProcessor = 0.0;
+    public static final double kElevatorProcessor = 4.5;
     public static final double kElevatorBarge = 68.11; 
     public static final double kElevatorZero = 0.0;
     public static final double kElelvatorGroundAlgae = 15;  
@@ -38,7 +38,7 @@ public class ElevatorConstants {
     public static final double kl3SafeToMoveMin = 34.5;
     public static final double kl4SafeToMoveMin = 60;
     public static final double kAlgeaIntakeTransfer = 13.21;
-    public static final double kLowAlgeaGrab = 18.68;
+    public static final double kLowAlgeaGrab = 19.5;
     public static final double kHighAlgeaGrab = 0;
 
     public static final double kUpperLimitElevator = 72.7;    // Inches

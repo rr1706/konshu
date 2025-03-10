@@ -78,8 +78,8 @@ public Climber() {
 
     public void prepClimb() {
         setPosition(ClimberConstants.kClimbPosition);
-        m_NovaLeft.setPercent(.5);
-        m_NovaRight.setPercent(.5);
+        m_NovaLeft.setPercent(.4);
+        m_NovaRight.setPercent(.4);
     }
 
     public void Climb() {

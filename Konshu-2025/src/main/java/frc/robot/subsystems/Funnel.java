@@ -12,7 +12,7 @@ public class Funnel extends SubsystemBase {
     public Funnel() {
         m_InNova.setMaxCurrent(CurrentType.STATOR, 40.0);
         m_InNova.setMaxCurrent(CurrentType.SUPPLY, 30.0);
-        m_InNova.setVoltageCompensation(10.0);
+        m_InNova.setVoltageCompensation(0.0);
     }
 
     public void runCoralIn(double speed) {

@@ -5,6 +5,7 @@
 package frc.robot.commands;
 
 import frc.robot.subsystems.CoralArm;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 
 public class IntakeFromFunnel extends Command {
@@ -26,13 +27,11 @@ public class IntakeFromFunnel extends Command {
   @Override
   public void execute() {
     // Retrieve the latest measurement from the LaserCan sensor.
-    int Measurement = coralArm.getMeasurement();
- //   boolean HaveCoral = coralArm.haveCoral();
     
-      if (Measurement < 23) {
+      if (coralArm.haveCoral()) {
         coralArm.runCoral(0);
       } else {
-        coralArm.runCoral(-.2);
+        coralArm.runCoral(-.3);
       }
   }
 

@@ -19,7 +19,7 @@ public class CoralArm extends SubsystemBase{
     public CoralArm(){
         m_Nova = new ThriftyNova(10, MotorType.MINION);
         m_Nova.setMaxCurrent(CurrentType.STATOR, 60.0);
-        m_Nova.setMaxCurrent(CurrentType.SUPPLY, 50.0);
+        m_Nova.setMaxCurrent(CurrentType.SUPPLY, 40.0);
         m_Nova.setVoltageCompensation(0.0);
         m_Nova.pid0.setFF(0.0000266);
         m_Nova.pid0.setP(0.00003);
@@ -28,7 +28,7 @@ public class CoralArm extends SubsystemBase{
         try {
               lc.setRangingMode(LaserCan.RangingMode.SHORT);
               lc.setRegionOfInterest(new LaserCan.RegionOfInterest(8, 8, 16, 16));
-              lc.setTimingBudget(LaserCan.TimingBudget.TIMING_BUDGET_33MS);
+              lc.setTimingBudget(LaserCan.TimingBudget.TIMING_BUDGET_20MS);
                  } catch (ConfigurationFailedException e) {  System.out.println("Configuration failed! " + e);
              }
 
@@ -53,7 +53,7 @@ public class CoralArm extends SubsystemBase{
     }
 
     public boolean haveCoral() {
-        return (getMeasurement() < 23);
+        return (getMeasurement() < 40);
     }
 
 
