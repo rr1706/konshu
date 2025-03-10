@@ -88,8 +88,8 @@ public class SSM extends SubsystemBase {
         }
 
         m_armSetpoint = getScoringArmPosition(m_setpoint)+m_armOffset; // Grab some local variables for mulit reuse efficiency
-        m_armSetpoint = Math.min(m_armSetpoint, ArmConstants.kArmUpperLimit);
-        m_armSetpoint = Math.max(m_armSetpoint, ArmConstants.kArmLowerLimit); 
+        m_armSetpoint = Math.max(m_armSetpoint, ArmConstants.kArmUpperLimit);
+        m_armSetpoint = Math.min(m_armSetpoint, ArmConstants.kArmLowerLimit); 
 
         m_elevatorSetpoint = getScoringElevatorPosition(m_setpoint)+m_elevatorOffset;
         m_elevatorSetpoint = Math.min(m_elevatorSetpoint, ElevatorConstants.kUpperLimitElevator);
@@ -131,14 +131,14 @@ public class SSM extends SubsystemBase {
     }
 
     public void periodic() {
-        /// SAFETY CHECK - Make sure the arm is not inside of the elevator (start position
+        /// SAFETY CHECK - Make sure the arm is not inside of the elevator (start position)
         if ((m_elevator.getPosition() < ElevatorConstants.kElevatorHighDanger) &&
          (m_arm.getPosition() < ArmConstants.kArmHighDanger)) {
-                m_arm.setPosition(getScoringArmPosition(States.LOADINGSTATION));
-                return;
+            m_arm.setPosition(getScoringArmPosition(States.LOADINGSTATION));
+            return;
         }
 
-        if (m_setpoint != m_queuedSetpoint)
+//        if (m_setpoint != m_queuedSetpoint)       // Now always reinit because added offsets
             newState(m_queuedSetpoint); // Check for new state commanded
         if (m_setpoint == States.DISABLED)
             return;
@@ -191,7 +191,7 @@ public class SSM extends SubsystemBase {
             case PROCESSOR -> ElevatorConstants.kElevatorProcessor;
             case BARGE -> ElevatorConstants.kElevatorBarge;
             case GROUNDALGAE -> ElevatorConstants.kElelvatorGroundAlgae;
-            case ALGAEHIGH -> ElevatorConstants.kLowAlgeaGrab+15.75;
+            case ALGAEHIGH -> ElevatorConstants.kHighAlgeaGrab;
             case ALGAELOW -> ElevatorConstants.kLowAlgeaGrab;
             default -> 0.0;
         };

@@ -43,12 +43,12 @@ public class AlgaeArm extends SubsystemBase {
 
         // TODO: need to verify current value
         public boolean haveAlgae() {
-            return (getAlgaeRollerStatorCurrent() > 30);
+            return (getAlgaeRollerStatorCurrent() > 35);
         }
 
         // public boolean haveAlgae() {
         //     Debouncer m_debouncer = new Debouncer(0.1, Debouncer.DebounceType.kRising);
-        //     if (m_debouncer.calculate(getAlgaeRollerStatorCurrent() > 30)) return true;
+        //     if (m_debouncer.calculate(getAlgaeRollerStatorCurrent() > 35)) return true;
         //     return false;
         // }
     }

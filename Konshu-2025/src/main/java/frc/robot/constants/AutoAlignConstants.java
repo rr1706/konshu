@@ -1,6 +1,7 @@
 package frc.robot.constants;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.geometry.Translation2d;
+import edu.wpi.first.math.interpolation.InterpolatingDoubleTreeMap;
 
 public final class AutoAlignConstants {
 
@@ -46,4 +47,22 @@ public final class AutoAlignConstants {
         public static final Rotation2d kFAlgea = new Rotation2d((4*Math.PI)/3);
         public static final Rotation2d kEAlgea = new Rotation2d((5*Math.PI)/3);
     }
+
+      public static InterpolatingDoubleTreeMap ElevatorAutoAlign = new InterpolatingDoubleTreeMap();
+//interpolation lookup table to vary elevator height with target distance
+
+        public static void SetUpAutoAlignConstants(){
+            ElevatorAutoAlign.put(0.0,40.0);
+            ElevatorAutoAlign.put(2.0,20.0);
+            ElevatorAutoAlign.put(4.0,2.0);
+            ElevatorAutoAlign.put(6.0,40.0);
+            ElevatorAutoAlign.put(8.0,20.0);
+            ElevatorAutoAlign.put(10.0,2.0);
+            ElevatorAutoAlign.put(12.0,40.0);
+            ElevatorAutoAlign.put(14.0,20.0);
+            ElevatorAutoAlign.put(16.0,2.0);
+            ElevatorAutoAlign.put(18.0,40.0);
+            ElevatorAutoAlign.put(20.0,20.0);
+        }
+
 }
