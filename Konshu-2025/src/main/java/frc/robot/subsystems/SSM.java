@@ -140,12 +140,11 @@ public class SSM extends SubsystemBase {
             return;
         }
 
-// //        if (m_setpoint != m_queuedSetpoint)      // Now always reinit because added offsets
-        if ((m_setpoint == States.L1) || (m_setpoint == States.L2) || 
-            (m_setpoint == States.L3) || (m_setpoint == States.L4)) {
+//        if (m_setpoint != m_queuedSetpoint)      // Now always reinit because added offsets
+        if ((m_queuedSetpoint == States.L1) || (m_queuedSetpoint == States.L2) || 
+            (m_queuedSetpoint == States.L3) || (m_queuedSetpoint == States.L4)) {
             if (m_hasCoral.getAsBoolean()) newState(m_queuedSetpoint);
-         } else 
-         newState(m_queuedSetpoint);                // Check for new state commanded
+        } else newState(m_queuedSetpoint);                // Check for new state commanded
         
         if (m_setpoint == States.DISABLED)
             return;
