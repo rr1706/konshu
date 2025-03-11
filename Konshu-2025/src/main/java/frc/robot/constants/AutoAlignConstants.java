@@ -52,21 +52,23 @@ public final class AutoAlignConstants {
       public static InterpolatingDoubleTreeMap ElevatorAutoAlignL2 = new InterpolatingDoubleTreeMap();
       public static InterpolatingDoubleTreeMap ElevatorAutoAlignL3 = new InterpolatingDoubleTreeMap();
       public static InterpolatingDoubleTreeMap ElevatorAutoAlignL4 = new InterpolatingDoubleTreeMap();
-
-
+      public static InterpolatingDoubleTreeMap ArmAutoAlignL1 = new InterpolatingDoubleTreeMap();
+      public static InterpolatingDoubleTreeMap ArmAutoAlignL2 = new InterpolatingDoubleTreeMap();
+      public static InterpolatingDoubleTreeMap ArmAutoAlignL3 = new InterpolatingDoubleTreeMap();
+      public static InterpolatingDoubleTreeMap ArmAutoAlignL4 = new InterpolatingDoubleTreeMap();
 
 //interpolation lookup table to vary elevator height with target distance
 // Data is in METERS!!
-    public static void SetUpAutoAlignConstantsL1(){
+    public static void SetUpElevatorAutoAlignConstantsL1(){
         ElevatorAutoAlignL1.put(0.5,0.0);
-        ElevatorAutoAlignL1.put(0.525,0.0);
+        ElevatorAutoAlignL1.put(0.525,0.0); // Against the reef
         ElevatorAutoAlignL1.put(0.65,0.0);
-        ElevatorAutoAlignL1.put(0.766,0.0);
-        ElevatorAutoAlignL1.put(0.882,0.0);
+        ElevatorAutoAlignL1.put(0.766,0.0); 
+        ElevatorAutoAlignL1.put(0.882,0.0); 
         ElevatorAutoAlignL1.put(1.0,0.0);
     }
 
-    public static void SetUpAutoAlignConstantsL2() {
+    public static void SetUpElevatorAutoAlignConstantsL2() {
         ElevatorAutoAlignL2.put(0.5,0.0);
         ElevatorAutoAlignL2.put(0.525,0.0);
         ElevatorAutoAlignL2.put(0.65,3.0);
@@ -75,7 +77,7 @@ public final class AutoAlignConstants {
         ElevatorAutoAlignL2.put(1.0,9.0);
     }
     
-    public static void SetUpAutoAlignConstantsL3() {
+    public static void SetUpElevatorAutoAlignConstantsL3() {
         ElevatorAutoAlignL3.put(0.5,0.0);
         ElevatorAutoAlignL3.put(0.525,0.0);
         ElevatorAutoAlignL3.put(0.65,3.0);
@@ -84,7 +86,7 @@ public final class AutoAlignConstants {
         ElevatorAutoAlignL3.put(1.0,9.0);
 }
 
-    public static void SetUpAutoAlignConstantsL4() {
+    public static void SetUpElevatorAutoAlignConstantsL4() {
         ElevatorAutoAlignL4.put(0.5,0.0);
         ElevatorAutoAlignL4.put(0.525,0.0);
         ElevatorAutoAlignL4.put(0.65,0.0);
@@ -92,4 +94,43 @@ public final class AutoAlignConstants {
         ElevatorAutoAlignL4.put(0.882,0.0);
         ElevatorAutoAlignL4.put(1.0,0.0);
     }
+
+    
+//interpolation lookup table to vary arm angle with target distance
+// Data is in degrees
+public static void SetUpArmAutoAlignConstantsL1(){
+    ArmAutoAlignL1.put(0.5,0.0);
+    ArmAutoAlignL1.put(0.525,0.0); // Against the reef
+    ArmAutoAlignL1.put(0.65,0.0);
+    ArmAutoAlignL1.put(0.766,0.0); 
+    ArmAutoAlignL1.put(0.882,0.0); 
+    ArmAutoAlignL1.put(1.0,0.0);
+}
+
+public static void SetUpArmAutoAlignConstantsL2() {
+    ArmAutoAlignL2.put(0.5,0.0);
+    ArmAutoAlignL2.put(0.525,0.0);
+    ArmAutoAlignL2.put(0.65,0.0);
+    ArmAutoAlignL2.put(0.766,0.0);
+    ArmAutoAlignL2.put(0.882,0.0);
+    ArmAutoAlignL2.put(1.0,0.0);
+}
+
+public static void SetUpArmAutoAlignConstantsL3() {
+    ArmAutoAlignL3.put(0.5,0.0);
+    ArmAutoAlignL3.put(0.525,0.0);
+    ArmAutoAlignL3.put(0.65,0.0);
+    ArmAutoAlignL3.put(0.766,0.0);
+    ArmAutoAlignL3.put(0.882,0.0);
+    ArmAutoAlignL3.put(1.0,0.0);
+}
+
+public static void SetUpArmAutoAlignConstantsL4() {
+    ArmAutoAlignL4.put(0.5,0.0);
+    ArmAutoAlignL4.put(0.525,0.0);
+    ArmAutoAlignL4.put(0.65,0.0);
+    ArmAutoAlignL4.put(0.766,0.0);
+    ArmAutoAlignL4.put(0.882,0.0);
+    ArmAutoAlignL4.put(1.0,0.0);
+}
 }

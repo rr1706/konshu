@@ -18,6 +18,7 @@ import frc.robot.utilities.ReefTargetCalculator;
 import frc.robot.utilities.ReefTargetCalculator.AlignMode;
 import com.ctre.phoenix6.swerve.SwerveRequest;
 import com.ctre.phoenix6.swerve.SwerveModule.DriveRequestType;
+import frc.robot.subsystems.LED;
 
 /**
  * PIDRotateToTrajectory rotates the robot to face a target (selected via joystick button polling)
@@ -33,6 +34,7 @@ public class AutoAlign extends Command {
     private final DoubleSupplier m_leftRightSupplier;
     private final DoubleSupplier m_rotationSupplier;
     private final SSM m_SSM;
+    private final LED m_LED;
     private States m_state;
     private AlignMode m_alignMode;
     private boolean m_goForPID = true;
@@ -54,12 +56,13 @@ public class AutoAlign extends Command {
                                  DoubleSupplier forwardBack,
                                  DoubleSupplier leftRight,
                                  DoubleSupplier rotation,
-                                  SSM ssm) {
+                                  SSM ssm, LED led) {
         this.m_drivetrain = drivetrain;
         this.m_forwardBackSupplier = forwardBack;
         this.m_leftRightSupplier = leftRight;
         this.m_rotationSupplier = rotation;   
         this.m_SSM = ssm;
+        this.m_LED = led;
         
         // Enable continuous input for proper angle wrapping (from -π to π)
         rotPID.enableContinuousInput(-Math.PI, Math.PI);
@@ -74,10 +77,11 @@ public class AutoAlign extends Command {
 
     @Override
     public void execute() {
-        double rotationOutput, armOffset, elevatorOffset;
+        double rotationOutput, armOffset, elevatorOffset, dist;
 
         armOffset = 0.0;
         elevatorOffset = 0.0;
+        dist = 0.0;     // Default value for LED logic
         m_state = SSM.States.LOADINGSTATION;    // Default to here if trigger with no button pressed
         m_goForPID = true;
         if (DriverStation.getStickButton(1, ButtonConstants.kL1Left)) {
@@ -161,26 +165,30 @@ public class AutoAlign extends Command {
 
             if (m_alignMode != AlignMode.ALGAE) {
                 // Adjust elevator based on distance (and evantually delta angle) from post
-                double dist = m_pose.getTranslation().getDistance(currentPose.getTranslation());   // Distance to post from robot
+                dist = m_pose.getTranslation().getDistance(currentPose.getTranslation());   // Distance to post from robot
                 Rotation2d theta = m_pose.getRotation().minus(currentPose.getRotation());    // Angle from coral wall normal
                 SmartDashboard.putNumber("Distance to target", dist);
                 SmartDashboard.putNumber("Angle to Post (deg)", theta.getRadians()*360.0/Math.PI);
-            
                 switch (m_state) {
                     case L1:
                         elevatorOffset = AutoAlignConstants.ElevatorAutoAlignL1.get(dist);
+                        armOffset = AutoAlignConstants.ArmAutoAlignL1.get(dist);
                     break;
                     case L2:
                         elevatorOffset = AutoAlignConstants.ElevatorAutoAlignL2.get(dist);
+                        armOffset = AutoAlignConstants.ArmAutoAlignL2.get(dist);
                     break;
                     case L3:
                         elevatorOffset = AutoAlignConstants.ElevatorAutoAlignL3.get(dist);
+                        armOffset = AutoAlignConstants.ArmAutoAlignL3.get(dist);
                     break;
                     case L4:
                         elevatorOffset = AutoAlignConstants.ElevatorAutoAlignL4.get(dist);
+                        armOffset = AutoAlignConstants.ArmAutoAlignL4.get(dist);
                     break;
                     default:
                         elevatorOffset = 0.0;
+                        armOffset = 0.0;
                     break;
                 }
             }
@@ -191,6 +199,10 @@ public class AutoAlign extends Command {
 
         // Set the state
         m_SSM.setState(m_state, armOffset, elevatorOffset);
+
+        // Set the distance for LEDs
+        if (dist > 0.0) m_LED.setDist(mapwithlimit(dist, 0.525, 0.882, 0.0, 1.0));
+        else m_LED.setDist(1.0);
 
         // Compute translation speeds from joystick inputs with a custom curve.\
         double transAdjustment = adjustInputCurve(m_forwardBackSupplier.getAsDouble(), m_leftRightSupplier.getAsDouble(), 0.7, 0.3);
@@ -208,8 +220,14 @@ public class AutoAlign extends Command {
     @Override
     public void end(boolean interrupted) {
         m_SSM.setState(States.LOADINGSTATION);
-        // Stop the drivetrain for safety.
     }
+
+    private double mapwithlimit(double x, double in_min, double in_max, double out_min, double out_max) {
+        double d = (x - in_min) * (out_max - out_min) / (in_max - in_min) + out_min;
+        d = Math.max(d, out_min);
+        d = Math.min(d, out_max);
+        return d;
+      }
 
 
     // Helper method to adjust the joystick input curve.

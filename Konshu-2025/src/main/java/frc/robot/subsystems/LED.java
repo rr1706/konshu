@@ -1,18 +1,20 @@
 package frc.robot.subsystems;
 
+import java.util.Map;
+
 import edu.wpi.first.wpilibj.AddressableLED;
 import edu.wpi.first.wpilibj.AddressableLEDBuffer;
 import edu.wpi.first.wpilibj.AddressableLEDBufferView;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import edu.wpi.first.wpilibj.LEDPattern;
-import edu.wpi.first.wpilibj.LEDPattern.GradientType;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.util.Color;
 
 public class LED extends SubsystemBase
 {
+  double m_dist = 1.0;    // Vary LEDs based on dist from target
+
   // LED colors are actually GRB, not RGB
-  Color m_black = new Color (0,50,0); // used for FLASHING 
+  Color m_black = new Color (0,50,0);
   Color m_green = new Color(255, 0, 0); // ALGAE - green 
   Color m_blue = new Color (0, 0, 255); // CORAL - blue 
   Color m_white = new Color (0,100,100); // DEFAULT not holding anything
@@ -35,8 +37,6 @@ public LED(CoralArm coralarm, AlgaeArm algaearm) {
     this.algaeArm = algaearm;
     m_led = new AddressableLED(9);
     m_led.setLength(m_ledBuffer.getLength());
-    leftStrand(m_white, true);
-    rightStrand(m_white, true);
     m_led.setData(m_ledBuffer); 
     m_led.start();
   }
@@ -44,57 +44,42 @@ public LED(CoralArm coralarm, AlgaeArm algaearm) {
   public void periodic() {
     // Sets all to blue with coral, green with algae, or white if neither
     if (coralArm.haveCoral()) {     // set LEDs to blue flashing
-      leftStrand(m_blue, false);
-      rightStrand(m_blue, false);
+      leftStrand(m_blue, m_dist);
+      rightStrand(m_blue, m_dist);
   } else if (algaeArm.haveAlgae()) {
-      leftStrand(m_green, false);
-      rightStrand(m_green, false);
+      leftStrand(m_green, 1.0);
+      rightStrand(m_green, 1.0);
     } else {
-      leftStrand(m_white, true);
-      rightStrand(m_white, true);
+      leftStrand(m_white, 1.0);
+      rightStrand(m_white, 1.0);
     }
     m_led.setData(m_ledBuffer);   // Send our output to the LED strips
   }
 
-  // left strand LED - lights up when any of the states are in effect
-  public void leftStrand(Color ledColor, boolean solid) {
-    // LED pattern and color
-    // Create an LED pattern that sets the entire strip to solid or flashing color
+  // Vary LEDs based on distance from target.  A dist of 1.0 lights all LEDs and 0.0 lights none.
+  public void setDist(double dist) {
+    m_dist = dist;
+  }
+
+  // left strand LED
+  // A dist of 1.0 lights all LEDs (solid), 0.5 lights half the strand.
+  public void leftStrand(Color ledColor, double dist) {
     LEDPattern left;
 
-    // if (solid) left = LEDPattern.solid(ledColor);
-    // else left = LEDPattern.gradient(GradientType.kDiscontinuous, ledColor, m_black);
-    left = LEDPattern.solid(ledColor);
+//  left = LEDPattern.solid(ledColor);
+    left = LEDPattern.steps(Map.of((1.0-m_dist), ledColor));
 
     // Apply the LED pattern to the data buffer
     left.applyTo(leftLEDs);
   }
 
-  // right strand LED - lights up when any of the states are in effect
-  public void rightStrand(Color ledColor, boolean solid) {
-
-    // LED pattern and color
-    // Create an LED pattern that sets the entire strip to solid or flashing color
+  public void rightStrand(Color ledColor, double dist) {
     LEDPattern right;
 
-    SmartDashboard.putBoolean("LED solid", solid);
-    if (solid) right = LEDPattern.solid(ledColor);
-    else right = LEDPattern.gradient(GradientType.kContinuous, ledColor, m_black, m_green, m_blue, m_white);
+//  right = LEDPattern.solid(ledColor);
+    right = LEDPattern.steps(Map.of((1.0-m_dist), ledColor));
 
     // Apply the LED pattern to the data buffer
     right.applyTo(rightLEDs);
   }
 }
-
- // TODO: How/when do we want to use this?  
-
-        // if (ReefTargetCalculator.left.getAsBoolean() == true) {
-        //     leftStrand(m_green, true); }
-        // else {
-        //     leftStrand(m_pink, true);
-        // }
-        // if (ReefTargetCalculator.right.getAsBoolean() == true) {
-        //     rightStrand(m_green, true); }
-        // else {
-        //     rightStrand(m_pink, true);
-        // }
