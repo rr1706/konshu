@@ -18,11 +18,11 @@ public class CoralArm extends SubsystemBase{
 
     public CoralArm(){
         m_Nova = new ThriftyNova(10, MotorType.MINION);
-        m_Nova.setMaxCurrent(CurrentType.STATOR, 60.0);
-        m_Nova.setMaxCurrent(CurrentType.SUPPLY, 40.0);
+        m_Nova.setMaxCurrent(CurrentType.STATOR, 40.0);
+        m_Nova.setMaxCurrent(CurrentType.SUPPLY, 30.0);
         m_Nova.setVoltageCompensation(0.0);
-        m_Nova.pid0.setFF(0.0000266);
-        m_Nova.pid0.setP(0.00003);
+        m_Nova.setBrakeMode(true);
+
 
         lc = new LaserCan(10);
         try {
@@ -61,7 +61,7 @@ public class CoralArm extends SubsystemBase{
     public void periodic() {
     LaserCan.Measurement measurement = lc.getMeasurement();
     if (measurement != null && measurement.status == LaserCan.LASERCAN_STATUS_VALID_MEASUREMENT) {
-        SmartDashboard.putNumber(getName(), measurement.distance_mm);
+        SmartDashboard.putNumber("LaserCAN Measurement", measurement.distance_mm);
     }
 
     SmartDashboard.putNumber("Coral Velo", m_Nova.getVelocity()/42.0);

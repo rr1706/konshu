@@ -88,8 +88,8 @@ public class SSM extends SubsystemBase {
         }
 
         m_armSetpoint = getScoringArmPosition(m_setpoint)+m_armOffset; // Grab some local variables for mulit reuse efficiency
-        m_armSetpoint = Math.min(m_armSetpoint, ArmConstants.kArmUpperLimit);
-        m_armSetpoint = Math.max(m_armSetpoint, ArmConstants.kArmLowerLimit); 
+        m_armSetpoint = Math.max(m_armSetpoint, ArmConstants.kArmUpperLimit);
+        m_armSetpoint = Math.min(m_armSetpoint, ArmConstants.kArmLowerLimit); 
 
         m_elevatorSetpoint = getScoringElevatorPosition(m_setpoint)+m_elevatorOffset;
         m_elevatorSetpoint = Math.min(m_elevatorSetpoint, ElevatorConstants.kUpperLimitElevator);
