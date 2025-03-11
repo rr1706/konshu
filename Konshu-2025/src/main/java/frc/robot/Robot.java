@@ -39,7 +39,10 @@ public class Robot extends TimedRobot {
     DriverStation.startDataLog(DataLogManager.getLog());
       DataLog log = DataLogManager.getLog();
     buttonLog = new StringLogEntry(log, "/button");
-    AutoAlignConstants.SetUpAutoAlignConstants();
+    AutoAlignConstants.SetUpAutoAlignConstantsL1();
+    AutoAlignConstants.SetUpAutoAlignConstantsL2();
+    AutoAlignConstants.SetUpAutoAlignConstantsL3();
+    AutoAlignConstants.SetUpAutoAlignConstantsL4();
     
     // CanBridge.runTCP();
   }

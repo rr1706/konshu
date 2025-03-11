@@ -139,11 +139,13 @@ public class AutoAlign extends Command {
             SmartDashboard.putNumber("CurrentAngle", currentAngle);
 
             double targetAngle;
-            Translation2d robotToGoal = m_pose.getTranslation().minus(currentPose.getTranslation());
             // For ALGAE mode, use the preset rotation; otherwise, compute the angle from the target translation.
             if (m_alignMode == AlignMode.ALGAE) {     // m_pose only has rotation populated
                 targetAngle = m_pose.getRotation().getRadians();
+                if (isAlgaeHigh(m_pose)) m_state = SSM.States.ALGAEHIGH;
+                else m_state = SSM.States.ALGAELOW;
             } else {
+              Translation2d robotToGoal = m_pose.getTranslation().minus(currentPose.getTranslation());
               double [] target_array ={m_pose.getTranslation().getX(), m_pose.getTranslation().getY()};
               SmartDashboard.putNumberArray("Target",target_array);
               targetAngle = robotToGoal.getAngle().getRadians();
@@ -157,15 +159,31 @@ public class AutoAlign extends Command {
             rotationOutput = rotPID.calculate(currentAngle, targetAngle);
             SmartDashboard.putNumber("Rot Out", rotationOutput);
 
-            // Adjust elevator based on distance (and evantually delta angle) from post
-            double dist = m_pose.getTranslation().getDistance(currentPose.getTranslation());   // Distance to post from robot
-            Rotation2d theta = m_pose.getRotation().minus(currentPose.getRotation());    // Angle from coral wall normal
-            SmartDashboard.putNumber("Distance to target", dist);
-            SmartDashboard.putNumber("Angle to Post (deg)", theta.getRadians()*360.0/Math.PI);
-
-   //         elevatorOffset = AutoAlignConstants.ElevatorAutoAlign.get(dist);
+            if (m_alignMode != AlignMode.ALGAE) {
+                // Adjust elevator based on distance (and evantually delta angle) from post
+                double dist = m_pose.getTranslation().getDistance(currentPose.getTranslation());   // Distance to post from robot
+                Rotation2d theta = m_pose.getRotation().minus(currentPose.getRotation());    // Angle from coral wall normal
+                SmartDashboard.putNumber("Distance to target", dist);
+                SmartDashboard.putNumber("Angle to Post (deg)", theta.getRadians()*360.0/Math.PI);
             
-
+                switch (m_state) {
+                    case L1:
+                        elevatorOffset = AutoAlignConstants.ElevatorAutoAlignL1.get(dist);
+                    break;
+                    case L2:
+                        elevatorOffset = AutoAlignConstants.ElevatorAutoAlignL2.get(dist);
+                    break;
+                    case L3:
+                        elevatorOffset = AutoAlignConstants.ElevatorAutoAlignL3.get(dist);
+                    break;
+                    case L4:
+                        elevatorOffset = AutoAlignConstants.ElevatorAutoAlignL4.get(dist);
+                    break;
+                    default:
+                        elevatorOffset = 0.0;
+                    break;
+                }
+            }
         } else {
             double rotCurveAdjustment = DriveCommands.adjustRotCurve(m_rotationSupplier.getAsDouble(), 0.7, 0.3);
             rotationOutput =  DriveCommands.m_slewRot.calculate(-m_rotationSupplier.getAsDouble() * DriveConstants.MAX_ANGULAR_RATE*rotCurveAdjustment); 
@@ -204,5 +222,11 @@ public class AutoAlign extends Command {
             magnitude = 0.0;
         }
         return a * Math.pow(magnitude, 3) + b * magnitude;
+    }
+    private boolean isAlgaeHigh(Pose2d pos){
+        if((pos.getRotation() == AutoAlignConstants.BlueAllianceConstants.kAAlgea)||
+           (pos.getRotation() == AutoAlignConstants.BlueAllianceConstants.kCAlgea)||
+           (pos.getRotation() == AutoAlignConstants.BlueAllianceConstants.kEAlgea)) return true;
+        return false;
     }
 }
