@@ -130,9 +130,9 @@ public final class AutoAlignConstants {
     public static void SetUpArmAutoAlignConstantsL4() {
         ArmAutoAlignL4.put(0.5, 0.0);
         ArmAutoAlignL4.put(0.525, 0.0);
-        ArmAutoAlignL4.put(0.65, 0.0);
-        ArmAutoAlignL4.put(0.766, 0.0);
-        ArmAutoAlignL4.put(0.882, 0.0);
-        ArmAutoAlignL4.put(1.0, 0.0);
+        ArmAutoAlignL4.put(0.65, -6.0);
+        ArmAutoAlignL4.put(0.766, -13.0);
+        ArmAutoAlignL4.put(0.882, -13.0);
+        ArmAutoAlignL4.put(1.0, -13.0);
     }
 }

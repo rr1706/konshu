@@ -115,7 +115,7 @@ public class RobotContainer {
         driverController.povDown().onTrue(new InstantCommand(() -> m_arm.jogging(true)));
 
         driverController.leftTrigger().onFalse(
-                new InstantCommand(() -> m_funnel.runCoralIn(-.4)).alongWith(new IntakeFromFunnel(m_coralArm)));
+                new InstantCommand(() -> m_funnel.runCoralIn(-.5)).alongWith(new IntakeFromFunnel(m_coralArm)));
         driverController.x().onTrue(new InstantCommand(() -> m_climber.prepClimb()));
         driverController.b().onTrue(new InstantCommand(() -> m_climber.Climb()))
                 .onFalse(new InstantCommand(() -> m_climber.stop()));
@@ -131,7 +131,8 @@ public class RobotContainer {
         driverController.a().onTrue(m_algaeArm.grabAlgae(0.8));
         operatorcontoller1.button(9).onTrue(m_algaeArm.grabAlgae(0.8));
         operatorcontoller2.button(1).onTrue(m_algaeArm.grabAlgae(0.8));
-        operatorcontoller2.button(2).whileTrue(new InstantCommand(() -> m_funnel.runCoralIn(.2)));
+        operatorcontoller2.button(2).whileTrue(new InstantCommand(() -> m_funnel.runCoralIn(.2)))
+        .onFalse(new InstantCommand(() -> m_funnel.runCoralIn(.2)));
 
         driverController.leftTrigger().whileTrue(new AutoAlign(
                 m_drivetrain,
