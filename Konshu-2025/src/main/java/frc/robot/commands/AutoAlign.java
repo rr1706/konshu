@@ -139,11 +139,11 @@ public class AutoAlign extends Command {
             SmartDashboard.putNumber("CurrentAngle", currentAngle);
 
             double targetAngle;
-            Translation2d robotToGoal = m_pose.getTranslation().minus(currentPose.getTranslation());
             // For ALGAE mode, use the preset rotation; otherwise, compute the angle from the target translation.
             if (m_alignMode == AlignMode.ALGAE) {     // m_pose only has rotation populated
                 targetAngle = m_pose.getRotation().getRadians();
             } else {
+              Translation2d robotToGoal = m_pose.getTranslation().minus(currentPose.getTranslation());
               double [] target_array ={m_pose.getTranslation().getX(), m_pose.getTranslation().getY()};
               SmartDashboard.putNumberArray("Target",target_array);
               targetAngle = robotToGoal.getAngle().getRadians();
