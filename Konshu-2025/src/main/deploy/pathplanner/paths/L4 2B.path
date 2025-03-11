@@ -16,12 +16,12 @@
     },
     {
       "anchor": {
-        "x": 3.7155405405405406,
-        "y": 5.082347972972972
+        "x": 3.6595738636363637,
+        "y": 5.166747159090908
       },
       "prevControl": {
-        "x": 3.6068412162162162,
-        "y": 5.388682432432431
+        "x": 3.5508745393120393,
+        "y": 5.473081618550368
       },
       "nextControl": null,
       "isLocked": false,
@@ -36,7 +36,7 @@
       "maxWaypointRelativePos": 1.0,
       "constraints": {
         "maxVelocity": 4.73,
-        "maxAcceleration": 3.0,
+        "maxAcceleration": 2.0,
         "maxAngularVelocity": 540.0,
         "maxAngularAcceleration": 720.0,
         "nominalVoltage": 12.0,
@@ -53,14 +53,14 @@
       "command": {
         "type": "named",
         "data": {
-          "name": "Score"
+          "name": "GoL4"
         }
       }
     }
   ],
   "globalConstraints": {
     "maxVelocity": 4.73,
-    "maxAcceleration": 5.0,
+    "maxAcceleration": 3.5,
     "maxAngularVelocity": 540.0,
     "maxAngularAcceleration": 720.0,
     "nominalVoltage": 12.0,

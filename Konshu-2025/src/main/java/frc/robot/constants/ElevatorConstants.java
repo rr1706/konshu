@@ -13,7 +13,7 @@ public class ElevatorConstants {
 
     public static final double kAccelerationElevator = 1000; //1000
     public static final double kVelocityElevator= 75; //75
-    public static final double kJerkElevator = 40000;
+    public static final double kJerkElevator = 80000;
 
     // public static final double kPElevator = 1.0; 
     // public static final double kIElevator = 1.0; 

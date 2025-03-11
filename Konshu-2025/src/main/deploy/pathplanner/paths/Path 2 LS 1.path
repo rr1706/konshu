@@ -3,13 +3,13 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 5.010050675675675,
-        "y": 5.200929054054053
+        "x": 5.045624999999999,
+        "y": 5.28640625
       },
       "prevControl": null,
       "nextControl": {
-        "x": 5.464611486486486,
-        "y": 5.5863175675675665
+        "x": 5.500185810810811,
+        "y": 5.671794763513513
       },
       "isLocked": false,
       "linkedName": "L4 3A End"
@@ -53,14 +53,14 @@
       "command": {
         "type": "named",
         "data": {
-          "name": "LoadingStation"
+          "name": "GoLoadingStationPOS"
         }
       }
     }
   ],
   "globalConstraints": {
     "maxVelocity": 4.73,
-    "maxAcceleration": 5.0,
+    "maxAcceleration": 3.5,
     "maxAngularVelocity": 540.0,
     "maxAngularAcceleration": 720.0,
     "nominalVoltage": 12.0,
