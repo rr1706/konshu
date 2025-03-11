@@ -14,7 +14,7 @@ public class LED extends SubsystemBase {
   Color m_black = new Color(0, 0, 0);
   Color m_green = new Color(255, 0, 0); // ALGAE - green
   Color m_blue = new Color(0, 0, 255);  // CORAL - blue
-  Color m_yellow = new Color(255, 255, 0);  // Coral in close - yellow
+  Color m_yellow = new Color(255, 255, 100);  // Coral in close - yellow
   Color m_purple = new Color(0, 100, 100); // DEFAULT - not holding anything
 
   private final CoralArm coralArm;
