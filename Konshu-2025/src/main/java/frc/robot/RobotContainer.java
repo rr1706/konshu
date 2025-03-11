@@ -82,7 +82,7 @@ public class RobotContainer {
         driverController.x().onTrue(new InstantCommand(() -> m_climber.prepClimb()));
         driverController.b().onTrue(new InstantCommand(() -> m_climber.Climb())).onFalse(new InstantCommand(()->m_climber.stop()));
 
-        driverController.rightTrigger().onTrue(new ConditionalCommand(m_algaeArm.spitAlgae(),m_coralArm.runCoralCmd(-0.7),()->{
+        driverController.rightTrigger().onTrue(new ConditionalCommand(m_algaeArm.spitAlgae(),m_coralArm.runCoralCmd(-0.35),()->{
             return m_SSM.getState() == (SSM.States.BARGE) || m_SSM.getState() == (SSM.States.PROCESSOR);
         }))
             .onFalse(new InstantCommand(() -> m_funnel.runCoralIn(-.4)).alongWith(new IntakeFromFunnel(m_coralArm)));

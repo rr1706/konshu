@@ -3,9 +3,9 @@ package frc.robot.constants;
 public class ElevatorConstants {
 
       // We are using Motion Magic position control with voltage countrol output type, so the PID parameters are in volts
-    public static final double kPElevator = 2.5;   // Output per unit of error in position (volts/rotation)
+    public static final double kPElevator = 2.0;   // Output per unit of error in position (volts/rotation)
     public static final double kIElevator = 0.0;   // Output per unit of integrated error in position (volts/(rotation*s))
-    public static final double kDElevator = .1;   // Output per unit of error in velocity (volts/rotation)
+    public static final double kDElevator = 0.0;   // Output per unit of error in velocity (volts/rotation)
     public static final double kGElevator = 0.6/2;   // Output to overcome gravity (volts) - modified by ArmCosine
     public static final double kSElevator = .2/2;   // Output to overcome static friction (volts)
     public static final double kVElevator = .12;   // Output per unit of target velocity (volts/rps)

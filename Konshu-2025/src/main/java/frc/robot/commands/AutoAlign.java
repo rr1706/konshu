@@ -226,7 +226,12 @@ public class AutoAlign extends Command {
     private boolean isAlgaeHigh(Pose2d pos){
         if((pos.getRotation() == AutoAlignConstants.BlueAllianceConstants.kAAlgea)||
            (pos.getRotation() == AutoAlignConstants.BlueAllianceConstants.kCAlgea)||
-           (pos.getRotation() == AutoAlignConstants.BlueAllianceConstants.kEAlgea)) return true;
+           (pos.getRotation() == AutoAlignConstants.BlueAllianceConstants.kEAlgea)||
+           (pos.getRotation() == AutoAlignConstants.RedAllianceConstants.kAAlgea)||
+           (pos.getRotation() == AutoAlignConstants.RedAllianceConstants.kCAlgea)||
+           (pos.getRotation() == AutoAlignConstants.RedAllianceConstants.kEAlgea)
+           
+           ) return true;
         return false;
     }
 }
