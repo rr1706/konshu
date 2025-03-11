@@ -144,8 +144,8 @@ public class RobotContainer {
 
     public void configureNamedCommands() {
         NamedCommands.registerCommand("ScoreL4",
-                (new WaitCommand(.35))
-                        .andThen(m_coralArm.runCoralCmd(-0.7).withTimeout(.3)));
+                (new WaitCommand(.6))
+                        .andThen(m_coralArm.runCoralCmd(-0.35).withTimeout(.4)));
         NamedCommands.registerCommand("GoL4",
                 new InstantCommand(() -> m_SSM.setState(States.L4)));
         NamedCommands.registerCommand("GoLoadingStationPOS",
