@@ -12,7 +12,7 @@ public class ArmConstants {
 
   public static final double kArmCruiseVelocity = 1.1;
   public static final double kArmAcceleration = 4.0;
-  // public static final double kArmJerk = 8000.0;
+  // public static final double kArmJerk = 0.4;
 
   public static final double kArmGearRatio = (50.0/8.0)*(48.0/20.0)*(48.0/14.0);   // alpha was (44.0/8.0)*(40.0/20.0)*(48.0/14.0);
   public static final double kArmRotorToSensor = 22.0/18.0;
