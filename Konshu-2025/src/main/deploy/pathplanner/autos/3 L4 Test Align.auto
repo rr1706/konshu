@@ -74,7 +74,7 @@
           }
         },
         {
-          "type": "sequential",
+          "type": "race",
           "data": {
             "commands": [
               {
@@ -86,10 +86,16 @@
               {
                 "type": "named",
                 "data": {
-                  "name": "GoLoadingStationPOS"
+                  "name": "AlignFRL4"
                 }
               }
             ]
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "GoLoadingStationPOS"
           }
         },
         {
@@ -131,7 +137,7 @@
           }
         },
         {
-          "type": "sequential",
+          "type": "race",
           "data": {
             "commands": [
               {
@@ -143,10 +149,16 @@
               {
                 "type": "named",
                 "data": {
-                  "name": "GoLoadingStationPOS"
+                  "name": "AlignFLL4"
                 }
               }
             ]
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "GoLoadingStationPOS"
           }
         },
         {
