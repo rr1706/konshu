@@ -58,8 +58,7 @@ public class LED extends SubsystemBase {
     m_led.setData(m_ledBuffer); // Send our output to the LED strips
   }
 
-  // Vary LEDs based on distance from target. A dist of 1.0 lights all LEDs and
-  // 0.0 lights none.
+  // Used to change LEDs based on distance to reef when holding coral
   public void setLEDScore(boolean LEDScore) {
     m_LEDScore = LEDScore;
   }
