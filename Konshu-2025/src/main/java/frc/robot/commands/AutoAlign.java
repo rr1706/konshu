@@ -84,7 +84,7 @@ public class AutoAlign extends Command {
 
         armOffset = 0.0;
         elevatorOffset = 0.0;
-        dist = 0.0; // Default value for LED logic
+        dist = 1.0; // Default value for LED logic
         m_state = SSM.States.LOADINGSTATION; // Default to here if trigger with no button pressed
         m_goForPID = true;
         if (DriverStation.getStickButton(1, ButtonConstants.kL1Left)) {
