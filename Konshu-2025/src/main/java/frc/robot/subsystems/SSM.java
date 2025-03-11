@@ -1,5 +1,7 @@
 package frc.robot.subsystems;
 
+import java.util.function.BooleanSupplier;
+
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.constants.ArmConstants;
@@ -10,6 +12,7 @@ public class SSM extends SubsystemBase {
     private final Arm m_arm;
     private final Elevator m_elevator;
     private static int m_slewMode = 0;
+    private final BooleanSupplier m_hasCoral;
 
     public enum States {
         DISABLED, L1, L2, L3, L4, LOADINGSTATION, PROCESSOR, BARGE, GROUNDALGAE, ALGAELOW, ALGAEHIGH, Climb
@@ -22,7 +25,7 @@ public class SSM extends SubsystemBase {
 
     // First constructor accepts a constant as an initial setpoint and starts moving
     // there immediately via periodic
-    public SSM(Arm arm, Elevator elevator, States setpoint) {
+    public SSM(Arm arm, Elevator elevator, States setpoint, BooleanSupplier hasCoral) {
         m_arm = arm;
         m_elevator = elevator;
         m_setpoint = States.DISABLED;
@@ -40,12 +43,14 @@ public class SSM extends SubsystemBase {
 
         m_armOffset = 0.0;
         m_elevatorOffset = 0.0;
+
+        m_hasCoral = hasCoral;
     }
 
     // Second constructor defaults to disabled (do nothing until SetState is first
     // called)
-    public SSM(Arm arm, Elevator elevator) {
-        this(arm, elevator, States.DISABLED);
+    public SSM(Arm arm, Elevator elevator, BooleanSupplier hasCoral) {
+        this(arm, elevator, States.DISABLED,hasCoral);
     }
 
     // ALways start the elevator if elevator commanded up, only move to the danger
@@ -136,7 +141,11 @@ public class SSM extends SubsystemBase {
         }
 
 //        if (m_setpoint != m_queuedSetpoint)      // Now always reinit because added offsets
-        newState(m_queuedSetpoint);                // Check for new state commanded
+        if ((m_setpoint == States.L1) || (m_setpoint == States.L2) || 
+            (m_setpoint == States.L3) || (m_setpoint == States.L4)) {
+            if (m_hasCoral.getAsBoolean()) newState(m_queuedSetpoint);
+         } else newState(m_queuedSetpoint);                // Check for new state commanded
+        
         if (m_setpoint == States.DISABLED)
             return;
 
