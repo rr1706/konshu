@@ -1,21 +1,20 @@
 package frc.robot.subsystems;
 
-import java.util.Map;
 import edu.wpi.first.wpilibj.AddressableLED;
 import edu.wpi.first.wpilibj.AddressableLEDBuffer;
 import edu.wpi.first.wpilibj.AddressableLEDBufferView;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import edu.wpi.first.wpilibj.LEDPattern;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.util.Color;
 
 public class LED extends SubsystemBase {
-  double m_dist = 1.0;    // Vary LEDs based on dist from target (0.0 - 1.0)
+  boolean m_LEDScore = false;
 
   // LED colors are actually GRB, not RGB
   Color m_black = new Color(0, 0, 0);
   Color m_green = new Color(255, 0, 0); // ALGAE - green
   Color m_blue = new Color(0, 0, 255);  // CORAL - blue
+  Color m_yellow = new Color(255, 255, 0);  // Coral in close - yellow
   Color m_purple = new Color(0, 100, 100); // DEFAULT - not holding anything
 
   private final CoralArm coralArm;
@@ -42,42 +41,42 @@ public class LED extends SubsystemBase {
   public void periodic() {
     // Sets all to blue with coral, green with algae, or white if neither
     if (coralArm.haveCoral()) {
-      leftStrand(m_blue, m_dist);
-      // rightStrand(m_blue, m_dist); // Not currently used as left/right LEDs are wired in parallel
+      if (m_LEDScore) {
+        leftStrand(m_yellow);
+        rightStrand(m_yellow);    // Not currently used as left/right LEDs are wired in parallel
+      } else {
+        leftStrand(m_blue);
+        rightStrand(m_blue);
+      }
     } else if (algaeArm.haveAlgae()) {
-      leftStrand(m_green, 1.0);
-      // rightStrand(m_green, 1.0);
+      leftStrand(m_green);
+      // rightStrand(m_green);
     } else {
-      leftStrand(m_purple, 1.0);
-      // rightStrand(m_purple, 1.0);
+      leftStrand(m_purple);
+      // rightStrand(m_purple);
     }
     m_led.setData(m_ledBuffer); // Send our output to the LED strips
   }
 
-  // Vary LEDs based on distance from target. A dist of 1.0 lights all LEDs and
-  // 0.0 lights none.
-  public void setDist(double dist) {
-    m_dist = dist;
+  // Used to change LEDs based on distance to reef when holding coral
+  public void setLEDScore(boolean LEDScore) {
+    m_LEDScore = LEDScore;
   }
 
   // left strand LED
-  // A dist of 1.0 lights all LEDs (solid), 0.5 lights half the strand.
-  public void leftStrand(Color ledColor, double dist) {
+  public void leftStrand(Color ledColor) {
     LEDPattern left;
 
-    SmartDashboard.putNumber("LED dist", dist);
-  // left = LEDPattern.solid(ledColor);
-    left = LEDPattern.steps(Map.of((1.0 - dist), ledColor));
+    left = LEDPattern.solid(ledColor);
 
     // Apply the LED pattern to the data buffer
     left.applyTo(leftLEDs);
   }
 
-  public void rightStrand(Color ledColor, double dist) {
+  public void rightStrand(Color ledColor) {
     LEDPattern right;
 
-    // right = LEDPattern.solid(ledColor);
-    right = LEDPattern.steps(Map.of((1.0 - dist), ledColor));
+    right = LEDPattern.solid(ledColor);
 
     // Apply the LED pattern to the data buffer
     right.applyTo(rightLEDs);

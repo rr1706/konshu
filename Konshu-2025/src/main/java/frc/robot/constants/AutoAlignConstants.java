@@ -61,7 +61,6 @@ public final class AutoAlignConstants {
     // Interpolation lookup table to vary elevator height with target distance
     // Data is in METERS!!
 
-    // NOTE: THE KEY RANGE IS ALSO USED BY LEDS -- HARDCODED IN AutoAlign.java
     public static void SetUpElevatorAutoAlignConstantsL1() {
         ElevatorAutoAlignL1.put(0.5, 0.0);
         ElevatorAutoAlignL1.put(0.525, 0.0); // Against the reef
