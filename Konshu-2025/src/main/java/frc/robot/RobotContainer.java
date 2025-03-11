@@ -2,8 +2,12 @@ package frc.robot;
 
 import com.pathplanner.lib.auto.AutoBuilder;
 import com.pathplanner.lib.auto.NamedCommands;
+import com.pathplanner.lib.config.PIDConstants;
+import com.pathplanner.lib.config.RobotConfig;
+import com.pathplanner.lib.controllers.PPHolonomicDriveController;
 
 import edu.wpi.first.wpilibj.DriverStation;
+import edu.wpi.first.wpilibj.DriverStation.Alliance;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
@@ -50,9 +54,12 @@ public class RobotContainer {
     private final SendableChooser<Command> autoChooser;
 
     public RobotContainer() {
-        configureNamedCommands();
 
         m_drivetrain = TunerConstants.createDrivetrain();
+
+        configureNamedCommands();
+        configureAutoBuilder();
+
         autoChooser = AutoBuilder.buildAutoChooser("4 L4");
         SmartDashboard.putData("Auto Mode", autoChooser);
         configureDefaultCommands();
@@ -66,6 +73,36 @@ public class RobotContainer {
                         () -> driverController.getLeftY(),
                         () -> driverController.getLeftX(),
                         () -> driverController.getRightX()));
+    }
+
+      private void configureAutoBuilder() {
+        try {
+            var config = RobotConfig.fromGUISettings();
+            AutoBuilder.configure(
+                () -> m_drivetrain.getState().Pose,   // Supplier of current robot pose
+                m_drivetrain::resetPose,         // Consumer for seeding pose against auto
+                
+                () -> m_drivetrain.getState().Speeds, // Supplier of current robot speeds
+                // Consumer of ChassisSpeeds and feedforwards to drive the robot
+                (speeds, feedforwards) -> m_drivetrain.setControl(
+                    m_drivetrain.m_pathApplyRobotSpeeds.withSpeeds(speeds)
+                        .withWheelForceFeedforwardsX(feedforwards.robotRelativeForcesXNewtons())
+                        .withWheelForceFeedforwardsY(feedforwards.robotRelativeForcesYNewtons())
+                ),
+                new PPHolonomicDriveController(
+                    // PID constants for translation
+                    new PIDConstants(10, 0, 0),
+                    // PID constants for rotation
+                    new PIDConstants(7, 0, 0)
+                ),
+                config,
+                // Assume the path needs to be flipped for Red vs Blue, this is normally the case
+                () -> DriverStation.getAlliance().orElse(Alliance.Blue) == Alliance.Red,
+                m_drivetrain // Subsystem for requirements
+            );
+        } catch (Exception ex) {
+            DriverStation.reportError("Failed to load PathPlanner config and configure AutoBuilder", ex.getStackTrace());
+        }
     }
 
     private void configureBindings() {
@@ -110,7 +147,12 @@ public class RobotContainer {
                 (new WaitCommand(.35))
                         .andThen(m_coralArm.runCoralCmd(-0.7).withTimeout(.3)));
         NamedCommands.registerCommand("GoL4",
-                new InstantCommand(() -> m_SSM.setState(States.L3)));
+                new InstantCommand(() -> m_SSM.setState(States.L4)));
+        NamedCommands.registerCommand("GoLoadingStationPOS",
+                new InstantCommand(() -> m_SSM.setState(States.LOADINGSTATION)));
+        NamedCommands.registerCommand("Run Funnel",
+                new InstantCommand(() -> m_funnel.runCoralIn(-.7)).alongWith(new IntakeFromFunnel(m_coralArm)));
+
 
         NamedCommands.registerCommand("AlignCRL4", new AlignInAuto(m_drivetrain, () -> {
             DriverStation.Alliance alliance = DriverStation.getAlliance().orElse(DriverStation.Alliance.Blue);
@@ -190,7 +232,7 @@ public class RobotContainer {
                 return AutoAlignConstants.RedAllianceConstants.kER;
             }
         }, SSM.States.L4, m_SSM));
-        NamedCommands.registerCommand("AlignAEL4", new AlignInAuto(m_drivetrain, () -> {
+        NamedCommands.registerCommand("AlignELL4", new AlignInAuto(m_drivetrain, () -> {
             DriverStation.Alliance alliance = DriverStation.getAlliance().orElse(DriverStation.Alliance.Blue);
             if (alliance == DriverStation.Alliance.Blue) {
                 return AutoAlignConstants.BlueAllianceConstants.kEL;
@@ -215,11 +257,6 @@ public class RobotContainer {
                 return AutoAlignConstants.RedAllianceConstants.kDL;
             }
         }, SSM.States.L4, m_SSM));
-
-        NamedCommands.registerCommand("GoLoadingStationPOS",
-                new InstantCommand(() -> m_SSM.setState(States.LOADINGSTATION)));
-        NamedCommands.registerCommand("Run Funnel",
-                new InstantCommand(() -> m_funnel.runCoralIn(-.7)).alongWith(new IntakeFromFunnel(m_coralArm)));
 
     }
 
