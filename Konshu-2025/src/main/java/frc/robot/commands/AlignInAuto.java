@@ -50,32 +50,32 @@ public class AlignInAuto extends Command {
         double targetAngle = robotToGoal.getAngle().getRadians();
         double elevatorOffset = 0.0;
         double armOffset = 0.0;
-                        // Adjust elevator based on distance (and evantually delta angle) from post
-              double  dist = target.getDistance(currentPose.getTranslation()); // Distance to post from robot
-                SmartDashboard.putNumber("Distance to target", dist);
-                SmartDashboard.putNumber("Angle to Post (deg)", target.getAngle().getRadians() * 360.0 / Math.PI);
-                switch (m_state) {
-                    case L1:
-                        elevatorOffset = AutoAlignConstants.ElevatorAutoAlignL1.get(dist);
-                        armOffset = AutoAlignConstants.ArmAutoAlignL1.get(dist);
-                        break;
-                    case L2:
-                        elevatorOffset = AutoAlignConstants.ElevatorAutoAlignL2.get(dist);
-                        armOffset = AutoAlignConstants.ArmAutoAlignL2.get(dist);
-                        break;
-                    case L3:
-                        elevatorOffset = AutoAlignConstants.ElevatorAutoAlignL3.get(dist);
-                        armOffset = AutoAlignConstants.ArmAutoAlignL3.get(dist);
-                        break;
-                    case L4:
-                        elevatorOffset = AutoAlignConstants.ElevatorAutoAlignL4.get(dist);
-                        armOffset = AutoAlignConstants.ArmAutoAlignL4.get(dist);
-                        break;
-                    default:
-                        elevatorOffset = 0.0;
-                        armOffset = 0.0;
-                        break;
-                }
+        // Adjust elevator based on distance (and evantually delta angle) from post
+        double dist = target.getDistance(currentPose.getTranslation()); // Distance to post from robot
+        SmartDashboard.putNumber("Distance to target", dist);
+        SmartDashboard.putNumber("Angle to Post (deg)", target.getAngle().getRadians() * 360.0 / Math.PI);
+        switch (m_state) {
+            case L1:
+                elevatorOffset = AutoAlignConstants.ElevatorAutoAlignL1.get(dist);
+                armOffset = AutoAlignConstants.ArmAutoAlignL1.get(dist);
+                break;
+            case L2:
+                elevatorOffset = AutoAlignConstants.ElevatorAutoAlignL2.get(dist);
+                armOffset = AutoAlignConstants.ArmAutoAlignL2.get(dist);
+                break;
+            case L3:
+                elevatorOffset = AutoAlignConstants.ElevatorAutoAlignL3.get(dist);
+                armOffset = AutoAlignConstants.ArmAutoAlignL3.get(dist);
+                break;
+            case L4:
+                elevatorOffset = AutoAlignConstants.ElevatorAutoAlignL4.get(dist);
+                armOffset = AutoAlignConstants.ArmAutoAlignL4.get(dist);
+                break;
+            default:
+                elevatorOffset = 0.0;
+                armOffset = 0.0;
+                break;
+        }
 
         m_ssm.setState(m_state, armOffset, elevatorOffset);
 
