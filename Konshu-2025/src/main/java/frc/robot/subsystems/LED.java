@@ -6,6 +6,7 @@ import edu.wpi.first.wpilibj.AddressableLEDBuffer;
 import edu.wpi.first.wpilibj.AddressableLEDBufferView;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import edu.wpi.first.wpilibj.LEDPattern;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.util.Color;
 
 public class LED extends SubsystemBase {
@@ -64,8 +65,9 @@ public class LED extends SubsystemBase {
   public void leftStrand(Color ledColor, double dist) {
     LEDPattern left;
 
-    // left = LEDPattern.solid(ledColor);
-    left = LEDPattern.steps(Map.of((1.0 - m_dist), ledColor));
+    SmartDashboard.putNumber("LED dist", dist);
+  // left = LEDPattern.solid(ledColor);
+    left = LEDPattern.steps(Map.of((1.0 - dist), ledColor));
 
     // Apply the LED pattern to the data buffer
     left.applyTo(leftLEDs);
@@ -75,7 +77,7 @@ public class LED extends SubsystemBase {
     LEDPattern right;
 
     // right = LEDPattern.solid(ledColor);
-    right = LEDPattern.steps(Map.of((1.0 - m_dist), ledColor));
+    right = LEDPattern.steps(Map.of((1.0 - dist), ledColor));
 
     // Apply the LED pattern to the data buffer
     right.applyTo(rightLEDs);
