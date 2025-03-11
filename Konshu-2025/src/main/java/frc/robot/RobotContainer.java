@@ -42,11 +42,11 @@ public class RobotContainer {
     private final Elevator m_elevator = new Elevator();
     private final Arm m_arm = new Arm();
     private final Funnel m_funnel = new Funnel();
+    public final CoralArm m_coralArm = new CoralArm();
 
-    private final SSM m_SSM = new SSM(m_arm, m_elevator);
+    private final SSM m_SSM = new SSM(m_arm, m_elevator, m_coralArm::haveCoral);
     public final CommandSwerveDrivetrain m_drivetrain;
     public final Climber m_climber = new Climber();
-    public final CoralArm m_coralArm = new CoralArm();
     public final AlgaeArm m_algaeArm = new AlgaeArm();
 
     private final LED m_LED = new LED(m_coralArm, m_algaeArm);
@@ -115,7 +115,7 @@ public class RobotContainer {
         driverController.povDown().onTrue(new InstantCommand(() -> m_arm.jogging(true)));
 
         driverController.leftTrigger().onFalse(
-                new InstantCommand(() -> m_funnel.runCoralIn(-.4)).alongWith(new IntakeFromFunnel(m_coralArm)));
+                new InstantCommand(() -> m_funnel.runCoralIn(-.5)).alongWith(new IntakeFromFunnel(m_coralArm)));
         driverController.x().onTrue(new InstantCommand(() -> m_climber.prepClimb()));
         driverController.b().onTrue(new InstantCommand(() -> m_climber.Climb()))
                 .onFalse(new InstantCommand(() -> m_climber.stop()));
@@ -127,11 +127,11 @@ public class RobotContainer {
                 .onFalse(
                         new InstantCommand(() -> m_funnel.runCoralIn(-.4)).alongWith(new IntakeFromFunnel(m_coralArm)));
 
-        // for testing ONLY
         driverController.a().onTrue(m_algaeArm.grabAlgae(0.8));
         operatorcontoller1.button(9).onTrue(m_algaeArm.grabAlgae(0.8));
         operatorcontoller2.button(1).onTrue(m_algaeArm.grabAlgae(0.8));
-        operatorcontoller2.button(2).whileTrue(new InstantCommand(() -> m_funnel.runCoralIn(.2)));
+        operatorcontoller2.button(2).whileTrue(new InstantCommand(() -> m_funnel.runCoralIn(.2)))
+        .onFalse(new InstantCommand(() -> m_funnel.runCoralIn(.2)));
 
         driverController.leftTrigger().whileTrue(new AutoAlign(
                 m_drivetrain,
@@ -144,8 +144,8 @@ public class RobotContainer {
 
     public void configureNamedCommands() {
         NamedCommands.registerCommand("ScoreL4",
-                (new WaitCommand(.35))
-                        .andThen(m_coralArm.runCoralCmd(-0.7).withTimeout(.3)));
+                (new WaitCommand(.6))
+                        .andThen(m_coralArm.runCoralCmd(-0.35).withTimeout(.4)));
         NamedCommands.registerCommand("GoL4",
                 new InstantCommand(() -> m_SSM.setState(States.L4)));
         NamedCommands.registerCommand("GoLoadingStationPOS",
