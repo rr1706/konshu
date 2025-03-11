@@ -152,7 +152,10 @@ public class AutoAlign extends Command {
             // the target translation.
             if (m_alignMode == AlignMode.ALGAE) { // m_pose only has rotation populated
                 targetAngle = m_pose.getRotation().getRadians();
-                if (isAlgaeHigh(m_pose))
+
+                // Override the high/low algae buttons when in auto rotate so that the state is based on
+                // which coral button is pressed - either algae button will enable
+                if (isAlgaeHigh(m_pose)) 
                     m_state = SSM.States.ALGAEHIGH;
                 else
                     m_state = SSM.States.ALGAELOW;
@@ -211,12 +214,12 @@ public class AutoAlign extends Command {
         m_SSM.setState(m_state, armOffset, elevatorOffset);
 
         // Set the distance for LEDs
-        if (dist > 0.0)
-            m_LED.setDist(mapwithlimit(dist, 0.525, 0.882, 0.0, 1.0));
+        if (dist <= 0.766)
+            m_LED.setLEDScore(true);
         else
-            m_LED.setDist(1.0);
+            m_LED.setLEDScore(false);
 
-        // Compute translation speeds from joystick inputs with a custom curve.\
+        // Compute translation speeds from joystick inputs with a custom curve.
         double transAdjustment = adjustInputCurve(m_forwardBackSupplier.getAsDouble(),
                 m_leftRightSupplier.getAsDouble(), 0.7, 0.3);
         double velocityX = DriveCommands.m_slewX
