@@ -12,7 +12,7 @@ public class ElevatorConstants {
     public static final double kAElevator = 0.0007;   // Output per unit of target accelleration (volts/rps/rps)
 
     public static final double kAccelerationElevator = 1000; //1000
-    public static final double kVelocityElevator= 65; //75
+    public static final double kVelocityElevator= 75; //75
     public static final double kJerkElevator = 0;
 
     // public static final double kPElevator = 1.0; 
@@ -25,11 +25,11 @@ public class ElevatorConstants {
     public static final boolean elevatorConfigforwardSoftLimitEnabled = true;
     public static final double kElevatorL1 = 8.6;       // These are in inches
     public static final double kElevatorL2 = 22.0; 
-    public static final double kElevatorL3 = 37.2; 
-    public static final double kElevatorL4 = 70.1; 
+    public static final double kElevatorL3 = 37.5; 
+    public static final double kElevatorL4 = 71.1; 
     public static final double kElevatorLoadingStation = 0.5; 
     public static final double kElevatorProcessor = 4.5;
-    public static final double kElevatorBarge = 68.11; 
+    public static final double kElevatorBarge = 69.61; 
     public static final double kElevatorZero = 0.0;
     public static final double kElelvatorGroundAlgae = 15;  
     public static final double kPulleyRadius = 0.5; 

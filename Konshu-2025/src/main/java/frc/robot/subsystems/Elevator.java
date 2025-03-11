@@ -98,11 +98,11 @@ public class Elevator extends SubsystemBase {
    public void jogging(boolean direction){
         if (direction == true){
             SmartDashboard.putNumber("Elevator Position", getPosition());
-            setPosition(getPosition()+1.0*ElevatorConstants.kInchPerRotation);
+            setPosition(getPosition()+2.0*ElevatorConstants.kInchPerRotation);
         }
         else{
             SmartDashboard.putNumber("Elevator Position", getPosition());
-            setPosition(getPosition()-1.0*ElevatorConstants.kInchPerRotation);
+            setPosition(getPosition()-2.0*ElevatorConstants.kInchPerRotation);
         }
     }
 

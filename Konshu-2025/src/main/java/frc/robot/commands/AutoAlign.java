@@ -157,11 +157,11 @@ public class AutoAlign extends Command {
             rotationOutput = rotPID.calculate(currentAngle, targetAngle);
             SmartDashboard.putNumber("Rot Out", rotationOutput);
 
-            // Adjust elevator based on distance (and evantually delta angle) from post
-            double dist = m_pose.getTranslation().getDistance(currentPose.getTranslation());   // Distance to post from robot
-            Rotation2d theta = m_pose.getRotation().minus(currentPose.getRotation());    // Angle from coral wall normal
-            SmartDashboard.putNumber("Distance to target", dist);
-            SmartDashboard.putNumber("Angle to Post (deg)", theta.getRadians()*360.0/Math.PI);
+            // // Adjust elevator based on distance (and evantually delta angle) from post
+            // double dist = m_pose.getTranslation().getDistance(currentPose.getTranslation());   // Distance to post from robot
+            // Rotation2d theta = m_pose.getRotation().minus(currentPose.getRotation());    // Angle from coral wall normal
+            // SmartDashboard.putNumber("Distance to target", dist);
+            // SmartDashboard.putNumber("Angle to Post (deg)", theta.getRadians()*360.0/Math.PI);
 
    //         elevatorOffset = AutoAlignConstants.ElevatorAutoAlign.get(dist);
             

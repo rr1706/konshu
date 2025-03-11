@@ -95,11 +95,11 @@ public class Arm extends SubsystemBase {
     public void jogging(boolean direction) {
         double count = 0;
         if (direction) {
-            setPosition(getPosition() + 4.0);
+            setPosition(getPosition() + 2.0);
             count += 1.0;
             SmartDashboard.putNumber("Count", count);
         } else {
-            setPosition(getPosition() - 4.0);
+            setPosition(getPosition() - 2.0);
             count += 1.0;
             SmartDashboard.putNumber("Count", count);
         }

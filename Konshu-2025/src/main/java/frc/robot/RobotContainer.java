@@ -2,12 +2,15 @@ package frc.robot;
 
 import com.pathplanner.lib.auto.AutoBuilder;
 import com.pathplanner.lib.auto.NamedCommands;
+
+import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.ConditionalCommand;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
+import edu.wpi.first.wpilibj2.command.button.CommandGenericHID;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import frc.robot.constants.*;
 import frc.robot.commands.AutoAlign;
@@ -28,6 +31,9 @@ import frc.robot.subsystems.Climber;
 public class RobotContainer {
     private final CommandXboxController driverController = 
     new CommandXboxController(DriveConstants.OperatorConstants.DRIVER_CONTROLLER_PORT);
+    private final CommandGenericHID operatorcontoller1 = new CommandGenericHID(1);
+    private final CommandGenericHID operatorcontoller2 = new CommandGenericHID(2);
+
     private final Elevator m_elevator = new Elevator();
     private final Arm m_arm = new Arm();
     private final Funnel m_funnel = new Funnel();
@@ -84,6 +90,10 @@ public class RobotContainer {
 
         //for testing ONLY
         driverController.a().onTrue(m_algaeArm.grabAlgae(0.8));
+        operatorcontoller1.button(9).onTrue(m_algaeArm.grabAlgae(0.8));
+        operatorcontoller2.button(1).onTrue(m_algaeArm.grabAlgae(0.8));
+        operatorcontoller2.button(2).whileTrue(new InstantCommand(() -> m_funnel.runCoralIn(.2)));
+
 
         driverController.leftTrigger().whileTrue(new AutoAlign(
                     drivetrain,
