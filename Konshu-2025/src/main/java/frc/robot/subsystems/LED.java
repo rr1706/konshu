@@ -1,7 +1,6 @@
 package frc.robot.subsystems;
 
 import java.util.Map;
-
 import edu.wpi.first.wpilibj.AddressableLED;
 import edu.wpi.first.wpilibj.AddressableLEDBuffer;
 import edu.wpi.first.wpilibj.AddressableLEDBufferView;
@@ -9,15 +8,14 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import edu.wpi.first.wpilibj.LEDPattern;
 import edu.wpi.first.wpilibj.util.Color;
 
-public class LED extends SubsystemBase
-{
-  double m_dist = 1.0;    // Vary LEDs based on dist from target
+public class LED extends SubsystemBase {
+  double m_dist = 1.0;    // Vary LEDs based on dist from target (0.0 - 1.0)
 
   // LED colors are actually GRB, not RGB
-  Color m_black = new Color (0,50,0);
-  Color m_green = new Color(255, 0, 0); // ALGAE - green 
-  Color m_blue = new Color (0, 0, 255); // CORAL - blue 
-  Color m_white = new Color (0,100,100); // DEFAULT not holding anything
+  Color m_black = new Color(0, 0, 0);
+  Color m_green = new Color(255, 0, 0); // ALGAE - green
+  Color m_blue = new Color(0, 0, 255);  // CORAL - blue
+  Color m_purple = new Color(0, 100, 100); // DEFAULT - not holding anything
 
   private final CoralArm coralArm;
   private final AlgaeArm algaeArm;
@@ -26,37 +24,37 @@ public class LED extends SubsystemBase
   AddressableLED m_led;
 
   // Reuse buffers
-  // Default to a length of 120, start empty output
   // Length is expensive to set, so only set it once, then just update data
   AddressableLEDBuffer m_ledBuffer = new AddressableLEDBuffer(96);
   AddressableLEDBufferView leftLEDs = m_ledBuffer.createView(0, 47);
   AddressableLEDBufferView rightLEDs = m_ledBuffer.createView(48, 95);
 
-public LED(CoralArm coralarm, AlgaeArm algaearm) {
+  public LED(CoralArm coralarm, AlgaeArm algaearm) {
     this.coralArm = coralarm;
     this.algaeArm = algaearm;
     m_led = new AddressableLED(9);
     m_led.setLength(m_ledBuffer.getLength());
-    m_led.setData(m_ledBuffer); 
+    m_led.setData(m_ledBuffer);
     m_led.start();
   }
-  
+
   public void periodic() {
     // Sets all to blue with coral, green with algae, or white if neither
-    if (coralArm.haveCoral()) {     // set LEDs to blue flashing
+    if (coralArm.haveCoral()) {
       leftStrand(m_blue, m_dist);
-      rightStrand(m_blue, m_dist);
-  } else if (algaeArm.haveAlgae()) {
+      // rightStrand(m_blue, m_dist); // Not currently used as left/right LEDs are wired in parallel
+    } else if (algaeArm.haveAlgae()) {
       leftStrand(m_green, 1.0);
-      rightStrand(m_green, 1.0);
+      // rightStrand(m_green, 1.0);
     } else {
-      leftStrand(m_white, 1.0);
-      rightStrand(m_white, 1.0);
+      leftStrand(m_purple, 1.0);
+      // rightStrand(m_purple, 1.0);
     }
-    m_led.setData(m_ledBuffer);   // Send our output to the LED strips
+    m_led.setData(m_ledBuffer); // Send our output to the LED strips
   }
 
-  // Vary LEDs based on distance from target.  A dist of 1.0 lights all LEDs and 0.0 lights none.
+  // Vary LEDs based on distance from target. A dist of 1.0 lights all LEDs and
+  // 0.0 lights none.
   public void setDist(double dist) {
     m_dist = dist;
   }
@@ -66,8 +64,8 @@ public LED(CoralArm coralarm, AlgaeArm algaearm) {
   public void leftStrand(Color ledColor, double dist) {
     LEDPattern left;
 
-//  left = LEDPattern.solid(ledColor);
-    left = LEDPattern.steps(Map.of((1.0-m_dist), ledColor));
+    // left = LEDPattern.solid(ledColor);
+    left = LEDPattern.steps(Map.of((1.0 - m_dist), ledColor));
 
     // Apply the LED pattern to the data buffer
     left.applyTo(leftLEDs);
@@ -76,8 +74,8 @@ public LED(CoralArm coralarm, AlgaeArm algaearm) {
   public void rightStrand(Color ledColor, double dist) {
     LEDPattern right;
 
-//  right = LEDPattern.solid(ledColor);
-    right = LEDPattern.steps(Map.of((1.0-m_dist), ledColor));
+    // right = LEDPattern.solid(ledColor);
+    right = LEDPattern.steps(Map.of((1.0 - m_dist), ledColor));
 
     // Apply the LED pattern to the data buffer
     right.applyTo(rightLEDs);

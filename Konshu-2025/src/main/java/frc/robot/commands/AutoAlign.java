@@ -1,4 +1,5 @@
 package frc.robot.commands;
+
 import java.util.function.DoubleSupplier;
 import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.math.geometry.Pose2d;
@@ -21,11 +22,14 @@ import com.ctre.phoenix6.swerve.SwerveModule.DriveRequestType;
 import frc.robot.subsystems.LED;
 
 /**
- * PIDRotateToTrajectory rotates the robot to face a target (selected via joystick button polling)
+ * PIDRotateToTrajectory rotates the robot to face a target (selected via
+ * joystick button polling)
  * while allowing the driver to control translation (x and y) via the joysticks.
  * 
- * The alignment mode is provided as (LEFT, RIGHT, or ALGAE). Based on this mode,
- * the button polling code selects either a target Translation2d or a preset Rotation2d from the
+ * The alignment mode is provided as (LEFT, RIGHT, or ALGAE). Based on this
+ * mode,
+ * the button polling code selects either a target Translation2d or a preset
+ * Rotation2d from the
  * AutoAlignConstants for the current alliance.
  */
 public class AutoAlign extends Command {
@@ -43,8 +47,7 @@ public class AutoAlign extends Command {
     private Pose2d m_pose = new Pose2d();
 
     // PID controller for rotation. Tune gains and constraints as needed.
-    private final PIDController rotPID = new PIDController(
-            15.0, 0.0, 0.5    );
+    private final PIDController rotPID = new PIDController(15.0, 0.0, 0.5);
 
     // Base CTRE FieldCentric swerve request (using velocity control)
     private final SwerveRequest.FieldCentric baseRequest = new SwerveRequest.FieldCentric()
@@ -53,21 +56,21 @@ public class AutoAlign extends Command {
             .withDriveRequestType(DriveRequestType.Velocity);
 
     public AutoAlign(CommandSwerveDrivetrain drivetrain,
-                                 DoubleSupplier forwardBack,
-                                 DoubleSupplier leftRight,
-                                 DoubleSupplier rotation,
-                                  SSM ssm, LED led) {
+            DoubleSupplier forwardBack,
+            DoubleSupplier leftRight,
+            DoubleSupplier rotation,
+            SSM ssm, LED led) {
         this.m_drivetrain = drivetrain;
         this.m_forwardBackSupplier = forwardBack;
         this.m_leftRightSupplier = leftRight;
-        this.m_rotationSupplier = rotation;   
+        this.m_rotationSupplier = rotation;
         this.m_SSM = ssm;
         this.m_LED = led;
-        
+
         // Enable continuous input for proper angle wrapping (from -π to π)
         rotPID.enableContinuousInput(-Math.PI, Math.PI);
         rotPID.setTolerance(0.05);
-        
+
         addRequirements(drivetrain, ssm);
     }
 
@@ -81,8 +84,8 @@ public class AutoAlign extends Command {
 
         armOffset = 0.0;
         elevatorOffset = 0.0;
-        dist = 0.0;     // Default value for LED logic
-        m_state = SSM.States.LOADINGSTATION;    // Default to here if trigger with no button pressed
+        dist = 0.0; // Default value for LED logic
+        m_state = SSM.States.LOADINGSTATION; // Default to here if trigger with no button pressed
         m_goForPID = true;
         if (DriverStation.getStickButton(1, ButtonConstants.kL1Left)) {
             m_state = SSM.States.L1;
@@ -132,27 +135,32 @@ public class AutoAlign extends Command {
             m_state = SSM.States.PROCESSOR;
             m_goForPID = false;
             Robot.buttonLog.append("Processor");
-        } else m_goForPID = false;            // No level button pressed - do nothing
+        } else
+            m_goForPID = false; // No level button pressed - do nothing
 
         if (m_goForPID) m_pose = ReefTargetCalculator.calculateTargetTranslation(m_alignMode);
-        if (m_pose == null) m_goForPID = false;  // No reef button pressed – optionally mark the command as finished
+        if (m_pose == null) m_goForPID = false; // No reef button pressed – optionally mark the command as finished
         SmartDashboard.putBoolean("goForPID", m_goForPID);
+
         if (m_goForPID) {
             Pose2d currentPose = m_drivetrain.getState().Pose;
             double currentAngle = currentPose.getRotation().getRadians();
             SmartDashboard.putNumber("CurrentAngle", currentAngle);
 
             double targetAngle;
-            // For ALGAE mode, use the preset rotation; otherwise, compute the angle from the target translation.
-            if (m_alignMode == AlignMode.ALGAE) {     // m_pose only has rotation populated
+            // For ALGAE mode, use the preset rotation; otherwise, compute the angle from
+            // the target translation.
+            if (m_alignMode == AlignMode.ALGAE) { // m_pose only has rotation populated
                 targetAngle = m_pose.getRotation().getRadians();
-                if (isAlgaeHigh(m_pose)) m_state = SSM.States.ALGAEHIGH;
-                else m_state = SSM.States.ALGAELOW;
+                if (isAlgaeHigh(m_pose))
+                    m_state = SSM.States.ALGAEHIGH;
+                else
+                    m_state = SSM.States.ALGAELOW;
             } else {
-              Translation2d robotToGoal = m_pose.getTranslation().minus(currentPose.getTranslation());
-              double [] target_array ={m_pose.getTranslation().getX(), m_pose.getTranslation().getY()};
-              SmartDashboard.putNumberArray("Target",target_array);
-              targetAngle = robotToGoal.getAngle().getRadians();
+                Translation2d robotToGoal = m_pose.getTranslation().minus(currentPose.getTranslation());
+                double[] target_array = { m_pose.getTranslation().getX(), m_pose.getTranslation().getY() };
+                SmartDashboard.putNumberArray("Target", target_array);
+                targetAngle = robotToGoal.getAngle().getRadians();
             }
 
             SmartDashboard.putString("Align Mode", m_alignMode.toString());
@@ -165,49 +173,56 @@ public class AutoAlign extends Command {
 
             if (m_alignMode != AlignMode.ALGAE) {
                 // Adjust elevator based on distance (and evantually delta angle) from post
-                dist = m_pose.getTranslation().getDistance(currentPose.getTranslation());   // Distance to post from robot
-                Rotation2d theta = m_pose.getRotation().minus(currentPose.getRotation());    // Angle from coral wall normal
+                dist = m_pose.getTranslation().getDistance(currentPose.getTranslation()); // Distance to post from robot
+                Rotation2d theta = m_pose.getRotation().minus(currentPose.getRotation()); // Angle from coral wall
+                                                                                          // normal
                 SmartDashboard.putNumber("Distance to target", dist);
-                SmartDashboard.putNumber("Angle to Post (deg)", theta.getRadians()*360.0/Math.PI);
+                SmartDashboard.putNumber("Angle to Post (deg)", theta.getRadians() * 360.0 / Math.PI);
                 switch (m_state) {
                     case L1:
                         elevatorOffset = AutoAlignConstants.ElevatorAutoAlignL1.get(dist);
                         armOffset = AutoAlignConstants.ArmAutoAlignL1.get(dist);
-                    break;
+                        break;
                     case L2:
                         elevatorOffset = AutoAlignConstants.ElevatorAutoAlignL2.get(dist);
                         armOffset = AutoAlignConstants.ArmAutoAlignL2.get(dist);
-                    break;
+                        break;
                     case L3:
                         elevatorOffset = AutoAlignConstants.ElevatorAutoAlignL3.get(dist);
                         armOffset = AutoAlignConstants.ArmAutoAlignL3.get(dist);
-                    break;
+                        break;
                     case L4:
                         elevatorOffset = AutoAlignConstants.ElevatorAutoAlignL4.get(dist);
                         armOffset = AutoAlignConstants.ArmAutoAlignL4.get(dist);
-                    break;
+                        break;
                     default:
                         elevatorOffset = 0.0;
                         armOffset = 0.0;
-                    break;
+                        break;
                 }
             }
         } else {
             double rotCurveAdjustment = DriveCommands.adjustRotCurve(m_rotationSupplier.getAsDouble(), 0.7, 0.3);
-            rotationOutput =  DriveCommands.m_slewRot.calculate(-m_rotationSupplier.getAsDouble() * DriveConstants.MAX_ANGULAR_RATE*rotCurveAdjustment); 
+            rotationOutput = DriveCommands.m_slewRot.calculate(
+                    -m_rotationSupplier.getAsDouble() * DriveConstants.MAX_ANGULAR_RATE * rotCurveAdjustment);
         }
 
         // Set the state
         m_SSM.setState(m_state, armOffset, elevatorOffset);
 
         // Set the distance for LEDs
-        if (dist > 0.0) m_LED.setDist(mapwithlimit(dist, 0.525, 0.882, 0.0, 1.0));
-        else m_LED.setDist(1.0);
+        if (dist > 0.0)
+            m_LED.setDist(mapwithlimit(dist, 0.525, 0.882, 0.0, 1.0));
+        else
+            m_LED.setDist(1.0);
 
         // Compute translation speeds from joystick inputs with a custom curve.\
-        double transAdjustment = adjustInputCurve(m_forwardBackSupplier.getAsDouble(), m_leftRightSupplier.getAsDouble(), 0.7, 0.3);
-        double velocityX = DriveCommands.m_slewX.calculate(-m_forwardBackSupplier.getAsDouble() * DriveConstants.MAX_SPEED *.7* transAdjustment);
-        double velocityY = DriveCommands.m_slewY.calculate(-m_leftRightSupplier.getAsDouble() * DriveConstants.MAX_SPEED * .7*transAdjustment);
+        double transAdjustment = adjustInputCurve(m_forwardBackSupplier.getAsDouble(),
+                m_leftRightSupplier.getAsDouble(), 0.7, 0.3);
+        double velocityX = DriveCommands.m_slewX
+                .calculate(-m_forwardBackSupplier.getAsDouble() * DriveConstants.MAX_SPEED * .7 * transAdjustment);
+        double velocityY = DriveCommands.m_slewY
+                .calculate(-m_leftRightSupplier.getAsDouble() * DriveConstants.MAX_SPEED * .7 * transAdjustment);
 
         // Build and apply the CTRE swerve request.
         SwerveRequest request = baseRequest
@@ -227,8 +242,7 @@ public class AutoAlign extends Command {
         d = Math.max(d, out_min);
         d = Math.min(d, out_max);
         return d;
-      }
-
+    }
 
     // Helper method to adjust the joystick input curve.
     private double adjustInputCurve(double x, double y, double a, double b) {
@@ -241,15 +255,15 @@ public class AutoAlign extends Command {
         }
         return a * Math.pow(magnitude, 3) + b * magnitude;
     }
-    private boolean isAlgaeHigh(Pose2d pos){
-        if((pos.getRotation() == AutoAlignConstants.BlueAllianceConstants.kAAlgea)||
-           (pos.getRotation() == AutoAlignConstants.BlueAllianceConstants.kCAlgea)||
-           (pos.getRotation() == AutoAlignConstants.BlueAllianceConstants.kEAlgea)||
-           (pos.getRotation() == AutoAlignConstants.RedAllianceConstants.kAAlgea)||
-           (pos.getRotation() == AutoAlignConstants.RedAllianceConstants.kCAlgea)||
-           (pos.getRotation() == AutoAlignConstants.RedAllianceConstants.kEAlgea)
-           
-           ) return true;
+
+    private boolean isAlgaeHigh(Pose2d pos) {
+        if ((pos.getRotation() == AutoAlignConstants.BlueAllianceConstants.kAAlgea) ||
+                (pos.getRotation() == AutoAlignConstants.BlueAllianceConstants.kCAlgea) ||
+                (pos.getRotation() == AutoAlignConstants.BlueAllianceConstants.kEAlgea) ||
+                (pos.getRotation() == AutoAlignConstants.RedAllianceConstants.kAAlgea) ||
+                (pos.getRotation() == AutoAlignConstants.RedAllianceConstants.kCAlgea) ||
+                (pos.getRotation() == AutoAlignConstants.RedAllianceConstants.kEAlgea))
+            return true;
         return false;
     }
 }

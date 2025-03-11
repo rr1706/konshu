@@ -67,10 +67,10 @@ public class SSM extends SubsystemBase {
         // Adjust the slew rate based on the setpoint
         switch (m_setpoint) {
             case L3:
-            if (m_slewMode != 1) {
-                DriveCommands.updateSlew(5, 5, 30.0);
-                m_slewMode = 1;
-            }
+                if (m_slewMode != 1) {
+                    DriveCommands.updateSlew(5, 5, 30.0);
+                    m_slewMode = 1;
+                }
             break;
             case L4:
             case BARGE:
@@ -116,17 +116,14 @@ public class SSM extends SubsystemBase {
         } else {
             m_arm.setPosition(m_armSetpoint); // Going down, always start arm to setpoint
             if ((m_elevatorSetpoint < ElevatorConstants.kElevatorHighDanger) && (m_arm.getPosition() < ArmConstants.kArmHighDanger)) {
-                m_elevator.setPosition(ElevatorConstants.kElevatorHighDanger); // Pause elevator at high danger before
-                                                                               // moving farther down
+                m_elevator.setPosition(ElevatorConstants.kElevatorHighDanger); // Pause elevator at high danger before moving farther down
                 m_elevatorPauseHigh = true;
             } else if ((m_elevatorSetpoint < ElevatorConstants.kElevatorLowDanger)
                     && (m_arm.getPosition() > ArmConstants.kArmLowDanger)) {
-                m_elevator.setPosition(ElevatorConstants.kElevatorLowDanger); // Pause elevator at low danger before
-                                                                              // moving farther down
+                m_elevator.setPosition(ElevatorConstants.kElevatorLowDanger); // Pause elevator at low danger before moving farther down
                 m_elevatorPauseLow = true;
-            } else {
+            } else
                 m_elevator.setPosition(m_elevatorSetpoint); // No constraints, move elevator to final setpoint
-            }
         }
     }
 
@@ -138,8 +135,8 @@ public class SSM extends SubsystemBase {
             return;
         }
 
-//        if (m_setpoint != m_queuedSetpoint)       // Now always reinit because added offsets
-            newState(m_queuedSetpoint); // Check for new state commanded
+//        if (m_setpoint != m_queuedSetpoint)      // Now always reinit because added offsets
+        newState(m_queuedSetpoint);                // Check for new state commanded
         if (m_setpoint == States.DISABLED)
             return;
 
