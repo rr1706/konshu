@@ -48,21 +48,71 @@ public final class AutoAlignConstants {
         public static final Rotation2d kEAlgea = new Rotation2d((5*Math.PI)/3);
     }
 
-      public static InterpolatingDoubleTreeMap ElevatorAutoAlign = new InterpolatingDoubleTreeMap();
+      public static InterpolatingDoubleTreeMap ElevatorAutoAlignL1 = new InterpolatingDoubleTreeMap();
+      public static InterpolatingDoubleTreeMap ElevatorAutoAlignL2 = new InterpolatingDoubleTreeMap();
+      public static InterpolatingDoubleTreeMap ElevatorAutoAlignL3 = new InterpolatingDoubleTreeMap();
+      public static InterpolatingDoubleTreeMap ElevatorAutoAlignL4 = new InterpolatingDoubleTreeMap();
+
+
+
 //interpolation lookup table to vary elevator height with target distance
 
-        public static void SetUpAutoAlignConstants(){
-            ElevatorAutoAlign.put(0.0,40.0);
-            ElevatorAutoAlign.put(2.0,20.0);
-            ElevatorAutoAlign.put(4.0,2.0);
-            ElevatorAutoAlign.put(6.0,40.0);
-            ElevatorAutoAlign.put(8.0,20.0);
-            ElevatorAutoAlign.put(10.0,2.0);
-            ElevatorAutoAlign.put(12.0,40.0);
-            ElevatorAutoAlign.put(14.0,20.0);
-            ElevatorAutoAlign.put(16.0,2.0);
-            ElevatorAutoAlign.put(18.0,40.0);
-            ElevatorAutoAlign.put(20.0,20.0);
+        public static void SetUpAutoAlignConstantsL1(){
+            ElevatorAutoAlignL1.put(0.0,0.0);
+            ElevatorAutoAlignL1.put(2.0,0.0);
+            ElevatorAutoAlignL1.put(4.0,0.0);
+            ElevatorAutoAlignL1.put(6.0,0.0);
+            ElevatorAutoAlignL1.put(8.0,0.0);
+            ElevatorAutoAlignL1.put(10.0,0.0);
+            ElevatorAutoAlignL1.put(12.0,0.0);
+            ElevatorAutoAlignL1.put(14.0,0.0);
+            ElevatorAutoAlignL1.put(16.0,0.0);
+            ElevatorAutoAlignL1.put(18.0,0.0);
+            ElevatorAutoAlignL1.put(20.0,0.0);
         }
 
+        public static void SetUpAutoAlignConstantsL2(){
+            ElevatorAutoAlignL2.put(0.0,0.0);
+            ElevatorAutoAlignL2.put(2.0,0.0);
+            ElevatorAutoAlignL2.put(4.0,0.0);
+            ElevatorAutoAlignL2.put(6.0,0.0);
+            ElevatorAutoAlignL2.put(8.0,0.0);
+            ElevatorAutoAlignL2.put(10.0,0.0);
+            ElevatorAutoAlignL2.put(12.0,0.0);
+            ElevatorAutoAlignL2.put(14.0,0.0);
+            ElevatorAutoAlignL2.put(16.0,0.0);
+            ElevatorAutoAlignL2.put(18.0,0.0);
+            ElevatorAutoAlignL2.put(20.0,0.0);
+
+            
+
+        }
+        public static void SetUpAutoAlignConstantsL3(){
+            ElevatorAutoAlignL3.put(0.0,0.0);
+            ElevatorAutoAlignL3.put(2.0,0.0);
+            ElevatorAutoAlignL3.put(4.0,0.0);
+            ElevatorAutoAlignL3.put(6.0,0.0);
+            ElevatorAutoAlignL3.put(8.0,0.0);
+            ElevatorAutoAlignL3.put(10.0,0.0);
+            ElevatorAutoAlignL3.put(12.0,0.0);
+            ElevatorAutoAlignL3.put(14.0,0.0);
+            ElevatorAutoAlignL3.put(16.0,0.0);
+            ElevatorAutoAlignL3.put(18.0,0.0);
+            ElevatorAutoAlignL3.put(20.0,0.0);
+
+
+}
+public static void SetUpAutoAlignConstantsL4(){
+    ElevatorAutoAlignL4.put(0.0,0.0);
+    ElevatorAutoAlignL4.put(2.0,0.0);
+    ElevatorAutoAlignL4.put(4.0,0.0);
+    ElevatorAutoAlignL4.put(6.0,0.0);
+    ElevatorAutoAlignL4.put(8.0,0.0);
+    ElevatorAutoAlignL4.put(10.0,0.0);
+    ElevatorAutoAlignL4.put(12.0,0.0);
+    ElevatorAutoAlignL4.put(14.0,0.0);
+    ElevatorAutoAlignL4.put(16.0,0.0);
+    ElevatorAutoAlignL4.put(18.0,0.0);
+    ElevatorAutoAlignL4.put(20.0,0.0);
+}
 }
