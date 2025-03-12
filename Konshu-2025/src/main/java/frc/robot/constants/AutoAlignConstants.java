@@ -41,12 +41,12 @@ public final class AutoAlignConstants {
         public static final Translation2d kER = new Translation2d(5.022, 3.432);
         public static final Translation2d kDL = new Translation2d(5.269, 3.862);
         public static final Translation2d kDR = new Translation2d(5.27, 4.19);
-        public static final Rotation2d kDAlgea = new Rotation2d(0);
-        public static final Rotation2d kCAlgea = new Rotation2d(Math.PI / 3);
-        public static final Rotation2d kBAlgea = new Rotation2d((2 * Math.PI) / 3);
-        public static final Rotation2d kAAlgea = new Rotation2d(Math.PI);
-        public static final Rotation2d kFAlgea = new Rotation2d((4 * Math.PI) / 3);
-        public static final Rotation2d kEAlgea = new Rotation2d((5 * Math.PI) / 3);
+        public static final Rotation2d kDAlgea = new Rotation2d(0+Math.PI);
+        public static final Rotation2d kCAlgea = new Rotation2d(Math.PI / 3+Math.PI);
+        public static final Rotation2d kBAlgea = new Rotation2d((2 * Math.PI) / 3+Math.PI);
+        public static final Rotation2d kAAlgea = new Rotation2d(Math.PI+Math.PI);
+        public static final Rotation2d kFAlgea = new Rotation2d((4 * Math.PI) / 3+Math.PI);
+        public static final Rotation2d kEAlgea = new Rotation2d((5 * Math.PI) / 3+Math.PI);
     }
 
     public static InterpolatingDoubleTreeMap ElevatorAutoAlignL1 = new InterpolatingDoubleTreeMap();

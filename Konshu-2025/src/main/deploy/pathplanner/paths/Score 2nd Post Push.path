@@ -1,0 +1,54 @@
+{
+  "version": "2025.0",
+  "waypoints": [
+    {
+      "anchor": {
+        "x": 1.1759290540540541,
+        "y": 6.95
+      },
+      "prevControl": null,
+      "nextControl": {
+        "x": 1.286438823350389,
+        "y": 7.17424894847038
+      },
+      "isLocked": false,
+      "linkedName": "Loading Push Cage Side"
+    },
+    {
+      "anchor": {
+        "x": 3.942820945945946,
+        "y": 5.270101351351351
+      },
+      "prevControl": {
+        "x": 3.1601977550158544,
+        "y": 5.607205473530214
+      },
+      "nextControl": null,
+      "isLocked": false,
+      "linkedName": null
+    }
+  ],
+  "rotationTargets": [],
+  "constraintZones": [],
+  "pointTowardsZones": [],
+  "eventMarkers": [],
+  "globalConstraints": {
+    "maxVelocity": 4.73,
+    "maxAcceleration": 3.0,
+    "maxAngularVelocity": 540.0,
+    "maxAngularAcceleration": 720.0,
+    "nominalVoltage": 12.0,
+    "unlimited": false
+  },
+  "goalEndState": {
+    "velocity": 0,
+    "rotation": -59.99999999999999
+  },
+  "reversed": false,
+  "folder": "Push Auto",
+  "idealStartingState": {
+    "velocity": 0,
+    "rotation": -55.840305454330576
+  },
+  "useDefaultConstraints": true
+}
