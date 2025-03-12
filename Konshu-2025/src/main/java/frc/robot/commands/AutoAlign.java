@@ -238,13 +238,7 @@ public class AutoAlign extends Command {
     @Override
     public void end(boolean interrupted) {
         m_SSM.setState(States.LOADINGSTATION);
-    }
-
-    private double mapwithlimit(double x, double in_min, double in_max, double out_min, double out_max) {
-        double d = (x - in_min) * (out_max - out_min) / (in_max - in_min) + out_min;
-        d = Math.max(d, out_min);
-        d = Math.min(d, out_max);
-        return d;
+        m_LED.setLEDScore(false);
     }
 
     // Helper method to adjust the joystick input curve.
