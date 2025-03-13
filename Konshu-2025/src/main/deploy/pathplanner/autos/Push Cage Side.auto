@@ -13,6 +13,12 @@
         {
           "type": "path",
           "data": {
+            "pathName": "Push Path 2"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
             "pathName": "Post Push L4 Path"
           }
         },
@@ -68,6 +74,25 @@
                       }
                     }
                   ]
+                }
+              }
+            ]
+          }
+        },
+        {
+          "type": "race",
+          "data": {
+            "commands": [
+              {
+                "type": "named",
+                "data": {
+                  "name": "ScoreL4"
+                }
+              },
+              {
+                "type": "named",
+                "data": {
+                  "name": "AlignBLL4"
                 }
               }
             ]
