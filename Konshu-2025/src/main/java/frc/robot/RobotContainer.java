@@ -105,11 +105,6 @@ public class RobotContainer {
                     ex.getStackTrace());
         }
     }
-
-    private double getCoralSpeed() {
-        if (m_SSM.getState() == SSM.States.L1) return (-0.25);
-        return (-0.35);
-    }
     
     private void configureBindings() {
         driverController.start().onTrue(DriveCommands.resetFieldOrientation(m_drivetrain));
@@ -133,20 +128,23 @@ public class RobotContainer {
         //                 }), () -> {
         //                     return m_SSM.getState() == (SSM.States.BARGE);
         //                 }))
+                
         //         .onFalse(
         //                 new InstantCommand(() -> m_funnel.runCoralIn(-.4)).alongWith(new IntakeFromFunnel(m_coralArm)));
 
-
-
         driverController.rightTrigger()
                 .onTrue(new ConditionalCommand(new WaitCommand(0.030).andThen(m_algaeArm.spitAlgae()),
-                        new ConditionalCommand(m_algaeArm.slowSpitAlgae(), m_coralArm.runCoralCmd(getCoralSpeed()), () -> {
+                        new ConditionalCommand(m_algaeArm.slowSpitAlgae(), 
+                        new ConditionalCommand(m_coralArm.runCoralCmd(-0.20), m_coralArm.runCoralCmd(-0.35), () -> {
+                            return m_SSM.getState() == (SSM.States.L1);
+                        }), () -> {
                             return m_SSM.getState() == (SSM.States.PROCESSOR);
                         }), () -> {
                             return m_SSM.getState() == (SSM.States.BARGE);
-                        }))
+                        }))  
                 .onFalse(
                         new InstantCommand(() -> m_funnel.runCoralIn(-.4)).alongWith(new IntakeFromFunnel(m_coralArm)));
+               
 
         driverController.a().onTrue(m_algaeArm.grabAlgae(0.8));
         operatorcontoller1.button(9).onTrue(m_algaeArm.grabAlgae(0.8));
