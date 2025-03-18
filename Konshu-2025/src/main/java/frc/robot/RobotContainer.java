@@ -39,15 +39,16 @@ public class RobotContainer {
     private final CommandGenericHID operatorcontoller1 = new CommandGenericHID(1);
     private final CommandGenericHID operatorcontoller2 = new CommandGenericHID(2);
 
-    private final Elevator m_elevator = new Elevator();
+    public final CoralArm m_coralArm = new CoralArm();
+    public final AlgaeArm m_algaeArm = new AlgaeArm();
+    private final Elevator m_elevator = new Elevator(m_coralArm::haveCoral, m_algaeArm::haveAlgae);
     private final Arm m_arm = new Arm();
     private final Funnel m_funnel = new Funnel();
-    public final CoralArm m_coralArm = new CoralArm();
-
+  
     private final SSM m_SSM = new SSM(m_arm, m_elevator, m_coralArm::haveCoral);
     public final CommandSwerveDrivetrain m_drivetrain;
     public final Climber m_climber = new Climber();
-    public final AlgaeArm m_algaeArm = new AlgaeArm();
+
 
     private final LED m_LED = new LED(m_coralArm, m_algaeArm);
 
@@ -105,6 +106,11 @@ public class RobotContainer {
         }
     }
 
+    private double getCoralSpeed() {
+        if (m_SSM.getState() == SSM.States.L1) return (-0.25);
+        return (-0.35);
+    }
+    
     private void configureBindings() {
         driverController.start().onTrue(DriveCommands.resetFieldOrientation(m_drivetrain));
 
@@ -120,9 +126,21 @@ public class RobotContainer {
         driverController.b().onTrue(new InstantCommand(() -> m_climber.Climb()))
                 .onFalse(new InstantCommand(() -> m_climber.stop()));
 
+        // driverController.rightTrigger()
+        //         .onTrue(new ConditionalCommand(new WaitCommand(0.030).andThen(m_algaeArm.spitAlgae()),
+        //                 new ConditionalCommand(m_algaeArm.slowSpitAlgae(), m_coralArm.runCoralCmd(-0.35), () -> {
+        //                     return m_SSM.getState() == (SSM.States.PROCESSOR);
+        //                 }), () -> {
+        //                     return m_SSM.getState() == (SSM.States.BARGE);
+        //                 }))
+        //         .onFalse(
+        //                 new InstantCommand(() -> m_funnel.runCoralIn(-.4)).alongWith(new IntakeFromFunnel(m_coralArm)));
+
+
+
         driverController.rightTrigger()
                 .onTrue(new ConditionalCommand(new WaitCommand(0.030).andThen(m_algaeArm.spitAlgae()),
-                        new ConditionalCommand(m_algaeArm.slowSpitAlgae(), m_coralArm.runCoralCmd(-0.35), () -> {
+                        new ConditionalCommand(m_algaeArm.slowSpitAlgae(), m_coralArm.runCoralCmd(getCoralSpeed()), () -> {
                             return m_SSM.getState() == (SSM.States.PROCESSOR);
                         }), () -> {
                             return m_SSM.getState() == (SSM.States.BARGE);
