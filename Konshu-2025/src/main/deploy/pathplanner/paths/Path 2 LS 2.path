@@ -8,20 +8,20 @@
       },
       "prevControl": null,
       "nextControl": {
-        "x": 4.244694870689462,
-        "y": 5.006282116814946
+        "x": 3.534237655711293,
+        "y": 5.7029024882776325
       },
       "isLocked": false,
       "linkedName": "2A End"
     },
     {
       "anchor": {
-        "x": 1.7293074324324322,
-        "y": 7.355152027027026
+        "x": 1.7741803278688524,
+        "y": 7.315624999999999
       },
       "prevControl": {
-        "x": 1.3871376551223842,
-        "y": 7.684215981977181
+        "x": 1.9514046309048907,
+        "y": 7.139297048689407
       },
       "nextControl": null,
       "isLocked": false,
@@ -45,22 +45,10 @@
     }
   ],
   "pointTowardsZones": [],
-  "eventMarkers": [
-    {
-      "name": "LS2",
-      "waypointRelativePos": 0,
-      "endWaypointRelativePos": null,
-      "command": {
-        "type": "named",
-        "data": {
-          "name": "GoLoadingStationPOS"
-        }
-      }
-    }
-  ],
+  "eventMarkers": [],
   "globalConstraints": {
     "maxVelocity": 4.73,
-    "maxAcceleration": 3.5,
+    "maxAcceleration": 4.0,
     "maxAngularVelocity": 540.0,
     "maxAngularAcceleration": 720.0,
     "nominalVoltage": 12.0,

@@ -211,6 +211,10 @@ public class AutoAlign extends Command {
         }
 
         // Set the state
+
+        if (m_state == SSM.States.BARGE && DriverStation.getStickAxis(0, 3)>= 0.25) {
+            armOffset = -30.0;
+        }
         m_SSM.setState(m_state, armOffset, elevatorOffset);
 
         // Set the distance for LEDs

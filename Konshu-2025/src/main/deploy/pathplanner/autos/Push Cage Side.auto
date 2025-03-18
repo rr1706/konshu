@@ -5,6 +5,12 @@
     "data": {
       "commands": [
         {
+          "type": "named",
+          "data": {
+            "name": "MoveClimberOut"
+          }
+        },
+        {
           "type": "path",
           "data": {
             "pathName": "Push Path"
@@ -29,7 +35,7 @@
               {
                 "type": "named",
                 "data": {
-                  "name": "ScoreL4"
+                  "name": "ScoreL4Fast"
                 }
               },
               {

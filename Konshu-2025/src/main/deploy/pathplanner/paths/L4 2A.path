@@ -3,13 +3,13 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 1.7293074324324322,
-        "y": 7.355152027027026
+        "x": 1.7741803278688524,
+        "y": 7.315624999999999
       },
       "prevControl": null,
       "nextControl": {
-        "x": 2.1903784882216497,
-        "y": 6.89627561737128
+        "x": 2.0752106164043083,
+        "y": 7.010983177643269
       },
       "isLocked": false,
       "linkedName": "Path 2 LS 1"
@@ -20,8 +20,8 @@
         "y": 5.2963778409090905
       },
       "prevControl": {
-        "x": 3.642325706388206,
-        "y": 5.938692030098281
+        "x": 3.78452572030153,
+        "y": 5.4931165203832775
       },
       "nextControl": null,
       "isLocked": false,
@@ -48,7 +48,7 @@
   "eventMarkers": [
     {
       "name": "2A",
-      "waypointRelativePos": 0.8106312292358839,
+      "waypointRelativePos": 0.549382716049383,
       "endWaypointRelativePos": null,
       "command": {
         "type": "named",

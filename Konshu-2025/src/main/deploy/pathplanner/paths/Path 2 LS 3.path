@@ -3,25 +3,25 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 3.6595738636363637,
-        "y": 5.166747159090908
+        "x": 3.6802254098360656,
+        "y": 5.133862704918033
       },
       "prevControl": null,
       "nextControl": {
-        "x": 4.018454666269504,
-        "y": 4.764943772642648
+        "x": 3.4182783020894503,
+        "y": 5.480852372028816
       },
       "isLocked": false,
       "linkedName": "L4 2B End"
     },
     {
       "anchor": {
-        "x": 1.7293074324324322,
-        "y": 7.355152027027026
+        "x": 1.7741803278688524,
+        "y": 7.315624999999999
       },
       "prevControl": {
-        "x": 1.5507083608541483,
-        "y": 7.546174252573312
+        "x": 1.9213633472142417,
+        "y": 7.113542940389615
       },
       "nextControl": null,
       "isLocked": false,
@@ -45,22 +45,10 @@
     }
   ],
   "pointTowardsZones": [],
-  "eventMarkers": [
-    {
-      "name": "LS3",
-      "waypointRelativePos": 0,
-      "endWaypointRelativePos": null,
-      "command": {
-        "type": "named",
-        "data": {
-          "name": "GoLoadingStationPOS"
-        }
-      }
-    }
-  ],
+  "eventMarkers": [],
   "globalConstraints": {
     "maxVelocity": 4.73,
-    "maxAcceleration": 3.5,
+    "maxAcceleration": 4.0,
     "maxAngularVelocity": 540.0,
     "maxAngularAcceleration": 720.0,
     "nominalVoltage": 12.0,

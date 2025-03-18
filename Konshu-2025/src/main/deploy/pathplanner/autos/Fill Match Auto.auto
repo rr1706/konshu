@@ -5,6 +5,12 @@
     "data": {
       "commands": [
         {
+          "type": "named",
+          "data": {
+            "name": "MoveClimberOut"
+          }
+        },
+        {
           "type": "path",
           "data": {
             "pathName": "Fill match"

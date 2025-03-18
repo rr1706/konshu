@@ -4,12 +4,12 @@
     {
       "anchor": {
         "x": 7.797784090909091,
-        "y": 3.3220028409090907
+        "y": 3.022
       },
       "prevControl": null,
       "nextControl": {
-        "x": 6.267857142857142,
-        "y": 1.7457792207792204
+        "x": 6.209631147540984,
+        "y": 1.9451331967213104
       },
       "isLocked": false,
       "linkedName": "Starting Upper Path"
@@ -48,7 +48,7 @@
   "eventMarkers": [
     {
       "name": "score_point",
-      "waypointRelativePos": 0.25,
+      "waypointRelativePos": 0.19800569800569962,
       "endWaypointRelativePos": null,
       "command": {
         "type": "named",
@@ -74,7 +74,7 @@
   "folder": null,
   "idealStartingState": {
     "velocity": 0,
-    "rotation": -179.3634064240365
+    "rotation": 180.0
   },
   "useDefaultConstraints": false
 }
