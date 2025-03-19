@@ -163,7 +163,14 @@ public class AutoAlign extends Command {
                 Translation2d robotToGoal = m_pose.getTranslation().minus(currentPose.getTranslation());
                 double[] target_array = { m_pose.getTranslation().getX(), m_pose.getTranslation().getY() };
                 SmartDashboard.putNumberArray("Target", target_array);
-                targetAngle = robotToGoal.getAngle().getRadians();
+
+                if (m_state == SSM.States.L1) {
+                    if (m_alignMode == ReefTargetCalculator.AlignMode.LEFT) {
+                      targetAngle = m_pose.getRotation().minus(new Rotation2d(2.86)).getRadians();
+                    } else {
+                      targetAngle = m_pose.getRotation().minus(new Rotation2d(2.86).plus(new Rotation2d(Math.PI))).getRadians();
+                    }
+                } else targetAngle = robotToGoal.getAngle().getRadians();
             }
 
             SmartDashboard.putString("Align Mode", m_alignMode.toString());
