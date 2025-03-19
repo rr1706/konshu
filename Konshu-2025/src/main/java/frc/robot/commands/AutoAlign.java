@@ -166,9 +166,9 @@ public class AutoAlign extends Command {
 
                 if (m_state == SSM.States.L1) {
                     if (m_alignMode == ReefTargetCalculator.AlignMode.LEFT) {
-                      targetAngle = m_pose.getRotation().minus(new Rotation2d(2.86)).getRadians();
+                      targetAngle = m_pose.getRotation().minus(new Rotation2d(1.22)).getRadians();
                     } else {
-                      targetAngle = m_pose.getRotation().minus(new Rotation2d(2.86).plus(new Rotation2d(Math.PI))).getRadians();
+                      targetAngle = m_pose.getRotation().minus(new Rotation2d(1.22).plus(new Rotation2d(Math.PI))).getRadians();
                     }
                 } else targetAngle = robotToGoal.getAngle().getRadians();
             }
