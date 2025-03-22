@@ -1,0 +1,81 @@
+{
+  "version": "2025.0",
+  "command": {
+    "type": "sequential",
+    "data": {
+      "commands": [
+        {
+          "type": "path",
+          "data": {
+            "pathName": "start algae pathh"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "GoL4"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "ScoreL4"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "grab algae"
+          }
+        },
+        {
+          "type": "sequential",
+          "data": {
+            "commands": [
+              {
+                "type": "named",
+                "data": {
+                  "name": "go level 1 aglae"
+                }
+              },
+              {
+                "type": "named",
+                "data": {
+                  "name": "get algae"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "barge shot"
+          }
+        },
+        {
+          "type": "sequential",
+          "data": {
+            "commands": [
+              {
+                "type": "named",
+                "data": {
+                  "name": "go barge"
+                }
+              },
+              {
+                "type": "named",
+                "data": {
+                  "name": "shoot barge"
+                }
+              }
+            ]
+          }
+        }
+      ]
+    }
+  },
+  "resetOdom": true,
+  "folder": null,
+  "choreoAuto": false
+}
