@@ -164,11 +164,12 @@ public class AutoAlign extends Command {
                 double[] target_array = { m_pose.getTranslation().getX(), m_pose.getTranslation().getY() };
                 SmartDashboard.putNumberArray("Target", target_array);
 
+                // If at L1, fix the rotation to the field at the selected coral angle plus/minus a fixed offset
                 if (m_state == SSM.States.L1) {
                     if (m_alignMode == ReefTargetCalculator.AlignMode.LEFT) {
-                      targetAngle = m_pose.getRotation().minus(new Rotation2d(1.22)).getRadians();
+                      targetAngle = m_pose.getRotation().plus(Rotation2d.fromDegrees(70.0)).getRadians();
                     } else {
-                      targetAngle = m_pose.getRotation().minus(new Rotation2d(1.22).plus(new Rotation2d(Math.PI))).getRadians();
+                      targetAngle = m_pose.getRotation().minus(Rotation2d.fromDegrees(70.0)).getRadians();
                     }
                 } else targetAngle = robotToGoal.getAngle().getRadians();
             }
