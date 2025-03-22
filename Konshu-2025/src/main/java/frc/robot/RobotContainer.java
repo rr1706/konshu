@@ -45,13 +45,12 @@ public class RobotContainer {
     private final Elevator m_elevator = new Elevator(m_coralArm::haveCoral, m_algaeArm::haveAlgae);
     private final Arm m_arm = new Arm();
     private final Funnel m_funnel = new Funnel();
-  
+
     private final SSM m_SSM = new SSM(m_arm, m_elevator, m_coralArm::haveCoral);
     public final CommandSwerveDrivetrain m_drivetrain;
     public final Climber m_climber = new Climber();
 
     public final AlgaeIntake m_AlgaeIntake = new AlgaeIntake();
-    
 
     private final LED m_LED = new LED(m_coralArm, m_algaeArm);
 
@@ -108,51 +107,56 @@ public class RobotContainer {
                     ex.getStackTrace());
         }
     }
-    
+
     private void configureBindings() {
         driverController.start().onTrue(DriveCommands.resetFieldOrientation(m_drivetrain));
 
-        // driverController.rightBumper().onTrue(new InstantCommand(() -> m_AlgaeIntake.setPosition(1))
-        //     .andThen(new InstantCommand(() -> m_AlgaeIntake.setRollers(0))));        
         driverController.leftBumper().whileTrue(m_algaeArm.grabAlgae(1.0)
-            .alongWith(new InstantCommand(() -> m_AlgaeIntake.setPosition(16.0))
-            .alongWith(new InstantCommand(() -> m_AlgaeIntake.setRollers(-0.6)))))
-            .onFalse(new InstantCommand(() -> m_AlgaeIntake.setPosition(1.0))
-            .andThen(new InstantCommand(() -> m_AlgaeIntake.setRollers(0.3))));
-            
+                .alongWith(new InstantCommand(() -> m_AlgaeIntake.setPosition(16.0))
+                        .alongWith(new InstantCommand(() -> m_AlgaeIntake.setRollers(-0.6))))
+                        .alongWith(new InstantCommand(() -> m_SSM.setState(States.PROCESSOR))))
+                .onFalse(new InstantCommand(() -> m_AlgaeIntake.setPosition(1.0))
+                        .andThen(new InstantCommand(() -> m_AlgaeIntake.setRollers(0.3))).andThen(new WaitCommand(0.5))
+                        .andThen(new InstantCommand(() -> m_AlgaeIntake.stop())));
+
         driverController.povUp().onTrue(new InstantCommand(() -> m_arm.jogging(false)));
         driverController.povDown().onTrue(new InstantCommand(() -> m_arm.jogging(true)));
 
         driverController.leftTrigger().onFalse(
                 new InstantCommand(() -> m_funnel.runCoralIn(-.5)).alongWith(new IntakeFromFunnel(m_coralArm)));
-        driverController.x().onTrue(new InstantCommand(() -> m_climber.prepClimb()));
+        driverController.x().onTrue(new InstantCommand(() -> m_climber.prepClimb()).alongWith(new InstantCommand(()->m_funnel.runCoralIn(0.0))));
         driverController.b().onTrue(new InstantCommand(() -> m_climber.Climb()))
                 .onFalse(new InstantCommand(() -> m_climber.stop()));
 
         // driverController.rightTrigger()
-        //         .onTrue(new ConditionalCommand(new WaitCommand(0.030).andThen(m_algaeArm.spitAlgae()),
-        //                 new ConditionalCommand(m_algaeArm.slowSpitAlgae(), m_coralArm.runCoralCmd(-0.35), () -> {
-        //                     return m_SSM.getState() == (SSM.States.PROCESSOR);
-        //                 }), () -> {
-        //                     return m_SSM.getState() == (SSM.States.BARGE);
-        //                 }))
-                
-        //         .onFalse(
-        //                 new InstantCommand(() -> m_funnel.runCoralIn(-.4)).alongWith(new IntakeFromFunnel(m_coralArm)));
+        // .onTrue(new ConditionalCommand(new
+        // WaitCommand(0.030).andThen(m_algaeArm.spitAlgae()),
+        // new ConditionalCommand(m_algaeArm.slowSpitAlgae(),
+        // m_coralArm.runCoralCmd(-0.35), () -> {
+        // return m_SSM.getState() == (SSM.States.PROCESSOR);
+        // }), () -> {
+        // return m_SSM.getState() == (SSM.States.BARGE);
+        // }))
+
+        // .onFalse(
+        // new InstantCommand(() -> m_funnel.runCoralIn(-.4)).alongWith(new
+        // IntakeFromFunnel(m_coralArm)));
 
         driverController.rightTrigger()
                 .onTrue(new ConditionalCommand(new WaitCommand(0.030).andThen(m_algaeArm.spitAlgae()),
-                        new ConditionalCommand(m_algaeArm.slowSpitAlgae(), 
-                        new ConditionalCommand(m_coralArm.runCoralCmd(-0.55), m_coralArm.runCoralCmd(-0.35), () -> {
-                            return m_SSM.getState() == (SSM.States.L1);
-                        }), () -> {
-                            return m_SSM.getState() == (SSM.States.PROCESSOR);
-                        }), () -> {
+                        new ConditionalCommand(m_algaeArm.slowSpitAlgae(),
+                                new ConditionalCommand(m_coralArm.runCoralCmd(-0.55), m_coralArm.runCoralCmd(-0.35),
+                                        () -> {
+                                            return m_SSM.getState() == (SSM.States.L1);
+                                        }),
+                                () -> {
+                                    return m_SSM.getState() == (SSM.States.PROCESSOR);
+                                }),
+                        () -> {
                             return m_SSM.getState() == (SSM.States.BARGE);
-                        }))  
+                        }))
                 .onFalse(
                         new InstantCommand(() -> m_funnel.runCoralIn(-.4)).alongWith(new IntakeFromFunnel(m_coralArm)));
-               
 
         driverController.a().onTrue(m_algaeArm.grabAlgae(0.8));
         operatorcontoller1.button(9).onTrue(m_algaeArm.grabAlgae(0.8));
@@ -163,7 +167,8 @@ public class RobotContainer {
                         new InstantCommand(() -> m_funnel.runCoralIn(-.4)).alongWith(new IntakeFromFunnel(m_coralArm)));
 
         operatorcontoller2.button(11).whileTrue(m_algaeArm.grabAlgae(.8)
-                .alongWith(new InstantCommand(() -> m_SSM.setState(States.PROCESSOR))));
+                .alongWith(new InstantCommand(() -> m_SSM.setState(States.PROCESSOR))))
+                .onFalse(new InstantCommand(() -> m_SSM.setState(States.LOADINGSTATION)));
         operatorcontoller2.button(12).whileTrue(m_algaeArm.spitAlgae());
         driverController.leftTrigger().whileTrue(new AutoAlign(
                 m_drivetrain,

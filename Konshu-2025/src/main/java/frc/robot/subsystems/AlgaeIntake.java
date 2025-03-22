@@ -77,7 +77,7 @@ public class AlgaeIntake extends SubsystemBase{
     }
     
     public void stop() {
-        m_algaeintakeFX.set(0);
+        m_algaeintakeSRX.set(0);
     }
 
     // @SuppressWarnings("rawtypes")

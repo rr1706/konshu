@@ -10,6 +10,7 @@ import com.ctre.phoenix6.hardware.TalonFX;
 import com.ctre.phoenix6.signals.InvertedValue;
 import com.ctre.phoenix6.signals.NeutralModeValue;
 import com.thethriftybot.ThriftyNova;
+import com.thethriftybot.ThriftyNova.CurrentType;
 import com.thethriftybot.ThriftyNova.MotorType;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
@@ -52,6 +53,8 @@ public Climber() {
                 .withKA(0);
         m_climberRightFx.getConfigurator().apply(m_Slot0Configs);
         m_NovaRight.setInversion(true);
+        m_NovaLeft.setMaxCurrent(CurrentType.STATOR, 40.0);
+        m_NovaRight.setMaxCurrent(CurrentType.STATOR, 40.0);
         m_climberRightFx.getConfigurator().apply(new MotorOutputConfigs().withInverted(InvertedValue.Clockwise_Positive));
         m_climberRightFx.setNeutralMode(NeutralModeValue.Brake);
 
@@ -83,7 +86,7 @@ public Climber() {
     }
 
     public void Climb() {
-        m_climberRightFx.setVoltage(-3.0);
+        m_climberRightFx.setVoltage(-8.0);
         m_NovaLeft.setPercent(0);
         m_NovaRight.setPercent(0);
     }
