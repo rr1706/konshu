@@ -294,6 +294,15 @@ public class RobotContainer {
                 return AutoAlignConstants.RedAllianceConstants.kDL;
             }
         }, SSM.States.L4, m_SSM));
+        NamedCommands.registerCommand("AlignERL4", new AlignInAuto(m_drivetrain, () -> {
+            DriverStation.Alliance alliance = DriverStation.getAlliance().orElse(DriverStation.Alliance.Blue);
+            if (alliance == DriverStation.Alliance.Blue) {
+                return AutoAlignConstants.BlueAllianceConstants.kER;
+            } else {
+                return AutoAlignConstants.RedAllianceConstants.kER;
+            }
+        }, SSM.States.L4, m_SSM));
+        
 
     }
 
