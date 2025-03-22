@@ -167,9 +167,9 @@ public class AutoAlign extends Command {
                 // If at L1, fix the rotation to the field at the selected coral angle plus/minus a fixed offset
                 if (m_state == SSM.States.L1) {
                     if (m_alignMode == ReefTargetCalculator.AlignMode.LEFT) {
-                      targetAngle = m_pose.getRotation().plus(Rotation2d.fromDegrees(70.0)).getRadians();
+                      targetAngle = m_pose.getRotation().minus(Rotation2d.fromDegrees(10.0)).getRadians();
                     } else {
-                      targetAngle = m_pose.getRotation().minus(Rotation2d.fromDegrees(70.0)).getRadians();
+                      targetAngle = m_pose.getRotation().plus(Rotation2d.fromDegrees(10.0)).getRadians();
                     }
                 } else targetAngle = robotToGoal.getAngle().getRadians();
             }
