@@ -9,9 +9,9 @@ public final class AutoAlignConstants {
     public static final class RedAllianceConstants {
         public static final Rotation2d BLUE_ALLIANCE_ROTATION = Rotation2d.kZero;
         public static final Translation2d kCL = new Translation2d(12.499, 3.433);
-        public static final Translation2d kCR = new Translation2d(12.783, 3.268).plus(new Translation2d(0.03464,-0.020)); 
-        public static final Translation2d kBL = new Translation2d(13.278, 3.269).plus(new Translation2d(0.03464,0.020)); //add 1-2cm?
-        public static final Translation2d kBR = new Translation2d(13.563, 3.432).plus(new Translation2d(0.03464,0.020)); 
+        public static final Translation2d kCR = new Translation2d(12.783, 3.268);//.plus(new Translation2d(0.03464,-0.020)); 
+        public static final Translation2d kBL = new Translation2d(13.278, 3.269);//.plus(new Translation2d(0.03464,0.020));
+        public static final Translation2d kBR = new Translation2d(13.563, 3.432);//.plus(new Translation2d(0.03464,0.020)); 
         public static final Translation2d kAL = new Translation2d(13.810, 3.862);
         public static final Translation2d kAR = new Translation2d(13.811, 4.19);
         public static final Translation2d kFL = new Translation2d(13.563, 4.619);
