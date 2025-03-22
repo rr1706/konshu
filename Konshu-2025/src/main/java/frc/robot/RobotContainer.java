@@ -17,6 +17,8 @@ import edu.wpi.first.wpilibj2.command.WaitCommand;
 import edu.wpi.first.wpilibj2.command.button.CommandGenericHID;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import frc.robot.constants.*;
+import frc.robot.commands.AlgaeIntakeCommand;
+import frc.robot.commands.AlgaeIntakeEndCommand;
 import frc.robot.commands.AlignInAuto;
 import frc.robot.commands.AutoAlign;
 import frc.robot.commands.DriveCommands;
@@ -111,13 +113,8 @@ public class RobotContainer {
     private void configureBindings() {
         driverController.start().onTrue(DriveCommands.resetFieldOrientation(m_drivetrain));
 
-        driverController.leftBumper().whileTrue(m_algaeArm.grabAlgae(1.0)
-                .alongWith(new InstantCommand(() -> m_AlgaeIntake.setPosition(16.0))
-                        .alongWith(new InstantCommand(() -> m_AlgaeIntake.setRollers(-0.6))))
-                        .alongWith(new InstantCommand(() -> m_SSM.setState(States.PROCESSOR))))
-                .onFalse(new InstantCommand(() -> m_AlgaeIntake.setPosition(1.0))
-                        .andThen(new InstantCommand(() -> m_AlgaeIntake.setRollers(0.3))).andThen(new WaitCommand(0.5))
-                        .andThen(new InstantCommand(() -> m_AlgaeIntake.stop())));
+        driverController.leftBumper().whileTrue(new AlgaeIntakeCommand(m_algaeArm, m_AlgaeIntake, m_SSM))
+                .onFalse(new AlgaeIntakeEndCommand(m_AlgaeIntake));
 
         driverController.povUp().onTrue(new InstantCommand(() -> m_arm.jogging(false)));
         driverController.povDown().onTrue(new InstantCommand(() -> m_arm.jogging(true)));

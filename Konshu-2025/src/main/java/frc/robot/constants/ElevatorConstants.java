@@ -28,7 +28,7 @@ public class ElevatorConstants {
     public static final double kElevatorL3 = 37.5; 
     public static final double kElevatorL4 = 71.1; 
     public static final double kElevatorLoadingStation = 0.5; 
-    public static final double kElevatorProcessor = 6.0;
+    public static final double kElevatorProcessor = 5.5;
     public static final double kElevatorBarge = 69.61; 
     public static final double kElevatorZero = 0.0;
     public static final double kElelvatorGroundAlgae = 15;  
