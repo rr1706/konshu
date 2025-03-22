@@ -120,8 +120,6 @@ public class RobotContainer {
             .onFalse(new InstantCommand(() -> m_AlgaeIntake.setPosition(1.0))
             .andThen(new InstantCommand(() -> m_AlgaeIntake.setRollers(0.3))));
             
-
-
         driverController.povUp().onTrue(new InstantCommand(() -> m_arm.jogging(false)));
         driverController.povDown().onTrue(new InstantCommand(() -> m_arm.jogging(true)));
 
