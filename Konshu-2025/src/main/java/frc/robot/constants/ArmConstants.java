@@ -28,15 +28,15 @@ public class ArmConstants {
   public static final double kArmAlgeaGrab = 32.5-75.4;
 
   public static final double kArmLowerLimit = kArmProcessor;   // Degrees from arm horizontal
-  public static final double kArmUpperLimit = -65.0;       // Degrees from arm horizontal
+  public static final double kArmUpperLimit = -65.0-75.4;       // Degrees from arm horizontal
 
   public static final double kMangentOffSet = 0.567627; // Rotations
 
   // These are the constants for the arm stayout zones
   // kElevatorHighDanger - elevator must be higher than this to safely move arm above kArmHighDanger
   // KElevatorLowDanter - elevator must be higher than this to safely move arm below kArmLowDanger
-  public static final double kArmHighDanger = 10.0; 
-  public static final double kArmLowDanger = 32.0;
+  public static final double kArmHighDanger = 10.0-75.4; 
+  public static final double kArmLowDanger = 32.0-75.4;
 
   public static class ArmCurrents {
     public static final double kSupplyCurrent = 30.0;   // Amps
