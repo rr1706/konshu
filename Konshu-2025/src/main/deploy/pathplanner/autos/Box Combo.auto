@@ -70,7 +70,7 @@
                     {
                       "type": "path",
                       "data": {
-                        "pathName": "L4 Close Upper Half"
+                        "pathName": "L4 J"
                       }
                     }
                   ]
@@ -86,7 +86,70 @@
               {
                 "type": "named",
                 "data": {
-                  "name": "ScoreL4"
+                  "name": "ScoreL4Fast"
+                }
+              },
+              {
+                "type": "named",
+                "data": {
+                  "name": "AlignELL4"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "GoLoadingStationPOS"
+          }
+        },
+        {
+          "type": "race",
+          "data": {
+            "commands": [
+              {
+                "type": "named",
+                "data": {
+                  "name": "Run Funnel"
+                }
+              },
+              {
+                "type": "sequential",
+                "data": {
+                  "commands": [
+                    {
+                      "type": "path",
+                      "data": {
+                        "pathName": "Extra Sauce"
+                      }
+                    },
+                    {
+                      "type": "wait",
+                      "data": {
+                        "waitTime": 0.25
+                      }
+                    },
+                    {
+                      "type": "path",
+                      "data": {
+                        "pathName": "L4 K"
+                      }
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        },
+        {
+          "type": "race",
+          "data": {
+            "commands": [
+              {
+                "type": "named",
+                "data": {
+                  "name": "ScoreL4Fast"
                 }
               },
               {
@@ -121,7 +184,7 @@
                     {
                       "type": "path",
                       "data": {
-                        "pathName": "Loading Station 2"
+                        "pathName": "Extra Fries"
                       }
                     },
                     {
@@ -133,7 +196,7 @@
                     {
                       "type": "path",
                       "data": {
-                        "pathName": "L4 Close Upper Half 2"
+                        "pathName": "L4 L"
                       }
                     }
                   ]
@@ -149,51 +212,13 @@
               {
                 "type": "named",
                 "data": {
-                  "name": "ScoreL4"
+                  "name": "ScoreL4Fast"
                 }
               },
               {
                 "type": "named",
                 "data": {
                   "name": "AlignFLL4"
-                }
-              }
-            ]
-          }
-        },
-        {
-          "type": "named",
-          "data": {
-            "name": "GoLoadingStationPOS"
-          }
-        },
-        {
-          "type": "race",
-          "data": {
-            "commands": [
-              {
-                "type": "named",
-                "data": {
-                  "name": "Run Funnel"
-                }
-              },
-              {
-                "type": "sequential",
-                "data": {
-                  "commands": [
-                    {
-                      "type": "path",
-                      "data": {
-                        "pathName": "Loading Station 3"
-                      }
-                    },
-                    {
-                      "type": "wait",
-                      "data": {
-                        "waitTime": 2.0
-                      }
-                    }
-                  ]
                 }
               }
             ]
