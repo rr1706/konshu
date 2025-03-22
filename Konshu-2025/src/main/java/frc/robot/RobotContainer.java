@@ -22,6 +22,7 @@ import frc.robot.commands.AutoAlign;
 import frc.robot.commands.DriveCommands;
 import frc.robot.commands.IntakeFromFunnel;
 import frc.robot.subsystems.AlgaeArm;
+import frc.robot.subsystems.AlgaeIntake;
 import frc.robot.subsystems.Arm;
 import frc.robot.subsystems.CommandSwerveDrivetrain;
 import frc.robot.subsystems.CoralArm;
@@ -49,6 +50,8 @@ public class RobotContainer {
     public final CommandSwerveDrivetrain m_drivetrain;
     public final Climber m_climber = new Climber();
 
+    public final AlgaeIntake m_AlgaeIntake = new AlgaeIntake();
+    
 
     private final LED m_LED = new LED(m_coralArm, m_algaeArm);
 
@@ -109,8 +112,15 @@ public class RobotContainer {
     private void configureBindings() {
         driverController.start().onTrue(DriveCommands.resetFieldOrientation(m_drivetrain));
 
-        driverController.rightBumper().onTrue(new InstantCommand(() -> m_elevator.jogging(false)));
-        driverController.leftBumper().onTrue(new InstantCommand(() -> m_elevator.jogging(true)));
+        // driverController.rightBumper().onTrue(new InstantCommand(() -> m_AlgaeIntake.setPosition(1))
+        //     .andThen(new InstantCommand(() -> m_AlgaeIntake.setRollers(0))));        
+        driverController.leftBumper().whileTrue(m_algaeArm.grabAlgae(1.0)
+            .alongWith(new InstantCommand(() -> m_AlgaeIntake.setPosition(16.0))
+            .alongWith(new InstantCommand(() -> m_AlgaeIntake.setRollers(-0.6)))))
+            .onFalse(new InstantCommand(() -> m_AlgaeIntake.setPosition(1.0))
+            .andThen(new InstantCommand(() -> m_AlgaeIntake.setRollers(0.3))));
+            
+
 
         driverController.povUp().onTrue(new InstantCommand(() -> m_arm.jogging(false)));
         driverController.povDown().onTrue(new InstantCommand(() -> m_arm.jogging(true)));

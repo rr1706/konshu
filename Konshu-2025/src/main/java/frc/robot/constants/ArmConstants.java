@@ -21,7 +21,7 @@ public class ArmConstants {
   public static final double kArmL2 = 26.8;    //26.8 before tuning //29.3 actyual
   public static final double kArmL3 = 26.8;    //26.8 before tuning 
   public static final double kArmL4 = 47.5;    //47.5 degrees //49.6 actual
-  public static final double kArmProcessor = 65.0;
+  public static final double kArmProcessor = 72.0;
   public static final double kArmBarge = -25.0;
   public static final double kArmFeeder = 12.1;
   public static final double kArmGroundAlgae = 15.0;
