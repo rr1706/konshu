@@ -3,25 +3,25 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 1.7293074324324322,
-        "y": 7.355152027027026
+        "x": 1.7741803278688524,
+        "y": 7.315624999999999
       },
       "prevControl": null,
       "nextControl": {
-        "x": 2.2573522974964115,
-        "y": 6.728700067829577
+        "x": 2.3022251929328315,
+        "y": 6.68917304080255
       },
       "isLocked": false,
       "linkedName": "Path 2 LS 1"
     },
     {
       "anchor": {
-        "x": 3.7155405405405406,
-        "y": 5.082347972972972
+        "x": 3.6802254098360656,
+        "y": 5.133862704918033
       },
       "prevControl": {
-        "x": 3.6068412162162162,
-        "y": 5.388682432432431
+        "x": 3.571526085511741,
+        "y": 5.4401971643774925
       },
       "nextControl": null,
       "isLocked": false,
@@ -36,7 +36,7 @@
       "maxWaypointRelativePos": 1.0,
       "constraints": {
         "maxVelocity": 4.73,
-        "maxAcceleration": 3.0,
+        "maxAcceleration": 2.0,
         "maxAngularVelocity": 540.0,
         "maxAngularAcceleration": 720.0,
         "nominalVoltage": 12.0,
@@ -48,19 +48,19 @@
   "eventMarkers": [
     {
       "name": "2B",
-      "waypointRelativePos": 0.6998892580288,
+      "waypointRelativePos": 0.5512820512820539,
       "endWaypointRelativePos": null,
       "command": {
         "type": "named",
         "data": {
-          "name": "Score"
+          "name": "GoL4"
         }
       }
     }
   ],
   "globalConstraints": {
     "maxVelocity": 4.73,
-    "maxAcceleration": 5.0,
+    "maxAcceleration": 3.5,
     "maxAngularVelocity": 540.0,
     "maxAngularAcceleration": 720.0,
     "nominalVoltage": 12.0,

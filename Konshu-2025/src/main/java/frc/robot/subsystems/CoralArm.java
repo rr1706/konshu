@@ -15,6 +15,7 @@ import au.grapplerobotics.ConfigurationFailedException;
 public class CoralArm extends SubsystemBase{
     private ThriftyNova m_Nova;
     private LaserCan lc;
+    public boolean LC_Override = false;
 
     public CoralArm(){
         m_Nova = new ThriftyNova(10, MotorType.MINION);
@@ -49,11 +50,16 @@ public class CoralArm extends SubsystemBase{
 
     public int getMeasurement() {
         LaserCan.Measurement measurement = lc.getMeasurement();
-        return (measurement.distance_mm);
+        if (measurement != null && measurement.status == LaserCan.LASERCAN_STATUS_VALID_MEASUREMENT) {
+            SmartDashboard.putBoolean("LaserCAN Invalid", false);
+            return (measurement.distance_mm); }
+        else
+        SmartDashboard.putBoolean("LaserCAN Invalid", true);
+        return (20);
     }
 
     public boolean haveCoral() {
-        return (getMeasurement() < 40);
+        return (getMeasurement() < 40) || LC_Override;
     }
 
 

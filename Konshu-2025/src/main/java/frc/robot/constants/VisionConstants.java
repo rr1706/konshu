@@ -13,7 +13,7 @@ public class VisionConstants {
         public static void SetUpTrustConstants(){
             Tag_N1_2.put(.25,40.0);
             Tag_N1_2.put(1.0,20.0);
-            Tag_N1_2.put(2.0,2.0);
+            Tag_N1_2.put(2.0,1.5);
 
             Tag_N3.put(.25,4000.0);
             Tag_N3.put(.25,2000.0);

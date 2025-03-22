@@ -34,9 +34,9 @@ public class Arm extends SubsystemBase {
             .withSupplyCurrentLimitEnable(true));
 
         m_limits = new SoftwareLimitSwitchConfigs()
-        .withForwardSoftLimitEnable(true)
+        .withForwardSoftLimitEnable(false)
         .withForwardSoftLimitThreshold(ArmConstants.kArmLowerLimit/360.0)
-        .withReverseSoftLimitEnable(true)
+        .withReverseSoftLimitEnable(false)
         .withReverseSoftLimitThreshold(ArmConstants.kArmUpperLimit/360.0);
         m_armFX.getConfigurator().apply(m_limits);
 

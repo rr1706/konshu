@@ -3,13 +3,13 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 1.6951704545454547,
-        "y": 1.0185653409090911
+        "x": 1.6183401639344261,
+        "y": 0.9261782786885238
       },
       "prevControl": null,
       "nextControl": {
-        "x": 2.26850590274576,
-        "y": 1.5562937284471485
+        "x": 2.1916756121347314,
+        "y": 1.4639066662265812
       },
       "isLocked": false,
       "linkedName": "Loading Station"
@@ -48,7 +48,7 @@
   "eventMarkers": [
     {
       "name": "score_point",
-      "waypointRelativePos": 0.6211562115621171,
+      "waypointRelativePos": 0.5531813865147198,
       "endWaypointRelativePos": null,
       "command": {
         "type": "named",

@@ -5,6 +5,12 @@
     "data": {
       "commands": [
         {
+          "type": "named",
+          "data": {
+            "name": "MoveClimberOut"
+          }
+        },
+        {
           "type": "path",
           "data": {
             "pathName": "Starting Upper Path"
@@ -23,7 +29,7 @@
               {
                 "type": "named",
                 "data": {
-                  "name": "ScoreL4"
+                  "name": "ScoreL4Fast"
                 }
               }
             ]
@@ -162,9 +168,35 @@
           }
         },
         {
-          "type": "path",
+          "type": "race",
           "data": {
-            "pathName": "Loading Station 3"
+            "commands": [
+              {
+                "type": "named",
+                "data": {
+                  "name": "Run Funnel"
+                }
+              },
+              {
+                "type": "sequential",
+                "data": {
+                  "commands": [
+                    {
+                      "type": "path",
+                      "data": {
+                        "pathName": "Loading Station 3"
+                      }
+                    },
+                    {
+                      "type": "wait",
+                      "data": {
+                        "waitTime": 2.0
+                      }
+                    }
+                  ]
+                }
+              }
+            ]
           }
         }
       ]

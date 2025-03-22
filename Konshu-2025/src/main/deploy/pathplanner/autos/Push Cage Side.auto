@@ -5,25 +5,43 @@
     "data": {
       "commands": [
         {
-          "type": "path",
+          "type": "named",
           "data": {
-            "pathName": "Starting Upper Path"
+            "name": "MoveClimberOut"
           }
         },
         {
-          "type": "sequential",
+          "type": "path",
+          "data": {
+            "pathName": "Push Path"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "Push Path 2"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "Post Push L4 Path"
+          }
+        },
+        {
+          "type": "race",
           "data": {
             "commands": [
               {
                 "type": "named",
                 "data": {
-                  "name": "ScoreL4"
+                  "name": "ScoreL4Fast"
                 }
               },
               {
                 "type": "named",
                 "data": {
-                  "name": "GoLoadingStationPOS"
+                  "name": "AlignCRL4"
                 }
               }
             ]
@@ -46,7 +64,7 @@
                     {
                       "type": "path",
                       "data": {
-                        "pathName": "Loading Station"
+                        "pathName": "Loading Station Post Push"
                       }
                     },
                     {
@@ -58,29 +76,10 @@
                     {
                       "type": "path",
                       "data": {
-                        "pathName": "L4 Close Upper Half"
+                        "pathName": "Score 2nd Post Push"
                       }
                     }
                   ]
-                }
-              }
-            ]
-          }
-        },
-        {
-          "type": "sequential",
-          "data": {
-            "commands": [
-              {
-                "type": "named",
-                "data": {
-                  "name": "ScoreL4"
-                }
-              },
-              {
-                "type": "named",
-                "data": {
-                  "name": "GoLoadingStationPOS"
                 }
               }
             ]
@@ -93,60 +92,22 @@
               {
                 "type": "named",
                 "data": {
-                  "name": "Run Funnel"
-                }
-              },
-              {
-                "type": "sequential",
-                "data": {
-                  "commands": [
-                    {
-                      "type": "path",
-                      "data": {
-                        "pathName": "Loading Station 2"
-                      }
-                    },
-                    {
-                      "type": "wait",
-                      "data": {
-                        "waitTime": 0.25
-                      }
-                    },
-                    {
-                      "type": "path",
-                      "data": {
-                        "pathName": "L4 Close Upper Half 2"
-                      }
-                    }
-                  ]
-                }
-              }
-            ]
-          }
-        },
-        {
-          "type": "sequential",
-          "data": {
-            "commands": [
-              {
-                "type": "named",
-                "data": {
                   "name": "ScoreL4"
                 }
               },
               {
                 "type": "named",
                 "data": {
-                  "name": "GoLoadingStationPOS"
+                  "name": "AlignBLL4"
                 }
               }
             ]
           }
         },
         {
-          "type": "path",
+          "type": "named",
           "data": {
-            "pathName": "Loading Station 3"
+            "name": "GoLoadingStationPOS"
           }
         }
       ]

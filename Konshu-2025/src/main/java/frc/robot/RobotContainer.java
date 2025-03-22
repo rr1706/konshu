@@ -22,6 +22,7 @@ import frc.robot.commands.AutoAlign;
 import frc.robot.commands.DriveCommands;
 import frc.robot.commands.IntakeFromFunnel;
 import frc.robot.subsystems.AlgaeArm;
+import frc.robot.subsystems.AlgaeIntake;
 import frc.robot.subsystems.Arm;
 import frc.robot.subsystems.CommandSwerveDrivetrain;
 import frc.robot.subsystems.CoralArm;
@@ -39,15 +40,18 @@ public class RobotContainer {
     private final CommandGenericHID operatorcontoller1 = new CommandGenericHID(1);
     private final CommandGenericHID operatorcontoller2 = new CommandGenericHID(2);
 
-    private final Elevator m_elevator = new Elevator();
+    public final CoralArm m_coralArm = new CoralArm();
+    public final AlgaeArm m_algaeArm = new AlgaeArm();
+    private final Elevator m_elevator = new Elevator(m_coralArm::haveCoral, m_algaeArm::haveAlgae);
     private final Arm m_arm = new Arm();
     private final Funnel m_funnel = new Funnel();
-    public final CoralArm m_coralArm = new CoralArm();
-
+  
     private final SSM m_SSM = new SSM(m_arm, m_elevator, m_coralArm::haveCoral);
     public final CommandSwerveDrivetrain m_drivetrain;
     public final Climber m_climber = new Climber();
-    public final AlgaeArm m_algaeArm = new AlgaeArm();
+
+    public final AlgaeIntake m_AlgaeIntake = new AlgaeIntake();
+    
 
     private final LED m_LED = new LED(m_coralArm, m_algaeArm);
 
@@ -75,42 +79,47 @@ public class RobotContainer {
                         () -> driverController.getRightX()));
     }
 
-      private void configureAutoBuilder() {
+    private void configureAutoBuilder() {
         try {
             var config = RobotConfig.fromGUISettings();
             AutoBuilder.configure(
-                () -> m_drivetrain.getState().Pose,   // Supplier of current robot pose
-                m_drivetrain::resetPose,         // Consumer for seeding pose against auto
-                
-                () -> m_drivetrain.getState().Speeds, // Supplier of current robot speeds
-                // Consumer of ChassisSpeeds and feedforwards to drive the robot
-                (speeds, feedforwards) -> m_drivetrain.setControl(
-                    m_drivetrain.m_pathApplyRobotSpeeds.withSpeeds(speeds)
-                        .withWheelForceFeedforwardsX(feedforwards.robotRelativeForcesXNewtons())
-                        .withWheelForceFeedforwardsY(feedforwards.robotRelativeForcesYNewtons())
-                ),
-                new PPHolonomicDriveController(
-                    // PID constants for translation
-                    new PIDConstants(10, 0, 0),
-                    // PID constants for rotation
-                    new PIDConstants(7, 0, 0)
-                ),
-                config,
-                // Assume the path needs to be flipped for Red vs Blue, this is normally the case
-                () -> DriverStation.getAlliance().orElse(Alliance.Blue) == Alliance.Red,
-                m_drivetrain // Subsystem for requirements
+                    () -> m_drivetrain.getState().Pose, // Supplier of current robot pose
+                    m_drivetrain::resetPose, // Consumer for seeding pose against auto
+
+                    () -> m_drivetrain.getState().Speeds, // Supplier of current robot speeds
+                    // Consumer of ChassisSpeeds and feedforwards to drive the robot
+                    (speeds, feedforwards) -> m_drivetrain.setControl(
+                            m_drivetrain.m_pathApplyRobotSpeeds.withSpeeds(speeds)
+                                    .withWheelForceFeedforwardsX(feedforwards.robotRelativeForcesXNewtons())
+                                    .withWheelForceFeedforwardsY(feedforwards.robotRelativeForcesYNewtons())),
+                    new PPHolonomicDriveController(
+                            // PID constants for translation
+                            new PIDConstants(10, 0, 0),
+                            // PID constants for rotation
+                            new PIDConstants(7, 0, 0)),
+                    config,
+                    // Assume the path needs to be flipped for Red vs Blue, this is normally the
+                    // case
+                    () -> DriverStation.getAlliance().orElse(Alliance.Blue) == Alliance.Red,
+                    m_drivetrain // Subsystem for requirements
             );
         } catch (Exception ex) {
-            DriverStation.reportError("Failed to load PathPlanner config and configure AutoBuilder", ex.getStackTrace());
+            DriverStation.reportError("Failed to load PathPlanner config and configure AutoBuilder",
+                    ex.getStackTrace());
         }
     }
-
+    
     private void configureBindings() {
         driverController.start().onTrue(DriveCommands.resetFieldOrientation(m_drivetrain));
 
-        driverController.rightBumper().onTrue(new InstantCommand(() -> m_elevator.jogging(false)));
-        driverController.leftBumper().onTrue(new InstantCommand(() -> m_elevator.jogging(true)));
-
+        // driverController.rightBumper().onTrue(new InstantCommand(() -> m_AlgaeIntake.setPosition(1))
+        //     .andThen(new InstantCommand(() -> m_AlgaeIntake.setRollers(0))));        
+        driverController.leftBumper().whileTrue(m_algaeArm.grabAlgae(1.0)
+            .alongWith(new InstantCommand(() -> m_AlgaeIntake.setPosition(16.0))
+            .alongWith(new InstantCommand(() -> m_AlgaeIntake.setRollers(-0.6)))))
+            .onFalse(new InstantCommand(() -> m_AlgaeIntake.setPosition(1.0))
+            .andThen(new InstantCommand(() -> m_AlgaeIntake.setRollers(0.3))));
+            
         driverController.povUp().onTrue(new InstantCommand(() -> m_arm.jogging(false)));
         driverController.povDown().onTrue(new InstantCommand(() -> m_arm.jogging(true)));
 
@@ -120,22 +129,42 @@ public class RobotContainer {
         driverController.b().onTrue(new InstantCommand(() -> m_climber.Climb()))
                 .onFalse(new InstantCommand(() -> m_climber.stop()));
 
+        // driverController.rightTrigger()
+        //         .onTrue(new ConditionalCommand(new WaitCommand(0.030).andThen(m_algaeArm.spitAlgae()),
+        //                 new ConditionalCommand(m_algaeArm.slowSpitAlgae(), m_coralArm.runCoralCmd(-0.35), () -> {
+        //                     return m_SSM.getState() == (SSM.States.PROCESSOR);
+        //                 }), () -> {
+        //                     return m_SSM.getState() == (SSM.States.BARGE);
+        //                 }))
+                
+        //         .onFalse(
+        //                 new InstantCommand(() -> m_funnel.runCoralIn(-.4)).alongWith(new IntakeFromFunnel(m_coralArm)));
+
         driverController.rightTrigger()
-                .onTrue(new ConditionalCommand(m_algaeArm.spitAlgae(), m_coralArm.runCoralCmd(-0.35), () -> {
-                    return m_SSM.getState() == (SSM.States.BARGE) || m_SSM.getState() == (SSM.States.PROCESSOR);
-                }))
+                .onTrue(new ConditionalCommand(new WaitCommand(0.030).andThen(m_algaeArm.spitAlgae()),
+                        new ConditionalCommand(m_algaeArm.slowSpitAlgae(), 
+                        new ConditionalCommand(m_coralArm.runCoralCmd(-0.55), m_coralArm.runCoralCmd(-0.35), () -> {
+                            return m_SSM.getState() == (SSM.States.L1);
+                        }), () -> {
+                            return m_SSM.getState() == (SSM.States.PROCESSOR);
+                        }), () -> {
+                            return m_SSM.getState() == (SSM.States.BARGE);
+                        }))  
                 .onFalse(
                         new InstantCommand(() -> m_funnel.runCoralIn(-.4)).alongWith(new IntakeFromFunnel(m_coralArm)));
+               
 
         driverController.a().onTrue(m_algaeArm.grabAlgae(0.8));
         operatorcontoller1.button(9).onTrue(m_algaeArm.grabAlgae(0.8));
         operatorcontoller2.button(1).onTrue(m_algaeArm.grabAlgae(0.8));
+
         operatorcontoller2.button(2).whileTrue(new InstantCommand(() -> m_funnel.runCoralIn(.2)))
-            .onFalse(new InstantCommand(() -> m_funnel.runCoralIn(.2)));
+                .onFalse(
+                        new InstantCommand(() -> m_funnel.runCoralIn(-.4)).alongWith(new IntakeFromFunnel(m_coralArm)));
 
         operatorcontoller2.button(11).whileTrue(m_algaeArm.grabAlgae(.8)
-            .alongWith(new InstantCommand(() -> m_SSM.setState(States.PROCESSOR))));
-
+                .alongWith(new InstantCommand(() -> m_SSM.setState(States.PROCESSOR))));
+        operatorcontoller2.button(12).whileTrue(m_algaeArm.spitAlgae());
         driverController.leftTrigger().whileTrue(new AutoAlign(
                 m_drivetrain,
                 () -> driverController.getLeftY(),
@@ -146,16 +175,19 @@ public class RobotContainer {
     }
 
     public void configureNamedCommands() {
+        NamedCommands.registerCommand("MoveClimberOut", new InstantCommand(() -> m_climber.setPosition(27.0)));
         NamedCommands.registerCommand("ScoreL4",
-                (new WaitCommand(.6))
-                        .andThen(m_coralArm.runCoralCmd(-0.35).withTimeout(.4)));
+                (new WaitCommand(.8))
+                        .andThen(m_coralArm.runCoralCmd(-0.35).withTimeout(.2)));
+        NamedCommands.registerCommand("ScoreL4Fast",
+                (new WaitCommand(.4))
+                        .andThen(m_coralArm.runCoralCmd(-0.35).withTimeout(.2)));
         NamedCommands.registerCommand("GoL4",
                 new InstantCommand(() -> m_SSM.setState(States.L4)));
         NamedCommands.registerCommand("GoLoadingStationPOS",
                 new InstantCommand(() -> m_SSM.setState(States.LOADINGSTATION)));
         NamedCommands.registerCommand("Run Funnel",
                 new InstantCommand(() -> m_funnel.runCoralIn(-.7)).alongWith(new IntakeFromFunnel(m_coralArm)));
-
 
         NamedCommands.registerCommand("AlignCRL4", new AlignInAuto(m_drivetrain, () -> {
             DriverStation.Alliance alliance = DriverStation.getAlliance().orElse(DriverStation.Alliance.Blue);
@@ -275,6 +307,6 @@ public class RobotContainer {
     }
 
     public Command getTeleInitCommand() {
-        return new InstantCommand(() -> m_climber.setPosition(30.0));
+        return new InstantCommand(() -> m_climber.setPosition(27.0));
     }
 }

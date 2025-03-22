@@ -3,13 +3,13 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 1.6951704545454547,
-        "y": 1.0185653409090911
+        "x": 1.6183401639344261,
+        "y": 0.9261782786885238
       },
       "prevControl": null,
       "nextControl": {
-        "x": 2.1365215951483716,
-        "y": 1.349029195159749
+        "x": 2.059691304537343,
+        "y": 1.2566421329391817
       },
       "isLocked": false,
       "linkedName": "Loading Station"
@@ -32,11 +32,11 @@
   "constraintZones": [
     {
       "name": "Constraints Zone",
-      "minWaypointRelativePos": 0.0,
-      "maxWaypointRelativePos": 0.0,
+      "minWaypointRelativePos": 0.7981956315289674,
+      "maxWaypointRelativePos": 1.0,
       "constraints": {
         "maxVelocity": 4.73,
-        "maxAcceleration": 3.0,
+        "maxAcceleration": 2.0,
         "maxAngularVelocity": 540.0,
         "maxAngularAcceleration": 720.0,
         "nominalVoltage": 12.0,
@@ -48,7 +48,7 @@
   "eventMarkers": [
     {
       "name": "score_point",
-      "waypointRelativePos": 0.622386223862239,
+      "waypointRelativePos": 0.5455840455840442,
       "endWaypointRelativePos": null,
       "command": {
         "type": "named",

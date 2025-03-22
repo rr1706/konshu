@@ -3,13 +3,13 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 1.7293074324324322,
-        "y": 7.355152027027026
+        "x": 1.7741803278688524,
+        "y": 7.315624999999999
       },
       "prevControl": null,
       "nextControl": {
-        "x": 2.191946392681455,
-        "y": 7.433261820029763
+        "x": 2.236819288117875,
+        "y": 7.393734793002736
       },
       "isLocked": false,
       "linkedName": "Path 2 LS 1"
@@ -36,7 +36,7 @@
       "maxWaypointRelativePos": 1.0,
       "constraints": {
         "maxVelocity": 4.73,
-        "maxAcceleration": 3.0,
+        "maxAcceleration": 2.0,
         "maxAngularVelocity": 540.0,
         "maxAngularAcceleration": 720.0,
         "nominalVoltage": 12.0,
@@ -53,14 +53,14 @@
       "command": {
         "type": "named",
         "data": {
-          "name": "Score"
+          "name": "GoL4"
         }
       }
     }
   ],
   "globalConstraints": {
     "maxVelocity": 4.73,
-    "maxAcceleration": 5.0,
+    "maxAcceleration": 3.5,
     "maxAngularVelocity": 540.0,
     "maxAngularAcceleration": 720.0,
     "nominalVoltage": 12.0,

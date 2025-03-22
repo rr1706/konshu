@@ -2,6 +2,8 @@ package frc.robot.subsystems;
 import com.ctre.phoenix6.controls.MotionMagicVoltage;
 import com.ctre.phoenix6.hardware.TalonFX;
 import com.ctre.phoenix6.signals.NeutralModeValue;
+import com.thethriftybot.ThriftyNova;
+import com.thethriftybot.ThriftyNova.CurrentType;
 import com.ctre.phoenix6.configs.*;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
@@ -24,9 +26,8 @@ import com.ctre.phoenix.motorcontrol.can.TalonSRXConfiguration;
 
 
 public class AlgaeIntake extends SubsystemBase{
-    private final TalonFX m_algaeintakeFX = new TalonFX(15);
-    TalonSRX m_algaeintakeSRX = new TalonSRX(16);
-    TalonSRXConfiguration config = new TalonSRXConfiguration();
+    private final TalonFX m_algaeintakeFX = new TalonFX(15, "*");
+    ThriftyNova m_algaeintakeSRX = new ThriftyNova(16);
     public double m_setPoint = getPosition();
 
     public AlgaeIntake() {
@@ -58,23 +59,21 @@ public class AlgaeIntake extends SubsystemBase{
 
         m_algaeintakeFX.setNeutralMode(NeutralModeValue.Brake); 
         
-        config.peakCurrentLimit = 40; // the peak current, in amps
-        config.peakCurrentDuration = 1500; // the time at the peak current before the limit triggers, in ms
-        config.continuousCurrentLimit = 30; // the current to maintain if the peak limit is triggered
-        m_algaeintakeSRX.configAllSettings(config); // apply the config settings; this selects the quadrature encoder
+        m_algaeintakeSRX.setMaxCurrent(CurrentType.STATOR, 20);
+        m_algaeintakeSRX.setNTLogging(true); // apply the config settings; this selects the quadrature encoder
     }
     
     public double getPosition() {      //Inches
-        return (IntakeConstants.kInchPerRotation*m_algaeintakeFX.getPosition().getValueAsDouble());
+        return (m_algaeintakeFX.getPosition().getValueAsDouble());
     }
 
     public void setPosition(double position) {       // Inches  
         m_setPoint = position;
-        m_algaeintakeFX.setControl(new MotionMagicVoltage(position/IntakeConstants.kInchPerRotation));
+        m_algaeintakeFX.setControl(new MotionMagicVoltage(position));
     }
 
     public void setRollers(double speed) {
-        m_algaeintakeSRX.set(TalonSRXControlMode.PercentOutput, speed);
+        m_algaeintakeSRX.set(speed);
     }
     
     public void stop() {

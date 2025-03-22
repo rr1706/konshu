@@ -1,0 +1,66 @@
+{
+  "version": "2025.0",
+  "waypoints": [
+    {
+      "anchor": {
+        "x": 5.079222972972973,
+        "y": 5.279983108108109
+      },
+      "prevControl": null,
+      "nextControl": {
+        "x": 6.828293918918919,
+        "y": 6.979645270270269
+      },
+      "isLocked": false,
+      "linkedName": "End of Push Score"
+    },
+    {
+      "anchor": {
+        "x": 1.1759290540540541,
+        "y": 6.95
+      },
+      "prevControl": {
+        "x": 0.17592905405405412,
+        "y": 6.95
+      },
+      "nextControl": null,
+      "isLocked": false,
+      "linkedName": "Loading Push Cage Side"
+    }
+  ],
+  "rotationTargets": [],
+  "constraintZones": [],
+  "pointTowardsZones": [],
+  "eventMarkers": [
+    {
+      "name": "score_point",
+      "waypointRelativePos": 0.0,
+      "endWaypointRelativePos": null,
+      "command": {
+        "type": "named",
+        "data": {
+          "name": "GoLoadingStationPOS"
+        }
+      }
+    }
+  ],
+  "globalConstraints": {
+    "maxVelocity": 4.73,
+    "maxAcceleration": 2.0,
+    "maxAngularVelocity": 540.0,
+    "maxAngularAcceleration": 720.0,
+    "nominalVoltage": 12.0,
+    "unlimited": false
+  },
+  "goalEndState": {
+    "velocity": 0,
+    "rotation": -55.840305454330576
+  },
+  "reversed": false,
+  "folder": "Push Auto",
+  "idealStartingState": {
+    "velocity": 0,
+    "rotation": -122.47119229084831
+  },
+  "useDefaultConstraints": false
+}

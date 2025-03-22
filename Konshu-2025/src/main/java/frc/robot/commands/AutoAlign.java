@@ -84,7 +84,7 @@ public class AutoAlign extends Command {
 
         armOffset = 0.0;
         elevatorOffset = 0.0;
-        dist = 0.0; // Default value for LED logic
+        dist = 1.0; // Default value for LED logic
         m_state = SSM.States.LOADINGSTATION; // Default to here if trigger with no button pressed
         m_goForPID = true;
         if (DriverStation.getStickButton(1, ButtonConstants.kL1Left)) {
@@ -163,7 +163,15 @@ public class AutoAlign extends Command {
                 Translation2d robotToGoal = m_pose.getTranslation().minus(currentPose.getTranslation());
                 double[] target_array = { m_pose.getTranslation().getX(), m_pose.getTranslation().getY() };
                 SmartDashboard.putNumberArray("Target", target_array);
-                targetAngle = robotToGoal.getAngle().getRadians();
+
+                // If at L1, fix the rotation to the field at the selected coral angle plus/minus a fixed offset
+                if (m_state == SSM.States.L1) {
+                    if (m_alignMode == ReefTargetCalculator.AlignMode.LEFT) {
+                      targetAngle = m_pose.getRotation().plus(Rotation2d.fromDegrees(70.0)).getRadians();
+                    } else {
+                      targetAngle = m_pose.getRotation().minus(Rotation2d.fromDegrees(70.0)).getRadians();
+                    }
+                } else targetAngle = robotToGoal.getAngle().getRadians();
             }
 
             SmartDashboard.putString("Align Mode", m_alignMode.toString());
@@ -211,6 +219,10 @@ public class AutoAlign extends Command {
         }
 
         // Set the state
+
+        if (m_state == SSM.States.BARGE && DriverStation.getStickAxis(0, 3)>= 0.25) {
+            armOffset = -30.0;
+        }
         m_SSM.setState(m_state, armOffset, elevatorOffset);
 
         // Set the distance for LEDs
@@ -238,13 +250,7 @@ public class AutoAlign extends Command {
     @Override
     public void end(boolean interrupted) {
         m_SSM.setState(States.LOADINGSTATION);
-    }
-
-    private double mapwithlimit(double x, double in_min, double in_max, double out_min, double out_max) {
-        double d = (x - in_min) * (out_max - out_min) / (in_max - in_min) + out_min;
-        d = Math.max(d, out_min);
-        d = Math.min(d, out_max);
-        return d;
+        m_LED.setLEDScore(false);
     }
 
     // Helper method to adjust the joystick input curve.
