@@ -11,8 +11,8 @@ public class ElevatorConstants {
     public static final double kVElevator = .123;   // Output per unit of target velocity (volts/rps)
     public static final double kAElevator = 0.001;   // Output per unit of target accelleration (volts/rps/rps)
 
-    public static final double kAccelerationElevator =400; //1000
-    public static final double kVelocityElevator= 80; //75
+    public static final double kAccelerationElevator = 400; //1000
+    public static final double kVelocityElevator = 80; //75
     public static final double kJerkElevator = 40000;
 
     // public static final double kPElevator = 1.0; 
