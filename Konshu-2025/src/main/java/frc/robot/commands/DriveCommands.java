@@ -16,9 +16,9 @@ public class DriveCommands {
         .withDriveRequestType(DriveRequestType.Velocity);
 
     // These slew rates are updated via updateSlew in SSM.java based on the commanded state
-    public static SlewRateLimiter m_slewX = new SlewRateLimiter(10.0);
-    public static SlewRateLimiter m_slewY = new SlewRateLimiter(10.0);
-    public static SlewRateLimiter m_slewRot = new SlewRateLimiter(30.0);
+    public static SlewRateLimiter m_slewX = new SlewRateLimiter(12.0);
+    public static SlewRateLimiter m_slewY = new SlewRateLimiter(12.0);
+    public static SlewRateLimiter m_slewRot = new SlewRateLimiter(36.0);
     
     public static void updateSlew(double x, double y, double r) {
         m_slewX = new SlewRateLimiter(x, -x, m_slewX.lastValue());

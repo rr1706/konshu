@@ -121,7 +121,8 @@ public class RobotContainer {
 
         driverController.leftTrigger().onFalse(
                 new InstantCommand(() -> m_funnel.runCoralIn(-.5)).alongWith(new IntakeFromFunnel(m_coralArm)));
-        driverController.x().onTrue(new InstantCommand(() -> m_climber.prepClimb()).alongWith(new InstantCommand(()->m_funnel.runCoralIn(0.0))));
+        driverController.x().onTrue(new InstantCommand(() -> m_climber.prepClimb())
+                .alongWith(new InstantCommand(() -> m_funnel.runCoralIn(0.0))));
         driverController.b().onTrue(new InstantCommand(() -> m_climber.Climb()))
                 .onFalse(new InstantCommand(() -> m_climber.stop()));
 
@@ -153,7 +154,7 @@ public class RobotContainer {
                             return m_SSM.getState() == (SSM.States.BARGE);
                         }))
                 .onFalse(
-                        new InstantCommand(() -> m_funnel.runCoralIn(-.4)).alongWith(new IntakeFromFunnel(m_coralArm)));
+                        new InstantCommand(() -> m_funnel.runCoralIn(-.5)).alongWith(new IntakeFromFunnel(m_coralArm)));
 
         driverController.a().onTrue(m_algaeArm.grabAlgae(0.8));
         operatorcontoller1.button(9).onTrue(m_algaeArm.grabAlgae(0.8));
@@ -161,7 +162,7 @@ public class RobotContainer {
 
         operatorcontoller2.button(2).whileTrue(new InstantCommand(() -> m_funnel.runCoralIn(.2)))
                 .onFalse(
-                        new InstantCommand(() -> m_funnel.runCoralIn(-.4)).alongWith(new IntakeFromFunnel(m_coralArm)));
+                        new InstantCommand(() -> m_funnel.runCoralIn(-.5)).alongWith(new IntakeFromFunnel(m_coralArm)));
 
         operatorcontoller2.button(11).whileTrue(m_algaeArm.grabAlgae(.8)
                 .alongWith(new InstantCommand(() -> m_SSM.setState(States.PROCESSOR))))
@@ -182,14 +183,19 @@ public class RobotContainer {
                 (new WaitCommand(.6))
                         .andThen(m_coralArm.runCoralCmd(-0.35).withTimeout(.2)));
         NamedCommands.registerCommand("ScoreL4Fast",
-                (new WaitCommand(.35))
-                        .andThen(m_coralArm.runCoralCmd(-0.35).withTimeout(.2)));
+                (new WaitCommand(.2))
+                        .andThen(m_coralArm.runCoralCmd(-0.40).withTimeout(.2)));
+        NamedCommands.registerCommand("ScoreL2Fast",
+                (new WaitCommand(.2))
+                        .andThen(m_coralArm.runCoralCmd(-0.50).withTimeout(.2)));
         NamedCommands.registerCommand("GoL4",
                 new InstantCommand(() -> m_SSM.setState(States.L4)));
+        NamedCommands.registerCommand("GoL2",
+                new InstantCommand(() -> m_SSM.setState(States.L2)));
         NamedCommands.registerCommand("GoLoadingStationPOS",
                 new InstantCommand(() -> m_SSM.setState(States.LOADINGSTATION)));
         NamedCommands.registerCommand("Run Funnel",
-                new InstantCommand(() -> m_funnel.runCoralIn(-.7)).alongWith(new IntakeFromFunnel(m_coralArm)));
+                new InstantCommand(() -> m_funnel.runCoralIn(-.5)).alongWith(new IntakeFromFunnel(m_coralArm)));
 
         NamedCommands.registerCommand("AlignCRL4", new AlignInAuto(m_drivetrain, () -> {
             DriverStation.Alliance alliance = DriverStation.getAlliance().orElse(DriverStation.Alliance.Blue);
@@ -235,6 +241,14 @@ public class RobotContainer {
                 return AutoAlignConstants.RedAllianceConstants.kAR;
             }
         }, SSM.States.L4, m_SSM));
+        NamedCommands.registerCommand("AlignARL2", new AlignInAuto(m_drivetrain, () -> {
+            DriverStation.Alliance alliance = DriverStation.getAlliance().orElse(DriverStation.Alliance.Blue);
+            if (alliance == DriverStation.Alliance.Blue) {
+                return AutoAlignConstants.BlueAllianceConstants.kAR;
+            } else {
+                return AutoAlignConstants.RedAllianceConstants.kAR;
+            }
+        }, SSM.States.L2, m_SSM));
         NamedCommands.registerCommand("AlignALL4", new AlignInAuto(m_drivetrain, () -> {
             DriverStation.Alliance alliance = DriverStation.getAlliance().orElse(DriverStation.Alliance.Blue);
             if (alliance == DriverStation.Alliance.Blue) {
@@ -302,7 +316,6 @@ public class RobotContainer {
                 return AutoAlignConstants.RedAllianceConstants.kER;
             }
         }, SSM.States.L4, m_SSM));
-        
 
     }
 

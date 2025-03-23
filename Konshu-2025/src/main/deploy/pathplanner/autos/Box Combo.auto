@@ -13,7 +13,7 @@
         {
           "type": "path",
           "data": {
-            "pathName": "L4 I"
+            "pathName": "L4 EL"
           }
         },
         {
@@ -58,13 +58,13 @@
                     {
                       "type": "path",
                       "data": {
-                        "pathName": "No ColeSlaw"
+                        "pathName": "EL LS"
                       }
                     },
                     {
                       "type": "path",
                       "data": {
-                        "pathName": "L4 J"
+                        "pathName": "L4 FR"
                       }
                     }
                   ]
@@ -81,63 +81,6 @@
                 "type": "named",
                 "data": {
                   "name": "ScoreL4Fast"
-                }
-              },
-              {
-                "type": "named",
-                "data": {
-                  "name": "AlignERL4"
-                }
-              }
-            ]
-          }
-        },
-        {
-          "type": "named",
-          "data": {
-            "name": "GoLoadingStationPOS"
-          }
-        },
-        {
-          "type": "race",
-          "data": {
-            "commands": [
-              {
-                "type": "named",
-                "data": {
-                  "name": "Run Funnel"
-                }
-              },
-              {
-                "type": "sequential",
-                "data": {
-                  "commands": [
-                    {
-                      "type": "path",
-                      "data": {
-                        "pathName": "Extra Sauce"
-                      }
-                    },
-                    {
-                      "type": "path",
-                      "data": {
-                        "pathName": "L4 K"
-                      }
-                    }
-                  ]
-                }
-              }
-            ]
-          }
-        },
-        {
-          "type": "race",
-          "data": {
-            "commands": [
-              {
-                "type": "named",
-                "data": {
-                  "name": "ScoreL4"
                 }
               },
               {
@@ -172,13 +115,13 @@
                     {
                       "type": "path",
                       "data": {
-                        "pathName": "Extra Fries"
+                        "pathName": "FR LS"
                       }
                     },
                     {
                       "type": "path",
                       "data": {
-                        "pathName": "L4 L"
+                        "pathName": "L4 FL"
                       }
                     }
                   ]
@@ -194,13 +137,70 @@
               {
                 "type": "named",
                 "data": {
-                  "name": "ScoreL4"
+                  "name": "ScoreL4Fast"
                 }
               },
               {
                 "type": "named",
                 "data": {
                   "name": "AlignFLL4"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "GoLoadingStationPOS"
+          }
+        },
+        {
+          "type": "race",
+          "data": {
+            "commands": [
+              {
+                "type": "named",
+                "data": {
+                  "name": "Run Funnel"
+                }
+              },
+              {
+                "type": "sequential",
+                "data": {
+                  "commands": [
+                    {
+                      "type": "path",
+                      "data": {
+                        "pathName": "FL LS"
+                      }
+                    },
+                    {
+                      "type": "path",
+                      "data": {
+                        "pathName": "L4 AR"
+                      }
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        },
+        {
+          "type": "race",
+          "data": {
+            "commands": [
+              {
+                "type": "named",
+                "data": {
+                  "name": "ScoreL2Fast"
+                }
+              },
+              {
+                "type": "named",
+                "data": {
+                  "name": "AlignARL2"
                 }
               }
             ]

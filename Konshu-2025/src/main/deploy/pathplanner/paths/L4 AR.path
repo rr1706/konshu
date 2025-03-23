@@ -3,40 +3,40 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 1.7849147727272727,
-        "y": 0.7393607954545461
+        "x": 1.7350568181818182,
+        "y": 0.7692755681818187
       },
       "prevControl": null,
       "nextControl": {
-        "x": 2.983685264530552,
-        "y": 1.0510411233233992
+        "x": 1.8972016875173319,
+        "y": 1.209140810882287
       },
       "isLocked": false,
       "linkedName": "Loading Station"
     },
     {
       "anchor": {
-        "x": 5.324829545454545,
-        "y": 2.9131676136363636
+        "x": 3.1510227272727276,
+        "y": 3.8106107954545454
       },
       "prevControl": {
-        "x": 4.864519348894349,
-        "y": 1.822895423832924
+        "x": 2.9615625000000003,
+        "y": 3.4017755681818183
       },
       "nextControl": null,
       "isLocked": false,
-      "linkedName": "L4 I End"
+      "linkedName": null
     }
   ],
   "rotationTargets": [],
   "constraintZones": [
     {
       "name": "Constraints Zone",
-      "minWaypointRelativePos": 0.7602089268755936,
+      "minWaypointRelativePos": 0.7326839826839823,
       "maxWaypointRelativePos": 1.0,
       "constraints": {
         "maxVelocity": 3.8,
-        "maxAcceleration": 3.5,
+        "maxAcceleration": 2.5,
         "maxAngularVelocity": 540.0,
         "maxAngularAcceleration": 720.0,
         "nominalVoltage": 12.0,
@@ -44,33 +44,22 @@
       }
     }
   ],
-  "pointTowardsZones": [
-    {
-      "fieldPosition": {
-        "x": 4.9,
-        "y": 3.3
-      },
-      "rotationOffset": 0.0,
-      "minWaypointRelativePos": 0.1439393939393987,
-      "maxWaypointRelativePos": 1.0,
-      "name": "Point Towards Zone"
-    }
-  ],
+  "pointTowardsZones": [],
   "eventMarkers": [
     {
       "name": "score_point",
-      "waypointRelativePos": 0.30194805194805235,
+      "waypointRelativePos": 0.39718614718615397,
       "endWaypointRelativePos": null,
       "command": {
         "type": "named",
         "data": {
-          "name": "GoL4"
+          "name": "GoL2"
         }
       }
     }
   ],
   "globalConstraints": {
-    "maxVelocity": 3.8,
+    "maxVelocity": 4.0,
     "maxAcceleration": 4.5,
     "maxAngularVelocity": 540.0,
     "maxAngularAcceleration": 720.0,
@@ -79,7 +68,7 @@
   },
   "goalEndState": {
     "velocity": 0,
-    "rotation": 119.99999999999999
+    "rotation": 3.900493742381931
   },
   "reversed": false,
   "folder": null,

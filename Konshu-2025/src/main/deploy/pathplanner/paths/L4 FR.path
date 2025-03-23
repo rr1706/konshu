@@ -3,13 +3,13 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 1.7849147727272727,
-        "y": 0.7393607954545461
+        "x": 1.7350568181818182,
+        "y": 0.7692755681818187
       },
       "prevControl": null,
       "nextControl": {
-        "x": 2.965830050501523,
-        "y": 1.7441811286620128
+        "x": 2.2620707976576995,
+        "y": 1.2612186950445776
       },
       "isLocked": false,
       "linkedName": "Loading Station"
@@ -17,11 +17,11 @@
     {
       "anchor": {
         "x": 3.942820945945946,
-        "y": 2.740371621621621
+        "y": 2.710726351351351
       },
       "prevControl": {
-        "x": 3.848515141590731,
-        "y": 2.5088410291183494
+        "x": 3.805646339377826,
+        "y": 2.501721262148046
       },
       "nextControl": null,
       "isLocked": false,
@@ -32,11 +32,11 @@
   "constraintZones": [
     {
       "name": "Constraints Zone",
-      "minWaypointRelativePos": 0.7981956315289649,
+      "minWaypointRelativePos": 0.654761904761902,
       "maxWaypointRelativePos": 1.0,
       "constraints": {
         "maxVelocity": 3.8,
-        "maxAcceleration": 3.5,
+        "maxAcceleration": 2.5,
         "maxAngularVelocity": 540.0,
         "maxAngularAcceleration": 720.0,
         "nominalVoltage": 12.0,
@@ -59,7 +59,7 @@
     }
   ],
   "globalConstraints": {
-    "maxVelocity": 3.8,
+    "maxVelocity": 4.0,
     "maxAcceleration": 4.5,
     "maxAngularVelocity": 540.0,
     "maxAngularAcceleration": 720.0,

@@ -34,7 +34,11 @@ public class AlignInAuto extends Command {
         m_target = target;
         m_state = state;
         m_ssm = ssm;
+        // Enable continuous input for proper angle wrapping (from -π to π)
+        rotPID.enableContinuousInput(-Math.PI, Math.PI);
+        rotPID.setTolerance(0.05);
         addRequirements(m_drivetrain);
+
     }
 
     @Override

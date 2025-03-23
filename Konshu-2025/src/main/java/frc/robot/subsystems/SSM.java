@@ -73,20 +73,20 @@ public class SSM extends SubsystemBase {
         switch (m_setpoint) {
             case L3:
                 if (m_slewMode != 1) {
-                    DriveCommands.updateSlew(5, 5, 30.0);
+                    DriveCommands.updateSlew(7, 7, 36.0);
                     m_slewMode = 1;
                 }
             break;
             case L4:
             case BARGE:
                 if (m_slewMode != 2) {
-                    DriveCommands.updateSlew(3.4, 3.4, 30.0);
+                    DriveCommands.updateSlew(4.0, 4.0, 36.0);
                     m_slewMode = 2;
                 }
             break;
             default:
                 if (m_slewMode != 3) {
-                    DriveCommands.updateSlew(10.0, 10.0, 30.0);
+                    DriveCommands.updateSlew(12.0, 12.0, 36.0);
                     m_slewMode = 3;
                 }
             break;

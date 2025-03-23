@@ -22,7 +22,7 @@ public class CoralArm extends SubsystemBase{
         m_Nova.setMaxCurrent(CurrentType.STATOR, 40.0);
         m_Nova.setMaxCurrent(CurrentType.SUPPLY, 30.0);
         m_Nova.setVoltageCompensation(0.0);
-        m_Nova.setBrakeMode(true);
+        m_Nova.setBrakeMode(false);
 
 
         lc = new LaserCan(10);

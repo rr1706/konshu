@@ -3,40 +3,40 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 7.016047297297298,
-        "y": 1.9103040540540541
+        "x": 5.049577702702703,
+        "y": 2.710726351351351
       },
       "prevControl": null,
       "nextControl": {
-        "x": 6.464108187581354,
-        "y": 2.2122670740760957
+        "x": 5.0650219404018015,
+        "y": 2.4611763731076373
       },
       "isLocked": false,
-      "linkedName": null
+      "linkedName": "L4 J"
     },
     {
       "anchor": {
-        "x": 5.025681818181818,
-        "y": 2.7436505681818177
+        "x": 1.7350568181818182,
+        "y": 0.7692755681818187
       },
       "prevControl": {
-        "x": 5.231569083938334,
-        "y": 2.6018393069953176
+        "x": 2.30608917603075,
+        "y": 1.0560310137366489
       },
       "nextControl": null,
       "isLocked": false,
-      "linkedName": "L4 J"
+      "linkedName": "Loading Station"
     }
   ],
   "rotationTargets": [],
   "constraintZones": [
     {
       "name": "Constraints Zone",
-      "minWaypointRelativePos": 0.6500474833808166,
+      "minWaypointRelativePos": 0.7478354978354966,
       "maxWaypointRelativePos": 1.0,
       "constraints": {
         "maxVelocity": 3.8,
-        "maxAcceleration": 3.5,
+        "maxAcceleration": 3.0,
         "maxAngularVelocity": 540.0,
         "maxAngularAcceleration": 720.0,
         "nominalVoltage": 12.0,
@@ -44,22 +44,21 @@
       }
     }
   ],
-  "pointTowardsZones": [],
-  "eventMarkers": [
+  "pointTowardsZones": [
     {
-      "name": "score_point",
-      "waypointRelativePos": 0.0,
-      "endWaypointRelativePos": null,
-      "command": {
-        "type": "named",
-        "data": {
-          "name": "GoL4"
-        }
-      }
+      "fieldPosition": {
+        "x": 4.2,
+        "y": 3.5
+      },
+      "rotationOffset": 0.0,
+      "minWaypointRelativePos": 0.22835497835497964,
+      "maxWaypointRelativePos": 0.75,
+      "name": "Point Towards Zone"
     }
   ],
+  "eventMarkers": [],
   "globalConstraints": {
-    "maxVelocity": 3.8,
+    "maxVelocity": 4.0,
     "maxAcceleration": 4.5,
     "maxAngularVelocity": 540.0,
     "maxAngularAcceleration": 720.0,
@@ -68,13 +67,13 @@
   },
   "goalEndState": {
     "velocity": 0,
-    "rotation": 119.99999999999999
+    "rotation": 54.18391925084435
   },
   "reversed": false,
   "folder": null,
   "idealStartingState": {
-    "velocity": 0.0,
-    "rotation": 135.0
+    "velocity": 0,
+    "rotation": 119.99999999999999
   },
   "useDefaultConstraints": true
 }

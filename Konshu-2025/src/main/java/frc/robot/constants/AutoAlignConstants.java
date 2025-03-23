@@ -17,7 +17,6 @@ public final class AutoAlignConstants {
         public static final Translation2d kFL = new Translation2d(13.563, 4.619);
         public static final Translation2d kFR = new Translation2d(13.279, 4.784);
         public static final Translation2d kEL = new Translation2d(12.811, 4.783);
-
         public static final Translation2d kER = new Translation2d(12.526, 4.62);
         public static final Translation2d kDL = new Translation2d(12.279, 4.19);
         public static final Translation2d kDR = new Translation2d(12.278, 3.862);
