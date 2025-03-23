@@ -25,10 +25,10 @@ public class AlgaeIntakeCommand extends Command {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    m_algaeArm.grabAlgae(1.0);
+    m_algaeArm.runAlgae(1.0);
     m_AlgaeIntake.setPosition(16.0);
     m_AlgaeIntake.setRollers(-0.6);
-    m_ssm.setState(SSM.States.LOADINGSTATION);
+    m_ssm.setState(SSM.States.PROCESSOR);
   }
 
   // Called every time the scheduler runs while the command is scheduled.

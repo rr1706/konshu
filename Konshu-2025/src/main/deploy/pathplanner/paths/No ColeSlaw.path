@@ -3,25 +3,25 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 5.262602459016393,
-        "y": 2.9521004098360653
+        "x": 5.025681818181818,
+        "y": 2.7436505681818177
       },
       "prevControl": null,
       "nextControl": {
-        "x": 5.058811475409836,
-        "y": 2.1369364754098346
+        "x": 4.674070945945946,
+        "y": 2.019003378378377
       },
       "isLocked": false,
-      "linkedName": "L4 I End"
+      "linkedName": "L4 J"
     },
     {
       "anchor": {
-        "x": 1.6183401639344261,
-        "y": 0.9261782786885238
+        "x": 1.7849147727272727,
+        "y": 0.7393607954545461
       },
       "prevControl": {
-        "x": 1.3734047296375353,
-        "y": 0.8761119923693502
+        "x": 2.2691208538083543,
+        "y": 0.8875871468058982
       },
       "nextControl": null,
       "isLocked": false,
@@ -45,7 +45,7 @@
     "rotation": 54.18391925084435
   },
   "reversed": false,
-  "folder": "Box Combo",
+  "folder": null,
   "idealStartingState": {
     "velocity": 0,
     "rotation": 119.99999999999999

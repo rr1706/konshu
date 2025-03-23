@@ -62,9 +62,10 @@ public class Elevator extends SubsystemBase {
             .withReverseSoftLimitEnable(true)
             .withReverseSoftLimitThreshold(ElevatorConstants.kULowerLimitElevator/ElevatorConstants.kInchPerRotation));
 
-        m_ElevatorRightFX.setNeutralMode(NeutralModeValue.Brake);
-
         m_ElevatorRightFX.getConfigurator().apply(new MotorOutputConfigs().withInverted(InvertedValue.Clockwise_Positive));                       
+        m_ElevatorRightFX.setNeutralMode(NeutralModeValue.Brake);
+        m_ElevatorLeftFX.setNeutralMode(NeutralModeValue.Brake);
+
     }
 
     public void setPosition(double position){        // Position in inches

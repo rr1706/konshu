@@ -3,25 +3,25 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 3.9919057377049176,
-        "y": 2.820235655737705
+        "x": 3.942820945945946,
+        "y": 2.740371621621621
       },
       "prevControl": null,
       "nextControl": {
-        "x": 3.2726434426229503,
-        "y": 1.8492315573770486
+        "x": 3.1763715302520743,
+        "y": 2.1206783786901844
       },
       "isLocked": false,
       "linkedName": "L4 K"
     },
     {
       "anchor": {
-        "x": 1.6183401639344261,
-        "y": 0.9261782786885238
+        "x": 1.7849147727272727,
+        "y": 0.7393607954545461
       },
       "prevControl": {
-        "x": 1.420301673146779,
-        "y": 0.7735979517569334
+        "x": 2.2680266309076704,
+        "y": 1.0872946660980092
       },
       "nextControl": null,
       "isLocked": false,
@@ -33,7 +33,7 @@
   "pointTowardsZones": [],
   "eventMarkers": [],
   "globalConstraints": {
-    "maxVelocity": 4.73,
+    "maxVelocity": 3.8,
     "maxAcceleration": 4.5,
     "maxAngularVelocity": 540.0,
     "maxAngularAcceleration": 720.0,
@@ -45,10 +45,10 @@
     "rotation": 54.18391925084435
   },
   "reversed": false,
-  "folder": "Box Combo",
+  "folder": null,
   "idealStartingState": {
     "velocity": 0,
     "rotation": 59.99999999999999
   },
-  "useDefaultConstraints": false
+  "useDefaultConstraints": true
 }

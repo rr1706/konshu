@@ -114,7 +114,7 @@ public class RobotContainer {
         driverController.start().onTrue(DriveCommands.resetFieldOrientation(m_drivetrain));
 
         driverController.leftBumper().whileTrue(new AlgaeIntakeCommand(m_algaeArm, m_AlgaeIntake, m_SSM))
-                .onFalse(new AlgaeIntakeEndCommand(m_AlgaeIntake));
+                .onFalse(new AlgaeIntakeEndCommand(m_AlgaeIntake, m_SSM));
 
         driverController.povUp().onTrue(new InstantCommand(() -> m_arm.jogging(false)));
         driverController.povDown().onTrue(new InstantCommand(() -> m_arm.jogging(true)));
@@ -179,10 +179,10 @@ public class RobotContainer {
     public void configureNamedCommands() {
         NamedCommands.registerCommand("MoveClimberOut", new InstantCommand(() -> m_climber.setPosition(27.0)));
         NamedCommands.registerCommand("ScoreL4",
-                (new WaitCommand(.8))
+                (new WaitCommand(.6))
                         .andThen(m_coralArm.runCoralCmd(-0.35).withTimeout(.2)));
         NamedCommands.registerCommand("ScoreL4Fast",
-                (new WaitCommand(.4))
+                (new WaitCommand(.35))
                         .andThen(m_coralArm.runCoralCmd(-0.35).withTimeout(.2)));
         NamedCommands.registerCommand("GoL4",
                 new InstantCommand(() -> m_SSM.setState(States.L4)));

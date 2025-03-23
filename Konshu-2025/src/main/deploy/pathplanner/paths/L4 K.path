@@ -3,25 +3,25 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 1.6183401639344261,
-        "y": 0.9261782786885238
+        "x": 1.7849147727272727,
+        "y": 0.7393607954545461
       },
       "prevControl": null,
       "nextControl": {
-        "x": 2.553734584877352,
-        "y": 1.642416181311248
+        "x": 2.965830050501523,
+        "y": 1.7441811286620128
       },
       "isLocked": false,
       "linkedName": "Loading Station"
     },
     {
       "anchor": {
-        "x": 3.9919057377049176,
-        "y": 2.820235655737705
+        "x": 3.942820945945946,
+        "y": 2.740371621621621
       },
       "prevControl": {
-        "x": 3.716205144180072,
-        "y": 2.316782397996683
+        "x": 3.848515141590731,
+        "y": 2.5088410291183494
       },
       "nextControl": null,
       "isLocked": false,
@@ -35,8 +35,8 @@
       "minWaypointRelativePos": 0.7981956315289649,
       "maxWaypointRelativePos": 1.0,
       "constraints": {
-        "maxVelocity": 4.73,
-        "maxAcceleration": 3.0,
+        "maxVelocity": 3.8,
+        "maxAcceleration": 3.5,
         "maxAngularVelocity": 540.0,
         "maxAngularAcceleration": 720.0,
         "nominalVoltage": 12.0,
@@ -47,14 +47,19 @@
   "pointTowardsZones": [],
   "eventMarkers": [
     {
-      "name": "ScoreL4Fast",
-      "waypointRelativePos": 0.7013295346628646,
+      "name": "score_point",
+      "waypointRelativePos": 0.40329670329670353,
       "endWaypointRelativePos": null,
-      "command": null
+      "command": {
+        "type": "named",
+        "data": {
+          "name": "GoL4"
+        }
+      }
     }
   ],
   "globalConstraints": {
-    "maxVelocity": 4.73,
+    "maxVelocity": 3.8,
     "maxAcceleration": 4.5,
     "maxAngularVelocity": 540.0,
     "maxAngularAcceleration": 720.0,
@@ -71,5 +76,5 @@
     "velocity": 0,
     "rotation": 54.18391925084435
   },
-  "useDefaultConstraints": false
+  "useDefaultConstraints": true
 }
