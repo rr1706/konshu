@@ -63,8 +63,6 @@ public class RobotContainer {
         m_drivetrain = TunerConstants.createDrivetrain();
 
         configureNamedCommands();
-        configureAutoBuilder();
-
         autoChooser = AutoBuilder.buildAutoChooser("4 L4");
         SmartDashboard.putData("Auto Mode", autoChooser);
         configureDefaultCommands();
@@ -80,36 +78,6 @@ public class RobotContainer {
                         () -> driverController.getRightX()));
     }
 
-    private void configureAutoBuilder() {
-        try {
-            var config = RobotConfig.fromGUISettings();
-            AutoBuilder.configure(
-                    () -> m_drivetrain.getState().Pose, // Supplier of current robot pose
-                    m_drivetrain::resetPose, // Consumer for seeding pose against auto
-
-                    () -> m_drivetrain.getState().Speeds, // Supplier of current robot speeds
-                    // Consumer of ChassisSpeeds and feedforwards to drive the robot
-                    (speeds, feedforwards) -> m_drivetrain.setControl(
-                            m_drivetrain.m_pathApplyRobotSpeeds.withSpeeds(speeds)
-                                    .withWheelForceFeedforwardsX(feedforwards.robotRelativeForcesXNewtons())
-                                    .withWheelForceFeedforwardsY(feedforwards.robotRelativeForcesYNewtons())),
-                    new PPHolonomicDriveController(
-                            // PID constants for translation
-                            new PIDConstants(10, 0, 0),
-                            // PID constants for rotation
-                            new PIDConstants(7, 0, 0)),
-                    config,
-                    // Assume the path needs to be flipped for Red vs Blue, this is normally the
-                    // case
-                    () -> DriverStation.getAlliance().orElse(Alliance.Blue) == Alliance.Red,
-                    m_drivetrain // Subsystem for requirements
-            );
-        } catch (Exception ex) {
-            DriverStation.reportError("Failed to load PathPlanner config and configure AutoBuilder",
-                    ex.getStackTrace());
-        }
-    }
-
     private void configureBindings() {
         driverController.start().onTrue(DriveCommands.resetFieldOrientation(m_drivetrain));
 
@@ -120,25 +88,11 @@ public class RobotContainer {
         driverController.povDown().onTrue(new InstantCommand(() -> m_arm.jogging(true)));
 
         driverController.leftTrigger().onFalse(
-                new InstantCommand(() -> m_funnel.runCoralIn(-.5)).alongWith(new IntakeFromFunnel(m_coralArm)));
+                new InstantCommand(() -> m_funnel.runCoralIn(-.3)).alongWith(new IntakeFromFunnel(m_coralArm)));
         driverController.x().onTrue(new InstantCommand(() -> m_climber.prepClimb())
                 .alongWith(new InstantCommand(() -> m_funnel.runCoralIn(0.0))));
         driverController.b().onTrue(new InstantCommand(() -> m_climber.Climb()))
                 .onFalse(new InstantCommand(() -> m_climber.stop()));
-
-        // driverController.rightTrigger()
-        // .onTrue(new ConditionalCommand(new
-        // WaitCommand(0.030).andThen(m_algaeArm.spitAlgae()),
-        // new ConditionalCommand(m_algaeArm.slowSpitAlgae(),
-        // m_coralArm.runCoralCmd(-0.35), () -> {
-        // return m_SSM.getState() == (SSM.States.PROCESSOR);
-        // }), () -> {
-        // return m_SSM.getState() == (SSM.States.BARGE);
-        // }))
-
-        // .onFalse(
-        // new InstantCommand(() -> m_funnel.runCoralIn(-.4)).alongWith(new
-        // IntakeFromFunnel(m_coralArm)));
 
         driverController.rightTrigger()
                 .onTrue(new ConditionalCommand(new WaitCommand(0.030).andThen(m_algaeArm.spitAlgae()),
@@ -154,7 +108,7 @@ public class RobotContainer {
                             return m_SSM.getState() == (SSM.States.BARGE);
                         }))
                 .onFalse(
-                        new InstantCommand(() -> m_funnel.runCoralIn(-.5)).alongWith(new IntakeFromFunnel(m_coralArm)));
+                        new InstantCommand(() -> m_funnel.runCoralIn(-.3)).alongWith(new IntakeFromFunnel(m_coralArm)));
 
         driverController.a().onTrue(m_algaeArm.grabAlgae(0.8));
         operatorcontoller1.button(9).onTrue(m_algaeArm.grabAlgae(0.8));
@@ -162,7 +116,7 @@ public class RobotContainer {
 
         operatorcontoller2.button(2).whileTrue(new InstantCommand(() -> m_funnel.runCoralIn(.2)))
                 .onFalse(
-                        new InstantCommand(() -> m_funnel.runCoralIn(-.5)).alongWith(new IntakeFromFunnel(m_coralArm)));
+                        new InstantCommand(() -> m_funnel.runCoralIn(-0.3)).alongWith(new IntakeFromFunnel(m_coralArm)));
 
         operatorcontoller2.button(11).whileTrue(m_algaeArm.grabAlgae(.8)
                 .alongWith(new InstantCommand(() -> m_SSM.setState(States.PROCESSOR))))
@@ -183,10 +137,10 @@ public class RobotContainer {
                 (new WaitCommand(.6))
                         .andThen(m_coralArm.runCoralCmd(-0.35).withTimeout(.2)));
         NamedCommands.registerCommand("ScoreL4Fast",
-                (new WaitCommand(.2))
+                (new WaitCommand(.17))
                         .andThen(m_coralArm.runCoralCmd(-0.40).withTimeout(.2)));
         NamedCommands.registerCommand("ScoreL2Fast",
-                (new WaitCommand(.2))
+                (new WaitCommand(.040))
                         .andThen(m_coralArm.runCoralCmd(-0.50).withTimeout(.2)));
         NamedCommands.registerCommand("GoL4",
                 new InstantCommand(() -> m_SSM.setState(States.L4)));
@@ -195,7 +149,7 @@ public class RobotContainer {
         NamedCommands.registerCommand("GoLoadingStationPOS",
                 new InstantCommand(() -> m_SSM.setState(States.LOADINGSTATION)));
         NamedCommands.registerCommand("Run Funnel",
-                new InstantCommand(() -> m_funnel.runCoralIn(-.5)).alongWith(new IntakeFromFunnel(m_coralArm)));
+                new InstantCommand(() -> m_funnel.runCoralIn(-.3)).alongWith(new IntakeFromFunnel(m_coralArm)));
 
         NamedCommands.registerCommand("AlignCRL4", new AlignInAuto(m_drivetrain, () -> {
             DriverStation.Alliance alliance = DriverStation.getAlliance().orElse(DriverStation.Alliance.Blue);

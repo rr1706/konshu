@@ -20,7 +20,7 @@ public class ArmConstants {
   public static final double kArmL1 = 12.1-75.4+17.0;      // Degrees from arm hortizontal
   public static final double kArmL2 = 26.8-75.4+17.0;
   public static final double kArmL3 = 26.8-75.4+17.0;
-  public static final double kArmL4 = 47.5-75.4+17.0;
+  public static final double kArmL4 = -10.0;
   public static final double kArmProcessor = 9.0;
   public static final double kArmBarge = -25.0-75.4+17.0;
   public static final double kArmFeeder = -46.6;

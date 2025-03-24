@@ -3,13 +3,13 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 1.7350568181818182,
-        "y": 0.7692755681818187
+        "x": 1.6951704545454547,
+        "y": 0.7593039772727264
       },
       "prevControl": null,
       "nextControl": {
-        "x": 1.8972016875173319,
-        "y": 1.209140810882287
+        "x": 1.8573153238809683,
+        "y": 1.1991692199731947
       },
       "isLocked": false,
       "linkedName": "Loading Station"
@@ -35,7 +35,7 @@
       "minWaypointRelativePos": 0.7326839826839823,
       "maxWaypointRelativePos": 1.0,
       "constraints": {
-        "maxVelocity": 3.8,
+        "maxVelocity": 4.0,
         "maxAcceleration": 2.5,
         "maxAngularVelocity": 540.0,
         "maxAngularAcceleration": 720.0,

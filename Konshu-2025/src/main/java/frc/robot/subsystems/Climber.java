@@ -18,8 +18,7 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class Climber  extends SubsystemBase{
     public static final TalonFX m_climberRightFx = new TalonFX(18, "*");
-    public static final ThriftyNova m_NovaLeft = new ThriftyNova(19, MotorType.MINION);
-    public static final ThriftyNova m_NovaRight = new ThriftyNova(20, MotorType.MINION);
+   public static final ThriftyNova m_NovaRight = new ThriftyNova(20, MotorType.MINION);
     private Slot0Configs m_Slot0Configs;
     private SoftwareLimitSwitchConfigs m_limits;
 
@@ -52,8 +51,7 @@ public Climber() {
                 .withKD(0)
                 .withKA(0);
         m_climberRightFx.getConfigurator().apply(m_Slot0Configs);
-        m_NovaRight.setInversion(true);
-        m_NovaLeft.setMaxCurrent(CurrentType.STATOR, 40.0);
+        m_NovaRight.setInversion(false);
         m_NovaRight.setMaxCurrent(CurrentType.STATOR, 40.0);
         m_climberRightFx.getConfigurator().apply(new MotorOutputConfigs().withInverted(InvertedValue.Clockwise_Positive));
         m_climberRightFx.setNeutralMode(NeutralModeValue.Brake);
@@ -81,13 +79,11 @@ public Climber() {
 
     public void prepClimb() {
         setPosition(ClimberConstants.kClimbPosition);
-        m_NovaLeft.setPercent(.4);
-        m_NovaRight.setPercent(.4);
+        m_NovaRight.setPercent(.6);
     }
 
     public void Climb() {
         m_climberRightFx.setVoltage(-6.0);
-        m_NovaLeft.setPercent(0);
         m_NovaRight.setPercent(0);
     }
 

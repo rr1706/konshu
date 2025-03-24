@@ -120,7 +120,7 @@ public class CommandSwerveDrivetrain extends TunerSwerveDrivetrain implements Su
                                     .withWheelForceFeedforwardsY(feedforwards.robotRelativeForcesYNewtons())),
                     new PPHolonomicDriveController(
                             // PID constants for translation
-                            new PIDConstants(5, 0, 0),
+                            new PIDConstants(3.0, 0, 0),
                             // PID constants for rotation
                             new PIDConstants(5, 0, 0)),
                     config,
@@ -245,16 +245,22 @@ public class CommandSwerveDrivetrain extends TunerSwerveDrivetrain implements Su
             if (ta > 1.5 && tagCount == 1) {
                 addVisionMeasurement(poseEstimate.pose, timestamp, VecBuilder.fill(VisionConstants.Tag_N1_2.get(ta),
                         VisionConstants.Tag_N1_2.get(ta), VisionConstants.Tag_N3.get(ta)));
-            } else if (ta <= 1.5 && ta >= 0.10 && tagCount == 1 && LimelightHelpers.validPoseEstimate(mt2PoseEstimate)
+            } else if (ta <= 1.5 && ta >= 0.15 && tagCount == 1 && LimelightHelpers.validPoseEstimate(mt2PoseEstimate)
                     && getState().Speeds.omegaRadiansPerSecond <= Math.PI) {
                 addVisionMeasurement(mt2PoseEstimate.pose, mt2PoseEstimate.timestampSeconds,
                         VecBuilder.fill(VisionConstants.megaTag2TreeMap.get(ta),
                                 VisionConstants.megaTag2TreeMap.get(ta), 999999));
-            } else if (ta >= 0.15 && tagCount >= 2) {
+            } else if (ta >= 0.25 && tagCount >= 2) {
                 addVisionMeasurement(poseEstimate.pose, timestamp, VecBuilder.fill(VisionConstants.MultTag_N1_2.get(ta),
                         VisionConstants.MultTag_N1_2.get(ta), VisionConstants.MultTag_N3.get(ta)));
 
+            } else if (ta <= 1.5 && ta >= 0.10 && tagCount == 2 && LimelightHelpers.validPoseEstimate(mt2PoseEstimate)
+                    && getState().Speeds.omegaRadiansPerSecond <= Math.PI) {
+                addVisionMeasurement(mt2PoseEstimate.pose, mt2PoseEstimate.timestampSeconds,
+                        VecBuilder.fill(VisionConstants.megaTag2TreeMap.get(ta),
+                                VisionConstants.megaTag2TreeMap.get(ta), 999999));
             }
+
         }
     }
 
