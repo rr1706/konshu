@@ -13,7 +13,7 @@
         {
           "type": "path",
           "data": {
-            "pathName": "L4 EL"
+            "pathName": "Start L4 CR"
           }
         },
         {
@@ -23,7 +23,7 @@
               {
                 "type": "named",
                 "data": {
-                  "name": "AlignELL4"
+                  "name": "AlignCRL4"
                 }
               },
               {
@@ -58,13 +58,13 @@
                     {
                       "type": "path",
                       "data": {
-                        "pathName": "EL LS"
+                        "pathName": "CR LS"
                       }
                     },
                     {
                       "type": "path",
                       "data": {
-                        "pathName": "L4 FR"
+                        "pathName": "L4 BL"
                       }
                     }
                   ]
@@ -86,7 +86,7 @@
               {
                 "type": "named",
                 "data": {
-                  "name": "AlignFRL4"
+                  "name": "AlignBLL4"
                 }
               }
             ]
@@ -115,13 +115,13 @@
                     {
                       "type": "path",
                       "data": {
-                        "pathName": "FR LS"
+                        "pathName": "BL LS"
                       }
                     },
                     {
                       "type": "path",
                       "data": {
-                        "pathName": "L4 FL"
+                        "pathName": "L4 BR"
                       }
                     }
                   ]
@@ -143,7 +143,7 @@
               {
                 "type": "named",
                 "data": {
-                  "name": "AlignFLL4"
+                  "name": "AlignBRL4"
                 }
               }
             ]
@@ -172,13 +172,13 @@
                     {
                       "type": "path",
                       "data": {
-                        "pathName": "FL LS"
+                        "pathName": "BR LS"
                       }
                     },
                     {
                       "type": "path",
                       "data": {
-                        "pathName": "L4 AR"
+                        "pathName": "L4 AL"
                       }
                     }
                   ]
@@ -200,7 +200,7 @@
               {
                 "type": "named",
                 "data": {
-                  "name": "AlignARL2"
+                  "name": "AlignALL2"
                 }
               }
             ]

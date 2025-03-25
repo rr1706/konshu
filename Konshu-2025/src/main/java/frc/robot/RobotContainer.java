@@ -148,6 +148,8 @@ public class RobotContainer {
                 new InstantCommand(() -> m_SSM.setState(States.L2)));
         NamedCommands.registerCommand("GoLoadingStationPOS",
                 new InstantCommand(() -> m_SSM.setState(States.LOADINGSTATION)));
+        NamedCommands.registerCommand("UseMT2", m_drivetrain.useMT2(true));
+        NamedCommands.registerCommand("NoMT2", m_drivetrain.useMT2(false));
         NamedCommands.registerCommand("Run Funnel",
                 new InstantCommand(() -> m_funnel.runCoralIn(-.3)).alongWith(new IntakeFromFunnel(m_coralArm)));
 
@@ -201,6 +203,14 @@ public class RobotContainer {
                 return AutoAlignConstants.BlueAllianceConstants.kAR;
             } else {
                 return AutoAlignConstants.RedAllianceConstants.kAR;
+            }
+        }, SSM.States.L2, m_SSM));
+        NamedCommands.registerCommand("AlignALL2", new AlignInAuto(m_drivetrain, () -> {
+            DriverStation.Alliance alliance = DriverStation.getAlliance().orElse(DriverStation.Alliance.Blue);
+            if (alliance == DriverStation.Alliance.Blue) {
+                return AutoAlignConstants.BlueAllianceConstants.kAL;
+            } else {
+                return AutoAlignConstants.RedAllianceConstants.kAL;
             }
         }, SSM.States.L2, m_SSM));
         NamedCommands.registerCommand("AlignALL4", new AlignInAuto(m_drivetrain, () -> {
@@ -285,6 +295,6 @@ public class RobotContainer {
     }
 
     public Command getTeleInitCommand() {
-        return new InstantCommand(() -> m_climber.setPosition(27.0));
+        return new InstantCommand(() -> m_climber.setPosition(27.0)).alongWith(m_drivetrain.useMT2(true));
     }
 }

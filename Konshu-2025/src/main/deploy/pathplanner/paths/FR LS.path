@@ -21,7 +21,7 @@
       },
       "prevControl": {
         "x": 1.8670280035599405,
-        "y": 0.9408665913945041
+        "y": 0.9408665913945042
       },
       "nextControl": null,
       "isLocked": false,
@@ -29,26 +29,24 @@
     }
   ],
   "rotationTargets": [],
-  "constraintZones": [
+  "constraintZones": [],
+  "pointTowardsZones": [],
+  "eventMarkers": [
     {
-      "name": "Constraints Zone",
-      "minWaypointRelativePos": 0.7521645021645001,
-      "maxWaypointRelativePos": 1.0,
-      "constraints": {
-        "maxVelocity": 4.0,
-        "maxAcceleration": 3.0,
-        "maxAngularVelocity": 540.0,
-        "maxAngularAcceleration": 720.0,
-        "nominalVoltage": 12.0,
-        "unlimited": false
+      "name": "MT2",
+      "waypointRelativePos": 0.052884615384614794,
+      "endWaypointRelativePos": null,
+      "command": {
+        "type": "named",
+        "data": {
+          "name": "UseMT2"
+        }
       }
     }
   ],
-  "pointTowardsZones": [],
-  "eventMarkers": [],
   "globalConstraints": {
     "maxVelocity": 4.0,
-    "maxAcceleration": 4.5,
+    "maxAcceleration": 3.6,
     "maxAngularVelocity": 540.0,
     "maxAngularAcceleration": 720.0,
     "nominalVoltage": 12.0,

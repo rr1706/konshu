@@ -23,6 +23,7 @@ import edu.wpi.first.wpilibj.DriverStation.Alliance;
 import edu.wpi.first.wpilibj.smartdashboard.Field2d;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.Subsystem;
 import frc.robot.LimelightHelpers;
 import frc.robot.LimelightHelpers.PoseEstimate;
@@ -38,6 +39,8 @@ public class CommandSwerveDrivetrain extends TunerSwerveDrivetrain implements Su
     // private Notifier m_simNotifier = null;
     // private double m_lastSimTime;
     private final Field2d m_field = new Field2d();
+
+    private boolean m_useMT2 = false;
 
     /* Blue alliance sees forward as 0 degrees (toward red alliance wall) */
     private static final Rotation2d kBlueAlliancePerspectiveRotation = Rotation2d.kZero;
@@ -120,9 +123,9 @@ public class CommandSwerveDrivetrain extends TunerSwerveDrivetrain implements Su
                                     .withWheelForceFeedforwardsY(feedforwards.robotRelativeForcesYNewtons())),
                     new PPHolonomicDriveController(
                             // PID constants for translation
-                            new PIDConstants(3.0, 0, 0),
+                            new PIDConstants(10.0, 0, 0),
                             // PID constants for rotation
-                            new PIDConstants(5, 0, 0)),
+                            new PIDConstants(10.0, 0, 0)),
                     config,
                     // Assume the path needs to be flipped for Red vs Blue, this is normally the
                     // case
@@ -242,11 +245,11 @@ public class CommandSwerveDrivetrain extends TunerSwerveDrivetrain implements Su
             double tagCount = poseEstimate.tagCount;
 
             SmartDashboard.putNumber("TA", ta);
-            if (ta > 1.5 && tagCount == 1) {
+            if (ta > 0.5 && tagCount == 1) {
                 addVisionMeasurement(poseEstimate.pose, timestamp, VecBuilder.fill(VisionConstants.Tag_N1_2.get(ta),
                         VisionConstants.Tag_N1_2.get(ta), VisionConstants.Tag_N3.get(ta)));
-            } else if (ta <= 1.5 && ta >= 0.15 && tagCount == 1 && LimelightHelpers.validPoseEstimate(mt2PoseEstimate)
-                    && getState().Speeds.omegaRadiansPerSecond <= Math.PI) {
+            } else if (ta <= 0.5 && ta >= 0.15 && tagCount == 1 && LimelightHelpers.validPoseEstimate(mt2PoseEstimate)
+                    && getState().Speeds.omegaRadiansPerSecond <= Math.PI && !m_useMT2) {
                 addVisionMeasurement(mt2PoseEstimate.pose, mt2PoseEstimate.timestampSeconds,
                         VecBuilder.fill(VisionConstants.megaTag2TreeMap.get(ta),
                                 VisionConstants.megaTag2TreeMap.get(ta), 999999));
@@ -254,13 +257,26 @@ public class CommandSwerveDrivetrain extends TunerSwerveDrivetrain implements Su
                 addVisionMeasurement(poseEstimate.pose, timestamp, VecBuilder.fill(VisionConstants.MultTag_N1_2.get(ta),
                         VisionConstants.MultTag_N1_2.get(ta), VisionConstants.MultTag_N3.get(ta)));
 
-            } else if (ta <= 1.5 && ta >= 0.10 && tagCount == 2 && LimelightHelpers.validPoseEstimate(mt2PoseEstimate)
-                    && getState().Speeds.omegaRadiansPerSecond <= Math.PI) {
+            } else if (ta <= .25 && ta >= 0.10 && tagCount == 2 && LimelightHelpers.validPoseEstimate(mt2PoseEstimate)
+                    && getState().Speeds.omegaRadiansPerSecond <= Math.PI && !m_useMT2) {
                 addVisionMeasurement(mt2PoseEstimate.pose, mt2PoseEstimate.timestampSeconds,
                         VecBuilder.fill(VisionConstants.megaTag2TreeMap.get(ta),
                                 VisionConstants.megaTag2TreeMap.get(ta), 999999));
             }
 
+        }
+    }
+
+    public Command useMT2(boolean use){
+        if(use){
+            return new InstantCommand(()->{
+                m_useMT2 = true;
+            });
+        }
+        else{
+            return new InstantCommand(()->{
+                m_useMT2 = false;
+            });
         }
     }
 

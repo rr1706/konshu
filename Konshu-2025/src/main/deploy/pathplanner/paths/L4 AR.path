@@ -16,12 +16,12 @@
     },
     {
       "anchor": {
-        "x": 3.1510227272727276,
-        "y": 3.8106107954545454
+        "x": 3.0732263513513516,
+        "y": 3.8076013513513502
       },
       "prevControl": {
-        "x": 2.9615625000000003,
-        "y": 3.4017755681818183
+        "x": 2.8837661240786243,
+        "y": 3.398766124078623
       },
       "nextControl": null,
       "isLocked": false,
@@ -29,21 +29,7 @@
     }
   ],
   "rotationTargets": [],
-  "constraintZones": [
-    {
-      "name": "Constraints Zone",
-      "minWaypointRelativePos": 0.7326839826839823,
-      "maxWaypointRelativePos": 1.0,
-      "constraints": {
-        "maxVelocity": 4.0,
-        "maxAcceleration": 2.5,
-        "maxAngularVelocity": 540.0,
-        "maxAngularAcceleration": 720.0,
-        "nominalVoltage": 12.0,
-        "unlimited": false
-      }
-    }
-  ],
+  "constraintZones": [],
   "pointTowardsZones": [],
   "eventMarkers": [
     {
@@ -56,11 +42,22 @@
           "name": "GoL2"
         }
       }
+    },
+    {
+      "name": "Dont Use MT2",
+      "waypointRelativePos": 0.4004120879120886,
+      "endWaypointRelativePos": null,
+      "command": {
+        "type": "named",
+        "data": {
+          "name": "NoMT2"
+        }
+      }
     }
   ],
   "globalConstraints": {
     "maxVelocity": 4.0,
-    "maxAcceleration": 4.5,
+    "maxAcceleration": 3.6,
     "maxAngularVelocity": 540.0,
     "maxAngularAcceleration": 720.0,
     "nominalVoltage": 12.0,

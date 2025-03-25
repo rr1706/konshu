@@ -23,7 +23,7 @@ public class AlgaeIntakeEndCommand extends Command{
     // Called when the command is initially scheduled.
     @Override
     public void initialize() {
-      m_AlgaeIntake.setPosition(1.0);
+      m_AlgaeIntake.setPosition(0.1);
       m_AlgaeIntake.setRollers(0.3);
       m_time.reset();
       m_time.start();

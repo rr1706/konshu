@@ -52,6 +52,7 @@ public Climber() {
                 .withKA(0);
         m_climberRightFx.getConfigurator().apply(m_Slot0Configs);
         m_NovaRight.setInversion(false);
+        m_NovaRight.setNTLogging(true);
         m_NovaRight.setMaxCurrent(CurrentType.STATOR, 40.0);
         m_climberRightFx.getConfigurator().apply(new MotorOutputConfigs().withInverted(InvertedValue.Clockwise_Positive));
         m_climberRightFx.setNeutralMode(NeutralModeValue.Brake);
@@ -79,13 +80,12 @@ public Climber() {
 
     public void prepClimb() {
         setPosition(ClimberConstants.kClimbPosition);
-        m_NovaRight.setPercent(.6);
+        m_NovaRight.setPercent(.4);
+        m_NovaRight.setPercent(.4);
     }
 
     public void Climb() {
-        m_climberRightFx.setVoltage(-6.0);
+        m_climberRightFx.setVoltage(-5.0);
         m_NovaRight.setPercent(0);
     }
-
-   
 }
