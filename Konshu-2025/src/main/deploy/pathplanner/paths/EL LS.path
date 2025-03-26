@@ -3,45 +3,39 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 5.069341216216216,
-        "y": 2.7502533783783782
+        "x": 5.055596590909091,
+        "y": 2.76359375
       },
       "prevControl": null,
       "nextControl": {
-        "x": 5.084785453915314,
-        "y": 2.5007034001346646
+        "x": 4.010285231923531,
+        "y": 1.9346505326926837
       },
       "isLocked": false,
       "linkedName": "L4 J"
     },
     {
       "anchor": {
-        "x": 1.6951704545454547,
-        "y": 0.7593039772727264
+        "x": 1.6403716216216213,
+        "y": 0.6750844594594594
       },
       "prevControl": {
-        "x": 2.2662028123943867,
-        "y": 1.0460594228275566
+        "x": 1.8416719836901132,
+        "y": 0.852929986645235
       },
       "nextControl": null,
       "isLocked": false,
       "linkedName": "Loading Station"
     }
   ],
-  "rotationTargets": [],
-  "constraintZones": [],
-  "pointTowardsZones": [
+  "rotationTargets": [
     {
-      "fieldPosition": {
-        "x": 4.2,
-        "y": 3.5
-      },
-      "rotationOffset": 0.0,
-      "minWaypointRelativePos": 0.22835497835497964,
-      "maxWaypointRelativePos": 0.75,
-      "name": "Point Towards Zone"
+      "waypointRelativePos": 0.6158785755983657,
+      "rotationDegrees": 54.0
     }
   ],
+  "constraintZones": [],
+  "pointTowardsZones": [],
   "eventMarkers": [
     {
       "name": "MT2",
@@ -57,7 +51,7 @@
   ],
   "globalConstraints": {
     "maxVelocity": 4.0,
-    "maxAcceleration": 3.6,
+    "maxAcceleration": 3.75,
     "maxAngularVelocity": 540.0,
     "maxAngularAcceleration": 720.0,
     "nominalVoltage": 12.0,
@@ -65,7 +59,7 @@
   },
   "goalEndState": {
     "velocity": 0,
-    "rotation": 54.18391925084435
+    "rotation": 54.0
   },
   "reversed": false,
   "folder": null,

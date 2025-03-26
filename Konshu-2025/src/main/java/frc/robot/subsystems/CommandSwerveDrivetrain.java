@@ -41,6 +41,7 @@ public class CommandSwerveDrivetrain extends TunerSwerveDrivetrain implements Su
     private final Field2d m_field = new Field2d();
 
     private boolean m_useMT2 = false;
+    private boolean m_useVision = false;
 
     /* Blue alliance sees forward as 0 degrees (toward red alliance wall) */
     private static final Rotation2d kBlueAlliancePerspectiveRotation = Rotation2d.kZero;
@@ -249,19 +250,19 @@ public class CommandSwerveDrivetrain extends TunerSwerveDrivetrain implements Su
                 addVisionMeasurement(poseEstimate.pose, timestamp, VecBuilder.fill(VisionConstants.Tag_N1_2.get(ta),
                         VisionConstants.Tag_N1_2.get(ta), VisionConstants.Tag_N3.get(ta)));
             } else if (ta <= 0.5 && ta >= 0.15 && tagCount == 1 && LimelightHelpers.validPoseEstimate(mt2PoseEstimate)
-                    && getState().Speeds.omegaRadiansPerSecond <= Math.PI && !m_useMT2) {
+                    && getState().Speeds.omegaRadiansPerSecond <= 2*Math.PI && !m_useMT2) {
                 addVisionMeasurement(mt2PoseEstimate.pose, mt2PoseEstimate.timestampSeconds,
-                        VecBuilder.fill(VisionConstants.megaTag2TreeMap.get(ta),
-                                VisionConstants.megaTag2TreeMap.get(ta), 999999));
+                        VecBuilder.fill(VisionConstants.Tag_N1_2.get(ta),
+                                VisionConstants.Tag_N1_2.get(ta), 999999));
             } else if (ta >= 0.25 && tagCount >= 2) {
                 addVisionMeasurement(poseEstimate.pose, timestamp, VecBuilder.fill(VisionConstants.MultTag_N1_2.get(ta),
                         VisionConstants.MultTag_N1_2.get(ta), VisionConstants.MultTag_N3.get(ta)));
 
             } else if (ta <= .25 && ta >= 0.10 && tagCount == 2 && LimelightHelpers.validPoseEstimate(mt2PoseEstimate)
-                    && getState().Speeds.omegaRadiansPerSecond <= Math.PI && !m_useMT2) {
+                    && getState().Speeds.omegaRadiansPerSecond <= 2*Math.PI && !m_useMT2) {
                 addVisionMeasurement(mt2PoseEstimate.pose, mt2PoseEstimate.timestampSeconds,
-                        VecBuilder.fill(VisionConstants.megaTag2TreeMap.get(ta),
-                                VisionConstants.megaTag2TreeMap.get(ta), 999999));
+                        VecBuilder.fill(VisionConstants.MultTag_N1_2.get(ta),
+                                VisionConstants.MultTag_N1_2.get(ta), 999999));
             }
 
         }

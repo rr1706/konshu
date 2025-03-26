@@ -3,13 +3,13 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 1.6951704545454547,
-        "y": 0.7593039772727264
+        "x": 1.6403716216216213,
+        "y": 0.6750844594594594
       },
       "prevControl": null,
       "nextControl": {
-        "x": 2.584528562653563,
-        "y": 1.1743377610565093
+        "x": 2.5297297297297296,
+        "y": 1.0901182432432424
       },
       "isLocked": false,
       "linkedName": "Loading Station"
@@ -71,7 +71,7 @@
   ],
   "globalConstraints": {
     "maxVelocity": 4.0,
-    "maxAcceleration": 3.6,
+    "maxAcceleration": 3.75,
     "maxAngularVelocity": 540.0,
     "maxAngularAcceleration": 720.0,
     "nominalVoltage": 12.0,
@@ -85,7 +85,7 @@
   "folder": null,
   "idealStartingState": {
     "velocity": 0,
-    "rotation": 54.18391925084435
+    "rotation": 54.0
   },
   "useDefaultConstraints": true
 }

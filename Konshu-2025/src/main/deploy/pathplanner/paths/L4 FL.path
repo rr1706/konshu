@@ -3,13 +3,13 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 1.6951704545454547,
-        "y": 0.7593039772727264
+        "x": 1.6403716216216213,
+        "y": 0.6750844594594594
       },
       "prevControl": null,
       "nextControl": {
-        "x": 1.8579336675906422,
-        "y": 1.109705144394733
+        "x": 1.8031348346668088,
+        "y": 1.025485626581466
       },
       "isLocked": false,
       "linkedName": "Loading Station"
@@ -33,6 +33,17 @@
   "pointTowardsZones": [],
   "eventMarkers": [
     {
+      "name": "score_point",
+      "waypointRelativePos": 0.05081300813008219,
+      "endWaypointRelativePos": null,
+      "command": {
+        "type": "named",
+        "data": {
+          "name": "GoL4"
+        }
+      }
+    },
+    {
       "name": "Dont Use MT2",
       "waypointRelativePos": 0.39629120879120866,
       "endWaypointRelativePos": null,
@@ -42,22 +53,11 @@
           "name": "NoMT2"
         }
       }
-    },
-    {
-      "name": "score_point",
-      "waypointRelativePos": 0.39718614718615397,
-      "endWaypointRelativePos": null,
-      "command": {
-        "type": "named",
-        "data": {
-          "name": "GoL4"
-        }
-      }
     }
   ],
   "globalConstraints": {
     "maxVelocity": 4.0,
-    "maxAcceleration": 3.6,
+    "maxAcceleration": 3.75,
     "maxAngularVelocity": 540.0,
     "maxAngularAcceleration": 720.0,
     "nominalVoltage": 12.0,
@@ -71,7 +71,7 @@
   "folder": null,
   "idealStartingState": {
     "velocity": 0,
-    "rotation": 54.18391925084435
+    "rotation": 54.0
   },
   "useDefaultConstraints": true
 }

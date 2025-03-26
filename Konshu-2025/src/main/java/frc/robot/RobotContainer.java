@@ -116,7 +116,8 @@ public class RobotContainer {
 
         operatorcontoller2.button(2).whileTrue(new InstantCommand(() -> m_funnel.runCoralIn(.2)))
                 .onFalse(
-                        new InstantCommand(() -> m_funnel.runCoralIn(-0.3)).alongWith(new IntakeFromFunnel(m_coralArm)));
+                        new InstantCommand(() -> m_funnel.runCoralIn(-0.3))
+                                .alongWith(new IntakeFromFunnel(m_coralArm)));
 
         operatorcontoller2.button(11).whileTrue(m_algaeArm.grabAlgae(.8)
                 .alongWith(new InstantCommand(() -> m_SSM.setState(States.PROCESSOR))))
@@ -132,13 +133,19 @@ public class RobotContainer {
     }
 
     public void configureNamedCommands() {
-        NamedCommands.registerCommand("MoveClimberOut", new InstantCommand(() -> m_climber.setPosition(27.0)));
+        NamedCommands.registerCommand("MoveClimberOut", new InstantCommand(() -> m_climber.setPosition(ClimberConstants.kDeployPosition)));
         NamedCommands.registerCommand("ScoreL4",
                 (new WaitCommand(.6))
                         .andThen(m_coralArm.runCoralCmd(-0.35).withTimeout(.2)));
         NamedCommands.registerCommand("ScoreL4Fast",
                 (new WaitCommand(.17))
-                        .andThen(m_coralArm.runCoralCmd(-0.40).withTimeout(.2)));
+                        .andThen(m_coralArm.runCoralCmd(-0.45).withTimeout(.2)));
+        NamedCommands.registerCommand("ScoreL4Faster",
+                (new WaitCommand(.13))
+                        .andThen(m_coralArm.runCoralCmd(-0.45).withTimeout(.2)));
+                        NamedCommands.registerCommand("ScoreL4Final",
+                        (new WaitCommand(.17))
+                                .andThen(m_coralArm.runCoralCmd(-0.45).withTimeout(.5)));
         NamedCommands.registerCommand("ScoreL2Fast",
                 (new WaitCommand(.040))
                         .andThen(m_coralArm.runCoralCmd(-0.50).withTimeout(.2)));
@@ -151,7 +158,7 @@ public class RobotContainer {
         NamedCommands.registerCommand("UseMT2", m_drivetrain.useMT2(true));
         NamedCommands.registerCommand("NoMT2", m_drivetrain.useMT2(false));
         NamedCommands.registerCommand("Run Funnel",
-                new InstantCommand(() -> m_funnel.runCoralIn(-.3)).alongWith(new IntakeFromFunnel(m_coralArm)));
+                new InstantCommand(() -> m_funnel.runCoralIn(-0.3)).alongWith(new IntakeFromFunnel(m_coralArm)));
 
         NamedCommands.registerCommand("AlignCRL4", new AlignInAuto(m_drivetrain, () -> {
             DriverStation.Alliance alliance = DriverStation.getAlliance().orElse(DriverStation.Alliance.Blue);
@@ -295,6 +302,6 @@ public class RobotContainer {
     }
 
     public Command getTeleInitCommand() {
-        return new InstantCommand(() -> m_climber.setPosition(27.0)).alongWith(m_drivetrain.useMT2(true));
+        return new InstantCommand(() -> m_climber.setPosition(ClimberConstants.kDeployPosition)).alongWith(m_drivetrain.useMT2(true));
     }
 }

@@ -3,13 +3,13 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 1.6951704545454547,
-        "y": 0.7593039772727264
+        "x": 1.6403716216216213,
+        "y": 0.6750844594594594
       },
       "prevControl": null,
       "nextControl": {
-        "x": 2.2685059027457597,
-        "y": 1.2970323648107835
+        "x": 2.2137070698219263,
+        "y": 1.2128128469975166
       },
       "isLocked": false,
       "linkedName": "Loading Station"
@@ -74,7 +74,7 @@
   "folder": null,
   "idealStartingState": {
     "velocity": 0,
-    "rotation": 54.18391925084435
+    "rotation": 54.0
   },
   "useDefaultConstraints": false
 }

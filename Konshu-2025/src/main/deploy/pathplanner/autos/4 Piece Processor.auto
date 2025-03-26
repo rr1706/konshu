@@ -42,7 +42,7 @@
               {
                 "type": "named",
                 "data": {
-                  "name": "ScoreL4Fast"
+                  "name": "ScoreL4Faster"
                 }
               }
             ]
@@ -207,13 +207,13 @@
               {
                 "type": "named",
                 "data": {
-                  "name": "ScoreL2Fast"
+                  "name": "ScoreL4Final"
                 }
               },
               {
                 "type": "named",
                 "data": {
-                  "name": "AlignARL2"
+                  "name": "AlignARL4"
                 }
               }
             ]
