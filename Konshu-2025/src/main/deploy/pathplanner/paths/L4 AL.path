@@ -3,25 +3,25 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 1.7741803278688524,
-        "y": 7.315624999999999
+        "x": 1.64,
+        "y": 7.3768
       },
       "prevControl": null,
       "nextControl": {
-        "x": 2.047935693627733,
-        "y": 6.933682769604283
+        "x": 2.263386143568481,
+        "y": 6.015771449231568
       },
       "isLocked": false,
       "linkedName": "Path 2 LS 1"
     },
     {
       "anchor": {
-        "x": 3.1510227272727276,
-        "y": 4.2408
+        "x": 3.091,
+        "y": 4.261
       },
       "prevControl": {
-        "x": 3.113043708382132,
-        "y": 4.487898349092235
+        "x": 2.5627540773546356,
+        "y": 4.679607507348527
       },
       "nextControl": null,
       "isLocked": false,
@@ -32,11 +32,11 @@
   "constraintZones": [
     {
       "name": "Constraints Zone",
-      "minWaypointRelativePos": 0.7326839826839823,
+      "minWaypointRelativePos": 0.8,
       "maxWaypointRelativePos": 1.0,
       "constraints": {
         "maxVelocity": 4.0,
-        "maxAcceleration": 2.5,
+        "maxAcceleration": 3.0,
         "maxAngularVelocity": 540.0,
         "maxAngularAcceleration": 720.0,
         "nominalVoltage": 12.0,
@@ -48,12 +48,23 @@
   "eventMarkers": [
     {
       "name": "score_point",
-      "waypointRelativePos": 0.39718614718615397,
+      "waypointRelativePos": 0.054383116883116894,
       "endWaypointRelativePos": null,
       "command": {
         "type": "named",
         "data": {
-          "name": "GoL2"
+          "name": "GoL4"
+        }
+      }
+    },
+    {
+      "name": "Dont Use MT2",
+      "waypointRelativePos": 0.39529220779220964,
+      "endWaypointRelativePos": null,
+      "command": {
+        "type": "named",
+        "data": {
+          "name": "NoMT2"
         }
       }
     }
@@ -68,13 +79,13 @@
   },
   "goalEndState": {
     "velocity": 0,
-    "rotation": -3.9
+    "rotation": -2.54
   },
   "reversed": false,
   "folder": null,
   "idealStartingState": {
     "velocity": 0,
-    "rotation": -53.0
+    "rotation": -54.0
   },
   "useDefaultConstraints": true
 }

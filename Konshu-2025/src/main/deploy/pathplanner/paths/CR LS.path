@@ -3,60 +3,52 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 5.049577702702703,
-        "y": 5.3308
+        "x": 5.056,
+        "y": 5.2878
       },
       "prevControl": null,
       "nextControl": {
-        "x": 5.065020090432605,
-        "y": 5.580350092728381
+        "x": 4.010769893640644,
+        "y": 6.11668480789553
       },
       "isLocked": false,
       "linkedName": "CR End"
     },
     {
       "anchor": {
-        "x": 1.7741803278688524,
-        "y": 7.315624999999999
+        "x": 1.64,
+        "y": 7.3768
       },
       "prevControl": {
-        "x": 2.3452148899220706,
-        "y": 7.028873943844054
+        "x": 1.8415934781258145,
+        "y": 7.198695902413402
       },
       "nextControl": null,
       "isLocked": false,
       "linkedName": "Path 2 LS 1"
     }
   ],
-  "rotationTargets": [],
-  "constraintZones": [
+  "rotationTargets": [
     {
-      "name": "Constraints Zone",
-      "minWaypointRelativePos": 0.7478354978354966,
-      "maxWaypointRelativePos": 1.0,
-      "constraints": {
-        "maxVelocity": 3.8,
-        "maxAcceleration": 3.0,
-        "maxAngularVelocity": 540.0,
-        "maxAngularAcceleration": 720.0,
-        "nominalVoltage": 12.0,
-        "unlimited": false
+      "waypointRelativePos": 0.6230031948881751,
+      "rotationDegrees": -54.0
+    }
+  ],
+  "constraintZones": [],
+  "pointTowardsZones": [],
+  "eventMarkers": [
+    {
+      "name": "MT2",
+      "waypointRelativePos": 0.05134189031505425,
+      "endWaypointRelativePos": null,
+      "command": {
+        "type": "named",
+        "data": {
+          "name": "UseMT2"
+        }
       }
     }
   ],
-  "pointTowardsZones": [
-    {
-      "fieldPosition": {
-        "x": 4.2,
-        "y": 3.5
-      },
-      "rotationOffset": 0.0,
-      "minWaypointRelativePos": 0.22835497835497964,
-      "maxWaypointRelativePos": 0.75,
-      "name": "Point Towards Zone"
-    }
-  ],
-  "eventMarkers": [],
   "globalConstraints": {
     "maxVelocity": 4.0,
     "maxAcceleration": 3.75,
@@ -67,7 +59,7 @@
   },
   "goalEndState": {
     "velocity": 0,
-    "rotation": -53.0
+    "rotation": -54.0
   },
   "reversed": false,
   "folder": null,

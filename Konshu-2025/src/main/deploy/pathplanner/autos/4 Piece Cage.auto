@@ -5,15 +5,28 @@
     "data": {
       "commands": [
         {
-          "type": "named",
+          "type": "parallel",
           "data": {
-            "name": "MoveClimberOut"
-          }
-        },
-        {
-          "type": "path",
-          "data": {
-            "pathName": "Start L4 CR"
+            "commands": [
+              {
+                "type": "path",
+                "data": {
+                  "pathName": "Start L4 CR"
+                }
+              },
+              {
+                "type": "named",
+                "data": {
+                  "name": "MoveClimberOut"
+                }
+              },
+              {
+                "type": "named",
+                "data": {
+                  "name": "NoMT2"
+                }
+              }
+            ]
           }
         },
         {
@@ -29,7 +42,7 @@
               {
                 "type": "named",
                 "data": {
-                  "name": "ScoreL4Fast"
+                  "name": "ScoreL4Faster"
                 }
               }
             ]
@@ -194,13 +207,13 @@
               {
                 "type": "named",
                 "data": {
-                  "name": "ScoreL2Fast"
+                  "name": "ScoreL4Final"
                 }
               },
               {
                 "type": "named",
                 "data": {
-                  "name": "AlignALL2"
+                  "name": "AlignALL4"
                 }
               }
             ]

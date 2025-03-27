@@ -3,13 +3,13 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 1.7741803278688524,
-        "y": 7.315624999999999
+        "x": 1.64,
+        "y": 7.3768
       },
       "prevControl": null,
       "nextControl": {
-        "x": 2.3022251929328315,
-        "y": 6.68917304080255
+        "x": 2.1680448650639788,
+        "y": 6.750348040802551
       },
       "isLocked": false,
       "linkedName": "Path 2 LS 1"
@@ -74,7 +74,7 @@
   "folder": "L4 - 3A - 2A - 2B",
   "idealStartingState": {
     "velocity": 0,
-    "rotation": -53.0
+    "rotation": -54.0
   },
   "useDefaultConstraints": false
 }

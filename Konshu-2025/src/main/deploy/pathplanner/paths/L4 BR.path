@@ -3,13 +3,13 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 1.7741803278688524,
-        "y": 7.315624999999999
+        "x": 1.64,
+        "y": 7.3768
       },
       "prevControl": null,
       "nextControl": {
-        "x": 1.9651660254702865,
-        "y": 7.086696086565282
+        "x": 1.8026114793264503,
+        "y": 7.026723570071815
       },
       "isLocked": false,
       "linkedName": "Path 2 LS 1"
@@ -20,8 +20,8 @@
         "y": 5.1628
       },
       "prevControl": {
-        "x": 3.5049832541080677,
-        "y": 5.368980224190503
+        "x": 3.4498437458485105,
+        "y": 5.347943517098892
       },
       "nextControl": null,
       "isLocked": false,
@@ -29,31 +29,28 @@
     }
   ],
   "rotationTargets": [],
-  "constraintZones": [
-    {
-      "name": "Constraints Zone",
-      "minWaypointRelativePos": 0.5967032967032965,
-      "maxWaypointRelativePos": 1.0,
-      "constraints": {
-        "maxVelocity": 3.8,
-        "maxAcceleration": 2.5,
-        "maxAngularVelocity": 540.0,
-        "maxAngularAcceleration": 720.0,
-        "nominalVoltage": 12.0,
-        "unlimited": false
-      }
-    }
-  ],
+  "constraintZones": [],
   "pointTowardsZones": [],
   "eventMarkers": [
     {
       "name": "score_point",
-      "waypointRelativePos": 0.39718614718615397,
+      "waypointRelativePos": 0.05113636363636467,
       "endWaypointRelativePos": null,
       "command": {
         "type": "named",
         "data": {
           "name": "GoL4"
+        }
+      }
+    },
+    {
+      "name": "Dont Use MT2",
+      "waypointRelativePos": 0.3952922077922082,
+      "endWaypointRelativePos": null,
+      "command": {
+        "type": "named",
+        "data": {
+          "name": "NoMT2"
         }
       }
     }
@@ -74,7 +71,7 @@
   "folder": null,
   "idealStartingState": {
     "velocity": 0,
-    "rotation": -53.0
+    "rotation": -54.0
   },
   "useDefaultConstraints": true
 }
