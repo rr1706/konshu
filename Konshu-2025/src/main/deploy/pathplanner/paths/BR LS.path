@@ -4,12 +4,12 @@
     {
       "anchor": {
         "x": 3.646368243243243,
-        "y": 5.1628
+        "y": 5.123
       },
       "prevControl": null,
       "nextControl": {
         "x": 3.349253690001087,
-        "y": 5.506076772082985
+        "y": 5.466276772082986
       },
       "isLocked": false,
       "linkedName": "BR End"

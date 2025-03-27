@@ -17,11 +17,11 @@
     {
       "anchor": {
         "x": 3.942820945945946,
-        "y": 5.3408
+        "y": 5.3
       },
       "prevControl": {
         "x": 3.8056454833096027,
-        "y": 5.549804527344517
+        "y": 5.509004527344517
       },
       "nextControl": null,
       "isLocked": false,
@@ -73,5 +73,5 @@
     "velocity": 0,
     "rotation": -54.0
   },
-  "useDefaultConstraints": true
+  "useDefaultConstraints": false
 }
