@@ -8,7 +8,6 @@ import com.ctre.phoenix6.swerve.SwerveRequest;
 import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Translation2d;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.constants.AutoAlignConstants;
 import frc.robot.constants.DriveConstants;
@@ -42,22 +41,28 @@ public class AlignInAuto extends Command {
     }
 
     @Override
+    public void initialize() {
+        // TODO Auto-generated method stub
+        super.initialize();
+    }
+
+    @Override
     public void execute() {
         Pose2d currentPose = m_drivetrain.getState().Pose;
         double currentAngle = currentPose.getRotation().getRadians();
 
         Translation2d target = m_target.get();
 
-        double[] target_array = { target.getX(), target.getY() };
-        SmartDashboard.putNumberArray("Target", target_array);
+        //double[] target_array = { target.getX(), target.getY() };
+        //SmartDashboard.putNumberArray("Target", target_array);
         Translation2d robotToGoal = target.minus(currentPose.getTranslation());
         double targetAngle = robotToGoal.getAngle().getRadians();
         double elevatorOffset = 0.0;
         double armOffset = 0.0;
         // Adjust elevator based on distance (and evantually delta angle) from post
         double dist = target.getDistance(currentPose.getTranslation()); // Distance to post from robot
-        SmartDashboard.putNumber("Distance to target", dist);
-        SmartDashboard.putNumber("Angle to Post (deg)", target.getAngle().getRadians() * 360.0 / Math.PI);
+        //SmartDashboard.putNumber("Distance to target", dist);
+        //SmartDashboard.putNumber("Angle to Post (deg)", target.getAngle().getRadians() * 360.0 / Math.PI);
         switch (m_state) {
             case L1:
                 elevatorOffset = AutoAlignConstants.ElevatorAutoAlignL1.get(dist);
@@ -83,12 +88,12 @@ public class AlignInAuto extends Command {
 
         m_ssm.setState(m_state, armOffset, elevatorOffset);
 
-        SmartDashboard.putNumber("Target Angle", targetAngle);
-        Double DifferenceinAngle = targetAngle - currentAngle;
-        SmartDashboard.putNumber("Difference In Angle", DifferenceinAngle);
+        //SmartDashboard.putNumber("Target Angle", targetAngle);
+        //double differenceinAngle = targetAngle - currentAngle;
+        //SmartDashboard.putNumber("Difference In Angle", DifferenceinAngle);
 
         double rotationOutput = rotPID.calculate(currentAngle, targetAngle);
-        SmartDashboard.putNumber("Rot Out", rotationOutput);
+        //SmartDashboard.putNumber("Rot Out", rotationOutput);
 
         double velocityX = 0.0;
         double velocityY = 0.0;

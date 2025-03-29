@@ -75,6 +75,12 @@
                       }
                     },
                     {
+                      "type": "wait",
+                      "data": {
+                        "waitTime": 0.1
+                      }
+                    },
+                    {
                       "type": "path",
                       "data": {
                         "pathName": "L4 FR"
@@ -129,6 +135,12 @@
                       "type": "path",
                       "data": {
                         "pathName": "FR LS"
+                      }
+                    },
+                    {
+                      "type": "wait",
+                      "data": {
+                        "waitTime": 0.1
                       }
                     },
                     {
@@ -207,13 +219,13 @@
               {
                 "type": "named",
                 "data": {
-                  "name": "ScoreL4Final"
+                  "name": "ScoreL2Fast"
                 }
               },
               {
                 "type": "named",
                 "data": {
-                  "name": "AlignARL4"
+                  "name": "AlignARL2"
                 }
               }
             ]

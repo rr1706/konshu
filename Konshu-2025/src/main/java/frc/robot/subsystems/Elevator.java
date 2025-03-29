@@ -122,10 +122,10 @@ public class Elevator extends SubsystemBase {
     @Override
     public void periodic() {
         // if getPosition() < 
-        SmartDashboard.putNumber("Elevator Position", getPosition());
-        SmartDashboard.putNumber("Left Elevator Current", getCurrentLeft().getValueAsDouble());
-        SmartDashboard.putNumber("Right Elevator Current", getCurrentRight().getValueAsDouble());
-        SmartDashboard.putNumber("Elevator Set Point", m_setPoint);
+        //SmartDashboard.putNumber("Elevator Position", getPosition());
+        //SmartDashboard.putNumber("Left Elevator Current", getCurrentLeft().getValueAsDouble());
+        //SmartDashboard.putNumber("Right Elevator Current", getCurrentRight().getValueAsDouble());
+        //SmartDashboard.putNumber("Elevator Set Point", m_setPoint);
     }
 
 }
