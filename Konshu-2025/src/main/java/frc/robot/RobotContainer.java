@@ -19,6 +19,7 @@ import frc.robot.commands.AlignInAuto;
 import frc.robot.commands.AutoAlign;
 import frc.robot.commands.DriveCommands;
 import frc.robot.commands.IntakeFromFunnel;
+import frc.robot.commands.MoveIntakeToUnJam;
 import frc.robot.subsystems.AlgaeArm;
 import frc.robot.subsystems.AlgaeIntake;
 import frc.robot.subsystems.Arm;
@@ -79,6 +80,8 @@ public class RobotContainer {
 
         driverController.leftBumper().whileTrue(new AlgaeIntakeCommand(m_algaeArm, m_AlgaeIntake, m_SSM))
                 .onFalse(new AlgaeIntakeEndCommand(m_AlgaeIntake, m_SSM));
+        driverController.rightBumper().whileTrue(new MoveIntakeToUnJam(m_AlgaeIntake, m_SSM))
+                .onFalse(new AlgaeIntakeEndCommand(m_AlgaeIntake, m_SSM));
 
         driverController.povUp().onTrue(new InstantCommand(() -> m_arm.jogging(false)));
         driverController.povDown().onTrue(new InstantCommand(() -> m_arm.jogging(true)));
@@ -129,7 +132,8 @@ public class RobotContainer {
     }
 
     public void configureNamedCommands() {
-        NamedCommands.registerCommand("MoveClimberOut", new InstantCommand(() -> m_climber.setPosition(ClimberConstants.kDeployPosition)));
+        NamedCommands.registerCommand("MoveClimberOut",
+                new InstantCommand(() -> m_climber.setPosition(ClimberConstants.kDeployPosition)));
         NamedCommands.registerCommand("ScoreL4",
                 (new WaitCommand(.6))
                         .andThen(m_coralArm.runCoralCmd(-0.35).withTimeout(.2)));
@@ -139,9 +143,9 @@ public class RobotContainer {
         NamedCommands.registerCommand("ScoreL4Faster",
                 (new WaitCommand(.13))
                         .andThen(m_coralArm.runCoralCmd(-0.45).withTimeout(.2)));
-                        NamedCommands.registerCommand("ScoreL4Final",
-                        (new WaitCommand(.17))
-                                .andThen(m_coralArm.runCoralCmd(-0.45).withTimeout(.5)));
+        NamedCommands.registerCommand("ScoreL4Final",
+                (new WaitCommand(.17))
+                        .andThen(m_coralArm.runCoralCmd(-0.45).withTimeout(.5)));
         NamedCommands.registerCommand("ScoreL2Fast",
                 (new WaitCommand(.040))
                         .andThen(m_coralArm.runCoralCmd(-0.50).withTimeout(.2)));
@@ -298,6 +302,7 @@ public class RobotContainer {
     }
 
     public Command getTeleInitCommand() {
-        return new InstantCommand(() -> m_climber.setPosition(ClimberConstants.kDeployPosition)).alongWith(m_drivetrain.useMT2(true));
+        return new InstantCommand(() -> m_climber.setPosition(ClimberConstants.kDeployPosition))
+                .alongWith(m_drivetrain.useMT2(true));
     }
 }
