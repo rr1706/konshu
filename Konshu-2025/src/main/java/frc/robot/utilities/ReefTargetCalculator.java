@@ -185,6 +185,7 @@ public class ReefTargetCalculator {
         double retdist;
         int reefindex;
         double dist[] = new double[12];
+        final int[] reeftag = {18, 19, 20, 21, 22, 17, 7, 6, 11, 10, 9, 8};
         final ReefFace[] face = {ReefFace.BlueA, ReefFace.BlueB, ReefFace.BlueC, ReefFace.BlueD, ReefFace.BlueE, ReefFace.BlueF, ReefFace.RedA, ReefFace.RedB, ReefFace.RedC, ReefFace.RedD, ReefFace.RedE, ReefFace.RedF};
         final AprilTagFieldLayout layout;
         try {
@@ -206,25 +207,11 @@ public class ReefTargetCalculator {
             return ReefFace.None;
         // }
 
-        // Calculate and save the distance to each reef face
-        dist[0] = layout.getTagPose(18).get().toPose2d().getTranslation().getDistance(CurrentPose.getTranslation()); 
-        dist[1] = layout.getTagPose(19).get().toPose2d().getTranslation().getDistance(CurrentPose.getTranslation()); 
-        dist[2] = layout.getTagPose(20).get().toPose2d().getTranslation().getDistance(CurrentPose.getTranslation()); 
-        dist[3] = layout.getTagPose(21).get().toPose2d().getTranslation().getDistance(CurrentPose.getTranslation()); 
-        dist[4] = layout.getTagPose(22).get().toPose2d().getTranslation().getDistance(CurrentPose.getTranslation()); 
-        dist[5] = layout.getTagPose(17).get().toPose2d().getTranslation().getDistance(CurrentPose.getTranslation()); 
-        dist[6] = layout.getTagPose(7).get().toPose2d().getTranslation().getDistance(CurrentPose.getTranslation());
-        dist[7] = layout.getTagPose(6).get().toPose2d().getTranslation().getDistance(CurrentPose.getTranslation());
-        dist[8] = layout.getTagPose(11).get().toPose2d().getTranslation().getDistance(CurrentPose.getTranslation());
-        dist[9] = layout.getTagPose(10).get().toPose2d().getTranslation().getDistance(CurrentPose.getTranslation());
-        dist[10] = layout.getTagPose(9).get().toPose2d().getTranslation().getDistance(CurrentPose.getTranslation());
-        dist[11] = layout.getTagPose(8).get().toPose2d().getTranslation().getDistance(CurrentPose.getTranslation());
-
         // Determine the closest reef face and return the cooresponding enum
         retdist = 10000.0;
         reefindex = 0;
         for (int i = 0; i < 12; i++) {
-            if (dist[i] < retdist) {
+            if (layout.getTagPose(reeftag[i]).get().toPose2d().getTranslation().getDistance(CurrentPose.getTranslation()) < retdist) {
                 retdist = dist[i];
                 reefindex = i;
             }
@@ -232,3 +219,7 @@ public class ReefTargetCalculator {
         return(face[reefindex]);
     }
 }
+
+
+
+
