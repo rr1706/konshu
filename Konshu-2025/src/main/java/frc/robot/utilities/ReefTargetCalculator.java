@@ -1,12 +1,23 @@
 package frc.robot.utilities;
 
 import edu.wpi.first.math.geometry.Pose2d;
+
+import edu.wpi.first.math.geometry.Pose3d;
 import edu.wpi.first.wpilibj.DriverStation;
 import frc.robot.constants.AutoAlignConstants;
 import frc.robot.constants.ButtonConstants;
 import frc.robot.Robot;
+
+import java.io.IOException;
+import java.nio.file.Path;
+import java.util.ArrayList;
+import java.util.List;
+
+import edu.wpi.first.apriltag.AprilTagFieldLayout;
+
 public class ReefTargetCalculator {
     public enum AlignMode {LEFT, RIGHT, ALGAE};
+    public enum ReefSide {BlueA, RedA, BlueB, RedB, BlueC, RedC, BlueD, RedD, BlueE, RedE, BlueF, RedF};
         
     /**
     * Calculates the target translation based on the current alliance,
@@ -173,5 +184,57 @@ public class ReefTargetCalculator {
         // No button pressed returns null.
         return null;
     }
-}
+    public ReefSide getNearestReefFacePose(Pose2d CurrentPose) throws IOException {
+        final AprilTagFieldLayout layout;
+        layout =
+            new AprilTagFieldLayout(
+                Path.of(
+                    "src",
+                    "main",
+                    "deploy",
+                    "apriltags",
+                    "2025-official.json"));
+        List<Pose2d> poseList = new ArrayList<>();
 
+        poseList.add(layout.getTagPose(18).get().toPose2d());
+        poseList.add(layout.getTagPose(19).get().toPose2d());
+        poseList.add(layout.getTagPose(20).get().toPose2d());
+        poseList.add(layout.getTagPose(21).get().toPose2d());
+        poseList.add(layout.getTagPose(22).get().toPose2d());
+        poseList.add(layout.getTagPose(17).get().toPose2d());
+        poseList.add(layout.getTagPose(7).get().toPose2d());
+        poseList.add(layout.getTagPose(6).get().toPose2d());
+        poseList.add(layout.getTagPose(11).get().toPose2d());
+        poseList.add(layout.getTagPose(10).get().toPose2d());
+        poseList.add(layout.getTagPose(9).get().toPose2d());
+        poseList.add(layout.getTagPose(8).get().toPose2d());
+
+        Pose2d closest = CurrentPose.nearest(poseList);
+
+        if (closest == layout.getTagPose(18).get().toPose2d()){
+            return ReefSide.BlueA; }
+        else if (closest == layout.getTagPose(19).get().toPose2d()){
+            return ReefSide.BlueB; }
+        else if (closest == layout.getTagPose(20).get().toPose2d()){
+            return ReefSide.BlueC; }
+        else if (closest == layout.getTagPose(21).get().toPose2d()){
+            return ReefSide.BlueD; }
+        else if (closest == layout.getTagPose(22).get().toPose2d()){
+            return ReefSide.BlueE; }
+        else if (closest == layout.getTagPose(17).get().toPose2d()){
+            return ReefSide.BlueF; }
+        else if (closest == layout.getTagPose(7).get().toPose2d()){
+            return ReefSide.RedA; }
+        else if (closest == layout.getTagPose(6).get().toPose2d()){
+            return ReefSide.RedB; }
+        else if (closest == layout.getTagPose(11).get().toPose2d()){
+            return ReefSide.RedC; }
+        else if (closest == layout.getTagPose(10).get().toPose2d()){
+            return ReefSide.RedD; }
+        else if (closest == layout.getTagPose(9).get().toPose2d()){
+            return ReefSide.RedE; }
+        else if (closest == layout.getTagPose(8).get().toPose2d()){
+            return ReefSide.RedF; }
+        else return ReefSide.BlueA;
+    }
+}
