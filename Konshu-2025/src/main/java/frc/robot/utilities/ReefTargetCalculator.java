@@ -1,38 +1,32 @@
 package frc.robot.utilities;
 
 import edu.wpi.first.math.geometry.Pose2d;
-
-import edu.wpi.first.math.geometry.Pose3d;
 import edu.wpi.first.wpilibj.DriverStation;
 import frc.robot.constants.AutoAlignConstants;
 import frc.robot.constants.ButtonConstants;
 import frc.robot.Robot;
-
 import java.io.IOException;
 import java.nio.file.Path;
-import java.util.ArrayList;
-import java.util.List;
-
 import edu.wpi.first.apriltag.AprilTagFieldLayout;
 
 public class ReefTargetCalculator {
     public enum AlignMode {LEFT, RIGHT, ALGAE};
-    public enum ReefSide {BlueA, RedA, BlueB, RedB, BlueC, RedC, BlueD, RedD, BlueE, RedE, BlueF, RedF};
-        
+    public enum ReefFace {None, BlueA, RedA, BlueB, RedB, BlueC, RedC, BlueD, RedD, BlueE, RedE, BlueF, RedF};
+    private static ReefFace m_face = ReefFace.None;
     /**
     * Calculates the target translation based on the current alliance,
-    * the state of reef (Coral) buttons, and the specified alignment mode.
-    * Note that for LEFT and RIGHT only the Translation2d is currently used, but the Rotation2d
-    * is also returned for future use by the dithering code (adjust the elevation/arm rotation slightly)
-         
+    * the state of reef (Coral) buttons, and the specified alignment mode.  
     * @return the selected target Pose2d, or null if no button is pressed.
     */
-    public static Pose2d calculateTargetTranslation(AlignMode alignMode) {
-        // Normalize alignment mode to uppercase.
+    public static Pose2d calculateTargetTranslation(AlignMode alignMode, Pose2d currentPose) {
+
+        // Get the closest reef face
+        m_face = getClosestReefFace(currentPose);
+        
         // Get current alliance; default to Blue if not present.
         DriverStation.Alliance alliance = DriverStation.getAlliance().orElse(DriverStation.Alliance.Blue);
         if (alliance == DriverStation.Alliance.Blue) {         // Blue Alliance button polling.
-            if (DriverStation.getStickButton(2, ButtonConstants.kCoralA)) {
+            if ((m_face == ReefFace.BlueA) || (DriverStation.getStickButton(2, ButtonConstants.kCoralA))) {
                 switch (alignMode) {
                     case LEFT: 
                         Robot.buttonLog.append("CoralA Left Blue");
@@ -44,7 +38,7 @@ public class ReefTargetCalculator {
                         Robot.buttonLog.append("CoralA Algea Blue");
                         return new Pose2d(null, AutoAlignConstants.BlueAllianceConstants.kAAlgea);
                 }
-            } else if (DriverStation.getStickButton(2, ButtonConstants.kCoralB)) {
+            } else if ((m_face == ReefFace.BlueB) || (DriverStation.getStickButton(2, ButtonConstants.kCoralB))) {
                 switch (alignMode) {
                     case LEFT:  
                         Robot.buttonLog.append("CoralB Left Blue");
@@ -56,7 +50,7 @@ public class ReefTargetCalculator {
                         Robot.buttonLog.append("CoralB Algea Blue");
                         return new Pose2d(null, AutoAlignConstants.BlueAllianceConstants.kBAlgea);  
                 }
-            } else if (DriverStation.getStickButton(2, ButtonConstants.kCoralC)) {
+            } else if ((m_face == ReefFace.BlueC) || (DriverStation.getStickButton(2, ButtonConstants.kCoralC))) {
                 switch (alignMode) {
                     case LEFT: 
                         Robot.buttonLog.append("CoralC Left Blue");
@@ -68,7 +62,7 @@ public class ReefTargetCalculator {
                         Robot.buttonLog.append("CoralC Algea Blue");
                         return new Pose2d(null, AutoAlignConstants.BlueAllianceConstants.kCAlgea);
                 }
-            } else if (DriverStation.getStickButton(2, ButtonConstants.kCoralD)) {
+            } else if ((m_face == ReefFace.BlueD) || (DriverStation.getStickButton(2, ButtonConstants.kCoralD))) {
                 switch (alignMode) {
                     case LEFT: 
                         Robot.buttonLog.append("CoralD Left Blue");
@@ -80,7 +74,7 @@ public class ReefTargetCalculator {
                         Robot.buttonLog.append("CoralD Algea Blue");
                         return new Pose2d(null, AutoAlignConstants.BlueAllianceConstants.kDAlgea);
                 }
-            } else if (DriverStation.getStickButton(2, ButtonConstants.kCoralE)) {
+            } else if ((m_face == ReefFace.BlueE) || (DriverStation.getStickButton(2, ButtonConstants.kCoralE))) {
                 switch (alignMode) {
                     case LEFT: 
                         Robot.buttonLog.append("CoralE Left Blue");
@@ -92,7 +86,7 @@ public class ReefTargetCalculator {
                         Robot.buttonLog.append("CoralE Algea Blue");
                         return new Pose2d(null, AutoAlignConstants.BlueAllianceConstants.kEAlgea);
                 }
-            } else if (DriverStation.getStickButton(2, ButtonConstants.kCoralF)) {
+            } else if ((m_face == ReefFace.BlueF) || (DriverStation.getStickButton(2, ButtonConstants.kCoralF))) {
                 switch (alignMode) {
                     case LEFT: 
                         Robot.buttonLog.append("CoralF Left Blue");
@@ -106,7 +100,7 @@ public class ReefTargetCalculator {
                 }
             }
         } else  {         // Red Alliance button polling.
-            if (DriverStation.getStickButton(2, ButtonConstants.kCoralA)) {
+            if ((m_face == ReefFace.RedA) || (DriverStation.getStickButton(2, ButtonConstants.kCoralA))) {
                 switch (alignMode) {
                     case LEFT: 
                         Robot.buttonLog.append("CoralA Left Red"); 
@@ -118,7 +112,7 @@ public class ReefTargetCalculator {
                         Robot.buttonLog.append("CoralA Algea Red");
                         return new Pose2d(null, AutoAlignConstants.RedAllianceConstants.kAAlgea);
                 }
-            } else if (DriverStation.getStickButton(2, ButtonConstants.kCoralB)) {
+            } else if ((m_face == ReefFace.RedB) || (DriverStation.getStickButton(2, ButtonConstants.kCoralB))) {
                 switch (alignMode) {
                     case LEFT:
                         Robot.buttonLog.append("CoralB Left Red"); 
@@ -130,7 +124,7 @@ public class ReefTargetCalculator {
                         Robot.buttonLog.append("CoralB Algea Red");
                         return new Pose2d(null, AutoAlignConstants.RedAllianceConstants.kBAlgea);  
                 }
-            } else if (DriverStation.getStickButton(2, ButtonConstants.kCoralC)) {
+            } else if ((m_face == ReefFace.RedC) || (DriverStation.getStickButton(2, ButtonConstants.kCoralC))) {
                 switch (alignMode) {
                     case LEFT:
                         Robot.buttonLog.append("CoralC Left Red"); 
@@ -142,7 +136,7 @@ public class ReefTargetCalculator {
                         Robot.buttonLog.append("CoralC Algea Red");
                         return new Pose2d(null, AutoAlignConstants.RedAllianceConstants.kCAlgea);
                 }
-            } else if (DriverStation.getStickButton(2, ButtonConstants.kCoralD)) {
+            } else if ((m_face == ReefFace.RedD) || (DriverStation.getStickButton(2, ButtonConstants.kCoralD))) {
                 switch (alignMode) {
                     case LEFT: 
                         Robot.buttonLog.append("CoralD Left Red"); 
@@ -154,7 +148,7 @@ public class ReefTargetCalculator {
                         Robot.buttonLog.append("CoralD Algea Red");
                         return new Pose2d(null, AutoAlignConstants.RedAllianceConstants.kDAlgea);
                 }
-            } else if (DriverStation.getStickButton(2, ButtonConstants.kCoralE)) {
+            } else if ((m_face == ReefFace.RedE) || (DriverStation.getStickButton(2, ButtonConstants.kCoralE))) {
                 switch (alignMode) {
                     case LEFT: 
                         Robot.buttonLog.append("CoralE Left Red"); 
@@ -166,7 +160,7 @@ public class ReefTargetCalculator {
                         Robot.buttonLog.append("CoralE Algea Red");
                         return new Pose2d(null, AutoAlignConstants.RedAllianceConstants.kEAlgea);
                 }
-            } else if (DriverStation.getStickButton(2, ButtonConstants.kCoralF)) {
+            } else if ((m_face == ReefFace.RedF) || (DriverStation.getStickButton(2, ButtonConstants.kCoralF))) {
                 switch (alignMode) {
                     case LEFT: 
                         Robot.buttonLog.append("CoralF Left Red"); 
@@ -184,57 +178,57 @@ public class ReefTargetCalculator {
         // No button pressed returns null.
         return null;
     }
-    public ReefSide getNearestReefFacePose(Pose2d CurrentPose) throws IOException {
+
+// Function to return the closest reef face enum based on the current pose.   There is probably a really
+// cool OO way to do this, but this is what I came up with.
+    public static ReefFace getClosestReefFace(Pose2d CurrentPose) {
+        double retdist;
+        int reefindex;
+        double dist[] = new double[12];
+        final ReefFace[] face = {ReefFace.BlueA, ReefFace.BlueB, ReefFace.BlueC, ReefFace.BlueD, ReefFace.BlueE, ReefFace.BlueF, ReefFace.RedA, ReefFace.RedB, ReefFace.RedC, ReefFace.RedD, ReefFace.RedE, ReefFace.RedF};
         final AprilTagFieldLayout layout;
-        layout =
-            new AprilTagFieldLayout(
+        try {
+            layout = new AprilTagFieldLayout(
                 Path.of(
                     "src",
                     "main",
                     "deploy",
                     "apriltags",
                     "2025-official.json"));
-        List<Pose2d> poseList = new ArrayList<>();
+        } catch (IOException e) {
+            e.printStackTrace();
+            return ReefFace.None;
+        }
 
-        poseList.add(layout.getTagPose(18).get().toPose2d());
-        poseList.add(layout.getTagPose(19).get().toPose2d());
-        poseList.add(layout.getTagPose(20).get().toPose2d());
-        poseList.add(layout.getTagPose(21).get().toPose2d());
-        poseList.add(layout.getTagPose(22).get().toPose2d());
-        poseList.add(layout.getTagPose(17).get().toPose2d());
-        poseList.add(layout.getTagPose(7).get().toPose2d());
-        poseList.add(layout.getTagPose(6).get().toPose2d());
-        poseList.add(layout.getTagPose(11).get().toPose2d());
-        poseList.add(layout.getTagPose(10).get().toPose2d());
-        poseList.add(layout.getTagPose(9).get().toPose2d());
-        poseList.add(layout.getTagPose(8).get().toPose2d());
+// NEED TO DEFINE THE OVERRIDE BUTTON IN BUTTONCONSTANTS
+        // Return "None" if override button is pushed so we will use the reef buttons instead of closest reef face
+        // if (DriverStation.getStickButton(2, ButtonConstants.kOverride)) {
+            return ReefFace.None;
+        // }
 
-        Pose2d closest = CurrentPose.nearest(poseList);
+        // Calculate and save the distance to each reef face
+        dist[0] = layout.getTagPose(18).get().toPose2d().getTranslation().getDistance(CurrentPose.getTranslation()); 
+        dist[1] = layout.getTagPose(19).get().toPose2d().getTranslation().getDistance(CurrentPose.getTranslation()); 
+        dist[2] = layout.getTagPose(20).get().toPose2d().getTranslation().getDistance(CurrentPose.getTranslation()); 
+        dist[3] = layout.getTagPose(21).get().toPose2d().getTranslation().getDistance(CurrentPose.getTranslation()); 
+        dist[4] = layout.getTagPose(22).get().toPose2d().getTranslation().getDistance(CurrentPose.getTranslation()); 
+        dist[5] = layout.getTagPose(17).get().toPose2d().getTranslation().getDistance(CurrentPose.getTranslation()); 
+        dist[6] = layout.getTagPose(7).get().toPose2d().getTranslation().getDistance(CurrentPose.getTranslation());
+        dist[7] = layout.getTagPose(6).get().toPose2d().getTranslation().getDistance(CurrentPose.getTranslation());
+        dist[8] = layout.getTagPose(11).get().toPose2d().getTranslation().getDistance(CurrentPose.getTranslation());
+        dist[9] = layout.getTagPose(10).get().toPose2d().getTranslation().getDistance(CurrentPose.getTranslation());
+        dist[10] = layout.getTagPose(9).get().toPose2d().getTranslation().getDistance(CurrentPose.getTranslation());
+        dist[11] = layout.getTagPose(8).get().toPose2d().getTranslation().getDistance(CurrentPose.getTranslation());
 
-        if (closest == layout.getTagPose(18).get().toPose2d()){
-            return ReefSide.BlueA; }
-        else if (closest == layout.getTagPose(19).get().toPose2d()){
-            return ReefSide.BlueB; }
-        else if (closest == layout.getTagPose(20).get().toPose2d()){
-            return ReefSide.BlueC; }
-        else if (closest == layout.getTagPose(21).get().toPose2d()){
-            return ReefSide.BlueD; }
-        else if (closest == layout.getTagPose(22).get().toPose2d()){
-            return ReefSide.BlueE; }
-        else if (closest == layout.getTagPose(17).get().toPose2d()){
-            return ReefSide.BlueF; }
-        else if (closest == layout.getTagPose(7).get().toPose2d()){
-            return ReefSide.RedA; }
-        else if (closest == layout.getTagPose(6).get().toPose2d()){
-            return ReefSide.RedB; }
-        else if (closest == layout.getTagPose(11).get().toPose2d()){
-            return ReefSide.RedC; }
-        else if (closest == layout.getTagPose(10).get().toPose2d()){
-            return ReefSide.RedD; }
-        else if (closest == layout.getTagPose(9).get().toPose2d()){
-            return ReefSide.RedE; }
-        else if (closest == layout.getTagPose(8).get().toPose2d()){
-            return ReefSide.RedF; }
-        else return ReefSide.BlueA;
+        // Determine the closest reef face and return the cooresponding enum
+        retdist = 10000.0;
+        reefindex = 0;
+        for (int i = 0; i < 12; i++) {
+            if (dist[i] < retdist) {
+                retdist = dist[i];
+                reefindex = i;
+            }
+        }
+        return(face[reefindex]);
     }
 }

@@ -138,12 +138,12 @@ public class AutoAlign extends Command {
         } else
             m_goForPID = false; // No level button pressed - do nothing
 
-        if (m_goForPID) m_pose = ReefTargetCalculator.calculateTargetTranslation(m_alignMode);
+        Pose2d currentPose = m_drivetrain.getState().Pose;
+        if (m_goForPID) m_pose = ReefTargetCalculator.calculateTargetTranslation(m_alignMode, currentPose);
         if (m_pose == null) m_goForPID = false; // No reef button pressed – optionally mark the command as finished
         SmartDashboard.putBoolean("goForPID", m_goForPID);
 
         if (m_goForPID) {
-            Pose2d currentPose = m_drivetrain.getState().Pose;
             double currentAngle = currentPose.getRotation().getRadians();
             SmartDashboard.putNumber("CurrentAngle", currentAngle);
 
