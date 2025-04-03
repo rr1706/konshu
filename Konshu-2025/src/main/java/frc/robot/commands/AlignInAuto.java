@@ -62,7 +62,7 @@ public class AlignInAuto extends Command {
         // Adjust elevator based on distance (and evantually delta angle) from post
         double dist = target.getDistance(currentPose.getTranslation()); // Distance to post from robot
         //SmartDashboard.putNumber("Distance to target", dist);
-        //SmartDashboard.putNumber("Angle to Post (deg)", target.getAngle().getRadians() * 360.0 / Math.PI);
+        //SmartDashboard.putNumber("Angle to Post (deg)", target.getAngle().getRadians() * 180.0 / Math.PI);
         switch (m_state) {
             case L1:
                 elevatorOffset = AutoAlignConstants.ElevatorAutoAlignL1.get(dist);

@@ -204,14 +204,14 @@ public class ReefTargetCalculator {
 // NEED TO DEFINE THE OVERRIDE BUTTON IN BUTTONCONSTANTS
         // Return "None" if override button is pushed so we will use the reef buttons instead of closest reef face
         // if (DriverStation.getStickButton(2, ButtonConstants.kOverride)) {
-            return ReefFace.None;
+        //    return ReefFace.None;
         // }
 
         // Determine the closest reef face and return the cooresponding enum
         minDist = 10000.0;
         minIndex = 0;
         for (int i = 0; i < 12; i++) {
-            dist = layout.getTagPose(reeftag[i]).get().toPose2d().getTranslation().getDistance(CurrentPose.getTranslation())
+            dist = layout.getTagPose(reeftag[i]).get().toPose2d().getTranslation().getDistance(CurrentPose.getTranslation());
             if (dist < minDist) {
                 minDist = dist;
                 minIndex = i;

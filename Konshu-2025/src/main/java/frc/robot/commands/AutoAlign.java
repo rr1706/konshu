@@ -188,7 +188,7 @@ public class AutoAlign extends Command {
                 Rotation2d theta = m_pose.getRotation().minus(currentPose.getRotation()); // Angle from coral wall
                                                                                           // normal
                 SmartDashboard.putNumber("Distance to target", dist);
-                SmartDashboard.putNumber("Angle to Post (deg)", theta.getRadians() * 360.0 / Math.PI);
+                SmartDashboard.putNumber("Angle to Post (deg)", theta.getRadians() * 180.0 / Math.PI);
                 switch (m_state) {
                     case L1:
                         elevatorOffset = AutoAlignConstants.ElevatorAutoAlignL1.get(dist);

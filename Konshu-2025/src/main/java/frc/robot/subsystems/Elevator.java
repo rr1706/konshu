@@ -95,7 +95,6 @@ public class Elevator extends SubsystemBase {
 
     public double getPosition() {      // Returns inches
         return (ElevatorConstants.kInchPerRotation*m_ElevatorRightFX.getPosition().getValueAsDouble());
-                // ElevatorConstants.kElevatorGearRatio) * (2 * Math.PI * ElevatorConstants.kPulleyRadius)
     }
 
     public void enableLimits(boolean limitsState){
