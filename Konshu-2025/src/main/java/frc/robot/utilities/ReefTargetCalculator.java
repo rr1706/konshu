@@ -201,11 +201,13 @@ public class ReefTargetCalculator {
             return ReefFace.None;
         }
 
-// NEED TO DEFINE THE OVERRIDE BUTTON IN BUTTONCONSTANTS
-        // Return "None" if override button is pushed so we will use the reef buttons instead of closest reef face
-        // if (DriverStation.getStickButton(2, ButtonConstants.kOverride)) {
-        //    return ReefFace.None;
-        // }
+        // Return "None" (override) if a reef button is pushed
+        if (DriverStation.getStickButton(2, ButtonConstants.kCoralA) || 
+            DriverStation.getStickButton(2, ButtonConstants.kCoralB) ||
+            DriverStation.getStickButton(2, ButtonConstants.kCoralC) ||
+            DriverStation.getStickButton(2, ButtonConstants.kCoralD) ||
+            DriverStation.getStickButton(2, ButtonConstants.kCoralE) ||
+            DriverStation.getStickButton(2, ButtonConstants.kCoralF)) return ReefFace.None;
 
         // Determine the closest reef face and return the cooresponding enum
         minDist = 10000.0;
