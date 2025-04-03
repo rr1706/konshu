@@ -180,11 +180,11 @@ public class ReefTargetCalculator {
     }
 
 // Function to return the closest reef face enum based on the current pose.   There is probably a really
-// cool OO way to do this, but this is what I came up with.
+// cool OO way to do this, but this should work. 
     public static ReefFace getClosestReefFace(Pose2d CurrentPose) {
-        double retdist;
-        int reefindex;
-        double dist[] = new double[12];
+        double dist, minDist;
+        int minIndex;
+        // Note - the April tag numbers in reeftag must coorespond to the ReefFace enums in the same order
         final int[] reeftag = {18, 19, 20, 21, 22, 17, 7, 6, 11, 10, 9, 8};
         final ReefFace[] face = {ReefFace.BlueA, ReefFace.BlueB, ReefFace.BlueC, ReefFace.BlueD, ReefFace.BlueE, ReefFace.BlueF, ReefFace.RedA, ReefFace.RedB, ReefFace.RedC, ReefFace.RedD, ReefFace.RedE, ReefFace.RedF};
         final AprilTagFieldLayout layout;
@@ -208,15 +208,16 @@ public class ReefTargetCalculator {
         // }
 
         // Determine the closest reef face and return the cooresponding enum
-        retdist = 10000.0;
-        reefindex = 0;
+        minDist = 10000.0;
+        minIndex = 0;
         for (int i = 0; i < 12; i++) {
-            if (layout.getTagPose(reeftag[i]).get().toPose2d().getTranslation().getDistance(CurrentPose.getTranslation()) < retdist) {
-                retdist = dist[i];
-                reefindex = i;
+            dist = layout.getTagPose(reeftag[i]).get().toPose2d().getTranslation().getDistance(CurrentPose.getTranslation())
+            if (dist < minDist) {
+                minDist = dist;
+                minIndex = i;
             }
         }
-        return(face[reefindex]);
+        return(face[minIndex]);
     }
 }
 
