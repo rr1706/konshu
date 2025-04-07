@@ -14,6 +14,7 @@ import edu.wpi.first.util.datalog.StringLogEntry;
 import frc.robot.constants.AutoAlignConstants;
 import com.ctre.phoenix6.SignalLogger;
 // import au.grapplerobotics.CanBridge;
+import com.pathplanner.lib.commands.PathfindingCommand;
 
 /**
  * The methods in this class are called automatically corresponding to each mode, as described in
@@ -49,6 +50,8 @@ public class Robot extends TimedRobot {
     AutoAlignConstants.SetUpArmAutoAlignConstantsL3();
     AutoAlignConstants.SetUpArmAutoAlignConstantsL4();
     SignalLogger.stop();
+    PathfindingCommand.warmupCommand().schedule();
+
     
     // CanBridge.runTCP();
   }
