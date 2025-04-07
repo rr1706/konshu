@@ -16,6 +16,7 @@ public class CoralArm extends SubsystemBase{
     private ThriftyNova m_Nova;
     private LaserCan lc;
     public boolean LC_Override = false;
+    public boolean m_haveCoral = false;
 
     public CoralArm(){
         m_Nova = new ThriftyNova(10, MotorType.MINION);
@@ -59,16 +60,17 @@ public class CoralArm extends SubsystemBase{
     }
 
     public boolean haveCoral() {
-        return (getMeasurement() < 40) || LC_Override;
+        m_haveCoral = getMeasurement() < 40;
+        return (m_haveCoral);
     }
 
+    // Calls to getMeasurment are very time expensive, this just returns the last update to use for LEDs
+    public boolean quickHaveCoral() {
+        return (m_haveCoral);
+    }
 
     // @Override
     public void periodic() {
-    LaserCan.Measurement measurement = lc.getMeasurement();
-    if (measurement != null && measurement.status == LaserCan.LASERCAN_STATUS_VALID_MEASUREMENT) {
-        SmartDashboard.putNumber("LaserCAN Measurement", measurement.distance_mm);
-    }
 
     SmartDashboard.putNumber("Coral Velo", m_Nova.getVelocity()/42.0);
     SmartDashboard.putNumber("Coral Current", m_Nova.getStatorCurrent());

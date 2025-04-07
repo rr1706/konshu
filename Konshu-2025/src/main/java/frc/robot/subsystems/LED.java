@@ -40,7 +40,7 @@ public class LED extends SubsystemBase {
 
   public void periodic() {
     // Sets all to blue with coral, green with algae, or white if neither
-    if (coralArm.haveCoral()) {
+    if (coralArm.quickHaveCoral()) {
       if (m_LEDScore) {
         leftStrand(m_yellow);
         rightStrand(m_yellow);    // Not currently used as left/right LEDs are wired in parallel
