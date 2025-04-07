@@ -10,6 +10,7 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.ConditionalCommand;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
+import edu.wpi.first.wpilibj2.command.WaitUntilCommand;
 import edu.wpi.first.wpilibj2.command.button.CommandGenericHID;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import frc.robot.constants.*;
@@ -159,6 +160,8 @@ public class RobotContainer {
         NamedCommands.registerCommand("NoMT2", m_drivetrain.useMT2(false));
         NamedCommands.registerCommand("Run Funnel",
                 new InstantCommand(() -> m_funnel.runCoralIn(-0.3)).alongWith(new IntakeFromFunnel(m_coralArm)));
+
+        NamedCommands.registerCommand("WaitForElevator", new WaitUntilCommand(m_elevator::atSetpoint).alongWith(new WaitCommand(0.050)).withTimeout(0.5));
 
         NamedCommands.registerCommand("AlignCRL4", new AlignInAuto(m_drivetrain, () -> {
             DriverStation.Alliance alliance = DriverStation.getAlliance().orElse(DriverStation.Alliance.Blue);

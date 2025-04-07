@@ -107,6 +107,10 @@ public class Elevator extends SubsystemBase {
         m_ElevatorRightFX.set(0);
     }
 
+    public boolean atSetpoint(){
+        return Math.abs(getPosition()-m_setPoint) <= 1.0;
+    }
+
    public void jogging(boolean direction){
         if (direction == true){
             SmartDashboard.putNumber("Elevator Position", getPosition());
