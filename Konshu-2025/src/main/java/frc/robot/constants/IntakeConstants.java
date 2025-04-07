@@ -26,7 +26,7 @@ public class IntakeConstants {
     public static final double kSAlgaeIntake = 0.25;
     public static final double kVAlgaeIntake = 0.096;
 
-    public static final double kAccelerationAglaeIntake = 300.0;
+    public static final double kAccelerationAglaeIntake = 500.0;
     public static final double kVelocityAglaeIntake = 100.0;
 
     public static final double kUpperLimit = 16.5;

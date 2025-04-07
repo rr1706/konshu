@@ -11,9 +11,9 @@ public class ElevatorConstants {
     public static final double kVElevator = .123;   // Output per unit of target velocity (volts/rps)
     public static final double kAElevator = 0.001;   // Output per unit of target accelleration (volts/rps/rps)
 
-    public static final double kAccelerationElevator = 267.0; // Was 400, changed with new motor 4/3/2025
-    public static final double kVelocityElevator = 56.6;  // Was 86, changed wth new motor 4/3/2025
-    public static final double kJerkElevator = 9999;
+    public static final double kAccelerationElevator = 300.0; // Was 400, changed with new motor 4/3/2025
+    public static final double kVelocityElevator = 80.0;  // Was 86, changed wth new motor 4/3/2025
+    public static final double kJerkElevator = 5000;
 
     public static final double kFElevator = 1.0;
     public static final double kElevatorGearRatio = 3.33; 
@@ -24,7 +24,7 @@ public class ElevatorConstants {
     public static final double kElevatorL2 = 22.0; 
     public static final double kElevatorL3 = 37.5; 
     public static final double kElevatorL4 = 71.1; 
-    public static final double kElevatorLoadingStation = 0.05; 
+    public static final double kElevatorLoadingStation = 0.3; 
     public static final double kElevatorProcessor = 5.7;
     public static final double kElevatorBarge = 69.61; 
     public static final double kElevatorZero = 0.0;
@@ -48,12 +48,12 @@ public class ElevatorConstants {
     // These are the constants for the arm stayout zones
     // kElevatorHighDanger - elevator must be higher than this to safely move arm above kArmHighDanger
     // KElevatorLowDanter - elevator must be higher than this to safely move arm below kArmLowDanger
-    public static final double kElevatorHighDanger = 21.0;
+    public static final double kElevatorHighDanger = 23.0;
     public static final double kElevatorLowDanger = 4.2;
 
     public static class ElevatorCurrents {
         public static final double kElevatorNeutral = 1.0; 
-        public static final double kStatorCurrent = 75.0;  // Was 50, changed for new motor 4/3/2025
+        public static final double kStatorCurrent = 80.0;  // Was 50, changed for new motor 4/3/2025
         public static final double kSupplyCurrent = 40.0; 
 }
 }

@@ -128,9 +128,9 @@ public class Arm extends SubsystemBase {
 
     @Override
     public void periodic() {
-        //SmartDashboard.putNumber("Arm Angle - degrees", getPosition());
-        //SmartDashboard.putNumber("Arm Stator Current", getCurrent());
-        //SmartDashboard.putNumber("Arm Set Point", m_setpoint);
+        SmartDashboard.putNumber("Arm Angle - degrees", getPosition());
+        SmartDashboard.putNumber("Arm Stator Current", getCurrent());
+        SmartDashboard.putNumber("Arm Set Point", m_setpoint);
         
     }
 }
