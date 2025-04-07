@@ -136,4 +136,12 @@ public final class AutoAlignConstants {
         ArmAutoAlignL4.put(0.882, -13.0);
         ArmAutoAlignL4.put(1.0, -13.0);
     }
+    public static final class SetUpAprilTags{
+      public static final Translation2d At17= new Translation2d(-160.27,-130.21);
+      public static final Translation2d At18= new Translation2d(-144,-158.38);
+      public static final Translation2d At19= new Translation2d(-160.28,-186.77);
+      public static final Translation2d At20= new Translation2d(-190.01,-186.92);
+      public static final Translation2d At21= new Translation2d(-208.49,-158.38);
+      public static final Translation2d At22= new Translation2d(-193.01,-130.09);
+    }
 }

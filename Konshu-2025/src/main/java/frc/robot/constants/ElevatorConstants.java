@@ -11,10 +11,14 @@ public class ElevatorConstants {
     public static final double kVElevator = .123;   // Output per unit of target velocity (volts/rps)
     public static final double kAElevator = 0.001;   // Output per unit of target accelleration (volts/rps/rps)
 
-    public static final double kAccelerationElevator = 300.0; // Was 400, changed with new motor 4/3/2025
-    public static final double kVelocityElevator = 80.0;  // Was 86, changed wth new motor 4/3/2025
-    public static final double kJerkElevator = 5000;
+    public static final double kUpAccelerationElevator = 300.0; // Was 400, changed with new elevator 4/3/2025
+    public static final double kUpVelocityElevator = 80.0;  // Was 86, changed wth new elevator 4/3/2025
+    public static final double kUpJerkElevator = 5000;
 
+    public static final double kDownAccelerationElevator = 200.0;
+    public static final double kDownVelocityElevator = 50.0;
+    public static final double kDownJerkElevator = 5000;
+    
     public static final double kFElevator = 1.0;
     public static final double kElevatorGearRatio = 3.33; 
     public static final double kElevatorPositionFactor = 1.0; 
@@ -53,7 +57,7 @@ public class ElevatorConstants {
 
     public static class ElevatorCurrents {
         public static final double kElevatorNeutral = 1.0; 
-        public static final double kStatorCurrent = 80.0;  // Was 50, changed for new motor 4/3/2025
+        public static final double kStatorCurrent = 80.0;  // Was 50, changed for new elevator 4/3/2025
         public static final double kSupplyCurrent = 40.0; 
 }
 }
