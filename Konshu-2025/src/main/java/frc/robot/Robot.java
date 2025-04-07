@@ -12,6 +12,7 @@ import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.util.datalog.DataLog;
 import edu.wpi.first.util.datalog.StringLogEntry;
 import frc.robot.constants.AutoAlignConstants;
+import com.ctre.phoenix6.SignalLogger;
 // import au.grapplerobotics.CanBridge;
 
 /**
@@ -47,6 +48,7 @@ public class Robot extends TimedRobot {
     AutoAlignConstants.SetUpArmAutoAlignConstantsL2();
     AutoAlignConstants.SetUpArmAutoAlignConstantsL3();
     AutoAlignConstants.SetUpArmAutoAlignConstantsL4();
+    SignalLogger.stop();
     
     // CanBridge.runTCP();
   }
