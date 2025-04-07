@@ -88,7 +88,7 @@ public class RobotContainer {
         driverController.povDown().onTrue(new InstantCommand(() -> m_arm.jogging(true)));
 
         driverController.leftTrigger().onFalse(
-                new InstantCommand(() -> m_funnel.runCoralIn(-.3)).alongWith(new IntakeFromFunnel(m_coralArm)));
+                new InstantCommand(() -> m_funnel.runCoralIn(-.3)).andThen(new IntakeFromFunnel(m_coralArm)));
         driverController.x().onTrue(new InstantCommand(() -> m_climber.prepClimb())
                 .alongWith(new InstantCommand(() -> m_funnel.runCoralIn(0.0))));
         driverController.b().onTrue(new InstantCommand(() -> m_climber.Climb()))
@@ -108,7 +108,7 @@ public class RobotContainer {
                             return m_SSM.getState() == (SSM.States.BARGE);
                         }))
                 .onFalse(
-                        new InstantCommand(() -> m_funnel.runCoralIn(-.3)).alongWith(new IntakeFromFunnel(m_coralArm)));
+                        new InstantCommand(() -> m_funnel.runCoralIn(-.3)).andThen(new IntakeFromFunnel(m_coralArm)));
 
         driverController.a().onTrue(m_algaeArm.grabAlgae(0.8));
         operatorcontoller1.button(9).onTrue(m_algaeArm.grabAlgae(0.8));
@@ -117,7 +117,7 @@ public class RobotContainer {
         operatorcontoller2.button(2).whileTrue(new InstantCommand(() -> m_funnel.runCoralIn(.2)))
                 .onFalse(
                         new InstantCommand(() -> m_funnel.runCoralIn(-0.3))
-                                .alongWith(new IntakeFromFunnel(m_coralArm)));
+                                .andThen(new IntakeFromFunnel(m_coralArm)));
 
         operatorcontoller2.button(11).whileTrue(m_algaeArm.grabAlgae(.8)
                 .alongWith(new InstantCommand(() -> m_SSM.setState(States.PROCESSOR))))
@@ -306,6 +306,6 @@ public class RobotContainer {
 
     public Command getTeleInitCommand() {
         return new InstantCommand(() -> m_climber.setPosition(ClimberConstants.kDeployPosition))
-                .alongWith(m_drivetrain.useMT2(true));
+                .andThen(m_drivetrain.useMT2(true));
     }
 }

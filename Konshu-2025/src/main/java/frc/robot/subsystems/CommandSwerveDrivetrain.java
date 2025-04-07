@@ -107,7 +107,11 @@ public class CommandSwerveDrivetrain extends TunerSwerveDrivetrain implements Su
         super(drivetrainConstants, odometryUpdateFrequency, odometryStandardDeviation, visionStandardDeviation,
                 modules);
         configureAutoBuilder();
+        SmartDashboard.putData(m_field);
+
     }
+
+    
 
     private void configureAutoBuilder() {
         try {
@@ -184,7 +188,6 @@ public class CommandSwerveDrivetrain extends TunerSwerveDrivetrain implements Su
                 Math.pow(getState().Speeds.vxMetersPerSecond, 2) + Math.pow(getState().Speeds.vyMetersPerSecond, 2));
         SmartDashboard.putNumber("Speed of Drive", abs_speed);
 
-        SmartDashboard.putData(m_field);
     }
 
     /**
