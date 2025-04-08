@@ -13,6 +13,7 @@ import frc.robot.constants.AutoAlignConstants;
 import frc.robot.constants.DriveConstants;
 import frc.robot.subsystems.CommandSwerveDrivetrain;
 import frc.robot.subsystems.SSM;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class AlignInAuto extends Command {
     private final CommandSwerveDrivetrain m_drivetrain;
@@ -93,7 +94,7 @@ public class AlignInAuto extends Command {
         //SmartDashboard.putNumber("Difference In Angle", DifferenceinAngle);
 
         double rotationOutput = rotPID.calculate(currentAngle, targetAngle);
-        //SmartDashboard.putNumber("Rot Out", rotationOutput);
+        SmartDashboard.putNumber("Auto Rot Out", rotationOutput);
 
         double velocityX = 0.0;
         double velocityY = 0.0;
