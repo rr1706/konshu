@@ -161,7 +161,7 @@ public class RobotContainer {
         NamedCommands.registerCommand("Run Funnel",
                 new InstantCommand(() -> m_funnel.runCoralIn(-0.3)).alongWith(new IntakeFromFunnel(m_coralArm)));
 
-        NamedCommands.registerCommand("WaitForElevator", new WaitUntilCommand(m_elevator::atSetpoint).alongWith(new WaitCommand(0.050)).withTimeout(0.5));
+        NamedCommands.registerCommand("WaitForElevator", new WaitUntilCommand(m_elevator::atSetpoint).alongWith(new WaitCommand(0.150)).withTimeout(0.5));
 
         NamedCommands.registerCommand("AlignCRL4", new AlignInAuto(m_drivetrain, () -> {
             DriverStation.Alliance alliance = DriverStation.getAlliance().orElse(DriverStation.Alliance.Blue);
