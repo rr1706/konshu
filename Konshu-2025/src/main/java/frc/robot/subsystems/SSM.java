@@ -76,6 +76,7 @@ public class SSM extends SubsystemBase {
                 m_pauseSpecial = true;                          //  and set flag
             }
         }
+        SmartDashboard.putBoolean("m_pauseSpecial", m_pauseSpecial);
 
         m_setpoint = state;
         SmartDashboard.putString("m_setpoint", m_setpoint.toString());
@@ -110,7 +111,7 @@ public class SSM extends SubsystemBase {
         m_armSetpoint = Math.max(m_armSetpoint, ArmConstants.kArmUpperLimit);
         m_armSetpoint = Math.min(m_armSetpoint, ArmConstants.kArmLowerLimit); 
 
-        m_elevatorSetpoint = getScoringElevatorPosition(m_setpoint)+m_elevatorOffset;
+        m_elevatorSetpoint = getScoringArmPosition(m_setpoint)+m_elevatorOffset;
         m_elevatorSetpoint = Math.min(m_elevatorSetpoint, ElevatorConstants.kUpperLimitElevator);
         m_elevatorSetpoint = Math.max(m_elevatorSetpoint, ElevatorConstants.kULowerLimitElevator);
 
@@ -125,8 +126,8 @@ public class SSM extends SubsystemBase {
             if ((m_setpoint == States.L1) && (m_elevator.getPosition() > m_elevatorSetpoint - 1.0) && 
              (m_elevator.getPosition() < m_elevatorSetpoint + 1.0)) {    // Moving to L1 in prep to move to L1_SPECIAL - now safe to move arm inside elevator
                 m_setpoint = States.L1_SPECIAL;
-                m_arm.setPosition(m_armSetpoint);
-                m_elevator.setPosition(m_elevatorSetpoint);
+                m_arm.setPosition(getScoringArmPosition(m_setpoint));
+                m_elevator.setPosition(getScoringArmPosition(m_setpoint));
                 m_pauseSpecial = false;
             } else if (m_arm.getPosition() > ArmConstants.kArmHighDanger) {     // Moving to L1 from L1_SPECIAL - now safe to move to final state
                 setState(m_nextSetpoint);   // Clear of elevator so now can move to original commanded set point
