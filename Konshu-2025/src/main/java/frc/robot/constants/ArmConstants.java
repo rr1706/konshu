@@ -10,10 +10,8 @@ public class ArmConstants {
   public static final double kArmV = 5.49;   // Output per unit of target velocity (volts/rps)
   public static final double kArmA = 0.001;   // Output per unit of target accelleration (volts/rps/rps)
 
-  // public static final double kArmCruiseVelocity = 1.0;
-  // public static final double kArmAcceleration = 6.0;
-  public static final double kArmCruiseVelocity = 0.1;
-  public static final double kArmAcceleration = 0.6;
+  public static final double kArmCruiseVelocity = 1.0;
+  public static final double kArmAcceleration = 6.0;
   // public static final double kArmJerk = 0.4;
 
   public static final double kArmGearRatio = (50.0/8.0)*(48.0/20.0)*(48.0/14.0);   // alpha was (44.0/8.0)*(40.0/20.0)*(48.0/14.0);
