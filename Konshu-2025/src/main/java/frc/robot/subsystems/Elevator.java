@@ -1,6 +1,9 @@
 package frc.robot.subsystems;
+import com.ctre.phoenix6.controls.DynamicMotionMagicVoltage;
 import com.ctre.phoenix6.controls.Follower;
+import com.ctre.phoenix6.controls.MotionMagicDutyCycle;
 import com.ctre.phoenix6.controls.MotionMagicVoltage;
+import com.ctre.phoenix6.controls.DynamicMotionMagicVoltage;
 import com.ctre.phoenix6.hardware.TalonFX;
 import com.ctre.phoenix6.signals.GravityTypeValue;
 import com.ctre.phoenix6.signals.InvertedValue;
@@ -41,9 +44,9 @@ public class Elevator extends SubsystemBase {
             .withSupplyCurrentLimitEnable(true));
             
          m_ElevatorRightFX.getConfigurator().apply(new MotionMagicConfigs()
-            .withMotionMagicAcceleration(ElevatorConstants.kAccelerationElevator)
-            .withMotionMagicCruiseVelocity(ElevatorConstants.kVelocityElevator)
-            .withMotionMagicJerk(ElevatorConstants.kJerkElevator));
+            .withMotionMagicAcceleration(ElevatorConstants.kDownAccelerationElevator)
+            .withMotionMagicCruiseVelocity(ElevatorConstants.kDownVelocityElevator)
+            .withMotionMagicJerk(ElevatorConstants.kDownJerkElevator));
 
                     
         m_ElevatorRightFX.getConfigurator().apply( new Slot0Configs()
@@ -69,8 +72,8 @@ public class Elevator extends SubsystemBase {
     }
 
     public void setPosition(double position){        // Position in inches
-        double ffvolts = 0.0;
 
+//       double ffvolts = 0.0;
         // Vary the ff voltage based on elevator position and what we are carrying
 //        if (getPosition() < firststageheight) ffvolts = 0.0;
 //        else if (getPosition() < secondstageheight) ffvolts = 0.0;
@@ -79,9 +82,16 @@ public class Elevator extends SubsystemBase {
 //       if (m_hasAlgae.getAsBoolean()) ffvolts += 0.0;
 
         m_setPoint = position;
-        m_ElevatorRightFX.setControl(new MotionMagicVoltage(position/ElevatorConstants.kInchPerRotation).withFeedForward(ffvolts));
-    }
+//        m_ElevatorRightFX.setControl(new MotionMagicVoltage(position/ElevatorConstants.kInchPerRotation));
 
+        if (position > getPosition()) {     // Going up
+            m_ElevatorRightFX.setControl(new DynamicMotionMagicVoltage(position/ElevatorConstants.kInchPerRotation, 
+                ElevatorConstants.kUpVelocityElevator, ElevatorConstants.kUpAccelerationElevator, ElevatorConstants.kUpJerkElevator));
+        } else {                            // Going down
+            m_ElevatorRightFX.setControl(new DynamicMotionMagicVoltage(position/ElevatorConstants.kInchPerRotation, 
+                ElevatorConstants.kDownVelocityElevator, ElevatorConstants.kDownAccelerationElevator, ElevatorConstants.kDownJerkElevator));
+        }
+    }
 
     @SuppressWarnings("rawtypes")
     public StatusSignal getCurrentLeft() {
