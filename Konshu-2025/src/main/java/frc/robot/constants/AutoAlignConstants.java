@@ -55,7 +55,7 @@ public final class AutoAlignConstants {
     public static InterpolatingDoubleTreeMap ElevatorAutoAlignL2 = new InterpolatingDoubleTreeMap();
     public static InterpolatingDoubleTreeMap ElevatorAutoAlignL3 = new InterpolatingDoubleTreeMap();
     public static InterpolatingDoubleTreeMap ElevatorAutoAlignL4 = new InterpolatingDoubleTreeMap();
-    public static InterpolatingDoubleTreeMap ArmAutoAlignL1 = new InterpolatingDoubleTreeMap();
+    public static InterpolatingDoubleTreeMap ArmAutoAlignL1 = new InterpolatingDoubleTreeMap();;
     public static InterpolatingDoubleTreeMap ArmAutoAlignL2 = new InterpolatingDoubleTreeMap();
     public static InterpolatingDoubleTreeMap ArmAutoAlignL3 = new InterpolatingDoubleTreeMap();
     public static InterpolatingDoubleTreeMap ArmAutoAlignL4 = new InterpolatingDoubleTreeMap();
