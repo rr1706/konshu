@@ -44,9 +44,9 @@
                 "data": {
                   "commands": [
                     {
-                      "type": "wait",
+                      "type": "named",
                       "data": {
-                        "waitTime": 0.01
+                        "name": "WaitForElevator"
                       }
                     },
                     {
@@ -112,13 +112,26 @@
               {
                 "type": "named",
                 "data": {
-                  "name": "ScoreL4Fast"
+                  "name": "AlignFRL4"
                 }
               },
               {
-                "type": "named",
+                "type": "sequential",
                 "data": {
-                  "name": "AlignFRL4"
+                  "commands": [
+                    {
+                      "type": "named",
+                      "data": {
+                        "name": "WaitForElevator"
+                      }
+                    },
+                    {
+                      "type": "named",
+                      "data": {
+                        "name": "ScoreL4Faster"
+                      }
+                    }
+                  ]
                 }
               }
             ]
@@ -175,13 +188,26 @@
               {
                 "type": "named",
                 "data": {
-                  "name": "ScoreL4Fast"
+                  "name": "AlignFLL4"
                 }
               },
               {
-                "type": "named",
+                "type": "sequential",
                 "data": {
-                  "name": "AlignFLL4"
+                  "commands": [
+                    {
+                      "type": "named",
+                      "data": {
+                        "name": "WaitForElevator"
+                      }
+                    },
+                    {
+                      "type": "named",
+                      "data": {
+                        "name": "ScoreL4Faster"
+                      }
+                    }
+                  ]
                 }
               }
             ]
@@ -232,13 +258,26 @@
               {
                 "type": "named",
                 "data": {
-                  "name": "ScoreL2Fast"
+                  "name": "AlignARL4"
                 }
               },
               {
-                "type": "named",
+                "type": "sequential",
                 "data": {
-                  "name": "AlignARL2"
+                  "commands": [
+                    {
+                      "type": "named",
+                      "data": {
+                        "name": "WaitForElevator"
+                      }
+                    },
+                    {
+                      "type": "named",
+                      "data": {
+                        "name": "ScoreL4Faster"
+                      }
+                    }
+                  ]
                 }
               }
             ]

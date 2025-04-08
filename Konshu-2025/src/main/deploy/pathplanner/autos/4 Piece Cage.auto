@@ -40,9 +40,22 @@
                 }
               },
               {
-                "type": "named",
+                "type": "sequential",
                 "data": {
-                  "name": "ScoreL4Faster"
+                  "commands": [
+                    {
+                      "type": "named",
+                      "data": {
+                        "name": "WaitForElevator"
+                      }
+                    },
+                    {
+                      "type": "named",
+                      "data": {
+                        "name": "ScoreL4Faster"
+                      }
+                    }
+                  ]
                 }
               }
             ]
@@ -99,13 +112,26 @@
               {
                 "type": "named",
                 "data": {
-                  "name": "ScoreL4Fast"
+                  "name": "AlignBLL4"
                 }
               },
               {
-                "type": "named",
+                "type": "sequential",
                 "data": {
-                  "name": "AlignBLL4"
+                  "commands": [
+                    {
+                      "type": "named",
+                      "data": {
+                        "name": "WaitForElevator"
+                      }
+                    },
+                    {
+                      "type": "named",
+                      "data": {
+                        "name": "ScoreL4Faster"
+                      }
+                    }
+                  ]
                 }
               }
             ]
@@ -162,13 +188,26 @@
               {
                 "type": "named",
                 "data": {
-                  "name": "ScoreL4Fast"
+                  "name": "AlignBRL4"
                 }
               },
               {
-                "type": "named",
+                "type": "sequential",
                 "data": {
-                  "name": "AlignBRL4"
+                  "commands": [
+                    {
+                      "type": "named",
+                      "data": {
+                        "name": "WaitForElevator"
+                      }
+                    },
+                    {
+                      "type": "named",
+                      "data": {
+                        "name": "ScoreL4Faster"
+                      }
+                    }
+                  ]
                 }
               }
             ]
@@ -219,13 +258,26 @@
               {
                 "type": "named",
                 "data": {
-                  "name": "ScoreL2Fast"
+                  "name": "AlignALL4"
                 }
               },
               {
-                "type": "named",
+                "type": "sequential",
                 "data": {
-                  "name": "AlignALL2"
+                  "commands": [
+                    {
+                      "type": "named",
+                      "data": {
+                        "name": "WaitForElevator"
+                      }
+                    },
+                    {
+                      "type": "named",
+                      "data": {
+                        "name": "ScoreL4Faster"
+                      }
+                    }
+                  ]
                 }
               }
             ]
