@@ -42,7 +42,7 @@ public class RobotContainer {
 
     public final CoralArm m_coralArm = new CoralArm();
     public final AlgaeArm m_algaeArm = new AlgaeArm();
-    private final Elevator m_elevator = new Elevator();
+    private final Elevator m_elevator = new Elevator(m_coralArm::haveCoral, m_algaeArm::haveAlgae);
     private final Arm m_arm = new Arm();
     private final Funnel m_funnel = new Funnel();
 

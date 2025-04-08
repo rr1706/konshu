@@ -91,15 +91,10 @@ public class AutoAlign extends Command {
             m_state = SSM.States.L1;
             m_alignMode = ReefTargetCalculator.AlignMode.LEFT;
             Robot.buttonLog.append("L1Left");
-// todo - need a dedicated button for L1_SPECIAL - using L1Right for testing
         } else if (DriverStation.getStickButton(1, ButtonConstants.kL1Right)) {
             m_state = SSM.States.L1;
             m_alignMode = ReefTargetCalculator.AlignMode.RIGHT;
             Robot.buttonLog.append("L1Right");
-        // } else if (DriverStation.getStickButton(1, ButtonConstants.kL1Right)) {
-        //     m_state = SSM.States.L1_SPECIAL;
-        //     m_goForPID = false;
-        //     Robot.buttonLog.append("L1Special");
         } else if (DriverStation.getStickButton(1, ButtonConstants.kL2Left)) {
             m_state = SSM.States.L2;
             m_alignMode = ReefTargetCalculator.AlignMode.LEFT;
@@ -224,6 +219,7 @@ public class AutoAlign extends Command {
         }
 
         // Set the state
+
         if (m_state == SSM.States.BARGE && DriverStation.getStickAxis(0, 3)>= 0.25) {
             armOffset = -30.0;
         }
