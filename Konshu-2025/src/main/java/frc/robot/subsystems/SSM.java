@@ -18,8 +18,8 @@ public class SSM extends SubsystemBase {
         DISABLED, L1, L1_SPECIAL, L2, L3, L4, LOADINGSTATION, PROCESSOR, BARGE, GROUNDALGAE, ALGAELOW, ALGAEHIGH, Climb
     };
 
-    private boolean m_elevatorPauseHigh, m_elevatorPauseLow, m_armPauseHigh, m_armPauseLow;
-    private States m_setpoint, m_queuedSetpoint;
+    private boolean m_elevatorPauseHigh, m_elevatorPauseLow, m_armPauseHigh, m_armPauseLow, m_pauseSpecial;
+    private States m_setpoint, m_queuedSetpoint, m_nextSetpoint;
     private double m_armSetpoint, m_elevatorSetpoint;
     private double m_armOffset, m_elevatorOffset;
 
@@ -29,11 +29,13 @@ public class SSM extends SubsystemBase {
         m_arm = arm;
         m_elevator = elevator;
         m_setpoint = States.DISABLED;
+        m_nextSetpoint = setpoint;
         m_queuedSetpoint = setpoint;
         m_elevatorPauseHigh = false;
         m_elevatorPauseLow = false;
         m_armPauseHigh = false;
         m_armPauseLow = false;
+        m_pauseSpecial = false;
         SmartDashboard.putString("m_setpoint", m_setpoint.toString());
         SmartDashboard.putString("m_queuedSetpoint", m_queuedSetpoint.toString());
         SmartDashboard.putBoolean("m_armPauseHigh", m_armPauseHigh);
@@ -105,6 +107,21 @@ public class SSM extends SubsystemBase {
         m_armPauseLow = false;
         m_elevatorPauseHigh = false;
         m_elevatorPauseLow = false;
+
+        // Handle special case of L1_SPECIAL (arm inside of elevator)
+        if (m_pauseSpecial) {
+            if ((m_setpoint == States.L1) && (m_elevator.getPosition() > m_elevatorSetpoint - 1.0) && 
+             (m_elevator.getPosition() < m_elevatorSetpoint + 1.0)) {    // Moving to L1 in prep to move to L1_SPECIAL - now safe to move arm inside elevator
+                m_setpoint = States.L1_SPECIAL;
+                m_arm.setPosition(getScoringArmPosition(m_setpoint));
+                m_elevator.setPosition(getScoringElevatorPosition(m_setpoint));
+                m_pauseSpecial = false;
+            } else if (m_arm.getPosition() > ArmConstants.kArmHighDanger) {     // Moving to L1 from L1_SPECIAL - now safe to move to final state
+                setState(m_nextSetpoint);   // Clear of elevator so now can move to original commanded set point
+                m_pauseSpecial = false;
+                return;
+            }
+        }
 
         if (m_setpoint != States.L1_SPECIAL) {
             if (m_elevator.getPosition() < m_elevatorSetpoint) { // If elevator going up...
