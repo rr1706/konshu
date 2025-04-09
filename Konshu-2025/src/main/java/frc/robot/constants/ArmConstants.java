@@ -18,6 +18,7 @@ public class ArmConstants {
   public static final double kArmRotorToSensor = 22.0/18.0;
 
   public static final double kArmL1 = 12.1-75.4+17.0;      // Degrees from arm hortizontal
+  public static final double KArmL1_special = -60.0;         // Inside the elevator
   public static final double kArmL2 = 26.8-75.4+17.0;
   public static final double kArmL3 = 26.8-75.4+17.0;
   public static final double kArmL4 = -10.0;

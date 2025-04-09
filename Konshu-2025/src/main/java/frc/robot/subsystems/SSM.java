@@ -15,7 +15,7 @@ public class SSM extends SubsystemBase {
     private final BooleanSupplier m_hasCoral;
 
     public enum States {
-        DISABLED, L1, L2, L3, L4, LOADINGSTATION, PROCESSOR, BARGE, GROUNDALGAE, ALGAELOW, ALGAEHIGH, Climb
+        DISABLED, L1, L1_SPECIAL, L2, L3, L4, LOADINGSTATION, PROCESSOR, BARGE, GROUNDALGAE, ALGAELOW, ALGAEHIGH, Climb
     };
 
     private boolean m_elevatorPauseHigh, m_elevatorPauseLow, m_armPauseHigh, m_armPauseLow;
@@ -170,6 +170,7 @@ public class SSM extends SubsystemBase {
     }
 
     public void setState(States q) {
+        if (q == States.L1_SPECIAL) q = States.L1;
         m_queuedSetpoint = q;
         SmartDashboard.putString("m_queuedSetPoint", m_queuedSetpoint.toString());
         m_armOffset = 0.0;
@@ -177,6 +178,7 @@ public class SSM extends SubsystemBase {
     }
 
     public void setState(States q, double armOffset, double elevatorOffset) {
+        if (q == States.L1_SPECIAL) q = States.L1;
         m_queuedSetpoint = q;
         SmartDashboard.putString("m_queuedSetPoint", m_queuedSetpoint.toString());
         m_armOffset = armOffset;
