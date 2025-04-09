@@ -76,6 +76,7 @@ public class SSM extends SubsystemBase {
                 m_pauseSpecial = true;                         //  and set flag
             }
         }
+        SmartDashboard.putBoolean("m_pauseSpecial", m_pauseSpecial);
 
         m_setpoint = state;
         SmartDashboard.putString("m_setpoint", m_setpoint.toString());
@@ -122,8 +123,8 @@ public class SSM extends SubsystemBase {
 
         // Handle special case of L_IN (arm inside of elevator)
         if (m_pauseSpecial) {
-            if ((m_setpoint == States.L1_INTERIM) && (m_elevator.getPosition() > m_elevatorSetpoint - 0.25) && 
-             (m_elevator.getPosition() < m_elevatorSetpoint + 0.25)) {    // Moving to L1_INTERIM in prep to move to L1_IN - now safe to move arm inside elevator
+            if ((m_setpoint == States.L1_INTERIM) && (m_elevator.getPosition() > m_elevatorSetpoint - 0.5) && 
+             (m_elevator.getPosition() < m_elevatorSetpoint + 0.5)) {    // Moving to L1_INTERIM in prep to move to L1_IN - now safe to move arm inside elevator
                 m_setpoint = States.L1_IN;
                 m_arm.setPosition(getScoringArmPosition(m_setpoint));
                 m_elevator.setPosition(getScoringElevatorPosition(m_setpoint));
@@ -134,6 +135,7 @@ public class SSM extends SubsystemBase {
                 return;
             }
         }
+        SmartDashboard.putBoolean("m_pauseSpecial", m_pauseSpecial);
 
         if (m_setpoint != States.L1_IN) {
             if (m_elevator.getPosition() < m_elevatorSetpoint) { // If elevator going up...
