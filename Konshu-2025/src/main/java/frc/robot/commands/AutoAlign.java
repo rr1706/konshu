@@ -95,9 +95,9 @@ public class AutoAlign extends Command {
             m_state = SSM.States.L1;
             m_alignMode = ReefTargetCalculator.AlignMode.RIGHT;
             Robot.buttonLog.append("L1Right");
-            // m_state = SSM.States.L1_SPECIAL;
+            // m_state = SSM.States.L1IN;
             // m_goForPID = false;
-            // Robot.buttonLog.append("L1Special");
+            // Robot.buttonLog.append("L1IN");
         } else if (DriverStation.getStickButton(1, ButtonConstants.kL2Left)) {
             m_state = SSM.States.L2;
             m_alignMode = ReefTargetCalculator.AlignMode.LEFT;
@@ -142,7 +142,7 @@ public class AutoAlign extends Command {
             m_goForPID = false; // No level button pressed - do nothing
 
         Pose2d currentPose = m_drivetrain.getState().Pose;
-        if (m_goForPID) m_pose = ReefTargetCalculator.calculateTargetTranslation(m_alignMode);
+        if (m_goForPID) m_pose = ReefTargetCalculator.calculateTargetTranslation(m_alignMode, currentPose);
         if (m_pose == null) m_goForPID = false; // No reef button pressed – optionally mark the command as finished
         SmartDashboard.putBoolean("goForPID", m_goForPID);
 

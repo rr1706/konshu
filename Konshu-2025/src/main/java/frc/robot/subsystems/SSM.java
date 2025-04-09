@@ -15,7 +15,7 @@ public class SSM extends SubsystemBase {
     private final BooleanSupplier m_hasCoral;
 
     public enum States {
-        DISABLED, L1, L1_SPECIAL, L2, L3, L4, LOADINGSTATION, PROCESSOR, BARGE, GROUNDALGAE, ALGAELOW, ALGAEHIGH, Climb
+        DISABLED, L1, L1_IN, L1_INTERIM, L2, L3, L4, LOADINGSTATION, PROCESSOR, BARGE, GROUNDALGAE, ALGAELOW, ALGAEHIGH, Climb
     };
 
     private boolean m_elevatorPauseHigh, m_elevatorPauseLow, m_armPauseHigh, m_armPauseLow, m_pauseSpecial;
@@ -65,15 +65,15 @@ public class SSM extends SubsystemBase {
     // below kArmLowDanger
     private void newState(States state) {
 
-        // Special handling of L1_SPECIAL (arm inside of elevator)
-        if (state != m_setpoint) {                              // Check for state change
-            if (state == States.L1_SPECIAL) {                   // If commanded to L1_SPECIAL
-                state = States.L1;                              //  first go to L1
+        // Special handling of L1_IN (arm inside of elevator)
+        if (state != m_setpoint) {                             // Check for state change
+            if (state == States.L1_IN) {                        // If new state is L1_IN
+                state = States.L1_INTERIM;                      //  first go to L_Interim
                 m_pauseSpecial = true;                          //  and set flag
-            } else if (m_setpoint == States.L1_SPECIAL) {       // If currently at L1_SPECIAL
+            } else if (m_setpoint == States.L1_IN) {            // If currently at L1_IN
                 m_nextSetpoint = state;                         //  save commanded state for later
-                state = States.L1;                              //  and first go to L1
-                m_pauseSpecial = true;                          //  and set flag
+                state = States.L1_INTERIM;                      //  and first go to L1_INTERIM
+                m_pauseSpecial = true;                         //  and set flag
             }
         }
 
@@ -120,22 +120,22 @@ public class SSM extends SubsystemBase {
         m_elevatorPauseHigh = false;
         m_elevatorPauseLow = false;
 
-        // Handle special case of L1_SPECIAL (arm inside of elevator)
+        // Handle special case of L_IN (arm inside of elevator)
         if (m_pauseSpecial) {
-            if ((m_setpoint == States.L1) && (m_elevator.getPosition() > m_elevatorSetpoint - 1.0) && 
-             (m_elevator.getPosition() < m_elevatorSetpoint + 1.0)) {    // Moving to L1 in prep to move to L1_SPECIAL - now safe to move arm inside elevator
-                m_setpoint = States.L1_SPECIAL;
+            if ((m_setpoint == States.L1_INTERIM) && (m_elevator.getPosition() > m_elevatorSetpoint - 0.25) && 
+             (m_elevator.getPosition() < m_elevatorSetpoint + 0.25)) {    // Moving to L1_INTERIM in prep to move to L1_IN - now safe to move arm inside elevator
+                m_setpoint = States.L1_IN;
                 m_arm.setPosition(getScoringArmPosition(m_setpoint));
                 m_elevator.setPosition(getScoringElevatorPosition(m_setpoint));
                 m_pauseSpecial = false;
-            } else if (m_arm.getPosition() > ArmConstants.kArmHighDanger) {     // Moving to L1 from L1_SPECIAL - now safe to move to final state
+            } else if (m_arm.getPosition() > ArmConstants.kArmHighDanger) {     // Moving to L1_INTERIM from L1_IN - now safe to move to final state
                 setState(m_nextSetpoint);   // Clear of elevator so now can move to original commanded set point
                 m_pauseSpecial = false;
                 return;
             }
         }
 
-        if (m_setpoint != States.L1_SPECIAL) {
+        if (m_setpoint != States.L1_IN) {
             if (m_elevator.getPosition() < m_elevatorSetpoint) { // If elevator going up...
                m_elevator.setPosition(m_elevatorSetpoint); // Going up, always start elevator to setpoint
                if ((m_armSetpoint < ArmConstants.kArmHighDanger)
@@ -165,7 +165,7 @@ public class SSM extends SubsystemBase {
 
     public void periodic() {
         /// SAFETY CHECK - Make sure the arm is not inside of the elevator (start position)
-        /// Only check if disabled (at start) now that arm CAN move inside elevator for L1_SPECIAL
+        /// Only check if disabled (at start) now that arm CAN move inside elevator for L1_IN
         if ((m_setpoint == States.DISABLED) && 
          (m_elevator.getPosition() < ElevatorConstants.kElevatorHighDanger) &&
          (m_arm.getPosition() < ArmConstants.kArmHighDanger)) {
@@ -176,7 +176,7 @@ public class SSM extends SubsystemBase {
 //        if (m_setpoint != m_queuedSetpoint)      // Now always reinit because added offsets
         if ((m_queuedSetpoint == States.L1) || (m_queuedSetpoint == States.L2) || 
             (m_queuedSetpoint == States.L3) || (m_queuedSetpoint == States.L4) ||
-            (m_queuedSetpoint == States.L1_SPECIAL)) {
+            (m_queuedSetpoint == States.L1_IN)) {
             if (m_hasCoral.getAsBoolean()) newState(m_queuedSetpoint);
         } else newState(m_queuedSetpoint);                // Check for new state commanded
         
@@ -186,8 +186,7 @@ public class SSM extends SubsystemBase {
         if (m_armPauseHigh && (m_elevator.getPosition() > ElevatorConstants.kElevatorHighDanger)) { // Elevator going up
             m_arm.setPosition(m_armSetpoint); // Cleared, continue to final setpoint
             m_armPauseHigh = false;
-        } else if (m_armPauseLow && (m_elevator.getPosition() > ElevatorConstants.kElevatorLowDanger)) { // Elevator
-                                                                                                         // going up
+        } else if (m_armPauseLow && (m_elevator.getPosition() > ElevatorConstants.kElevatorLowDanger)) { // Elevator going up
             m_arm.setPosition(m_armSetpoint); // Cleared, continue to final setpoint
             m_armPauseLow = false;
         } else if (m_elevatorPauseHigh && (m_arm.getPosition() > ArmConstants.kArmHighDanger)) { // Elevator going down
@@ -224,7 +223,8 @@ public class SSM extends SubsystemBase {
     public double getScoringElevatorPosition(States state) {
         return switch (state) {
             case L1 -> ElevatorConstants.kElevatorL1;
-            case L1_SPECIAL -> ElevatorConstants.kElevatorL1_Special;
+            case L1_IN -> ElevatorConstants.kElevatorL1IN;
+            case L1_INTERIM -> ElevatorConstants.kElevatorL1Interim;
             case L2 -> ElevatorConstants.kElevatorL2;
             case L3 -> ElevatorConstants.kElevatorL3;
             case L4 -> ElevatorConstants.kElevatorL4;
@@ -241,7 +241,8 @@ public class SSM extends SubsystemBase {
     public double getScoringArmPosition(States state) {
         return switch (state) {
             case L1 -> ArmConstants.kArmL1;
-            case L1_SPECIAL -> ArmConstants.KArmL1_special;
+            case L1_IN -> ArmConstants.KArmL1IN;
+            case L1_INTERIM -> ArmConstants.KArmL1Interim;
             case L2 -> ArmConstants.kArmL2;
             case L3 -> ArmConstants.kArmL3;
             case L4 -> ArmConstants.kArmL4;

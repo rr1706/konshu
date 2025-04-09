@@ -136,7 +136,8 @@ public final class AutoAlignConstants {
         ArmAutoAlignL4.put(0.882, -8.6);
         ArmAutoAlignL4.put(1.0, -8.6);
     }
-    public static final class SetUpAprilTags{
+
+    public static final class ReefAprilTags{
       public static final Translation2d At17= new Translation2d(-160.27,-130.21);
       public static final Translation2d At18= new Translation2d(-144,-158.38);
       public static final Translation2d At19= new Translation2d(-160.28,-186.77);
