@@ -204,7 +204,6 @@ public class SSM extends SubsystemBase {
     }
 
     public void setState(States q) {
-        if (q == States.L1_SPECIAL) q = States.L1;
         m_queuedSetpoint = q;
         SmartDashboard.putString("m_queuedSetPoint", m_queuedSetpoint.toString());
         m_armOffset = 0.0;
@@ -212,7 +211,6 @@ public class SSM extends SubsystemBase {
     }
 
     public void setState(States q, double armOffset, double elevatorOffset) {
-        if (q == States.L1_SPECIAL) q = States.L1;
         m_queuedSetpoint = q;
         SmartDashboard.putString("m_queuedSetPoint", m_queuedSetpoint.toString());
         m_armOffset = armOffset;
@@ -226,6 +224,7 @@ public class SSM extends SubsystemBase {
     public double getScoringElevatorPosition(States state) {
         return switch (state) {
             case L1 -> ElevatorConstants.kElevatorL1;
+            case L1_SPECIAL -> ElevatorConstants.kElevatorL1_Special;
             case L2 -> ElevatorConstants.kElevatorL2;
             case L3 -> ElevatorConstants.kElevatorL3;
             case L4 -> ElevatorConstants.kElevatorL4;
@@ -242,6 +241,7 @@ public class SSM extends SubsystemBase {
     public double getScoringArmPosition(States state) {
         return switch (state) {
             case L1 -> ArmConstants.kArmL1;
+            case L1_SPECIAL -> ArmConstants.KArmL1_special;
             case L2 -> ArmConstants.kArmL2;
             case L3 -> ArmConstants.kArmL3;
             case L4 -> ArmConstants.kArmL4;
