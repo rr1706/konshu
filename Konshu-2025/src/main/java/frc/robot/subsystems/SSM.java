@@ -65,6 +65,18 @@ public class SSM extends SubsystemBase {
     // below kArmLowDanger
     private void newState(States state) {
 
+        // Special handling of L1_SPECIAL (arm inside of elevator)
+        if (state != m_setpoint) {                              // Check for state change
+            if (state == States.L1_SPECIAL) {                   // If commanded to L1_SPECIAL
+                state = States.L1;                              //  first go to L1
+                m_pauseSpecial = true;                          //  and set flag
+            } else if (m_setpoint == States.L1_SPECIAL) {       // If currently at L1_SPECIAL
+                m_nextSetpoint = state;                         //  save commanded state for later
+                state = States.L1;                              //  and first go to L1
+                m_pauseSpecial = true;                          //  and set flag
+            }
+        }
+
         m_setpoint = state;
         SmartDashboard.putString("m_setpoint", m_setpoint.toString());
 
