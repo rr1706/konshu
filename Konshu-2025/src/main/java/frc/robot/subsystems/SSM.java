@@ -117,47 +117,7 @@ public class SSM extends SubsystemBase {
             default:
             break;
         }
-
-        // If we decide we really need autoalign in L1_IN, then will need to do this.  Will also require:  
-        //  1) Update AutoAlign for L1_IN to use PID and set rotation perpendicular to reef (similar to L1 without offset)
-        //  2) Set up lookup offsets for arm L1_IN
-        //  3) Create new upper and lower limits for arm when inside elevator
-        //  4) Add another elseif to state change above to deal with state change request when in TO_L1_IN state - would be bad
-        //  5) Include L1_IN as valid state for safe move logic
-        // switch (m_L1state) {
-        //     case IN_TO_L1_INTERIM:
-        //         if ((m_elevator.getPosition() > ElevatorConstants.kElevatorL1Interim - 0.5) && 
-        //             (m_elevator.getPosition() < ElevatorConstants.kElevatorL1Interim + 0.5)) {    //  Now safe to move arm inside elevator
-        //             m_L1state = L1State.TO_L1_IN;
-        //             m_arm.setPosition(getScoringArmPosition(States.L1_IN));
-        //             m_elevator.setPosition(getScoringElevatorPosition(States.L1_IN));
-        //         }
-        //     break;
-        //     case TO_L1_IN:
-        //         if ((m_arm.getPosition() > ArmConstants.kArmL1Interim - 3.0) && 
-        //             (m_arm.getPosition() < ArmConstants.kArmL1Interim + 3.0)) {
-        //             m_L1state = L1State.AT_L1_IN;
-        //             m_setpoint = States.L1_IN;
-        //             m_queuedSetpoint = States.L1_IN;
-        //         }
-        //     break;
-        //     case AT_L1_IN:
-        //         m_armSetpoint = getScoringArmPosition(m_setpoint)+m_armOffset;
-        //         m_armSetpoint = Math.max(m_armSetpoint, ArmConstants.kArmUpperLimitIN);
-        //         m_armSetpoint = Math.min(m_armSetpoint, ArmConstants.kArmLowerLimitIN); 
-        //         m_arm.setPosition(m_armSetpoint);
-        //     break;
-        //     case OUT_TO_L1_INTERIM:
-        //         if (m_arm.getPosition() > ArmConstants.kArmHighDanger) {
-        //             m_L1state = L1State.OUT;
-        //             m_setpoint = m_nextSetpoint;            // Now safe to move to commanded state
-        //             m_queuedSetpoint = m_nextSetpoint;
-        //         }
-        //     break;
-        //     default:
-        //     break;
-        // }
-
+        
         // Adjust the slew rate based on the setpoint
         switch (m_setpoint) {
             case L3:
