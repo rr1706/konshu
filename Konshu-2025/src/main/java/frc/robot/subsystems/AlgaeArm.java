@@ -36,7 +36,7 @@ public class AlgaeArm extends SubsystemBase {
 
 
         public Command grabAlgae(double speed){
-            return run(()->runAlgae(speed));
+            return runOnce(()->runAlgae(speed));
         }
     
         public void stop() {

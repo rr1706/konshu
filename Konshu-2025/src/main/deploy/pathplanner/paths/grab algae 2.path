@@ -8,20 +8,20 @@
       },
       "prevControl": null,
       "nextControl": {
-        "x": 6.786,
-        "y": 5.936
+        "x": 6.708862253013159,
+        "y": 5.228231919158134
       },
       "isLocked": false,
       "linkedName": "barge shot 1"
     },
     {
       "anchor": {
-        "x": 5.245,
-        "y": 5.25
+        "x": 5.1675,
+        "y": 5.16575
       },
       "prevControl": {
-        "x": 5.742250000000001,
-        "y": 5.9715
+        "x": 5.421,
+        "y": 5.67275
       },
       "nextControl": null,
       "isLocked": false,

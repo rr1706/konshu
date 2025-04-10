@@ -3,13 +3,13 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 5.15775,
-        "y": 2.7769999999999992
+        "x": 5.11875,
+        "y": 2.90375
       },
       "prevControl": null,
       "nextControl": {
-        "x": 6.591,
-        "y": 1.6557499999999994
+        "x": 5.46,
+        "y": 2.3675
       },
       "isLocked": false,
       "linkedName": "grab algae 3 end"
@@ -20,8 +20,8 @@
         "y": 4.7855
       },
       "prevControl": {
-        "x": 7.61475,
-        "y": 1.0415
+        "x": 6.8347500000000005,
+        "y": 3.9567499999999995
       },
       "nextControl": null,
       "isLocked": false,
@@ -74,7 +74,7 @@
   "folder": "algae autooooooooooo",
   "idealStartingState": {
     "velocity": 0,
-    "rotation": 115.27772223555296
+    "rotation": 119.99999999999999
   },
   "useDefaultConstraints": true
 }

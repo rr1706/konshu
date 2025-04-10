@@ -36,7 +36,7 @@
               {
                 "type": "named",
                 "data": {
-                  "name": "AlignBRL4"
+                  "name": "AlignDLL4"
                 }
               },
               {
@@ -206,6 +206,12 @@
                 "type": "named",
                 "data": {
                   "name": "ThrowAlgae"
+                }
+              },
+              {
+                "type": "named",
+                "data": {
+                  "name": "GoLoadingStationPOS"
                 }
               }
             ]

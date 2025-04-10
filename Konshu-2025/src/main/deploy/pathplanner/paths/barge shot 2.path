@@ -3,13 +3,13 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 5.245,
-        "y": 5.25
+        "x": 5.1675,
+        "y": 5.16575
       },
       "prevControl": null,
       "nextControl": {
-        "x": 5.400511230060051,
-        "y": 5.453941686839216
+        "x": 5.323011230060051,
+        "y": 5.369691686839216
       },
       "isLocked": false,
       "linkedName": "aglae shot 2"
@@ -68,7 +68,7 @@
   },
   "goalEndState": {
     "velocity": 0,
-    "rotation": 179.0608090542645
+    "rotation": 180.0
   },
   "reversed": false,
   "folder": "algae autooooooooooo",
