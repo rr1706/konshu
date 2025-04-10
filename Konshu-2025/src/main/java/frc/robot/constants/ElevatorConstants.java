@@ -25,8 +25,8 @@ public class ElevatorConstants {
     public static final double kElevatorNeutral = 1.0; 
     public static final boolean elevatorConfigforwardSoftLimitEnabled = true;
     public static final double kElevatorL1 = 8.6;       // These are in inches
-    public static final double kElevatorL1Interim = 3.5;   // Waypoint to arm inside the elevator
-    public static final double kElevatorL1IN = 3.5;       // Arm inside the elevator
+    public static final double kElevatorL1Interim = 3.5;    // Waypoint to arm inside the elevator
+    public static final double kElevatorL1IN = kElevatorL1Interim;         // Arm inside the elevator
     public static final double kElevatorL2 = 22.0; 
     public static final double kElevatorL3 = 37.5;  
     public static final double kElevatorL4 = 71.5; 
