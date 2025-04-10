@@ -188,11 +188,19 @@ public class ReefTargetCalculator {
         int closestIndex;
         ReefFace faces[] = {ReefFace.BlueA, ReefFace.BlueB, ReefFace.BlueC, ReefFace.BlueD, ReefFace.BlueE, ReefFace.BlueF,
                 ReefFace.RedA, ReefFace.RedB, ReefFace.RedC, ReefFace.RedD, ReefFace.RedE, ReefFace.RedF};
-        Translation2d tags[] = {AutoAlignConstants.ReefAprilTags.At17, AutoAlignConstants.ReefAprilTags.At18,
-                AutoAlignConstants.ReefAprilTags.At19, AutoAlignConstants.ReefAprilTags.At20, AutoAlignConstants.ReefAprilTags.At21,
-                AutoAlignConstants.ReefAprilTags.At22, AutoAlignConstants.ReefAprilTags.At11, AutoAlignConstants.ReefAprilTags.At10,
-                AutoAlignConstants.ReefAprilTags.At9, AutoAlignConstants.ReefAprilTags.At8, AutoAlignConstants.ReefAprilTags.At7,
-                AutoAlignConstants.ReefAprilTags.At6}; 
+        Translation2d tags[] = {
+                AutoAlignConstants.ReefAprilTags.At18,  // Blue A
+                AutoAlignConstants.ReefAprilTags.At19,  // Blue B
+                AutoAlignConstants.ReefAprilTags.At20,  // Blue C
+                AutoAlignConstants.ReefAprilTags.At21,  // Blue D
+                AutoAlignConstants.ReefAprilTags.At22,  // Blue E
+                AutoAlignConstants.ReefAprilTags.At17,  // Blue F
+                AutoAlignConstants.ReefAprilTags.At7,  // Red A
+                AutoAlignConstants.ReefAprilTags.At6,  // Red B
+                AutoAlignConstants.ReefAprilTags.At11,   // Red C
+                AutoAlignConstants.ReefAprilTags.At10,   // Red D
+                AutoAlignConstants.ReefAprilTags.At9,   // Red E
+                AutoAlignConstants.ReefAprilTags.At8};  // Red F
 
         // If a button pushed then return none, otherwise retun the closest tag.
         // Need this until we get rid of the reef coral buttons.
