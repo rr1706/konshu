@@ -3,6 +3,7 @@ package frc.robot.utilities;
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.wpilibj.DriverStation;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.constants.AutoAlignConstants;
 import frc.robot.constants.ButtonConstants;
 import frc.robot.Robot;
@@ -23,7 +24,8 @@ public class ReefTargetCalculator {
         ReefFace m_face;
 
         m_face = ReefFace.None;
-//        m_face = getClosestReefFace(currentPose);         // Note this will return closest regardless of alliance
+        m_face = getClosestReefFace(currentPose);         // Note this will return closest regardless of alliance
+        SmartDashboard.putString("m_face", m_face.toString());
 
         // Get current alliance; default to Blue if not present.
         DriverStation.Alliance alliance = DriverStation.getAlliance().orElse(DriverStation.Alliance.Blue);
@@ -211,6 +213,7 @@ public class ReefTargetCalculator {
                 closestIndex = i;
             }
         }
+        SmartDashboard.putNumber("closestIndex", closestIndex);
         return faces[closestIndex];
     }
 
