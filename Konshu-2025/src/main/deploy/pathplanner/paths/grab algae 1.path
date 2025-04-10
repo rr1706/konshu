@@ -48,7 +48,7 @@
   "eventMarkers": [
     {
       "name": "pick_up_algae",
-      "waypointRelativePos": 0.8269784172661855,
+      "waypointRelativePos": 0.046638655462185104,
       "endWaypointRelativePos": null,
       "command": {
         "type": "named",

@@ -48,7 +48,7 @@
   "eventMarkers": [
     {
       "name": "barge_shot",
-      "waypointRelativePos": 0.5071428571428547,
+      "waypointRelativePos": 0.10210084033613473,
       "endWaypointRelativePos": null,
       "command": {
         "type": "named",
