@@ -5,43 +5,57 @@
     "data": {
       "commands": [
         {
-          "type": "path",
-          "data": {
-            "pathName": "start algae pathh"
-          }
-        },
-        {
-          "type": "named",
-          "data": {
-            "name": "GoL4"
-          }
-        },
-        {
-          "type": "named",
-          "data": {
-            "name": "ScoreL4"
-          }
-        },
-        {
-          "type": "path",
-          "data": {
-            "pathName": "grab algae"
-          }
-        },
-        {
-          "type": "sequential",
+          "type": "race",
           "data": {
             "commands": [
               {
-                "type": "named",
+                "type": "path",
                 "data": {
-                  "name": "go level 1 aglae"
+                  "pathName": "start algae pathh"
                 }
               },
               {
                 "type": "named",
                 "data": {
-                  "name": "get algae"
+                  "name": "MoveClimberOut"
+                }
+              },
+              {
+                "type": "named",
+                "data": {
+                  "name": "MT2"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "type": "race",
+          "data": {
+            "commands": [
+              {
+                "type": "named",
+                "data": {
+                  "name": "AlignBRL4"
+                }
+              },
+              {
+                "type": "sequential",
+                "data": {
+                  "commands": [
+                    {
+                      "type": "named",
+                      "data": {
+                        "name": "WaitForElevator"
+                      }
+                    },
+                    {
+                      "type": "named",
+                      "data": {
+                        "name": "ScoreL4Faster"
+                      }
+                    }
+                  ]
                 }
               }
             ]
@@ -50,7 +64,7 @@
         {
           "type": "path",
           "data": {
-            "pathName": "barge shot"
+            "pathName": "grab algae 1"
           }
         },
         {
@@ -60,13 +74,138 @@
               {
                 "type": "named",
                 "data": {
-                  "name": "go barge"
+                  "name": "WaitForElevator"
                 }
               },
               {
                 "type": "named",
                 "data": {
-                  "name": "shoot barge"
+                  "name": "PickUpAlgae"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "barge shot 1"
+          }
+        },
+        {
+          "type": "sequential",
+          "data": {
+            "commands": [
+              {
+                "type": "named",
+                "data": {
+                  "name": "WaitForElevator"
+                }
+              },
+              {
+                "type": "named",
+                "data": {
+                  "name": "ThrowAlgae"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "grab algae 2"
+          }
+        },
+        {
+          "type": "sequential",
+          "data": {
+            "commands": [
+              {
+                "type": "named",
+                "data": {
+                  "name": "WaitForElevator"
+                }
+              },
+              {
+                "type": "named",
+                "data": {
+                  "name": "PickUpAlgae"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "barge shot 2"
+          }
+        },
+        {
+          "type": "sequential",
+          "data": {
+            "commands": [
+              {
+                "type": "named",
+                "data": {
+                  "name": "WaitForElevator"
+                }
+              },
+              {
+                "type": "named",
+                "data": {
+                  "name": "ThrowAlgae"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "grab algae 3"
+          }
+        },
+        {
+          "type": "sequential",
+          "data": {
+            "commands": [
+              {
+                "type": "named",
+                "data": {
+                  "name": "WaitForElevator"
+                }
+              },
+              {
+                "type": "named",
+                "data": {
+                  "name": "PickUpAlgae"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "barge shot 3"
+          }
+        },
+        {
+          "type": "sequential",
+          "data": {
+            "commands": [
+              {
+                "type": "named",
+                "data": {
+                  "name": "WaitForElevator"
+                }
+              },
+              {
+                "type": "named",
+                "data": {
+                  "name": "ThrowAlgae"
                 }
               }
             ]
