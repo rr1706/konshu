@@ -60,6 +60,7 @@ public final class AutoAlignConstants {
     public static InterpolatingDoubleTreeMap ArmAutoAlignL3 = new InterpolatingDoubleTreeMap();
     public static InterpolatingDoubleTreeMap ArmAutoAlignL4 = new InterpolatingDoubleTreeMap();
 
+
     // Interpolation lookup table to vary elevator height with target distance
     // Data is in METERS!!
 

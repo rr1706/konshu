@@ -3,29 +3,29 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 7.292999999999999,
-        "y": 3.9567499999999995
+        "x": 5.245,
+        "y": 5.25
       },
       "prevControl": null,
       "nextControl": {
-        "x": 6.303388626251258,
-        "y": 3.888835982484434
+        "x": 5.400511230060051,
+        "y": 5.453941686839216
       },
       "isLocked": false,
-      "linkedName": null
+      "linkedName": "aglae shot 2"
     },
     {
       "anchor": {
-        "x": 5.840250000000001,
-        "y": 3.8495
+        "x": 7.45875,
+        "y": 6.02375
       },
       "prevControl": {
-        "x": 6.895022452996494,
-        "y": 3.9121570411843973
+        "x": 6.63975,
+        "y": 5.8775
       },
       "nextControl": null,
       "isLocked": false,
-      "linkedName": "starting algae pathh"
+      "linkedName": "barge shot 2"
     }
   ],
   "rotationTargets": [],
@@ -47,13 +47,13 @@
   "pointTowardsZones": [],
   "eventMarkers": [
     {
-      "name": "score_point",
-      "waypointRelativePos": 0.49537815126050555,
+      "name": "barge_shot",
+      "waypointRelativePos": 0.5071428571428547,
       "endWaypointRelativePos": null,
       "command": {
         "type": "named",
         "data": {
-          "name": "GoL4"
+          "name": "GoBarge"
         }
       }
     }
@@ -68,13 +68,13 @@
   },
   "goalEndState": {
     "velocity": 0,
-    "rotation": 180.0
+    "rotation": 179.0608090542645
   },
   "reversed": false,
   "folder": "algae autooooooooooo",
   "idealStartingState": {
     "velocity": 0,
-    "rotation": 180.0
+    "rotation": -121.53479190518837
   },
   "useDefaultConstraints": true
 }

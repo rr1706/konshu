@@ -161,6 +161,15 @@ public class RobotContainer {
         NamedCommands.registerCommand("NoMT2", m_drivetrain.useMT2(false));
         NamedCommands.registerCommand("Run Funnel",
                 new InstantCommand(() -> m_funnel.runCoralIn(-0.3)).alongWith(new IntakeFromFunnel(m_coralArm)));
+        NamedCommands.registerCommand("PickUpAlgae", (new WaitCommand(.2)).andThen(m_algaeArm.grabAlgae(.8)));
+        NamedCommands.registerCommand("ThrowAlgae", (new WaitCommand(.2)).andThen(m_algaeArm.spitAlgae()).andThen(m_algaeArm.slowSpitAlgae()));
+        NamedCommands.registerCommand("GoBarge", 
+                new InstantCommand(()-> m_SSM.setState(States.BARGE)));
+        NamedCommands.registerCommand("GoAlgaeHigh", 
+                new InstantCommand(() -> m_SSM.setState(States.ALGAEHIGH)));
+        NamedCommands.registerCommand("GoAlgaeLow", 
+                new InstantCommand(() -> m_SSM.setState(States.ALGAELOW)));
+
 
         NamedCommands.registerCommand("WaitForElevator", new WaitUntilCommand(m_elevator::atSetpoint).alongWith(new WaitCommand(0.150)).withTimeout(0.5));
 
@@ -281,14 +290,6 @@ public class RobotContainer {
                 return AutoAlignConstants.BlueAllianceConstants.kDL;
             } else {
                 return AutoAlignConstants.RedAllianceConstants.kDL;
-            }
-        }, SSM.States.L4, m_SSM));
-        NamedCommands.registerCommand("AlignERL4", new AlignInAuto(m_drivetrain, () -> {
-            DriverStation.Alliance alliance = DriverStation.getAlliance().orElse(DriverStation.Alliance.Blue);
-            if (alliance == DriverStation.Alliance.Blue) {
-                return AutoAlignConstants.BlueAllianceConstants.kER;
-            } else {
-                return AutoAlignConstants.RedAllianceConstants.kER;
             }
         }, SSM.States.L4, m_SSM));
 
