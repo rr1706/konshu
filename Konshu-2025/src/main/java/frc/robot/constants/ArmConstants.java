@@ -25,7 +25,7 @@ public class ArmConstants {
 
   public static final double kArmL1 = 12.1-75.4+17.0;      // These are in degrees
   public static final double kArmL1Interim = kArmL1;         // Waypoint to arm inside the elevator
-  public static final double kArmL1IN = -60.0;               // Inside the elevator
+  public static final double kArmL1IN = -80.0;               // Inside the elevator
   public static final double kArmL2 = 26.8-75.4+17.0;
   public static final double kArmL3 = 26.8-75.4+17.0;
   public static final double kArmL4 = -10.0;
