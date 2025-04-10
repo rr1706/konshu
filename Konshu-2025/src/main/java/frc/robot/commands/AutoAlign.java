@@ -95,9 +95,9 @@ public class AutoAlign extends Command {
             m_state = SSM.States.L1;
             m_alignMode = ReefTargetCalculator.AlignMode.RIGHT;
             Robot.buttonLog.append("L1Right");
-            // m_state = SSM.States.L1IN;
+            // m_state = SSM.States.L1_IN;
             // m_goForPID = false;
-            // Robot.buttonLog.append("L1IN");
+            // Robot.buttonLog.append("L1_IN");
         } else if (DriverStation.getStickButton(1, ButtonConstants.kL2Left)) {
             m_state = SSM.States.L2;
             m_alignMode = ReefTargetCalculator.AlignMode.LEFT;

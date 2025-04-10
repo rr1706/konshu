@@ -36,7 +36,6 @@ public class SSM extends SubsystemBase {
         m_armPauseHigh = false;
         m_armPauseLow = false;
         m_pauseSpecial = false;
-        SmartDashboard.putString("m_setpoint", m_setpoint.toString());
         SmartDashboard.putString("m_queuedSetpoint", m_queuedSetpoint.toString());
         SmartDashboard.putBoolean("m_armPauseHigh", m_armPauseHigh);
         SmartDashboard.putBoolean("m_armPauseLow", m_armPauseLow);
@@ -65,20 +64,30 @@ public class SSM extends SubsystemBase {
     // below kArmLowDanger
     private void newState(States state) {
 
+        SmartDashboard.putString("state in", state.toString());
+        SmartDashboard.putString("m_setpoint in", m_setpoint.toString());
+        SmartDashboard.putString("m_queuedSetpoint in", m_queuedSetpoint.toString());
+        SmartDashboard.putBoolean("m_pauseSpecial in", m_pauseSpecial);
+
         // Special handling of L1_IN (arm inside of elevator)
         if (state != m_setpoint) {                             // Check for state change
             if (state == States.L1_IN) {                        // If new state is L1_IN
                 state = States.L1_INTERIM;                      //  first go to L_Interim
+                m_queuedSetpoint = States.L1_INTERIM;
                 m_pauseSpecial = true;                          //  and set flag
             } else if (m_setpoint == States.L1_IN) {            // If currently at L1_IN
                 m_nextSetpoint = state;                         //  save commanded state for later
-                state = States.L1_INTERIM;                      //  and first go to L1_INTERIM
+                m_queuedSetpoint = States.L1_INTERIM;
+                state = States.L1_INTERIM;                     //  and first go to L1_INTERIM
                 m_pauseSpecial = true;                         //  and set flag
             }
         }
+        SmartDashboard.putBoolean("m_pauseSpecial out 1", m_pauseSpecial);
+        SmartDashboard.putString("m_nextSetpoint", m_nextSetpoint.toString());
+
 
         m_setpoint = state;
-        SmartDashboard.putString("m_setpoint", m_setpoint.toString());
+        SmartDashboard.putString("m_setpoint out", m_setpoint.toString());
 
         if (m_setpoint == States.DISABLED)
             return;
@@ -122,18 +131,22 @@ public class SSM extends SubsystemBase {
 
         // Handle special case of L_IN (arm inside of elevator)
         if (m_pauseSpecial) {
-            if ((m_setpoint == States.L1_INTERIM) && (m_elevator.getPosition() > m_elevatorSetpoint - 0.25) && 
-             (m_elevator.getPosition() < m_elevatorSetpoint + 0.25)) {    // Moving to L1_INTERIM in prep to move to L1_IN - now safe to move arm inside elevator
-                m_setpoint = States.L1_IN;
-                m_arm.setPosition(getScoringArmPosition(m_setpoint));
-                m_elevator.setPosition(getScoringElevatorPosition(m_setpoint));
-                m_pauseSpecial = false;
+            if (m_setpoint == States.L1_INTERIM) {
+                if ((m_elevator.getPosition() > m_elevatorSetpoint - 0.5) && (m_elevator.getPosition() < m_elevatorSetpoint + 0.5)) {    // Moving to L1_INTERIM in prep to move to L1_IN - now safe to move arm inside elevator
+                    m_setpoint = States.L1_IN;
+                    m_queuedSetpoint = States.L1_IN;
+                    m_arm.setPosition(getScoringArmPosition(m_setpoint));
+                    m_elevator.setPosition(getScoringElevatorPosition(m_setpoint));
+                    m_pauseSpecial = false;
+                }
             } else if (m_arm.getPosition() > ArmConstants.kArmHighDanger) {     // Moving to L1_INTERIM from L1_IN - now safe to move to final state
-                setState(m_nextSetpoint);   // Clear of elevator so now can move to original commanded set point
+                m_setpoint = m_nextSetpoint;
+                m_queuedSetpoint = m_nextSetpoint;
                 m_pauseSpecial = false;
                 return;
             }
         }
+        SmartDashboard.putBoolean("m_pauseSpecial out 2", m_pauseSpecial);
 
         if (m_setpoint != States.L1_IN) {
             if (m_elevator.getPosition() < m_elevatorSetpoint) { // If elevator going up...
@@ -183,6 +196,7 @@ public class SSM extends SubsystemBase {
         if (m_setpoint == States.DISABLED)
             return;
 
+        
         if (m_armPauseHigh && (m_elevator.getPosition() > ElevatorConstants.kElevatorHighDanger)) { // Elevator going up
             m_arm.setPosition(m_armSetpoint); // Cleared, continue to final setpoint
             m_armPauseHigh = false;
@@ -204,14 +218,14 @@ public class SSM extends SubsystemBase {
 
     public void setState(States q) {
         m_queuedSetpoint = q;
-        SmartDashboard.putString("m_queuedSetPoint", m_queuedSetpoint.toString());
+        SmartDashboard.putString("m_queuedSetpoint", m_queuedSetpoint.toString());
         m_armOffset = 0.0;
         m_elevatorOffset = 0.0;
     }
 
     public void setState(States q, double armOffset, double elevatorOffset) {
         m_queuedSetpoint = q;
-        SmartDashboard.putString("m_queuedSetPoint", m_queuedSetpoint.toString());
+        SmartDashboard.putString("m_queuedSetpoint", m_queuedSetpoint.toString());
         m_armOffset = armOffset;
         m_elevatorOffset = elevatorOffset;
     }
