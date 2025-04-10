@@ -17,26 +17,32 @@ public class SSM extends SubsystemBase {
     public enum States {
         DISABLED, L1, L1_IN, L1_INTERIM, L2, L3, L4, LOADINGSTATION, PROCESSOR, BARGE, GROUNDALGAE, ALGAELOW, ALGAEHIGH, Climb
     };
+    private enum L1State {OUT, IN_TO_L1_INTERIM, TO_L1_IN, AT_L1_IN, OUT_TO_L1_INTERIM};
 
-    private boolean m_elevatorPauseHigh, m_elevatorPauseLow, m_armPauseHigh, m_armPauseLow, m_pauseSpecial;
+    private boolean m_elevatorPauseHigh, m_elevatorPauseLow, m_armPauseHigh, m_armPauseLow;
     private States m_setpoint, m_queuedSetpoint, m_nextSetpoint;
     private double m_armSetpoint, m_elevatorSetpoint;
     private double m_armOffset, m_elevatorOffset;
+    private L1State m_L1state;
 
     // First constructor accepts a constant as an initial setpoint and starts moving
     // there immediately via periodic
     public SSM(Arm arm, Elevator elevator, States setpoint, BooleanSupplier hasCoral) {
         m_arm = arm;
         m_elevator = elevator;
-        m_setpoint = States.DISABLED;
+        m_setpoint = setpoint;
         m_nextSetpoint = setpoint;
         m_queuedSetpoint = setpoint;
+        m_L1state = L1State.OUT;
         m_elevatorPauseHigh = false;
         m_elevatorPauseLow = false;
         m_armPauseHigh = false;
         m_armPauseLow = false;
-        m_pauseSpecial = false;
+
+        SmartDashboard.putString("m_setpoint", m_setpoint.toString());
         SmartDashboard.putString("m_queuedSetpoint", m_queuedSetpoint.toString());
+        SmartDashboard.putString("m_nextSetpoint", m_nextSetpoint.toString());
+        SmartDashboard.putString("m_nL1state", m_L1state.toString());
         SmartDashboard.putBoolean("m_armPauseHigh", m_armPauseHigh);
         SmartDashboard.putBoolean("m_armPauseLow", m_armPauseLow);
         SmartDashboard.putBoolean("m_elevatorPauseHigh", m_elevatorPauseHigh);
@@ -51,7 +57,7 @@ public class SSM extends SubsystemBase {
     // Second constructor defaults to disabled (do nothing until SetState is first
     // called)
     public SSM(Arm arm, Elevator elevator, BooleanSupplier hasCoral) {
-        this(arm, elevator, States.DISABLED,hasCoral);
+        this(arm, elevator, States.DISABLED, hasCoral);
     }
 
     // ALways start the elevator if elevator commanded up, only move to the danger
@@ -62,35 +68,95 @@ public class SSM extends SubsystemBase {
     // above kArmHighDanger
     // KElevatorLowDanter - elevator must be higher than this to safely move arm
     // below kArmLowDanger
-    private void newState(States state) {
+    private void updateState(States state) {
 
-        SmartDashboard.putString("state in", state.toString());
-        SmartDashboard.putString("m_setpoint in", m_setpoint.toString());
-        SmartDashboard.putString("m_queuedSetpoint in", m_queuedSetpoint.toString());
-        SmartDashboard.putBoolean("m_pauseSpecial in", m_pauseSpecial);
-
-        // Special handling of L1_IN (arm inside of elevator)
+        // Special handling of L1_IN (arm inside of elevator).   Written in protest as both Sam and Emmerson
+        // assured me we would never need to move the arm inside the elevator!  The code was so clean before this.
         if (state != m_setpoint) {                             // Check for state change
-            if (state == States.L1_IN) {                        // If new state is L1_IN
-                state = States.L1_INTERIM;                      //  first go to L_Interim
-                m_queuedSetpoint = States.L1_INTERIM;
-                m_pauseSpecial = true;                          //  and set flag
-            } else if (m_setpoint == States.L1_IN) {            // If currently at L1_IN
-                m_nextSetpoint = state;                         //  save commanded state for later
-                m_queuedSetpoint = States.L1_INTERIM;
-                state = States.L1_INTERIM;                     //  and first go to L1_INTERIM
-                m_pauseSpecial = true;                         //  and set flag
+            if (state == States.L1_IN) {                         // If new state is L1_IN
+                state = States.L1_INTERIM;                       //  first go to L_Interim
+                m_queuedSetpoint = States.L1_INTERIM;            //  so doesn't reset on next pass
+                m_L1state = L1State.IN_TO_L1_INTERIM;            //  and set flag
+            } else if (m_setpoint == States.L1_IN) {           // If currently at L1_IN
+                m_nextSetpoint = state;                          //  save new commanded state for later
+                state = States.L1_INTERIM;                       //  first go to L_Interim
+                m_queuedSetpoint = States.L1_INTERIM;            //  so doesn't reset on next pass
+                m_L1state = L1State.OUT_TO_L1_INTERIM;           //  and set flag
+                m_arm.setPosition(getScoringArmPosition(States.L1_INTERIM));
+                m_elevator.setPosition(getScoringElevatorPosition(States.L1_INTERIM));
             }
         }
-        SmartDashboard.putBoolean("m_pauseSpecial out 1", m_pauseSpecial);
-        SmartDashboard.putString("m_nextSetpoint", m_nextSetpoint.toString());
-
 
         m_setpoint = state;
-        SmartDashboard.putString("m_setpoint out", m_setpoint.toString());
+        SmartDashboard.putString("m_setpoint", m_setpoint.toString());
+        SmartDashboard.putString("m_queuedSetpoint", m_queuedSetpoint.toString());
+        SmartDashboard.putString("m_nextSetpoint", m_nextSetpoint.toString());
+        SmartDashboard.putString("m_nL1state", m_L1state.toString());
 
-        if (m_setpoint == States.DISABLED)
-            return;
+        if (m_setpoint == States.DISABLED) return;
+
+        // Handle special case of L_IN (arm inside of elevator)
+        switch (m_L1state) {
+            case IN_TO_L1_INTERIM:
+                if ((m_elevator.getPosition() > ElevatorConstants.kElevatorL1Interim - 0.5) && 
+                    (m_elevator.getPosition() < ElevatorConstants.kElevatorL1Interim + 0.5)) {   
+                    m_L1state = L1State.TO_L1_IN;
+                    m_arm.setPosition(getScoringArmPosition(States.L1_IN));                 // Now safe to move arm inside elevator
+ //                   m_elevator.setPosition(getScoringElevatorPosition(States.L1_IN));     // For now, assume don't move elevator at all when arm inside
+                    m_setpoint = States.L1_IN;
+                    m_queuedSetpoint = States.L1_IN;
+                }
+            break;
+            case OUT_TO_L1_INTERIM:
+                if (m_arm.getPosition() > ArmConstants.kArmHighDanger) {
+                    m_L1state = L1State.OUT;
+                    m_setpoint = m_nextSetpoint;            // Now safe to move to new commanded state
+                    m_queuedSetpoint = m_nextSetpoint;
+                }
+            break;
+            default:
+            break;
+        }
+
+        // If we decide we really need autoalign in L1_IN, then will need to do this.  Will also require:  
+        //  1) Update AutoAlign for L1_IN to use PID and set rotation perpendicular to reef (similar to L1 without offset)
+        //  2) Set up lookup offsets for arm L1_IN
+        //  3) Create new upper and lower limits for arm when inside elevator
+        //  4) Add another elseif to state change above to deal with state change request when in TO_L1_IN state - would be bad
+        //  5) Include L1_IN as valid state for safe move logic
+        // switch (m_L1state) {
+        //     case IN_TO_L1_INTERIM:
+        //         if ((m_elevator.getPosition() > ElevatorConstants.kElevatorL1Interim - 0.5) && 
+        //             (m_elevator.getPosition() < ElevatorConstants.kElevatorL1Interim + 0.5)) {    //  Now safe to move arm inside elevator
+        //             m_L1state = L1State.TO_L1_IN;
+        //             m_arm.setPosition(getScoringArmPosition(States.L1_IN));
+        //             m_elevator.setPosition(getScoringElevatorPosition(States.L1_IN));
+        //         }
+        //     break;
+        //     case TO_L1_IN:
+        //         if ((m_arm.getPosition() > ArmConstants.kArmL1Interim - 3.0) && 
+        //             (m_arm.getPosition() < ArmConstants.kArmL1Interim + 3.0)) {
+        //             m_L1state = L1State.AT_L1_IN;
+        //             m_setpoint = States.L1_IN;
+        //             m_queuedSetpoint = States.L1_IN;
+        //         }
+        //     break;
+        //     case AT_L1_IN:
+        //         m_armSetpoint = getScoringArmPosition(m_setpoint)+m_armOffset;
+        //         m_armSetpoint = Math.max(m_armSetpoint, ArmConstants.kArmUpperLimitIN);
+        //         m_armSetpoint = Math.min(m_armSetpoint, ArmConstants.kArmLowerLimitIN); 
+        //         m_arm.setPosition(m_armSetpoint);
+        //     break;
+        //     case OUT_TO_L1_INTERIM:
+        //         if (m_arm.getPosition() > ArmConstants.kArmHighDanger) {
+        //             m_L1state = L1State.OUT;
+        //             m_setpoint = m_nextSetpoint;            // Now safe to move to commanded state
+        //             m_queuedSetpoint = m_nextSetpoint;
+        //         }
+        //     break;
+        //     default:
+        //     break;
+        // }
 
         // Adjust the slew rate based on the setpoint
         switch (m_setpoint) {
@@ -115,40 +181,22 @@ public class SSM extends SubsystemBase {
             break;
         }
 
-        m_armSetpoint = getScoringArmPosition(m_setpoint)+m_armOffset; // Grab some local variables for mulit reuse efficiency
-        m_armSetpoint = Math.max(m_armSetpoint, ArmConstants.kArmUpperLimit);
-        m_armSetpoint = Math.min(m_armSetpoint, ArmConstants.kArmLowerLimit); 
+        // Safe move logic - only execute if arm not inside elevator 
+        if ((m_L1state == L1State.OUT) || (m_L1state == L1State.IN_TO_L1_INTERIM)) {
+            m_armSetpoint = getScoringArmPosition(m_setpoint)+m_armOffset;
+            m_armSetpoint = Math.max(m_armSetpoint, ArmConstants.kArmUpperLimit);
+            m_armSetpoint = Math.min(m_armSetpoint, ArmConstants.kArmLowerLimit); 
 
-        m_elevatorSetpoint = getScoringElevatorPosition(m_setpoint)+m_elevatorOffset;
-        m_elevatorSetpoint = Math.min(m_elevatorSetpoint, ElevatorConstants.kUpperLimitElevator);
-        m_elevatorSetpoint = Math.max(m_elevatorSetpoint, ElevatorConstants.kULowerLimitElevator);
+            m_elevatorSetpoint = getScoringElevatorPosition(m_setpoint)+m_elevatorOffset;
+            m_elevatorSetpoint = Math.min(m_elevatorSetpoint, ElevatorConstants.kUpperLimitElevator);
+            m_elevatorSetpoint = Math.max(m_elevatorSetpoint, ElevatorConstants.kULowerLimitElevator);
 
-        // Clear booleans
-        m_armPauseHigh = false;
-        m_armPauseLow = false;
-        m_elevatorPauseHigh = false;
-        m_elevatorPauseLow = false;
+            // Clear booleans
+            m_armPauseHigh = false;
+            m_armPauseLow = false;
+            m_elevatorPauseHigh = false;
+            m_elevatorPauseLow = false;
 
-        // Handle special case of L_IN (arm inside of elevator)
-        if (m_pauseSpecial) {
-            if (m_setpoint == States.L1_INTERIM) {
-                if ((m_elevator.getPosition() > m_elevatorSetpoint - 0.5) && (m_elevator.getPosition() < m_elevatorSetpoint + 0.5)) {    // Moving to L1_INTERIM in prep to move to L1_IN - now safe to move arm inside elevator
-                    m_setpoint = States.L1_IN;
-                    m_queuedSetpoint = States.L1_IN;
-                    m_arm.setPosition(getScoringArmPosition(m_setpoint));
-                    m_elevator.setPosition(getScoringElevatorPosition(m_setpoint));
-                    m_pauseSpecial = false;
-                }
-            } else if (m_arm.getPosition() > ArmConstants.kArmHighDanger) {     // Moving to L1_INTERIM from L1_IN - now safe to move to final state
-                m_setpoint = m_nextSetpoint;
-                m_queuedSetpoint = m_nextSetpoint;
-                m_pauseSpecial = false;
-                return;
-            }
-        }
-        SmartDashboard.putBoolean("m_pauseSpecial out 2", m_pauseSpecial);
-
-        if (m_setpoint != States.L1_IN) {
             if (m_elevator.getPosition() < m_elevatorSetpoint) { // If elevator going up...
                m_elevator.setPosition(m_elevatorSetpoint); // Going up, always start elevator to setpoint
                if ((m_armSetpoint < ArmConstants.kArmHighDanger)
@@ -190,13 +238,11 @@ public class SSM extends SubsystemBase {
         if ((m_queuedSetpoint == States.L1) || (m_queuedSetpoint == States.L2) || 
             (m_queuedSetpoint == States.L3) || (m_queuedSetpoint == States.L4) ||
             (m_queuedSetpoint == States.L1_IN)) {
-            if (m_hasCoral.getAsBoolean()) newState(m_queuedSetpoint);
-        } else newState(m_queuedSetpoint);                // Check for new state commanded
+            if (m_hasCoral.getAsBoolean()) updateState(m_queuedSetpoint);
+        } else updateState(m_queuedSetpoint);
         
-        if (m_setpoint == States.DISABLED)
-            return;
+        if (m_setpoint == States.DISABLED) return;
 
-        
         if (m_armPauseHigh && (m_elevator.getPosition() > ElevatorConstants.kElevatorHighDanger)) { // Elevator going up
             m_arm.setPosition(m_armSetpoint); // Cleared, continue to final setpoint
             m_armPauseHigh = false;
@@ -255,8 +301,8 @@ public class SSM extends SubsystemBase {
     public double getScoringArmPosition(States state) {
         return switch (state) {
             case L1 -> ArmConstants.kArmL1;
-            case L1_IN -> ArmConstants.KArmL1IN;
-            case L1_INTERIM -> ArmConstants.KArmL1Interim;
+            case L1_IN -> ArmConstants.kArmL1IN;
+            case L1_INTERIM -> ArmConstants.kArmL1Interim;
             case L2 -> ArmConstants.kArmL2;
             case L3 -> ArmConstants.kArmL3;
             case L4 -> ArmConstants.kArmL4;

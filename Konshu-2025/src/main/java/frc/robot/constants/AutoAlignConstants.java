@@ -138,18 +138,30 @@ public final class AutoAlignConstants {
         ArmAutoAlignL4.put(1.0, -8.6);
     }
 
-    public static final class ReefAprilTags{
-      public static final Translation2d At17= new Translation2d(-160.27,-130.21);
-      public static final Translation2d At18= new Translation2d(-144,-158.38);
-      public static final Translation2d At19= new Translation2d(-160.28,-186.77);
-      public static final Translation2d At20= new Translation2d(-190.01,-186.92);
-      public static final Translation2d At21= new Translation2d(-208.49,-158.38);
-      public static final Translation2d At22= new Translation2d(-193.01,-130.09);
-      public static final Translation2d At11= new Translation2d(-497.21,-79.45);
-      public static final Translation2d At10= new Translation2d(-480.95,-107.63);
-      public static final Translation2d At9= new Translation2d(-497.21,-136.04);
-      public static final Translation2d At8= new Translation2d(-529.96,-136.17);
-      public static final Translation2d At7= new Translation2d(-546.44,-107.63);
-      public static final Translation2d At6= new Translation2d(-529.56,-79.33);
-    }
+public static final class ReefAprilTags {
+    // Translation values are in meters (x, y) as directly provided from the JSON.
+    public static final Translation2d At1  = new Translation2d(16.697198, 0.65532);
+    public static final Translation2d At2  = new Translation2d(16.697198, 7.39648);
+    public static final Translation2d At3  = new Translation2d(11.56081, 8.05561);
+    public static final Translation2d At4  = new Translation2d(9.27608, 6.137656);
+    public static final Translation2d At5  = new Translation2d(9.27608, 1.914906);
+    public static final Translation2d At6  = new Translation2d(13.474446, 3.306318);
+    public static final Translation2d At7  = new Translation2d(13.890498, 4.0259);
+    public static final Translation2d At8  = new Translation2d(13.474446, 4.745482);
+    public static final Translation2d At9  = new Translation2d(12.643358, 4.745482);
+    public static final Translation2d At10 = new Translation2d(12.227306, 4.0259);
+    public static final Translation2d At11 = new Translation2d(12.643358, 3.306318);
+    public static final Translation2d At12 = new Translation2d(0.851154, 0.65532);
+    public static final Translation2d At13 = new Translation2d(0.851154, 7.39648);
+    public static final Translation2d At14 = new Translation2d(8.272272, 6.137656);
+    public static final Translation2d At15 = new Translation2d(8.272272, 1.914906);
+    public static final Translation2d At16 = new Translation2d(5.987542, -0.00381);
+    public static final Translation2d At17 = new Translation2d(4.073906, 3.306318);
+    public static final Translation2d At18 = new Translation2d(3.6576, 4.0259);
+    public static final Translation2d At19 = new Translation2d(4.073906, 4.745482);
+    public static final Translation2d At20 = new Translation2d(4.90474, 4.745482);
+    public static final Translation2d At21 = new Translation2d(5.321046, 4.0259);
+    public static final Translation2d At22 = new Translation2d(4.90474, 3.306318);
 }
+
+    }

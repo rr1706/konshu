@@ -87,7 +87,12 @@ public class AutoAlign extends Command {
         dist = 1.0; // Default value for LED logic
         m_state = SSM.States.LOADINGSTATION; // Default to here if trigger with no button pressed
         m_goForPID = true;
-        if (DriverStation.getStickButton(1, ButtonConstants.kL1Left)) {
+        if ((DriverStation.getStickButton(1, ButtonConstants.kL1Left)) &&
+            (DriverStation.getStickButton(1, ButtonConstants.kL1Right))) {
+            m_state = SSM.States.L1_IN;
+            m_goForPID = false;
+            Robot.buttonLog.append("L1_IN");
+        } else if (DriverStation.getStickButton(1, ButtonConstants.kL1Left)) {
             m_state = SSM.States.L1;
             m_alignMode = ReefTargetCalculator.AlignMode.LEFT;
             Robot.buttonLog.append("L1Left");
@@ -95,9 +100,6 @@ public class AutoAlign extends Command {
             m_state = SSM.States.L1;
             m_alignMode = ReefTargetCalculator.AlignMode.RIGHT;
             Robot.buttonLog.append("L1Right");
-            // m_state = SSM.States.L1_IN;
-            // m_goForPID = false;
-            // Robot.buttonLog.append("L1_IN");
         } else if (DriverStation.getStickButton(1, ButtonConstants.kL2Left)) {
             m_state = SSM.States.L2;
             m_alignMode = ReefTargetCalculator.AlignMode.LEFT;
