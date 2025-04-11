@@ -2,9 +2,9 @@ package frc.robot.constants;
 
 public class ArmConstants {
   // We are using Motion Magic position control with voltage countrol output type, so the PID parameters are in volts
-  public static final double kArmP = 200.0;   // Output per unit of error in position (volts/rotation)
+  public static final double kArmP = 50.0;   // Output per unit of error in position (volts/rotation)
   public static final double kArmI = 0.0;   // Output per unit of integrated error in position (volts/(rotation*s))
-  public static final double kArmD = 10.0;   // Output per unit of error in velocity (volts/rotation)
+  public static final double kArmD = 5.0;   // Output per unit of error in velocity (volts/rotation)
   public static final double kArmG = -0.375;   // Output to overcome gravity (volts) - modified by ArmCosine
   public static final double kArmS = 0.2;   // Output to overcome static friction (volts)
   public static final double kArmV = 5.49;   // Output per unit of target velocity (volts/rps)

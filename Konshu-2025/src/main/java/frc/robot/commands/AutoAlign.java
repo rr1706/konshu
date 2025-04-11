@@ -190,6 +190,7 @@ public class AutoAlign extends Command {
             if (m_alignMode != AlignMode.ALGAE) {
                 // Adjust elevator based on distance (and evantually delta angle) from post
                 dist = m_pose.getTranslation().getDistance(currentPose.getTranslation()); // Distance to post from robot
+                SmartDashboard.putNumber("Distance from Goal", dist);
                 Rotation2d theta = m_pose.getRotation().minus(currentPose.getRotation()); // Angle from coral wall
                                                                                           // normal
                 SmartDashboard.putNumber("Distance to target", dist);

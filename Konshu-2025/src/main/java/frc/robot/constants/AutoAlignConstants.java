@@ -65,47 +65,47 @@ public final class AutoAlignConstants {
     // Data is in METERS!!
 
     public static void SetUpElevatorAutoAlignConstantsL1() {
-        ElevatorAutoAlignL1.put(0.5, 0.0);
-        ElevatorAutoAlignL1.put(0.525, 0.0); // Against the reef
-        ElevatorAutoAlignL1.put(0.65, 0.0);
+        ElevatorAutoAlignL1.put(0.49, 0.0);
+        ElevatorAutoAlignL1.put(0.49, 0.0); // Against the reef
+        ElevatorAutoAlignL1.put(0.6, 0.0);
         ElevatorAutoAlignL1.put(0.766, 0.0);
         ElevatorAutoAlignL1.put(0.882, 0.0);
         ElevatorAutoAlignL1.put(1.0, 0.0);
     }
 
     public static void SetUpElevatorAutoAlignConstantsL2() {
-        ElevatorAutoAlignL2.put(0.5, 0.0);
-        ElevatorAutoAlignL2.put(0.525, 0.0);
-        ElevatorAutoAlignL2.put(0.65, 3.0);
-        ElevatorAutoAlignL2.put(0.766, 6.0);
-        ElevatorAutoAlignL2.put(0.882, 9.0);
-        ElevatorAutoAlignL2.put(1.0, 9.0);
+        ElevatorAutoAlignL2.put(0.49, 0.0);
+        ElevatorAutoAlignL2.put(0.49, 0.0);
+        ElevatorAutoAlignL2.put(0.6, 3.0);
+        ElevatorAutoAlignL2.put(0.72, 6.0);
+        ElevatorAutoAlignL2.put(0.84, 10.5);
+        ElevatorAutoAlignL2.put(1.0, 10.5);
     }
 
     public static void SetUpElevatorAutoAlignConstantsL3() {
-        ElevatorAutoAlignL3.put(0.5, 0.0);
-        ElevatorAutoAlignL3.put(0.525, 0.0);
-        ElevatorAutoAlignL3.put(0.65, 3.0);
-        ElevatorAutoAlignL3.put(0.766, 6.0);
-        ElevatorAutoAlignL3.put(0.882, 9.0);
-        ElevatorAutoAlignL3.put(1.0, 9.0);
+        ElevatorAutoAlignL3.put(0.49, 0.0);
+        ElevatorAutoAlignL3.put(0.49, 0.0);
+        ElevatorAutoAlignL3.put(0.6, 3.0);
+        ElevatorAutoAlignL3.put(0.72, 6.0);
+        ElevatorAutoAlignL3.put(0.84, 10.5);
+        ElevatorAutoAlignL3.put(1.0, 10.5);
     }
 
     public static void SetUpElevatorAutoAlignConstantsL4() {
-        ElevatorAutoAlignL4.put(0.5, 0.0);
-        ElevatorAutoAlignL4.put(0.525, 0.0);
-        ElevatorAutoAlignL4.put(0.65, 0.5);
-        ElevatorAutoAlignL4.put(0.766, 1.0);
-        ElevatorAutoAlignL4.put(0.882, 1.5);
-        ElevatorAutoAlignL4.put(1.0, 1.5);
+        ElevatorAutoAlignL4.put(0.49, 0.0);
+        ElevatorAutoAlignL4.put(0.49, 0.0);
+        ElevatorAutoAlignL4.put(0.6, 0.5);
+        ElevatorAutoAlignL4.put(0.72, 1.0);
+        ElevatorAutoAlignL4.put(0.84, 2.0);
+        ElevatorAutoAlignL4.put(1.0, 2.0);
     }
 
     // Interpolation lookup table to vary arm angle with target distance
     // Data is in degrees
     public static void SetUpArmAutoAlignConstantsL1() {
-        ArmAutoAlignL1.put(0.5, 0.0);
-        ArmAutoAlignL1.put(0.525, 0.0); // Against the reef
-        ArmAutoAlignL1.put(0.65, 0.0);
+        ArmAutoAlignL1.put(0.49, 0.0);
+        ArmAutoAlignL1.put(0.49, 0.0); // Against the reef
+        ArmAutoAlignL1.put(0.6, 0.0);
         ArmAutoAlignL1.put(0.766, 0.0);
         ArmAutoAlignL1.put(0.882, 0.0);
         ArmAutoAlignL1.put(1.0, 0.0);
@@ -130,12 +130,12 @@ public final class AutoAlignConstants {
     }
 
     public static void SetUpArmAutoAlignConstantsL4() {
-        ArmAutoAlignL4.put(0.5, 0.0);
-        ArmAutoAlignL4.put(0.525, 0.0);
-        ArmAutoAlignL4.put(0.65, -4.0);
-        ArmAutoAlignL4.put(0.766, -8.6);
-        ArmAutoAlignL4.put(0.882, -8.6);
-        ArmAutoAlignL4.put(1.0, -8.6);
+        ArmAutoAlignL4.put(0.49, 0.0);
+        ArmAutoAlignL4.put(0.49, 0.0);
+        ArmAutoAlignL4.put(0.66, -9.0);
+        ArmAutoAlignL4.put(0.72, -13.6);
+        ArmAutoAlignL4.put(0.84, -17.0);
+        ArmAutoAlignL4.put(1.0, -17.0);
     }
 
 public static final class ReefAprilTags {
