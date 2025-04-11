@@ -14,9 +14,7 @@ public class SSM extends SubsystemBase {
     private static int m_slewMode = 0;
     private final BooleanSupplier m_hasCoral;
 
-    public enum States {
-        DISABLED, L1, L1_IN, L1_INTERIM, L2, L3, L4, LOADINGSTATION, PROCESSOR, BARGE, GROUNDALGAE, ALGAELOW, ALGAEHIGH, Climb
-    };
+    public enum States {DISABLED, L1, L1_IN, L1_INTERIM, L2, L3, L4, LOADINGSTATION, PROCESSOR, BARGE, GROUNDALGAE, ALGAELOW, ALGAEHIGH, Climb};
     private enum L1State {OUT, IN_TO_L1_INTERIM, TO_L1_IN, AT_L1_IN, OUT_TO_L1_INTERIM};
 
     private boolean m_elevatorPauseHigh, m_elevatorPauseLow, m_armPauseHigh, m_armPauseLow;
@@ -38,15 +36,6 @@ public class SSM extends SubsystemBase {
         m_elevatorPauseLow = false;
         m_armPauseHigh = false;
         m_armPauseLow = false;
-
-        SmartDashboard.putString("m_setpoint", m_setpoint.toString());
-        SmartDashboard.putString("m_queuedSetpoint", m_queuedSetpoint.toString());
-        SmartDashboard.putString("m_nextSetpoint", m_nextSetpoint.toString());
-        SmartDashboard.putString("m_nL1state", m_L1state.toString());
-        SmartDashboard.putBoolean("m_armPauseHigh", m_armPauseHigh);
-        SmartDashboard.putBoolean("m_armPauseLow", m_armPauseLow);
-        SmartDashboard.putBoolean("m_elevatorPauseHigh", m_elevatorPauseHigh);
-        SmartDashboard.putBoolean("m_elevatorPauseLow", m_elevatorPauseLow);
 
         m_armOffset = 0.0;
         m_elevatorOffset = 0.0;
@@ -88,11 +77,6 @@ public class SSM extends SubsystemBase {
         }
 
         m_setpoint = state;
-        SmartDashboard.putString("m_setpoint", m_setpoint.toString());
-        SmartDashboard.putString("m_queuedSetpoint", m_queuedSetpoint.toString());
-        SmartDashboard.putString("m_nextSetpoint", m_nextSetpoint.toString());
-        SmartDashboard.putString("m_nL1state", m_L1state.toString());
-
         if (m_setpoint == States.DISABLED) return;
 
         // Handle special case of L_IN (arm inside of elevator)

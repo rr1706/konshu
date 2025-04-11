@@ -1,5 +1,4 @@
 package frc.robot.subsystems;
-
 import com.ctre.phoenix6.configs.CANcoderConfiguration;
 import com.ctre.phoenix6.configs.CurrentLimitsConfigs;
 import com.ctre.phoenix6.configs.FeedbackConfigs;
@@ -70,7 +69,6 @@ public class Arm extends SubsystemBase {
 
         m_armFX.getConfigurator().apply(new MotorOutputConfigs().withInverted(InvertedValue.CounterClockwise_Positive));
         m_armFX.setNeutralMode(NeutralModeValue.Brake);
-
     }
 
     // Get the position of the motor in degrees from hortizontal
@@ -103,7 +101,6 @@ public class Arm extends SubsystemBase {
             count += 1.0;
             SmartDashboard.putNumber("Count", count);
         }
-
     }
 
     // Called by ZeroArm to move the arm toward the lower hard limit.
