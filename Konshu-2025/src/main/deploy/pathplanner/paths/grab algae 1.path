@@ -3,13 +3,13 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 5.840250000000001,
-        "y": 3.8495
+        "x": 5.76608606557377,
+        "y": 3.839190573770491
       },
       "prevControl": null,
       "nextControl": {
-        "x": 6.038487113999672,
-        "y": 3.632342756015263
+        "x": 6.209631147540984,
+        "y": 3.8272028688524586
       },
       "isLocked": false,
       "linkedName": "starting algae pathh"
@@ -20,8 +20,8 @@
         "y": 4.014322207976104
       },
       "prevControl": {
-        "x": 6.258610865977105,
-        "y": 4.053167575972122
+        "x": 6.377459016393443,
+        "y": 4.00701844262295
       },
       "nextControl": null,
       "isLocked": false,
@@ -56,18 +56,29 @@
           "name": "GoAlgaeLow"
         }
       }
+    },
+    {
+      "name": "pick_up_algae2",
+      "waypointRelativePos": 0.4966024915062238,
+      "endWaypointRelativePos": null,
+      "command": {
+        "type": "named",
+        "data": {
+          "name": "PickUpAlgae"
+        }
+      }
     }
   ],
   "globalConstraints": {
     "maxVelocity": 4.0,
-    "maxAcceleration": 3.5,
+    "maxAcceleration": 3.0,
     "maxAngularVelocity": 540.0,
     "maxAngularAcceleration": 720.0,
     "nominalVoltage": 12.0,
     "unlimited": false
   },
   "goalEndState": {
-    "velocity": 0,
+    "velocity": 0.5,
     "rotation": 180.0
   },
   "reversed": false,
@@ -76,5 +87,5 @@
     "velocity": 0,
     "rotation": 180.0
   },
-  "useDefaultConstraints": true
+  "useDefaultConstraints": false
 }

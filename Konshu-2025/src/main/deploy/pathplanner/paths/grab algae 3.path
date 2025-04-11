@@ -3,41 +3,25 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 7.45875,
-        "y": 6.02375
+        "x": 7.9,
+        "y": 5.1098872950819665
       },
       "prevControl": null,
       "nextControl": {
-        "x": 6.960317810323768,
-        "y": 4.681592165701291
+        "x": 7.401567810323768,
+        "y": 3.767729460783258
       },
       "isLocked": false,
       "linkedName": "barge shot 2"
     },
     {
       "anchor": {
-        "x": 5.9670000000000005,
-        "y": 3.1767499999999997
+        "x": 5.142725409836065,
+        "y": 2.916137295081967
       },
       "prevControl": {
-        "x": 6.15225,
-        "y": 3.362
-      },
-      "nextControl": {
-        "x": 5.790223304703365,
-        "y": 2.9999733047033637
-      },
-      "isLocked": false,
-      "linkedName": null
-    },
-    {
-      "anchor": {
-        "x": 5.11875,
-        "y": 2.90375
-      },
-      "prevControl": {
-        "x": 5.343,
-        "y": 2.5527499999999996
+        "x": 5.778073770491804,
+        "y": 1.68140368852459
       },
       "nextControl": null,
       "isLocked": false,
@@ -64,12 +48,23 @@
   "eventMarkers": [
     {
       "name": "pick_up_algae",
-      "waypointRelativePos": 0.1504201680672348,
+      "waypointRelativePos": 0.1,
       "endWaypointRelativePos": null,
       "command": {
         "type": "named",
         "data": {
           "name": "GoAlgaeHigh"
+        }
+      }
+    },
+    {
+      "name": "pick_up_algae2",
+      "waypointRelativePos": 0.5011325028312387,
+      "endWaypointRelativePos": null,
+      "command": {
+        "type": "named",
+        "data": {
+          "name": "PickUpAlgae"
         }
       }
     }
@@ -83,14 +78,14 @@
     "unlimited": false
   },
   "goalEndState": {
-    "velocity": 0,
+    "velocity": 0.2,
     "rotation": 119.99999999999999
   },
   "reversed": false,
   "folder": "algae autooooooooooo",
   "idealStartingState": {
     "velocity": 0,
-    "rotation": 180.0
+    "rotation": 167.80115305196577
   },
   "useDefaultConstraints": true
 }

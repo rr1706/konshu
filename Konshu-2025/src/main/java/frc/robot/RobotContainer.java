@@ -160,16 +160,17 @@ public class RobotContainer {
         NamedCommands.registerCommand("NoMT2", m_drivetrain.useMT2(false));
         NamedCommands.registerCommand("Run Funnel",
                 new InstantCommand(() -> m_funnel.runCoralIn(-0.3)).alongWith(new IntakeFromFunnel(m_coralArm)));
-        NamedCommands.registerCommand("PickUpAlgae", m_algaeArm.grabAlgae(.8).andThen(new WaitCommand(0.100)));
+        NamedCommands.registerCommand("PickUpAlgae", m_algaeArm.grabAlgae(.8));
         NamedCommands.registerCommand("ThrowAlgae",
-        new InstantCommand(() -> m_SSM.setState(States.BARGE,-30.0,0.0)).andThen(new WaitCommand(.030)).andThen(m_algaeArm.spitAlgae()).andThen(new WaitCommand(0.030)).andThen(new InstantCommand(()->m_SSM.setState(States.ALGAEHIGH))));
+        new InstantCommand(() -> m_SSM.setState(States.BARGE,-30.0,0.0)).andThen(new WaitCommand(.030)).andThen(m_algaeArm.spitAlgae().withTimeout(0.200)).andThen(new InstantCommand(()->m_SSM.setState(States.ALGAEHIGH))));
         NamedCommands.registerCommand("GoBarge",
                 new InstantCommand(() -> m_SSM.setState(States.BARGE)));
         NamedCommands.registerCommand("GoAlgaeHigh",
                 new InstantCommand(() -> m_SSM.setState(States.ALGAEHIGH)));
         NamedCommands.registerCommand("GoAlgaeLow",
                 new InstantCommand(() -> m_SSM.setState(States.ALGAELOW)));
-
+                NamedCommands.registerCommand("WaitForElevator2",
+                new WaitUntilCommand(m_elevator::atSetpoint).withTimeout(0.5));
         NamedCommands.registerCommand("WaitForElevator",
                 new WaitUntilCommand(m_elevator::atSetpoint).alongWith(new WaitCommand(0.150)).withTimeout(0.5));
 

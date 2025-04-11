@@ -5,15 +5,9 @@
     "data": {
       "commands": [
         {
-          "type": "race",
+          "type": "sequential",
           "data": {
             "commands": [
-              {
-                "type": "path",
-                "data": {
-                  "pathName": "start algae pathh"
-                }
-              },
               {
                 "type": "named",
                 "data": {
@@ -21,9 +15,9 @@
                 }
               },
               {
-                "type": "named",
+                "type": "path",
                 "data": {
-                  "name": "MT2"
+                  "pathName": "start algae pathh"
                 }
               }
             ]
@@ -74,13 +68,13 @@
               {
                 "type": "named",
                 "data": {
-                  "name": "WaitForElevator"
+                  "name": "WaitForElevator2"
                 }
               },
               {
-                "type": "named",
+                "type": "wait",
                 "data": {
-                  "name": "PickUpAlgae"
+                  "waitTime": 0.3
                 }
               }
             ]
@@ -90,25 +84,6 @@
           "type": "path",
           "data": {
             "pathName": "barge shot 1"
-          }
-        },
-        {
-          "type": "sequential",
-          "data": {
-            "commands": [
-              {
-                "type": "named",
-                "data": {
-                  "name": "WaitForElevator"
-                }
-              },
-              {
-                "type": "named",
-                "data": {
-                  "name": "ThrowAlgae"
-                }
-              }
-            ]
           }
         },
         {
@@ -124,13 +99,13 @@
               {
                 "type": "named",
                 "data": {
-                  "name": "WaitForElevator"
+                  "name": "WaitForElevator2"
                 }
               },
               {
-                "type": "named",
+                "type": "wait",
                 "data": {
-                  "name": "PickUpAlgae"
+                  "waitTime": 0.3
                 }
               }
             ]
@@ -140,25 +115,6 @@
           "type": "path",
           "data": {
             "pathName": "barge shot 2"
-          }
-        },
-        {
-          "type": "sequential",
-          "data": {
-            "commands": [
-              {
-                "type": "named",
-                "data": {
-                  "name": "WaitForElevator"
-                }
-              },
-              {
-                "type": "named",
-                "data": {
-                  "name": "ThrowAlgae"
-                }
-              }
-            ]
           }
         },
         {
@@ -174,13 +130,13 @@
               {
                 "type": "named",
                 "data": {
-                  "name": "WaitForElevator"
+                  "name": "WaitForElevator2"
                 }
               },
               {
-                "type": "named",
+                "type": "wait",
                 "data": {
-                  "name": "PickUpAlgae"
+                  "waitTime": 0.3
                 }
               }
             ]
@@ -196,18 +152,6 @@
           "type": "sequential",
           "data": {
             "commands": [
-              {
-                "type": "named",
-                "data": {
-                  "name": "WaitForElevator"
-                }
-              },
-              {
-                "type": "named",
-                "data": {
-                  "name": "ThrowAlgae"
-                }
-              },
               {
                 "type": "named",
                 "data": {

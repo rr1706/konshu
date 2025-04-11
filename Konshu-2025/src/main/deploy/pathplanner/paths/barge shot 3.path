@@ -3,25 +3,25 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 5.11875,
-        "y": 2.90375
+        "x": 5.142725409836065,
+        "y": 2.916137295081967
       },
       "prevControl": null,
       "nextControl": {
-        "x": 5.46,
-        "y": 2.3675
+        "x": 5.483975409836065,
+        "y": 2.379887295081967
       },
       "isLocked": false,
       "linkedName": "grab algae 3 end"
     },
     {
       "anchor": {
-        "x": 7.508,
-        "y": 4.7855
+        "x": 7.8998975409836065,
+        "y": 5.265727459016393
       },
       "prevControl": {
-        "x": 6.8347500000000005,
-        "y": 3.9567499999999995
+        "x": 7.240471311475409,
+        "y": 4.858145491803278
       },
       "nextControl": null,
       "isLocked": false,
@@ -32,10 +32,10 @@
   "constraintZones": [
     {
       "name": "Constraints Zone",
-      "minWaypointRelativePos": 0,
-      "maxWaypointRelativePos": 0,
+      "minWaypointRelativePos": 0.8186046511627886,
+      "maxWaypointRelativePos": 1.0,
       "constraints": {
-        "maxVelocity": 4.0,
+        "maxVelocity": 1.0,
         "maxAcceleration": 3.0,
         "maxAngularVelocity": 540.0,
         "maxAngularAcceleration": 720.0,
@@ -48,12 +48,23 @@
   "eventMarkers": [
     {
       "name": "barge_shot",
-      "waypointRelativePos": 0.05,
+      "waypointRelativePos": 0.19988674971687495,
       "endWaypointRelativePos": null,
       "command": {
         "type": "named",
         "data": {
           "name": "GoBarge"
+        }
+      }
+    },
+    {
+      "name": "flick",
+      "waypointRelativePos": 0.8676532769555952,
+      "endWaypointRelativePos": null,
+      "command": {
+        "type": "named",
+        "data": {
+          "name": "ThrowAlgae"
         }
       }
     }
@@ -68,7 +79,7 @@
   },
   "goalEndState": {
     "velocity": 0,
-    "rotation": 179.0330744283557
+    "rotation": -155.0
   },
   "reversed": false,
   "folder": "algae autooooooooooo",
