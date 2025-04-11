@@ -303,6 +303,10 @@ public class RobotContainer {
 
     }
 
+    public void setSSMDisabled(){
+        m_SSM.setState(States.DISABLED);
+    }
+
     public Command getTeleInitCommand() {
         return new InstantCommand(() -> m_climber.setPosition(ClimberConstants.kDeployPosition))
                 .andThen(m_drivetrain.useMT2(true));
