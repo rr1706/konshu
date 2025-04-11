@@ -1,10 +1,7 @@
 package frc.robot.commands;
-
 import java.util.function.Supplier;
-
 import com.ctre.phoenix6.swerve.SwerveModule.DriveRequestType;
 import com.ctre.phoenix6.swerve.SwerveRequest;
-
 import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Translation2d;
@@ -114,5 +111,4 @@ public class AlignInAuto extends Command {
                 .withRotationalRate(0.0);
         m_drivetrain.setControl(request);
     }
-
 }

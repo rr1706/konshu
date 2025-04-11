@@ -1,16 +1,12 @@
 package frc.robot.subsystems;
-
 import com.thethriftybot.ThriftyNova;
 import com.thethriftybot.ThriftyNova.CurrentType;
 import com.thethriftybot.ThriftyNova.MotorType;
-
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import au.grapplerobotics.LaserCan;
 import au.grapplerobotics.ConfigurationFailedException;
-
-
 
 public class CoralArm extends SubsystemBase{
     private ThriftyNova m_Nova;
@@ -24,7 +20,6 @@ public class CoralArm extends SubsystemBase{
         m_Nova.setMaxCurrent(CurrentType.SUPPLY, 30.0);
         m_Nova.setVoltageCompensation(0.0);
         m_Nova.setBrakeMode(false);
-
 
         lc = new LaserCan(10);
         try {

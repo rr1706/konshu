@@ -9,13 +9,9 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.constants.IntakeConstants;
 
-import com.ctre.phoenix.motorcontrol.TalonSRXControlMode;
-import com.ctre.phoenix.motorcontrol.can.TalonSRX;
-import com.ctre.phoenix.motorcontrol.can.TalonSRXConfiguration;
 
-// Example usage of a TalonSRX motor controller
+//Example usage of a TalonSRX motor controller
 //TalonSRX motor = new TalonSRX(0); // creates a new TalonSRX with ID 0
-
 //TalonSRXConfiguration config = new TalonSRXConfiguration();
 //config.peakCurrentLimit = 40; // the peak current, in amps
 //config.peakCurrentDuration = 1500; // the time at the peak current before the limit triggers, in ms
@@ -24,14 +20,12 @@ import com.ctre.phoenix.motorcontrol.can.TalonSRXConfiguration;
 
 //motor.set(TalonSRXControlMode.PercentOutput, 0.5); // runs the motor at 50% power
 
-
 public class AlgaeIntake extends SubsystemBase{
     private final TalonFX m_algaeintakeFX = new TalonFX(15, "*");
     ThriftyNova m_algaeintakeSRX = new ThriftyNova(16);
     public double m_setPoint = getPosition();
 
     public AlgaeIntake() {
-
         m_algaeintakeFX.getConfigurator().apply(new CurrentLimitsConfigs()
         .withStatorCurrentLimit(IntakeConstants.kStatorCurrent)
         .withStatorCurrentLimitEnable(true)
@@ -80,7 +74,6 @@ public class AlgaeIntake extends SubsystemBase{
         m_algaeintakeSRX.set(0);
     }
 
-    // @SuppressWarnings("rawtypes")
     public double getCurrent() {
         return (m_algaeintakeFX.getSupplyCurrent().getValueAsDouble());
     }
@@ -92,7 +85,6 @@ public class AlgaeIntake extends SubsystemBase{
         else {
             setPosition(getPosition()-0.5);
         }
-
     }
 
     @Override
@@ -101,5 +93,5 @@ public class AlgaeIntake extends SubsystemBase{
         SmartDashboard.putNumber("Algae Intake Current", getCurrent());
         SmartDashboard.putNumber("Algae Intake Set Point", m_setPoint);
     }
-    }
+}
 

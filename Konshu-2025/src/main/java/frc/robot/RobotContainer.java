@@ -2,7 +2,6 @@ package frc.robot;
 
 import com.pathplanner.lib.auto.AutoBuilder;
 import com.pathplanner.lib.auto.NamedCommands;
-
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -42,18 +41,15 @@ public class RobotContainer {
 
     public final CoralArm m_coralArm = new CoralArm();
     public final AlgaeArm m_algaeArm = new AlgaeArm();
-    private final Elevator m_elevator = new Elevator(m_coralArm::haveCoral, m_algaeArm::haveAlgae);
+    private final Elevator m_elevator = new Elevator();
     private final Arm m_arm = new Arm();
     private final Funnel m_funnel = new Funnel();
 
     private final SSM m_SSM = new SSM(m_arm, m_elevator, m_coralArm::haveCoral);
     public final CommandSwerveDrivetrain m_drivetrain;
     public final Climber m_climber = new Climber();
-
     public final AlgaeIntake m_AlgaeIntake = new AlgaeIntake();
-
     private final LED m_LED = new LED(m_coralArm, m_algaeArm);
-
     private final SendableChooser<Command> autoChooser;
 
     public RobotContainer() {

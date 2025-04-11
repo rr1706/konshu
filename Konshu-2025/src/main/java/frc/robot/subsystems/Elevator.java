@@ -1,16 +1,10 @@
 package frc.robot.subsystems;
 import com.ctre.phoenix6.controls.DynamicMotionMagicVoltage;
 import com.ctre.phoenix6.controls.Follower;
-import com.ctre.phoenix6.controls.MotionMagicDutyCycle;
-import com.ctre.phoenix6.controls.MotionMagicVoltage;
-import com.ctre.phoenix6.controls.DynamicMotionMagicVoltage;
 import com.ctre.phoenix6.hardware.TalonFX;
 import com.ctre.phoenix6.signals.GravityTypeValue;
 import com.ctre.phoenix6.signals.InvertedValue;
 import com.ctre.phoenix6.signals.NeutralModeValue;
-
-import java.util.function.BooleanSupplier;
-
 import com.ctre.phoenix6.StatusSignal;
 import com.ctre.phoenix6.configs.*;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -18,17 +12,12 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.constants.ElevatorConstants;
 
 public class Elevator extends SubsystemBase {
-
-    private final BooleanSupplier m_hasCoral;
-    private final BooleanSupplier m_hasAlgae;
     public final static TalonFX m_ElevatorRightFX = new TalonFX(9, "*");
     public final static TalonFX m_ElevatorLeftFX = new TalonFX(10, "*");
     public double m_setPoint = getPosition();
     private SoftwareLimitSwitchConfigs m_limits;
 
-    public Elevator(BooleanSupplier hasCoral, BooleanSupplier hasAlgae) {
-        m_hasCoral = hasCoral;
-        m_hasAlgae = hasAlgae;
+    public Elevator() {
         m_ElevatorLeftFX.setControl(new Follower(9, true).withUpdateFreqHz(100));
 
         m_ElevatorRightFX.getConfigurator().apply(new CurrentLimitsConfigs()
@@ -47,7 +36,6 @@ public class Elevator extends SubsystemBase {
             .withMotionMagicAcceleration(ElevatorConstants.kDownAccelerationElevator)
             .withMotionMagicCruiseVelocity(ElevatorConstants.kDownVelocityElevator)
             .withMotionMagicJerk(ElevatorConstants.kDownJerkElevator));
-
                     
         m_ElevatorRightFX.getConfigurator().apply( new Slot0Configs()
             .withKP(ElevatorConstants.kPElevator)
@@ -68,22 +56,11 @@ public class Elevator extends SubsystemBase {
         m_ElevatorRightFX.getConfigurator().apply(new MotorOutputConfigs().withInverted(InvertedValue.Clockwise_Positive));                       
         m_ElevatorRightFX.setNeutralMode(NeutralModeValue.Brake);
         m_ElevatorLeftFX.setNeutralMode(NeutralModeValue.Brake);
-
     }
 
     public void setPosition(double position){        // Position in inches
 
-//       double ffvolts = 0.0;
-        // Vary the ff voltage based on elevator position and what we are carrying
-//        if (getPosition() < firststageheight) ffvolts = 0.0;
-//        else if (getPosition() < secondstageheight) ffvolts = 0.0;
-//        else ffvolts = 0.0;
-//       if (m_hasCoral.getAsBoolean()) ffvolts += 0.0;
-//       if (m_hasAlgae.getAsBoolean()) ffvolts += 0.0;
-
         m_setPoint = position;
-//        m_ElevatorRightFX.setControl(new MotionMagicVoltage(position/ElevatorConstants.kInchPerRotation));
-
         if (position > getPosition()) {     // Going up
             m_ElevatorRightFX.setControl(new DynamicMotionMagicVoltage(position/ElevatorConstants.kInchPerRotation, 
                 ElevatorConstants.kUpVelocityElevator, ElevatorConstants.kUpAccelerationElevator, ElevatorConstants.kUpJerkElevator));

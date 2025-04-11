@@ -1,5 +1,4 @@
 package frc.robot.subsystems;
-
 import com.ctre.phoenix6.configs.CurrentLimitsConfigs;
 import com.ctre.phoenix6.configs.MotionMagicConfigs;
 import com.ctre.phoenix6.configs.MotorOutputConfigs;
@@ -12,19 +11,16 @@ import com.ctre.phoenix6.signals.NeutralModeValue;
 import com.thethriftybot.ThriftyNova;
 import com.thethriftybot.ThriftyNova.CurrentType;
 import com.thethriftybot.ThriftyNova.MotorType;
-
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
- import frc.robot.constants.ClimberConstants;
+import frc.robot.constants.ClimberConstants;
 
 public class Climber  extends SubsystemBase{
     public static final TalonFX m_climberRightFx = new TalonFX(18, "*");
-   public static final ThriftyNova m_NovaRight = new ThriftyNova(20, MotorType.MINION);
+    public static final ThriftyNova m_NovaRight = new ThriftyNova(20, MotorType.MINION);
     private Slot0Configs m_Slot0Configs;
     private SoftwareLimitSwitchConfigs m_limits;
 
-
 public Climber() {
-
         m_climberRightFx.getConfigurator().apply(new CurrentLimitsConfigs()
                         .withStatorCurrentLimit(ClimberConstants.kStatorCurrent)
                         .withStatorCurrentLimitEnable(true)
@@ -58,8 +54,6 @@ public Climber() {
         m_NovaRight.setMaxCurrent(CurrentType.STATOR, 40.0);
         m_climberRightFx.getConfigurator().apply(new MotorOutputConfigs().withInverted(InvertedValue.Clockwise_Positive));
         m_climberRightFx.setNeutralMode(NeutralModeValue.Brake);
-
-      
     }
 
     public void deployPosition(double pos) {
@@ -78,7 +72,6 @@ public Climber() {
         double climber_current = (right_current);
         return climber_current;
     }
-
 
     public void prepClimb() {
         setPosition(ClimberConstants.kClimbPosition);
