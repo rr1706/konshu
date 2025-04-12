@@ -3,19 +3,12 @@
 // the WPILib BSD license file in the root directory of this project.
 
 package frc.robot.commands;
-
 import frc.robot.subsystems.CoralArm;
 import edu.wpi.first.wpilibj2.command.Command;
 
 public class IntakeFromFunnel extends Command {
-
   private final CoralArm coralArm;
-  
-  /**
-   * Creates a new command instance.
-   *
-   * @param coralArm The subsystem that contains the LaserCan sensor and motor controller.
-   */
+
   public IntakeFromFunnel(CoralArm coralArm) {
     this.coralArm = coralArm;
     // Declare subsystem dependencies.
@@ -25,20 +18,27 @@ public class IntakeFromFunnel extends Command {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
+
     // Retrieve the latest measurement from the LaserCan sensor.
-    
+      // if (coralArm.haveCoral()) {
+      //   coralArm.runCoral(0);
+      // } else {
+      //   coralArm.runCoral(-.22);
+      // }
+
+      // Run fast until coral is first detected, then slow down.  Stop at second detector.
       if (coralArm.haveCoral()) {
-        coralArm.runCoral(0);
+        coralArm.runCoral(0);         // Second detector - stop coral
+      } else if (coralArm.startCoral()) {
+        coralArm.runCoral(-0.1);            // First but not second - run slow
       } else {
-        coralArm.runCoral(-.22);
+        coralArm.runCoral(-0.4);            // Neither - run fast
       }
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    // Ensure that the motor is stopped when the command ends.
-    //coralArm.runCoral(0.0);
   }
 
   // This command never finishes on its own.

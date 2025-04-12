@@ -13,7 +13,7 @@ import edu.wpi.first.util.datalog.DataLog;
 import edu.wpi.first.util.datalog.StringLogEntry;
 import frc.robot.constants.AutoAlignConstants;
 import com.ctre.phoenix6.SignalLogger;
-// import au.grapplerobotics.CanBridge;
+import au.grapplerobotics.CanBridge;
 import com.pathplanner.lib.commands.PathfindingCommand;
 
 /**
@@ -52,8 +52,7 @@ public class Robot extends TimedRobot {
     SignalLogger.stop();
     PathfindingCommand.warmupCommand().schedule();
 
-    
-    // CanBridge.runTCP();
+    CanBridge.runTCP();      // Uncomment to enable setting up grapple CAN IDs
   }
 
   /**
