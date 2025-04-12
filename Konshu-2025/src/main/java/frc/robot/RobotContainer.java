@@ -118,7 +118,13 @@ public class RobotContainer {
         operatorcontoller2.button(11).whileTrue(m_algaeArm.grabAlgae(.8)
                 .alongWith(new InstantCommand(() -> m_SSM.setState(States.PROCESSOR))))
                 .onFalse(new InstantCommand(() -> m_SSM.setState(States.LOADINGSTATION)));
-        operatorcontoller2.button(12).whileTrue(m_algaeArm.spitAlgae());
+
+  //      operatorcontoller2.button(12).whileTrue(m_algaeArm.spitAlgae());
+        operatorcontoller2.button(12).onTrue(m_algaeArm.grabAlgae(0.8)
+            .alongWith(new InstantCommand(() -> m_SSM.setState(States.L1_IN))))
+            .onFalse(m_algaeArm.grabAlgae(0)
+            .alongWith(new InstantCommand(() -> m_SSM.setState(States.LOADINGSTATION))));
+
         driverController.leftTrigger().whileTrue(new AutoAlign(
                 m_drivetrain,
                 () -> driverController.getLeftY(),

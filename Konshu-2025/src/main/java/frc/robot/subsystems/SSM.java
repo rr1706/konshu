@@ -186,8 +186,7 @@ public class SSM extends SubsystemBase {
 
 //        if (m_setpoint != m_queuedSetpoint)      // Now always reinit because added offsets
         if ((m_queuedSetpoint == States.L1) || (m_queuedSetpoint == States.L2) || 
-            (m_queuedSetpoint == States.L3) || (m_queuedSetpoint == States.L4) ||
-            (m_queuedSetpoint == States.L1_IN)) {
+            (m_queuedSetpoint == States.L3) || (m_queuedSetpoint == States.L4)) {
             if (m_hasCoral.getAsBoolean()) updateState(m_queuedSetpoint);
         } else updateState(m_queuedSetpoint);
         
