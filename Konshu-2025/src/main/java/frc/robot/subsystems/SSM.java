@@ -256,7 +256,7 @@ public class SSM extends SubsystemBase {
             case L2 -> ArmConstants.kArmL2;
             case L3 -> ArmConstants.kArmL3;
             case L4 -> ArmConstants.kArmL4;
-            case LOADINGSTATION -> ArmConstants.kArmFeeder;
+            case LOADINGSTATION -> ArmConstants.kArmLoadingStation;
             case PROCESSOR -> ArmConstants.kArmProcessor;
             case BARGE -> ArmConstants.kArmBarge;
             case GROUNDALGAE -> ArmConstants.kArmGroundAlgae;
