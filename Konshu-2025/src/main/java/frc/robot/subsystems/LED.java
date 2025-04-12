@@ -1,7 +1,5 @@
 package frc.robot.subsystems;
 
-import java.util.function.BooleanSupplier;
-
 import edu.wpi.first.wpilibj.AddressableLED;
 import edu.wpi.first.wpilibj.AddressableLEDBuffer;
 import edu.wpi.first.wpilibj.AddressableLEDBufferView;
@@ -19,8 +17,8 @@ public class LED extends SubsystemBase {
   Color m_yellow = new Color(216, 255, 30);  // Coral in close - yellow
   Color m_purple = new Color(0, 100, 100); // DEFAULT - not holding anything
 
-  private final BooleanSupplier m_hasCoral;
-  private final BooleanSupplier m_hasAlgae;
+  private final CoralArm coralArm;
+  private final AlgaeArm algaeArm;
 
   // PWM port 9 Must be a PWM header, not MXP or DIO
   AddressableLED m_led;
@@ -31,9 +29,9 @@ public class LED extends SubsystemBase {
   AddressableLEDBufferView leftLEDs = m_ledBuffer.createView(0, 47);
   AddressableLEDBufferView rightLEDs = m_ledBuffer.createView(48, 95);
 
-  public LED(BooleanSupplier hasCoral, BooleanSupplier hasAlgae) {
-    m_hasCoral = hasCoral;
-    m_hasAlgae = hasAlgae;
+  public LED(CoralArm coralarm, AlgaeArm algaearm) {
+    this.coralArm = coralarm;
+    this.algaeArm = algaearm;
     m_led = new AddressableLED(9);
     m_led.setLength(m_ledBuffer.getLength());
     m_led.setData(m_ledBuffer);
@@ -42,15 +40,15 @@ public class LED extends SubsystemBase {
 
   public void periodic() {
     // Sets all to blue with coral, green with algae, or white if neither
-    if (m_hasCoral.getAsBoolean()) {
+    if (coralArm.quickHaveCoral()) {
       if (m_LEDScore) {
         leftStrand(m_yellow);
- //       rightStrand(m_yellow);    // Not currently used as left/right LEDs are wired in parallel
+        rightStrand(m_yellow);    // Not currently used as left/right LEDs are wired in parallel
       } else {
         leftStrand(m_blue);
- //       rightStrand(m_blue);
+        rightStrand(m_blue);
       }
-    } else if (m_hasAlgae.getAsBoolean()) {
+    } else if (algaeArm.haveAlgae()) {
       leftStrand(m_green);
       // rightStrand(m_green);
     } else {

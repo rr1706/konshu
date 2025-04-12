@@ -2,7 +2,7 @@ package frc.robot.subsystems;
 
 import java.util.function.BooleanSupplier;
 
-//import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.constants.ArmConstants;
 import frc.robot.constants.ElevatorConstants;
@@ -59,7 +59,7 @@ public class SSM extends SubsystemBase {
     // below kArmLowDanger
     private void updateState(States state) {
 
-        // Special handling of L1_IN (arm inside of elevator).   Written in protest as both Sam and Emerson
+        // Special handling of L1_IN (arm inside of elevator).   Written in protest as both Sam and Emmerson
         // assured me we would never need to move the arm inside the elevator!  The code was so clean before this.
         if (state != m_setpoint) {                             // Check for state change
             if (state == States.L1_IN) {                         // If new state is L1_IN
@@ -200,22 +200,22 @@ public class SSM extends SubsystemBase {
             m_elevator.setPosition(m_elevatorSetpoint); // Cleared, continue to final setpoint
             m_elevatorPauseLow = false;
         }
-        // SmartDashboard.putBoolean("m_armPauseHigh", m_armPauseHigh);
-        // SmartDashboard.putBoolean("m_armPauseLow", m_armPauseLow);
-        // SmartDashboard.putBoolean("m_elevatorPauseHigh", m_elevatorPauseHigh);
-        // SmartDashboard.putBoolean("m_elevatorPauseLow", m_elevatorPauseLow);
+        SmartDashboard.putBoolean("m_armPauseHigh", m_armPauseHigh);
+        SmartDashboard.putBoolean("m_armPauseLow", m_armPauseLow);
+        SmartDashboard.putBoolean("m_elevatorPauseHigh", m_elevatorPauseHigh);
+        SmartDashboard.putBoolean("m_elevatorPauseLow", m_elevatorPauseLow);
     }
 
     public void setState(States q) {
         m_queuedSetpoint = q;
-//        SmartDashboard.putString("m_queuedSetpoint", m_queuedSetpoint.toString());
+        SmartDashboard.putString("m_queuedSetpoint", m_queuedSetpoint.toString());
         m_armOffset = 0.0;
         m_elevatorOffset = 0.0;
     }
 
     public void setState(States q, double armOffset, double elevatorOffset) {
         m_queuedSetpoint = q;
-//        SmartDashboard.putString("m_queuedSetpoint", m_queuedSetpoint.toString());
+        SmartDashboard.putString("m_queuedSetpoint", m_queuedSetpoint.toString());
         m_armOffset = armOffset;
         m_elevatorOffset = elevatorOffset;
     }
