@@ -93,7 +93,7 @@ public class RobotContainer {
         driverController.rightTrigger()
                 .onTrue(new ConditionalCommand(new WaitCommand(0.030).andThen(m_algaeArm.spitAlgae()),
                         new ConditionalCommand(m_algaeArm.slowSpitAlgae(),
-                                new ConditionalCommand(m_coralArm.runCoralCmd(-0.25), m_coralArm.runCoralCmd(-0.35),
+                                new ConditionalCommand(m_coralArm.runCoralCmd(-0.35), m_coralArm.runCoralCmd(-0.35),
                                         () -> {
                                             return m_SSM.getState() == (SSM.States.L1_IN);
                                         }),
