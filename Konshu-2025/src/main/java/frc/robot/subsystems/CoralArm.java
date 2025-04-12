@@ -82,7 +82,7 @@ public class CoralArm extends SubsystemBase{
     // @Override
     public void periodic() {
 
-        // Call getMeasurement2 only once in periodic since it is an expensive call and 
+        // Call getMeasurement2 only once (in periodic) since it is an expensive call and 
         // haveCoral is called multiple times per frame (SSM, LED, and IntakeFromFunnel);
         // whereas getMeasurement1 is only called once (IntakeFromFunnel command)
         m_haveCoral = getMeasurement2() < 40;

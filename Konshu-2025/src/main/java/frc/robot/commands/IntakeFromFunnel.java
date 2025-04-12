@@ -19,13 +19,14 @@ public class IntakeFromFunnel extends Command {
   @Override
   public void execute() {
 
-    // Retrieve the latest measurement from the LaserCan sensor.
+    // One sensor version...
       // if (coralArm.haveCoral()) {
       //   coralArm.runCoral(0);
       // } else {
       //   coralArm.runCoral(-.22);
       // }
 
+      // Two sensor version...
       // Run fast until coral is first detected, then slow down.  Stop at second detector.
       if (coralArm.haveCoral()) {
         coralArm.runCoral(0);         // Second detector - stop coral
