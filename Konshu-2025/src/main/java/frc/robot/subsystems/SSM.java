@@ -15,6 +15,13 @@ public class SSM extends SubsystemBase {
     private final BooleanSupplier m_hasCoral;
 
     public enum States {DISABLED, L1, L1_IN, L1_INTERIM, L2, L3, L4, LOADINGSTATION, PROCESSOR, BARGE, GROUNDALGAE, ALGAELOW, ALGAEHIGH, Climb};
+    // Currently not using all these L1States, but left in case we later want to implement
+    // Autoalign while in L1_IN.   This will require extenstions to use all these states AS WELL AS:
+    //  1) Update AutoAlign for L1_IN to use PID and set rotation perpendicular to reef (similar to L1 without offset)
+    //  2) Set up lookup offsets for arm L1_IN
+    //  3) Create new upper and lower limits for arm when inside elevator
+    //  4) Add another elseif to initial state change request check to handle when happens while in TO_L1_IN state - would be bad
+    //  5) Include L1_IN as valid state for safe move logic so arm/elevator update with offset changes
     private enum L1State {OUT, IN_TO_L1_INTERIM, TO_L1_IN, AT_L1_IN, OUT_TO_L1_INTERIM};
 
     private boolean m_elevatorPauseHigh, m_elevatorPauseLow, m_armPauseHigh, m_armPauseLow;
@@ -31,16 +38,15 @@ public class SSM extends SubsystemBase {
         m_setpoint = setpoint;
         m_nextSetpoint = setpoint;
         m_queuedSetpoint = setpoint;
+        m_hasCoral = hasCoral;
+        
         m_L1state = L1State.OUT;
         m_elevatorPauseHigh = false;
         m_elevatorPauseLow = false;
         m_armPauseHigh = false;
         m_armPauseLow = false;
-
         m_armOffset = 0.0;
         m_elevatorOffset = 0.0;
-
-        m_hasCoral = hasCoral;
     }
 
     // Second constructor defaults to disabled (do nothing until SetState is first
