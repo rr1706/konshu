@@ -55,17 +55,14 @@ public class CoralArm extends SubsystemBase{
     }
 
     public boolean haveCoral() {
-        m_haveCoral = getMeasurement() < 40;
-        return (m_haveCoral);
-    }
-
-    // Calls to getMeasurment are very time expensive, this just returns the last update to use for LEDs
-    public boolean quickHaveCoral() {
         return (m_haveCoral);
     }
 
     // @Override
     public void periodic() {
+    // m_haveCoral is used by multiple subsystems/commands, but is a time expensive call.  So
+    // set it once per periodic call, and use the value in other subsystems/commands
+    m_haveCoral = getMeasurement() < 40;
 
     SmartDashboard.putNumber("Coral Velo", m_Nova.getVelocity()/42.0);
     SmartDashboard.putNumber("Coral Current", m_Nova.getStatorCurrent());
