@@ -49,7 +49,7 @@ public class RobotContainer {
     public final CommandSwerveDrivetrain m_drivetrain;
     public final Climber m_climber = new Climber();
     public final AlgaeIntake m_AlgaeIntake = new AlgaeIntake();
-    private final LED m_LED = new LED(m_coralArm, m_algaeArm);
+    private final LED m_LED = new LED(m_coralArm::haveCoral, m_algaeArm::haveAlgae);
     private final SendableChooser<Command> autoChooser;
 
     public RobotContainer() {
