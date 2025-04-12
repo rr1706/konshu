@@ -30,7 +30,7 @@ public class IntakeFromFunnel extends Command {
       if (coralArm.haveCoral()) {
         coralArm.runCoral(0);
       } else {
-        coralArm.runCoral(-.18);
+        coralArm.runCoral(-.22);
       }
   }
 

@@ -84,7 +84,7 @@ public class RobotContainer {
         driverController.povDown().onTrue(new InstantCommand(() -> m_arm.jogging(true)));
 
         driverController.leftTrigger().onFalse(
-                new InstantCommand(() -> m_funnel.runCoralIn(-.3)).andThen(new IntakeFromFunnel(m_coralArm)));
+                new InstantCommand(() -> m_funnel.runCoralIn(-.25)).andThen(new IntakeFromFunnel(m_coralArm)));
         driverController.x().onTrue(new InstantCommand(() -> m_climber.prepClimb())
                 .alongWith(new InstantCommand(() -> m_funnel.runCoralIn(0.0))));
         driverController.b().onTrue(new InstantCommand(() -> m_climber.Climb()))
@@ -93,9 +93,9 @@ public class RobotContainer {
         driverController.rightTrigger()
                 .onTrue(new ConditionalCommand(new WaitCommand(0.030).andThen(m_algaeArm.spitAlgae()),
                         new ConditionalCommand(m_algaeArm.slowSpitAlgae(),
-                                new ConditionalCommand(m_coralArm.runCoralCmd(-0.45), m_coralArm.runCoralCmd(-0.35),
+                                new ConditionalCommand(m_coralArm.runCoralCmd(-0.25), m_coralArm.runCoralCmd(-0.35),
                                         () -> {
-                                            return m_SSM.getState() == (SSM.States.L1);
+                                            return m_SSM.getState() == (SSM.States.L1_IN);
                                         }),
                                 () -> {
                                     return m_SSM.getState() == (SSM.States.PROCESSOR);
@@ -104,7 +104,7 @@ public class RobotContainer {
                             return m_SSM.getState() == (SSM.States.BARGE);
                         }))
                 .onFalse(
-                        new InstantCommand(() -> m_funnel.runCoralIn(-.3)).andThen(new IntakeFromFunnel(m_coralArm)));
+                        new InstantCommand(() -> m_funnel.runCoralIn(-.25)).andThen(new IntakeFromFunnel(m_coralArm)));
 
         driverController.a().onTrue(m_algaeArm.grabAlgae(0.8));
         operatorcontoller1.button(9).onTrue(m_algaeArm.grabAlgae(0.8));
@@ -112,7 +112,7 @@ public class RobotContainer {
 
         operatorcontoller2.button(2).whileTrue(new InstantCommand(() -> m_funnel.runCoralIn(.2)))
                 .onFalse(
-                        new InstantCommand(() -> m_funnel.runCoralIn(-0.3))
+                        new InstantCommand(() -> m_funnel.runCoralIn(-0.25))
                                 .andThen(new IntakeFromFunnel(m_coralArm)));
 
         operatorcontoller2.button(11).whileTrue(m_algaeArm.grabAlgae(.8)
@@ -138,7 +138,7 @@ public class RobotContainer {
                 (new WaitCommand(.17))
                         .andThen(m_coralArm.runCoralCmd(-0.45).withTimeout(.2)));
         NamedCommands.registerCommand("ScoreL4Faster",
-                (new WaitCommand(.13))
+                (new WaitCommand(.10))
                         .andThen(m_coralArm.runCoralCmd(-0.45).withTimeout(.2)));
         NamedCommands.registerCommand("ScoreL4Final",
                 (new WaitCommand(.17))
@@ -155,20 +155,22 @@ public class RobotContainer {
         NamedCommands.registerCommand("UseMT2", m_drivetrain.useMT2(true));
         NamedCommands.registerCommand("NoMT2", m_drivetrain.useMT2(false));
         NamedCommands.registerCommand("Run Funnel",
-                new InstantCommand(() -> m_funnel.runCoralIn(-0.3)).alongWith(new IntakeFromFunnel(m_coralArm)));
+                new InstantCommand(() -> m_funnel.runCoralIn(-0.25)).alongWith(new IntakeFromFunnel(m_coralArm)));
         NamedCommands.registerCommand("PickUpAlgae", m_algaeArm.grabAlgae(.8));
         NamedCommands.registerCommand("ThrowAlgae",
-        new InstantCommand(() -> m_SSM.setState(States.BARGE,-30.0,0.0)).andThen(new WaitCommand(.030)).andThen(m_algaeArm.spitAlgae().withTimeout(0.200)).andThen(new InstantCommand(()->m_SSM.setState(States.ALGAEHIGH))));
+                new InstantCommand(() -> m_SSM.setState(States.BARGE, -30.0, 0.0)).andThen(new WaitCommand(.030))
+                        .andThen(m_algaeArm.spitAlgae().withTimeout(0.200))
+                        .andThen(new InstantCommand(() -> m_SSM.setState(States.ALGAEHIGH))));
         NamedCommands.registerCommand("GoBarge",
                 new InstantCommand(() -> m_SSM.setState(States.BARGE)));
         NamedCommands.registerCommand("GoAlgaeHigh",
                 new InstantCommand(() -> m_SSM.setState(States.ALGAEHIGH)));
         NamedCommands.registerCommand("GoAlgaeLow",
                 new InstantCommand(() -> m_SSM.setState(States.ALGAELOW)));
-                NamedCommands.registerCommand("WaitForElevator2",
+        NamedCommands.registerCommand("WaitForElevator2",
                 new WaitUntilCommand(m_elevator::atSetpoint).withTimeout(0.5));
         NamedCommands.registerCommand("WaitForElevator",
-                new WaitUntilCommand(m_elevator::atSetpoint).alongWith(new WaitCommand(0.150)).withTimeout(0.5));
+                new WaitUntilCommand(m_elevator::atSetpoint).alongWith(new WaitCommand(0.100)).withTimeout(0.5));
 
         NamedCommands.registerCommand("AlignCRL4", new AlignInAuto(m_drivetrain, () -> {
             DriverStation.Alliance alliance = DriverStation.getAlliance().orElse(DriverStation.Alliance.Blue);
@@ -303,7 +305,7 @@ public class RobotContainer {
 
     }
 
-    public void setSSMDisabled(){
+    public void setSSMDisabled() {
         m_SSM.setState(States.DISABLED);
     }
 
