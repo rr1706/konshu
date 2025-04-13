@@ -93,7 +93,9 @@ public class RobotContainer {
         driverController.rightTrigger()
                 .onTrue(new ConditionalCommand(new WaitCommand(0.030).andThen(m_algaeArm.spitAlgae()),
                         new ConditionalCommand(m_algaeArm.slowSpitAlgae(),
-                                new ConditionalCommand(m_coralArm.runCoralCmd(-0.25), m_coralArm.runCoralCmd(-0.35),
+                                new ConditionalCommand(new ConditionalCommand(m_coralArm.runCoralCmd(-0.4),m_coralArm.runCoralCmd(-0.25),()->{
+                                    return operatorcontoller2.button(2).getAsBoolean();
+                                }), m_coralArm.runCoralCmd(-0.35),
                                         () -> {
                                             return m_SSM.getState() == (SSM.States.L1_IN);
                                         }),
@@ -106,11 +108,11 @@ public class RobotContainer {
                 .onFalse(
                         new InstantCommand(() -> m_funnel.runCoralIn(-.25)).andThen(new IntakeFromFunnel(m_coralArm)));
 
-        driverController.a().onTrue(m_algaeArm.grabAlgae(0.8));
+        //driverController.a().onTrue(m_algaeArm.grabAlgae(0.8));
         operatorcontoller1.button(9).onTrue(m_algaeArm.grabAlgae(0.8));
         operatorcontoller2.button(1).onTrue(m_algaeArm.grabAlgae(0.8));
 
-        operatorcontoller2.button(2).whileTrue(new InstantCommand(() -> m_funnel.runCoralIn(.2)))
+        driverController.a().onTrue(new InstantCommand(() -> m_funnel.runCoralIn(.2)))
                 .onFalse(
                         new InstantCommand(() -> m_funnel.runCoralIn(-0.25))
                                 .andThen(new IntakeFromFunnel(m_coralArm)));
@@ -139,19 +141,19 @@ public class RobotContainer {
                 new InstantCommand(() -> m_climber.setPosition(ClimberConstants.kDeployPosition)));
         NamedCommands.registerCommand("ScoreL4",
                 (new WaitCommand(.6))
-                        .andThen(m_coralArm.runCoralCmd(-0.35).withTimeout(.2)));
+                        .andThen(m_coralArm.runCoralCmd(-0.40).withTimeout(.2)));
         NamedCommands.registerCommand("ScoreL4Fast",
                 (new WaitCommand(.17))
-                        .andThen(m_coralArm.runCoralCmd(-0.45).withTimeout(.2)));
+                        .andThen(m_coralArm.runCoralCmd(-0.40).withTimeout(.2)));
         NamedCommands.registerCommand("ScoreL4Faster",
                 (new WaitCommand(.10))
-                        .andThen(m_coralArm.runCoralCmd(-0.45).withTimeout(.2)));
+                        .andThen(m_coralArm.runCoralCmd(-0.40).withTimeout(.2)));
         NamedCommands.registerCommand("ScoreL4Final",
                 (new WaitCommand(.17))
-                        .andThen(m_coralArm.runCoralCmd(-0.45).withTimeout(.5)));
+                        .andThen(m_coralArm.runCoralCmd(-0.40).withTimeout(.5)));
         NamedCommands.registerCommand("ScoreL2Fast",
                 (new WaitCommand(.040))
-                        .andThen(m_coralArm.runCoralCmd(-0.50).withTimeout(.2)));
+                        .andThen(m_coralArm.runCoralCmd(-0.40).withTimeout(.2)));
         NamedCommands.registerCommand("GoL4",
                 new InstantCommand(() -> m_SSM.setState(States.L4)));
         NamedCommands.registerCommand("GoL2",

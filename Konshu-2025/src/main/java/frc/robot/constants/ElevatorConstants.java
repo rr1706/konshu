@@ -20,20 +20,20 @@ public class ElevatorConstants {
   public static final double kDownVelocityElevator = 50.0;
   public static final double kDownJerkElevator = 5000;
 
-  public static final double kElevatorL1 = 8.6 - 0.23; // These are in inches
-  public static final double kElevatorL1Interim = 3.0 - 0.23; // Waypoint to arm inside the elevator
+  public static final double kElevatorL1 = 8.6 - 1.0; // These are in inches
+  public static final double kElevatorL1Interim = 3.0 - 1.0; // Waypoint to arm inside the elevator
   public static final double kElevatorL1IN = kElevatorL1Interim; // Arm inside the elevator
-  public static final double kElevatorL2 = 22.63 - 0.23;
-  public static final double kElevatorL3 = 38.5 - 0.23;
-  public static final double kElevatorL4 = 72.0 - 0.23;
-  public static final double kElevatorLoadingStation = 0.2;
-  public static final double kElevatorProcessor = 5.7 - 0.23;
-  public static final double kElevatorBarge = 69.61 - 0.23;
-  public static final double kElelvatorGroundAlgae = 15.0 - 0.23;
-  public static final double kLowAlgeaGrab = 19.5 - 0.23;
+  public static final double kElevatorL2 = 22.63 - 1.0;
+  public static final double kElevatorL3 = 38.5 - 1.0;
+  public static final double kElevatorL4 = 72.0 - 1.0;
+  public static final double kElevatorLoadingStation = 0.1;
+  public static final double kElevatorProcessor = 5.7 - 1.0;
+  public static final double kElevatorBarge = 69.61 - 1.0;
+  public static final double kElelvatorGroundAlgae = 15.0 - 1.0;
+  public static final double kLowAlgeaGrab = 19.5 - 1.0;
   public static final double kHighAlgeaGrab = kLowAlgeaGrab + 15.75;
 
-  public static final double kUpperLimitElevator = 74.0 - 0.23; // Inches
+  public static final double kUpperLimitElevator = 74.0; // Inches
   public static final double kULowerLimitElevator = 0;
 
   public static final double kPulleyTeeth = 36.0;
