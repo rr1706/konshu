@@ -121,7 +121,7 @@ public class RobotContainer {
 
   //      operatorcontoller2.button(12).whileTrue(m_algaeArm.spitAlgae());
         operatorcontoller2.button(12).whileTrue(m_algaeArm.grabAlgae(0.8)
-            .alongWith(new InstantCommand(() -> m_SSM.setState(States.L1_IN))))
+            .alongWith(new InstantCommand(() -> m_SSM.ejectStuckAlgae())))
             .onFalse(m_algaeArm.grabAlgae(0)
             .alongWith(new InstantCommand(() -> m_SSM.setState(States.LOADINGSTATION))));
 

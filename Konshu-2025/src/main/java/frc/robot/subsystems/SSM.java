@@ -92,7 +92,7 @@ public class SSM extends SubsystemBase {
                     (m_elevator.getPosition() < ElevatorConstants.kElevatorL1Interim + 0.5)) {   
                     m_L1state = L1State.TO_L1_IN;
                     m_arm.setPosition(getScoringArmPosition(States.L1_IN));                 // Now safe to move arm inside elevator
- //                   m_elevator.setPosition(getScoringElevatorPosition(States.L1_IN));     // For now, assume don't move elevator at all when arm inside
+                    m_elevator.setPosition(getScoringElevatorPosition(States.L1_IN));     // For now, assume don't move elevator at all when arm inside
                     m_setpoint = States.L1_IN;
                     m_queuedSetpoint = States.L1_IN;
                 }
@@ -186,7 +186,8 @@ public class SSM extends SubsystemBase {
 
 //        if (m_setpoint != m_queuedSetpoint)      // Now always reinit because added offsets
         if ((m_queuedSetpoint == States.L1) || (m_queuedSetpoint == States.L2) || 
-            (m_queuedSetpoint == States.L3) || (m_queuedSetpoint == States.L4)) {
+            (m_queuedSetpoint == States.L3) || (m_queuedSetpoint == States.L4) ||
+            (m_queuedSetpoint == States.L1_IN)) {
             if (m_hasCoral.getAsBoolean()) updateState(m_queuedSetpoint);
         } else updateState(m_queuedSetpoint);
         
@@ -223,6 +224,12 @@ public class SSM extends SubsystemBase {
         SmartDashboard.putString("m_queuedSetpoint", m_queuedSetpoint.toString());
         m_armOffset = armOffset;
         m_elevatorOffset = elevatorOffset;
+    }
+
+    public void ejectStuckAlgae() {
+        if (m_elevator.getPosition() <  ElevatorConstants.kElevatorL1IN) {
+            m_arm.setPosition(ArmConstants.kArmL1IN);
+        }
     }
 
     public States getState(){
