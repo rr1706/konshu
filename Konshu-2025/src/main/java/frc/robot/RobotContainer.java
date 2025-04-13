@@ -93,7 +93,7 @@ public class RobotContainer {
         driverController.rightTrigger()
                 .onTrue(new ConditionalCommand(new WaitCommand(0.030).andThen(m_algaeArm.spitAlgae()),
                         new ConditionalCommand(m_algaeArm.slowSpitAlgae(),
-                                new ConditionalCommand(m_coralArm.runCoralCmd(-0.35), m_coralArm.runCoralCmd(-0.35),
+                                new ConditionalCommand(m_coralArm.runCoralCmd(-0.25), m_coralArm.runCoralCmd(-0.35),
                                         () -> {
                                             return m_SSM.getState() == (SSM.States.L1_IN);
                                         }),
@@ -120,7 +120,7 @@ public class RobotContainer {
                 .onFalse(new InstantCommand(() -> m_SSM.setState(States.LOADINGSTATION)));
 
   //      operatorcontoller2.button(12).whileTrue(m_algaeArm.spitAlgae());
-        operatorcontoller2.button(12).whileTrue(m_algaeArm.grabAlgae(-0.8)
+        operatorcontoller2.button(12).whileTrue(m_algaeArm.grabAlgae(0.8)
             .alongWith(new InstantCommand(() -> m_SSM.setState(States.L1_IN))))
             .onFalse(m_algaeArm.grabAlgae(0)
             .alongWith(new InstantCommand(() -> m_SSM.setState(States.LOADINGSTATION))));
@@ -164,7 +164,7 @@ public class RobotContainer {
                 new InstantCommand(() -> m_funnel.runCoralIn(-0.25)).alongWith(new IntakeFromFunnel(m_coralArm)));
         NamedCommands.registerCommand("PickUpAlgae", m_algaeArm.grabAlgae(.8));
         NamedCommands.registerCommand("ThrowAlgae",
-                new InstantCommand(() -> m_SSM.setState(States.BARGE, -30.0, 0.0)).andThen(new WaitCommand(.030))
+                new InstantCommand(() -> m_SSM.setState(States.BARGE, -25.0, 0.0)).andThen(new WaitCommand(.030))
                         .andThen(m_algaeArm.spitAlgae().withTimeout(0.200))
                         .andThen(new InstantCommand(() -> m_SSM.setState(States.ALGAEHIGH))));
         NamedCommands.registerCommand("GoBarge",

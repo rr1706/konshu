@@ -54,6 +54,7 @@ public class CoralArm extends SubsystemBase{
         LaserCan.Measurement measurement1 = lc1.getMeasurement();
         if (measurement1 != null && measurement1.status == LaserCan.LASERCAN_STATUS_VALID_MEASUREMENT) {
             SmartDashboard.putBoolean("LaserCAN 1 Invalid", false);
+            SmartDashboard.putNumber("LaserCAN 1 dist", measurement1.distance_mm);
             return (measurement1.distance_mm); }
         else
         SmartDashboard.putBoolean("LaserCAN 1 Invalid", true);
@@ -64,6 +65,7 @@ public class CoralArm extends SubsystemBase{
         LaserCan.Measurement measurement2 = lc2.getMeasurement();
         if (measurement2 != null && measurement2.status == LaserCan.LASERCAN_STATUS_VALID_MEASUREMENT) {
             SmartDashboard.putBoolean("LaserCAN 2 Invalid", false);
+            SmartDashboard.putNumber("LaserCAN 2 dist", measurement2.distance_mm);
             return (measurement2.distance_mm); }
         else
         SmartDashboard.putBoolean("LaserCAN 2 Invalid", true);

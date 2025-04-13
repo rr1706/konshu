@@ -27,7 +27,7 @@ public class AlgaeArm extends SubsystemBase {
         }
 
         public Command spitAlgae(){
-            return startEnd(()->runAlgae(-0.7),()->stop());
+            return startEnd(()->runAlgae(-0.5),()->stop());
         }
 
         public Command slowSpitAlgae(){
