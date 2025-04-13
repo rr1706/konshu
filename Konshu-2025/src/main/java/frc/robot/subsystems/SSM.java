@@ -229,6 +229,8 @@ public class SSM extends SubsystemBase {
     public void ejectStuckAlgae() {
         if (m_elevator.getPosition() <  ElevatorConstants.kElevatorL1IN) {
             m_arm.setPosition(ArmConstants.kArmL1IN);
+            m_setpoint = States.L1_IN;
+            m_queuedSetpoint = States.L1_IN;
         }
     }
 
