@@ -149,16 +149,9 @@
           }
         },
         {
-          "type": "sequential",
+          "type": "path",
           "data": {
-            "commands": [
-              {
-                "type": "named",
-                "data": {
-                  "name": "GoLoadingStationPOS"
-                }
-              }
-            ]
+            "pathName": "FinishToLoading"
           }
         }
       ]
