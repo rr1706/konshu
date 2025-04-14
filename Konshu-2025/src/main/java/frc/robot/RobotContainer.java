@@ -93,9 +93,9 @@ public class RobotContainer {
         driverController.rightTrigger()
                 .onTrue(new ConditionalCommand(new WaitCommand(0.030).andThen(m_algaeArm.spitAlgae()),
                         new ConditionalCommand(m_algaeArm.slowSpitAlgae(),
-                                new ConditionalCommand(new ConditionalCommand(m_coralArm.runCoralCmd(-0.4),m_coralArm.runCoralCmd(-0.25),()->{
+                                new ConditionalCommand(new ConditionalCommand(m_coralArm.runCoralCmd(-0.4),m_coralArm.runCoralCmd(-0.3),()->{
                                     return operatorcontoller2.button(2).getAsBoolean();
-                                }), m_coralArm.runCoralCmd(-0.35),
+                                }), m_coralArm.runCoralCmd(-0.40),
                                         () -> {
                                             return m_SSM.getState() == (SSM.States.L1_IN);
                                         }),
@@ -108,7 +108,6 @@ public class RobotContainer {
                 .onFalse(
                         new InstantCommand(() -> m_funnel.runCoralIn(-.25)).andThen(new IntakeFromFunnel(m_coralArm)));
 
-        //driverController.a().onTrue(m_algaeArm.grabAlgae(0.8));
         operatorcontoller1.button(9).onTrue(m_algaeArm.grabAlgae(0.8));
         operatorcontoller2.button(1).onTrue(m_algaeArm.grabAlgae(0.8));
 
@@ -121,7 +120,6 @@ public class RobotContainer {
                 .alongWith(new InstantCommand(() -> m_SSM.setState(States.PROCESSOR))))
                 .onFalse(new InstantCommand(() -> m_SSM.setState(States.LOADINGSTATION)));
 
-  //      operatorcontoller2.button(12).whileTrue(m_algaeArm.spitAlgae());
         operatorcontoller2.button(12).whileTrue(m_algaeArm.grabAlgae(0.8)
             .alongWith(new InstantCommand(() -> m_SSM.ejectStuckAlgae())))
             .onFalse(m_algaeArm.grabAlgae(0)

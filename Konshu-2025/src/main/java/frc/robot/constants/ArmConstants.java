@@ -27,17 +27,17 @@ public class ArmConstants {
   public static final double kArmHighDanger = -48.4;
   public static final double kArmLowDanger = -26.4;
 
-  public static final double kArmL1 = -46.3; // These are in degrees
+  public static final double kArmL1 = -44.3; // These are in degrees
   public static final double kArmL1Interim = kArmL1; // Waypoint to arm inside the elevator
-  public static final double kArmL1IN = -80.0; // Inside the elevator
-  public static final double kArmL2 = -31.6;
-  public static final double kArmL3 = -31.6;
-  public static final double kArmL4 = -10.0;
-  public static final double kArmProcessor = 6.0;
-  public static final double kArmBarge = -83.4;
-  public static final double kArmLoadingStation = -41.0;
-  public static final double kArmGroundAlgae = -43.4;
-  public static final double kArmAlgeaGrab = -25.9;
+  public static final double kArmL1IN = -78.0; // Inside the elevator
+  public static final double kArmL2 = -29.6;
+  public static final double kArmL3 = -29.6;
+  public static final double kArmL4 = -8.0;
+  public static final double kArmProcessor = 8.0;
+  public static final double kArmBarge = -81.4;
+  public static final double kArmLoadingStation = -44.0;
+  public static final double kArmGroundAlgae = -41.4;
+  public static final double kArmAlgeaGrab = -23.9;
 
   public static final double kArmLowerLimit = kArmProcessor; // Degrees from arm horizontal
   public static final double kArmUpperLimit = -123.4; // Degrees from arm horizontal

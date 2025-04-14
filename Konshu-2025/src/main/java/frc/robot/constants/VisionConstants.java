@@ -19,10 +19,10 @@ public class VisionConstants {
             Tag_N1_2.put(3.0,1.5);
 
 
-            Tag_N3.put(.25,4000.0);
-            Tag_N3.put(1.0,1000.0);
-            Tag_N3.put(2.0,100.0);
-            Tag_N3.put(3.0,100.0);
+            Tag_N3.put(.25,2000.0);
+            Tag_N3.put(1.0,100.0);
+            Tag_N3.put(2.0,20.0);
+            Tag_N3.put(3.0,10.0);
 
                         
             MultTag_N1_2.put(0.1, 40.0);
@@ -33,8 +33,8 @@ public class VisionConstants {
 
             MultTag_N3.put(0.1, 400.0);
             MultTag_N3.put(0.25, 100.0);
-            MultTag_N3.put(1.0, 20.0);
-            MultTag_N3.put(2.0, 20.0);
+            MultTag_N3.put(1.0, 10.0);
+            MultTag_N3.put(2.0, 5.0);
 
 
             megaTag2TreeMap.put(0.25, 40.0);
