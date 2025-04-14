@@ -21,7 +21,7 @@ public class AlignInAuto extends Command {
             15.0, 0.0, 0.5);
 
     // Base CTRE FieldCentric swerve request (using velocity control)
-    private final SwerveRequest.FieldCentric baseRequest = new SwerveRequest.FieldCentric()
+    private final SwerveRequest.RobotCentric baseRequest = new SwerveRequest.RobotCentric()
             .withDeadband(DriveConstants.MAX_SPEED * DriveConstants.DRIVE_DEADBAND)
             .withRotationalDeadband(DriveConstants.MAX_ANGULAR_RATE * DriveConstants.ROTATION_DEADBAND)
             .withDriveRequestType(DriveRequestType.Velocity);
@@ -93,7 +93,7 @@ public class AlignInAuto extends Command {
         double rotationOutput = rotPID.calculate(currentAngle, targetAngle);
         SmartDashboard.putNumber("Auto Rot Out", rotationOutput);
 
-        double velocityX = 0.0;
+        double velocityX = 0.2;
         double velocityY = 0.0;
 
         SwerveRequest request = baseRequest
