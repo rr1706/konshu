@@ -3,13 +3,13 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 5.142725409836065,
-        "y": 5.1098872950819665
+        "x": 5.130737704918032,
+        "y": 2.904149590163935
       },
       "prevControl": null,
       "nextControl": {
-        "x": 5.5982581967213125,
-        "y": 5.613370901639343
+        "x": 6.389446721311475,
+        "y": 3.095952868852459
       },
       "isLocked": false,
       "linkedName": "aglae shot 2"
@@ -20,8 +20,8 @@
         "y": 5.1098872950819665
       },
       "prevControl": {
-        "x": 6.485348360655739,
-        "y": 5.301690573770491
+        "x": 7.664246890759428,
+        "y": 4.925704160046266
       },
       "nextControl": null,
       "isLocked": false,
@@ -32,7 +32,7 @@
   "constraintZones": [
     {
       "name": "Constraints Zone",
-      "minWaypointRelativePos": 0.8507399577167042,
+      "minWaypointRelativePos": 0.804861580013507,
       "maxWaypointRelativePos": 1.0,
       "constraints": {
         "maxVelocity": 1.0,
@@ -79,13 +79,13 @@
   },
   "goalEndState": {
     "velocity": 0.0,
-    "rotation": 167.80115305196577
+    "rotation": -155.0
   },
   "reversed": false,
-  "folder": "algae autooooooooooo",
+  "folder": "Algae Auto",
   "idealStartingState": {
     "velocity": 0,
-    "rotation": -121.53479190518837
+    "rotation": 119.99999999999999
   },
   "useDefaultConstraints": true
 }

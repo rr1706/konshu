@@ -8,20 +8,20 @@
       },
       "prevControl": null,
       "nextControl": {
-        "x": 7.401567810323768,
-        "y": 3.767729460783258
+        "x": 6.952868852459017,
+        "y": 5.325665983606557
       },
       "isLocked": false,
       "linkedName": "barge shot 2"
     },
     {
       "anchor": {
-        "x": 5.142725409836065,
-        "y": 2.916137295081967
+        "x": 5.15,
+        "y": 5.15
       },
       "prevControl": {
-        "x": 5.778073770491804,
-        "y": 1.68140368852459
+        "x": 5.3998077787037335,
+        "y": 5.5826797648407895
       },
       "nextControl": null,
       "isLocked": false,
@@ -79,13 +79,13 @@
   },
   "goalEndState": {
     "velocity": 0.2,
-    "rotation": 119.99999999999999
+    "rotation": -119.99999999999999
   },
   "reversed": false,
-  "folder": "algae autooooooooooo",
+  "folder": "Algae Auto",
   "idealStartingState": {
     "velocity": 0,
-    "rotation": 167.80115305196577
+    "rotation": -155.0
   },
   "useDefaultConstraints": true
 }

@@ -3,13 +3,13 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 5.840250000000001,
-        "y": 4.014322207976104
+        "x": 5.76608606557377,
+        "y": 4.012214368670529
       },
       "prevControl": null,
       "nextControl": {
-        "x": 6.5032499999999995,
-        "y": 4.278499999999999
+        "x": 6.4290860655737685,
+        "y": 4.276392160694424
       },
       "isLocked": false,
       "linkedName": "pick up algae 1"
@@ -82,7 +82,7 @@
     "rotation": -155.0
   },
   "reversed": false,
-  "folder": "algae autooooooooooo",
+  "folder": "Algae Auto",
   "idealStartingState": {
     "velocity": 0,
     "rotation": 180.0

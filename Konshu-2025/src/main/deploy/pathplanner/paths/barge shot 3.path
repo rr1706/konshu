@@ -3,13 +3,13 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 5.142725409836065,
-        "y": 2.916137295081967
+        "x": 5.15,
+        "y": 5.15
       },
       "prevControl": null,
       "nextControl": {
-        "x": 5.483975409836065,
-        "y": 2.379887295081967
+        "x": 5.5383196721311485,
+        "y": 5.6013831967213115
       },
       "isLocked": false,
       "linkedName": "grab algae 3 end"
@@ -20,8 +20,8 @@
         "y": 5.265727459016393
       },
       "prevControl": {
-        "x": 7.240471311475409,
-        "y": 4.858145491803278
+        "x": 7.192622950819672,
+        "y": 5.6013831967213115
       },
       "nextControl": null,
       "isLocked": false,
@@ -32,7 +32,7 @@
   "constraintZones": [
     {
       "name": "Constraints Zone",
-      "minWaypointRelativePos": 0.8186046511627886,
+      "minWaypointRelativePos": 0.6968264686023034,
       "maxWaypointRelativePos": 1.0,
       "constraints": {
         "maxVelocity": 1.0,
@@ -79,13 +79,13 @@
   },
   "goalEndState": {
     "velocity": 0,
-    "rotation": -155.0
+    "rotation": 160.0
   },
   "reversed": false,
-  "folder": "algae autooooooooooo",
+  "folder": "Algae Auto",
   "idealStartingState": {
     "velocity": 0,
-    "rotation": 119.99999999999999
+    "rotation": -119.99999999999999
   },
   "useDefaultConstraints": true
 }

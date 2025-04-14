@@ -16,12 +16,12 @@
     },
     {
       "anchor": {
-        "x": 5.840250000000001,
-        "y": 4.014322207976104
+        "x": 5.76608606557377,
+        "y": 4.012214368670529
       },
       "prevControl": {
-        "x": 6.377459016393443,
-        "y": 4.00701844262295
+        "x": 6.303295081967212,
+        "y": 4.004910603317375
       },
       "nextControl": null,
       "isLocked": false,
@@ -82,7 +82,7 @@
     "rotation": 180.0
   },
   "reversed": false,
-  "folder": "algae autooooooooooo",
+  "folder": "Algae Auto",
   "idealStartingState": {
     "velocity": 0,
     "rotation": 180.0
