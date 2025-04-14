@@ -1,7 +1,11 @@
 package frc.robot.subsystems;
 import java.util.function.Supplier;
 import com.ctre.phoenix6.Utils;
+import com.ctre.phoenix6.hardware.CANcoder;
+import com.ctre.phoenix6.hardware.TalonFX;
+import com.ctre.phoenix6.signals.NeutralModeValue;
 import com.ctre.phoenix6.swerve.SwerveDrivetrainConstants;
+import com.ctre.phoenix6.swerve.SwerveModule;
 import com.ctre.phoenix6.swerve.SwerveModuleConstants;
 import com.ctre.phoenix6.swerve.SwerveRequest;
 import com.pathplanner.lib.auto.AutoBuilder;
@@ -103,7 +107,11 @@ public class CommandSwerveDrivetrain extends TunerSwerveDrivetrain implements Su
                 modules);
         configureAutoBuilder();
         SmartDashboard.putData(m_field);
-
+        SwerveModule<TalonFX, TalonFX, CANcoder>[] moduleArray = getModules();
+        int size = moduleArray.length;
+        for(int i=0;i<size;i++){
+            moduleArray[i].getDriveMotor().setNeutralMode(NeutralModeValue.Coast);
+        }
     }
 
     private void configureAutoBuilder() {
