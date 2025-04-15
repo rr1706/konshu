@@ -132,10 +132,10 @@ public final class AutoAlignConstants {
     public static void SetUpArmAutoAlignConstantsL4() {
         ArmAutoAlignL4.put(0.49, 0.0);
         ArmAutoAlignL4.put(0.49, 0.0);
-        ArmAutoAlignL4.put(0.66, -5.0);
-        ArmAutoAlignL4.put(0.72, -10.0);
-        ArmAutoAlignL4.put(0.84, -15.0);
-        ArmAutoAlignL4.put(1.0, -15.0);
+        ArmAutoAlignL4.put(0.66, -6.0);
+        ArmAutoAlignL4.put(0.72, -11.0);
+        ArmAutoAlignL4.put(0.84, -16.0);
+        ArmAutoAlignL4.put(1.0, -16.0);
     }
 
 public static final class ReefAprilTags {

@@ -2,6 +2,7 @@ package frc.robot.subsystems;
 import com.ctre.phoenix6.configs.CurrentLimitsConfigs;
 import com.ctre.phoenix6.configs.MotionMagicConfigs;
 import com.ctre.phoenix6.configs.MotorOutputConfigs;
+import com.ctre.phoenix6.configs.OpenLoopRampsConfigs;
 import com.ctre.phoenix6.configs.Slot0Configs;
 import com.ctre.phoenix6.configs.SoftwareLimitSwitchConfigs;
 import com.ctre.phoenix6.controls.MotionMagicVoltage;
@@ -11,6 +12,8 @@ import com.ctre.phoenix6.signals.NeutralModeValue;
 import com.thethriftybot.ThriftyNova;
 import com.thethriftybot.ThriftyNova.CurrentType;
 import com.thethriftybot.ThriftyNova.MotorType;
+
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.constants.ClimberConstants;
 
@@ -38,6 +41,8 @@ public Climber() {
                 .withMotionMagicAcceleration(ClimberConstants.kAcceleration)
                 .withMotionMagicCruiseVelocity(ClimberConstants.kCruiseVelocity));
                 
+        m_climberRightFx.getConfigurator().apply(new OpenLoopRampsConfigs().withVoltageOpenLoopRampPeriod(0.5));
+
         m_Slot0Configs = new Slot0Configs()
                 .withKG(0)
                 .withKS(.25)
@@ -64,6 +69,11 @@ public Climber() {
         m_climberRightFx.stopMotor();
     }
 
+    @Override
+    public void periodic() {
+        SmartDashboard.putNumber("Climber Pose", getPose());
+    }
+
     public void setPosition(double pos) {
         m_climberRightFx.setControl(new MotionMagicVoltage(pos));
     }
@@ -78,8 +88,21 @@ public Climber() {
         m_NovaRight.set(0.4);
     }
 
-    public void Climb() {
-        m_climberRightFx.setVoltage(-5.0);
+    public void setVoltage(double voltage){
+        m_climberRightFx.setVoltage(voltage);
+    }
+
+    public double getPose(){
+        return m_climberRightFx.getPosition().getValueAsDouble();
+    }
+
+    public void stopMinion(){
         m_NovaRight.setPercent(0);
     }
+
+    public void Climb() {
+        m_climberRightFx.setVoltage(-6.0);
+        m_NovaRight.setPercent(0);
+    }
+
 }

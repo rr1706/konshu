@@ -32,7 +32,7 @@ public class ArmConstants {
   public static final double kArmL1IN = -78.0; // Inside the elevator
   public static final double kArmL2 = -29.6;
   public static final double kArmL3 = -29.6;
-  public static final double kArmL4 = -8.0;
+  public static final double kArmL4 = -6.0;
   public static final double kArmProcessor = 8.0;
   public static final double kArmBarge = -81.4;
   public static final double kArmLoadingStation = -44.0;

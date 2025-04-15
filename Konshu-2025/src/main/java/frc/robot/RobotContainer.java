@@ -17,6 +17,7 @@ import frc.robot.commands.AlgaeIntakeCommand;
 import frc.robot.commands.AlgaeIntakeEndCommand;
 import frc.robot.commands.AlignInAuto;
 import frc.robot.commands.AutoAlign;
+import frc.robot.commands.Climb;
 import frc.robot.commands.DriveCommands;
 import frc.robot.commands.IntakeFromFunnel;
 import frc.robot.commands.MoveIntakeToUnJam;
@@ -87,11 +88,10 @@ public class RobotContainer {
                 new InstantCommand(() -> m_funnel.runCoralIn(-.25)).andThen(new IntakeFromFunnel(m_coralArm)));
         driverController.x().onTrue(new InstantCommand(() -> m_climber.prepClimb())
                 .alongWith(new InstantCommand(() -> m_funnel.runCoralIn(0.0))));
-        driverController.b().onTrue(new InstantCommand(() -> m_climber.Climb()))
-                .onFalse(new InstantCommand(() -> m_climber.stop()));
+        driverController.b().whileTrue(new Climb(m_climber));
 
         driverController.rightTrigger()
-                .onTrue(new ConditionalCommand(new WaitCommand(0.030).andThen(m_algaeArm.spitAlgae()),
+                .onTrue(new ConditionalCommand(new WaitCommand(0.050).andThen(m_algaeArm.spitAlgae()),
                         new ConditionalCommand(m_algaeArm.slowSpitAlgae(),
                                 new ConditionalCommand(new ConditionalCommand(m_coralArm.runCoralCmd(-0.4),m_coralArm.runCoralCmd(-0.3),()->{
                                     return operatorcontoller2.button(2).getAsBoolean();
@@ -164,7 +164,7 @@ public class RobotContainer {
                 new InstantCommand(() -> m_funnel.runCoralIn(-0.25)).alongWith(new IntakeFromFunnel(m_coralArm)));
         NamedCommands.registerCommand("PickUpAlgae", m_algaeArm.grabAlgae(.8));
         NamedCommands.registerCommand("ThrowAlgae",
-                new InstantCommand(() -> m_SSM.setState(States.BARGE, -25.0, 0.0)).andThen(new WaitCommand(.030))
+                new InstantCommand(() -> m_SSM.setState(States.BARGE, -30.0, 0.0)).andThen(new WaitCommand(.070))
                         .andThen(m_algaeArm.spitAlgae().withTimeout(0.200))
                         .andThen(new InstantCommand(() -> m_SSM.setState(States.ALGAEHIGH))));
         NamedCommands.registerCommand("GoBarge",
