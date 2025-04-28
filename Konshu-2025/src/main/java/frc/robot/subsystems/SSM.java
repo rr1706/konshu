@@ -65,7 +65,7 @@ public class SSM extends SubsystemBase {
     // below kArmLowDanger
     private void updateState(States state) {
 
-        // Special handling of L1_IN (arm inside of elevator).   Written in protest as both Sam and Emmerson
+        // Special handling of L1_IN (arm inside of elevator).   Written in protest as both Sam and Emerson
         // assured me we would never need to move the arm inside the elevator!  The code was so clean before this.
         if (state != m_setpoint) {                             // Check for state change
             if (state == States.L1_IN) {                         // If new state is L1_IN
