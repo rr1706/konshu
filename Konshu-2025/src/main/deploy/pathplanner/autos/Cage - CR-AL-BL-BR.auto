@@ -88,12 +88,6 @@
                       }
                     },
                     {
-                      "type": "wait",
-                      "data": {
-                        "waitTime": 0.1
-                      }
-                    },
-                    {
                       "type": "path",
                       "data": {
                         "pathName": "L4 AL"
@@ -164,12 +158,6 @@
                       }
                     },
                     {
-                      "type": "wait",
-                      "data": {
-                        "waitTime": 0.1
-                      }
-                    },
-                    {
                       "type": "path",
                       "data": {
                         "pathName": "L4 BL"
@@ -237,12 +225,6 @@
                       "type": "path",
                       "data": {
                         "pathName": "BL LS"
-                      }
-                    },
-                    {
-                      "type": "wait",
-                      "data": {
-                        "waitTime": 0.1
                       }
                     },
                     {

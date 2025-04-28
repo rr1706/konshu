@@ -33,7 +33,7 @@ public class IntakeFromFunnel extends Command {
       } else if (coralArm.startCoral()) {
         coralArm.runCoral(-0.15);            // First but not second - run slow
       } else {
-        coralArm.runCoral(-0.35);            // Neither - run fast
+        coralArm.runCoral(-0.28);            // Neither - run fast
       }
   }
 

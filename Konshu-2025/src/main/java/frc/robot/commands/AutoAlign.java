@@ -88,10 +88,15 @@ public class AutoAlign extends Command {
         m_state = SSM.States.LOADINGSTATION; // Default to here if trigger with no button pressed
         m_goForPID = true;
         if ((DriverStation.getStickButton(1, ButtonConstants.kL1Left)) &&
-            (DriverStation.getStickButton(1, ButtonConstants.kL1Right))) {
+                (DriverStation.getStickButton(1, ButtonConstants.kL1Right))) {
             m_state = SSM.States.L1_IN;
             m_goForPID = false;
             Robot.buttonLog.append("L1_IN");
+        } else if (DriverStation.getStickButton(2, ButtonConstants.kBarge)
+                && DriverStation.getStickButton(2, ButtonConstants.kProcessor)) {
+            m_state = SSM.States.TOSS;
+            m_goForPID = false;
+            Robot.buttonLog.append("Barge");
         } else if (DriverStation.getStickButton(1, ButtonConstants.kL1Left)) {
             m_state = SSM.States.L1;
             m_alignMode = ReefTargetCalculator.AlignMode.LEFT;
@@ -144,8 +149,10 @@ public class AutoAlign extends Command {
             m_goForPID = false; // No level button pressed - do nothing
 
         Pose2d currentPose = m_drivetrain.getState().Pose;
-        if (m_goForPID) m_pose = ReefTargetCalculator.calculateTargetTranslation(m_alignMode, currentPose);
-        if (m_pose == null) m_goForPID = false; // No reef button pressed – optionally mark the command as finished
+        if (m_goForPID)
+            m_pose = ReefTargetCalculator.calculateTargetTranslation(m_alignMode, currentPose);
+        if (m_pose == null)
+            m_goForPID = false; // No reef button pressed – optionally mark the command as finished
         SmartDashboard.putBoolean("goForPID", m_goForPID);
 
         if (m_goForPID) {
@@ -158,9 +165,10 @@ public class AutoAlign extends Command {
             if (m_alignMode == AlignMode.ALGAE) { // m_pose only has rotation populated
                 targetAngle = m_pose.getRotation().getRadians();
 
-                // Override the high/low algae buttons when in auto rotate so that the state is based on
+                // Override the high/low algae buttons when in auto rotate so that the state is
+                // based on
                 // which coral button is pressed - either algae button will enable
-                if (isAlgaeHigh(m_pose)) 
+                if (isAlgaeHigh(m_pose))
                     m_state = SSM.States.ALGAEHIGH;
                 else
                     m_state = SSM.States.ALGAELOW;
@@ -169,14 +177,16 @@ public class AutoAlign extends Command {
                 double[] target_array = { m_pose.getTranslation().getX(), m_pose.getTranslation().getY() };
                 SmartDashboard.putNumberArray("Target", target_array);
 
-                // If at L1, fix the rotation to the field at the selected coral angle plus/minus a fixed offset
+                // If at L1, fix the rotation to the field at the selected coral angle
+                // plus/minus a fixed offset
                 if (m_state == SSM.States.L1) {
                     if (m_alignMode == ReefTargetCalculator.AlignMode.LEFT) {
-                      targetAngle = m_pose.getRotation().plus(Rotation2d.fromDegrees(10.0)).getRadians();
+                        targetAngle = m_pose.getRotation().plus(Rotation2d.fromDegrees(10.0)).getRadians();
                     } else {
-                      targetAngle = m_pose.getRotation().minus(Rotation2d.fromDegrees(10.0)).getRadians();
+                        targetAngle = m_pose.getRotation().minus(Rotation2d.fromDegrees(10.0)).getRadians();
                     }
-                } else targetAngle = robotToGoal.getAngle().getRadians();
+                } else
+                    targetAngle = robotToGoal.getAngle().getRadians();
             }
 
             SmartDashboard.putString("Align Mode", m_alignMode.toString());
@@ -226,7 +236,7 @@ public class AutoAlign extends Command {
 
         // Set the state
 
-        if (m_state == SSM.States.BARGE && DriverStation.getStickAxis(0, 3)>= 0.25) {
+        if ((m_state == SSM.States.BARGE || m_state == SSM.States.TOSS) && DriverStation.getStickAxis(0, 3) >= 0.25) {
             armOffset = -30.0;
         }
         m_SSM.setState(m_state, armOffset, elevatorOffset);

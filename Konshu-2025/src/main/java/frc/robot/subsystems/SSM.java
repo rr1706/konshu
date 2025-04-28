@@ -14,7 +14,7 @@ public class SSM extends SubsystemBase {
     private static int m_slewMode = 0;
     private final BooleanSupplier m_hasCoral;
 
-    public enum States {DISABLED, L1, L1_IN, L1_INTERIM, L2, L3, L4, LOADINGSTATION, PROCESSOR, BARGE, GROUNDALGAE, ALGAELOW, ALGAEHIGH, Climb};
+    public enum States {DISABLED, L1, L1_IN, L1_INTERIM, L2, L3, L4, LOADINGSTATION, PROCESSOR, BARGE, GROUNDALGAE, ALGAELOW, ALGAEHIGH, Climb, TOSS};
     // Currently not using all these L1States, but left in case we later want to implement
     // Autoalign while in L1_IN.   This will require extenstions to use all these states AS WELL AS:
     //  1) Update AutoAlign for L1_IN to use PID and set rotation perpendicular to reef (similar to L1 without offset)
@@ -252,6 +252,7 @@ public class SSM extends SubsystemBase {
             case GROUNDALGAE -> ElevatorConstants.kElelvatorGroundAlgae;
             case ALGAEHIGH -> ElevatorConstants.kHighAlgeaGrab;
             case ALGAELOW -> ElevatorConstants.kLowAlgeaGrab;
+            case TOSS -> ElevatorConstants.kToss;
             default -> 0.0;
         };
     }
@@ -270,6 +271,7 @@ public class SSM extends SubsystemBase {
             case GROUNDALGAE -> ArmConstants.kArmGroundAlgae;
             case ALGAEHIGH -> ArmConstants.kArmAlgeaGrab;
             case ALGAELOW -> ArmConstants.kArmAlgeaGrab;
+            case TOSS -> ArmConstants.kToss;
             default -> 0.0;
         };
     }

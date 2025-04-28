@@ -3,39 +3,39 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 1.6403716216216213,
-        "y": 0.6750844594594594
+        "x": 3.6802254098360656,
+        "y": 5.097899590163934
       },
       "prevControl": null,
       "nextControl": {
-        "x": 2.5297297297297296,
-        "y": 1.0901182432432424
+        "x": 3.549,
+        "y": 5.3315
       },
       "isLocked": false,
-      "linkedName": "Loading Station"
+      "linkedName": null
     },
     {
       "anchor": {
-        "x": 5.324829545454545,
-        "y": 2.9131676136363636
+        "x": 3.8220000000000005,
+        "y": 5.204749999999999
       },
       "prevControl": {
-        "x": 5.395439189189189,
-        "y": 2.3648648648648645
+        "x": 3.722318472146388,
+        "y": 5.434017514063307
       },
       "nextControl": null,
       "isLocked": false,
-      "linkedName": "L4 I End"
+      "linkedName": null
     }
   ],
   "rotationTargets": [],
   "constraintZones": [
     {
       "name": "Constraints Zone",
-      "minWaypointRelativePos": 0.7954545454545479,
-      "maxWaypointRelativePos": 1.0,
+      "minWaypointRelativePos": 0,
+      "maxWaypointRelativePos": 0,
       "constraints": {
-        "maxVelocity": 3.8,
+        "maxVelocity": 4.0,
         "maxAcceleration": 2.5,
         "maxAngularVelocity": 540.0,
         "maxAngularAcceleration": 720.0,
@@ -44,48 +44,48 @@
       }
     }
   ],
-  "pointTowardsZones": [
-    {
-      "fieldPosition": {
-        "x": 4.8,
-        "y": 3.5
-      },
-      "rotationOffset": 0.0,
-      "minWaypointRelativePos": 0.3950216450216449,
-      "maxWaypointRelativePos": 1.0,
-      "name": "Point Towards Zone"
-    }
-  ],
+  "pointTowardsZones": [],
   "eventMarkers": [
     {
-      "name": "score_point",
-      "waypointRelativePos": 0.30194805194805235,
+      "name": "pick_up_algae",
+      "waypointRelativePos": 0.046638655462185104,
       "endWaypointRelativePos": null,
       "command": {
         "type": "named",
         "data": {
-          "name": "GoL4"
+          "name": "GoAlgaeLow"
+        }
+      }
+    },
+    {
+      "name": "pick_up_algae2",
+      "waypointRelativePos": 0.4966024915062238,
+      "endWaypointRelativePos": null,
+      "command": {
+        "type": "named",
+        "data": {
+          "name": "PickUpAlgae"
         }
       }
     }
   ],
   "globalConstraints": {
     "maxVelocity": 4.0,
-    "maxAcceleration": 3.9,
+    "maxAcceleration": 3.0,
     "maxAngularVelocity": 540.0,
     "maxAngularAcceleration": 720.0,
     "nominalVoltage": 12.0,
     "unlimited": false
   },
   "goalEndState": {
-    "velocity": 0,
-    "rotation": 119.99999999999999
+    "velocity": 0.5,
+    "rotation": -59.99999999999999
   },
   "reversed": false,
-  "folder": null,
+  "folder": "Algae Auto",
   "idealStartingState": {
     "velocity": 0,
-    "rotation": 54.0
+    "rotation": -59.99999999999999
   },
-  "useDefaultConstraints": true
+  "useDefaultConstraints": false
 }

@@ -11,7 +11,7 @@
               {
                 "type": "path",
                 "data": {
-                  "pathName": "Start L4 CR"
+                  "pathName": "Fast Start L4 CR"
                 }
               },
               {
@@ -46,7 +46,7 @@
                     {
                       "type": "named",
                       "data": {
-                        "name": "WaitForElevator"
+                        "name": "WaitForElevator2"
                       }
                     },
                     {
@@ -84,13 +84,13 @@
                     {
                       "type": "path",
                       "data": {
-                        "pathName": "CR LS"
+                        "pathName": "Fast CR LS"
                       }
                     },
                     {
                       "type": "path",
                       "data": {
-                        "pathName": "L4 BL"
+                        "pathName": "L4 BL Fast"
                       }
                     }
                   ]
@@ -116,7 +116,7 @@
                     {
                       "type": "named",
                       "data": {
-                        "name": "WaitForElevator"
+                        "name": "WaitForElevator2"
                       }
                     },
                     {
@@ -154,13 +154,13 @@
                     {
                       "type": "path",
                       "data": {
-                        "pathName": "BL LS"
+                        "pathName": "Fast BL LS"
                       }
                     },
                     {
                       "type": "path",
                       "data": {
-                        "pathName": "L4 BR"
+                        "pathName": "Fast L4 BR"
                       }
                     }
                   ]
@@ -186,7 +186,7 @@
                     {
                       "type": "named",
                       "data": {
-                        "name": "WaitForElevator"
+                        "name": "WaitForElevator2"
                       }
                     },
                     {
@@ -224,13 +224,13 @@
                     {
                       "type": "path",
                       "data": {
-                        "pathName": "BR LS"
+                        "pathName": "Fast BR LS"
                       }
                     },
                     {
                       "type": "path",
                       "data": {
-                        "pathName": "L4 AL"
+                        "pathName": "Fast L3 BR"
                       }
                     }
                   ]
@@ -246,7 +246,7 @@
               {
                 "type": "named",
                 "data": {
-                  "name": "AlignALL4"
+                  "name": "AlignBRL3"
                 }
               },
               {
@@ -256,7 +256,7 @@
                     {
                       "type": "named",
                       "data": {
-                        "name": "WaitForElevator"
+                        "name": "WaitForElevator2"
                       }
                     },
                     {
@@ -269,6 +269,37 @@
                 }
               }
             ]
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "Grab Algae Cage Side"
+          }
+        },
+        {
+          "type": "sequential",
+          "data": {
+            "commands": [
+              {
+                "type": "named",
+                "data": {
+                  "name": "WaitForElevator2"
+                }
+              },
+              {
+                "type": "wait",
+                "data": {
+                  "waitTime": 0.3
+                }
+              }
+            ]
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "Fast BL LS"
           }
         }
       ]

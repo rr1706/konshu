@@ -3,55 +3,61 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 3.1527663934426227,
-        "y": 4.2347848360655735
-      },
-      "prevControl": null,
-      "nextControl": {
-        "x": 2.301,
-        "y": 4.9415
-      },
-      "isLocked": false,
-      "linkedName": "AL End"
-    },
-    {
-      "anchor": {
         "x": 1.64,
         "y": 7.3768
       },
+      "prevControl": null,
+      "nextControl": {
+        "x": 2.167057069063799,
+        "y": 6.884812351832002
+      },
+      "isLocked": false,
+      "linkedName": "Path 2 LS 1"
+    },
+    {
+      "anchor": {
+        "x": 3.9799180327868857,
+        "y": 5.265727459016393
+      },
       "prevControl": {
-        "x": 2.262,
-        "y": 6.5795
+        "x": 3.8427425701505427,
+        "y": 5.4747319863609105
       },
       "nextControl": null,
       "isLocked": false,
-      "linkedName": "Path 2 LS 1"
+      "linkedName": "BL End"
     }
   ],
-  "rotationTargets": [
-    {
-      "waypointRelativePos": 0.6230031948881751,
-      "rotationDegrees": -54.0
-    }
-  ],
+  "rotationTargets": [],
   "constraintZones": [],
   "pointTowardsZones": [],
   "eventMarkers": [
     {
-      "name": "MT2",
-      "waypointRelativePos": 0.05134189031505425,
+      "name": "score_point",
+      "waypointRelativePos": 0.05134189031505179,
       "endWaypointRelativePos": null,
       "command": {
         "type": "named",
         "data": {
-          "name": "UseMT2"
+          "name": "GoL4"
+        }
+      }
+    },
+    {
+      "name": "Dont Use MT2",
+      "waypointRelativePos": 0.3033838973162226,
+      "endWaypointRelativePos": null,
+      "command": {
+        "type": "named",
+        "data": {
+          "name": "NoMT2"
         }
       }
     }
   ],
   "globalConstraints": {
     "maxVelocity": 4.0,
-    "maxAcceleration": 3.9,
+    "maxAcceleration": 5.0,
     "maxAngularVelocity": 540.0,
     "maxAngularAcceleration": 720.0,
     "nominalVoltage": 12.0,
@@ -59,13 +65,13 @@
   },
   "goalEndState": {
     "velocity": 0,
-    "rotation": -54.0
+    "rotation": -59.99999999999999
   },
   "reversed": false,
   "folder": null,
   "idealStartingState": {
     "velocity": 0,
-    "rotation": -2.54
+    "rotation": -54.0
   },
-  "useDefaultConstraints": true
+  "useDefaultConstraints": false
 }

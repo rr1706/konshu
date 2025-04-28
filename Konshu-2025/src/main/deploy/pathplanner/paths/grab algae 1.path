@@ -3,13 +3,13 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 5.8305,
-        "y": 3.9567499999999995
+        "x": 5.814036885245901,
+        "y": 3.8511782786885242
       },
       "prevControl": null,
       "nextControl": {
-        "x": 6.2740450819672136,
-        "y": 3.944762295081967
+        "x": 6.257581967213115,
+        "y": 3.839190573770492
       },
       "isLocked": false,
       "linkedName": "starting algae pathh"

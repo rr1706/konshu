@@ -93,7 +93,7 @@ public class AlignInAuto extends Command {
         double rotationOutput = rotPID.calculate(currentAngle, targetAngle);
         SmartDashboard.putNumber("Auto Rot Out", rotationOutput);
 
-        double velocityX = 0.2;
+        double velocityX = 0.0;
         double velocityY = 0.0;
 
         SwerveRequest request = baseRequest

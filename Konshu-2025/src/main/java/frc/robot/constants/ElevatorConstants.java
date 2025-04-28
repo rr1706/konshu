@@ -29,6 +29,8 @@ public class ElevatorConstants {
   public static final double kElevatorLoadingStation = 0.1;
   public static final double kElevatorProcessor = 5.7;
   public static final double kElevatorBarge = 69.61;
+  public static final double kToss = 24.0;
+ 
   public static final double kElelvatorGroundAlgae = 15.0;
   public static final double kLowAlgeaGrab = 19.5;
   public static final double kHighAlgeaGrab = kLowAlgeaGrab + 15.87;
@@ -46,8 +48,8 @@ public class ElevatorConstants {
   // above kArmHighDanger
   // KElevatorLowDanter - elevator must be higher than this to safely move arm
   // below kArmLowDanger
-  public static final double kElevatorHighDanger = 23.0 - 0.23;
-  public static final double kElevatorLowDanger = 4.2 - 0.23;
+  public static final double kElevatorHighDanger = 23.0;
+  public static final double kElevatorLowDanger = 4.2;
 
   public static class ElevatorCurrents {
     public static final double kElevatorNeutral = 1.0;
