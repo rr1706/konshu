@@ -91,9 +91,9 @@ public class RobotContainer {
         driverController.b().whileTrue(new Climb(m_climber));
 
         driverController.rightTrigger()
-                .onTrue(new ConditionalCommand(new WaitCommand(0.090).andThen(m_algaeArm.spitAlgae()),
+                .onTrue(new ConditionalCommand(new WaitCommand(0.110).andThen(m_algaeArm.spitAlgae()),
                         new ConditionalCommand(m_algaeArm.slowSpitAlgae(),
-                                new ConditionalCommand(new ConditionalCommand(m_coralArm.runCoralCmd(-0.35),m_coralArm.runCoralCmd(-0.225),()->{
+                                new ConditionalCommand(new ConditionalCommand(m_coralArm.runCoralCmd(-0.6),m_coralArm.runCoralCmd(-0.225),()->{
                                     return operatorcontoller2.button(2).getAsBoolean();
                                 }), m_coralArm.runCoralCmd(-0.36),
                                         () -> {

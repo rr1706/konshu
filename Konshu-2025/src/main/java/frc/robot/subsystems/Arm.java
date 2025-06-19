@@ -6,6 +6,7 @@ import com.ctre.phoenix6.configs.MotionMagicConfigs;
 import com.ctre.phoenix6.configs.MotorOutputConfigs;
 import com.ctre.phoenix6.configs.Slot0Configs;
 import com.ctre.phoenix6.configs.SoftwareLimitSwitchConfigs;
+import com.ctre.phoenix6.controls.DynamicMotionMagicVoltage;
 import com.ctre.phoenix6.controls.MotionMagicVoltage;
 import com.ctre.phoenix6.hardware.CANcoder;
 import com.ctre.phoenix6.hardware.TalonFX;
@@ -24,6 +25,7 @@ public class Arm extends SubsystemBase {
     private Slot0Configs m_Slot0Configs;
     private CANcoder m_cancoder = new CANcoder(11, "rio");
     private double m_setpoint = getPosition();
+    private boolean m_slowArm = false;
 
     public Arm() {
         m_armFX.getConfigurator().apply(new CurrentLimitsConfigs()
@@ -128,6 +130,7 @@ public class Arm extends SubsystemBase {
         SmartDashboard.putNumber("Arm Angle - degrees", getPosition());
         SmartDashboard.putNumber("Arm Stator Current", getCurrent());
         SmartDashboard.putNumber("Arm Set Point", m_setpoint);
+        SmartDashboard.putBoolean("Slow Arm", m_slowArm);
         
     }
 }

@@ -184,6 +184,13 @@ public class SSM extends SubsystemBase {
             return;
         }
 
+        // if(m_setpoint == States.BARGE){
+        //     m_arm.slowArm(true);
+        // }
+        // else{
+        //     m_arm.slowArm(false);
+        // }
+
 //        if (m_setpoint != m_queuedSetpoint)      // Now always reinit because added offsets
         if ((m_queuedSetpoint == States.L1) || (m_queuedSetpoint == States.L2) || 
             (m_queuedSetpoint == States.L3) || (m_queuedSetpoint == States.L4) ||

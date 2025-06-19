@@ -36,9 +36,9 @@ public class DriveCommands {
                     // double fb = forwardBack.getAsDouble();
                     // SmartDashboard.putNumber("fb", fb);
                     
-                    double transCurveAdjustment = adjustInputCurve(forwardBack.getAsDouble(), leftRight.getAsDouble(),0.7,0.3);
+                    double transCurveAdjustment = adjustInputCurve(forwardBack.getAsDouble(), leftRight.getAsDouble(),0.9,0.1);
                     SmartDashboard.putNumber("TransCurveAdj", transCurveAdjustment);
-                    double rotCurveAdjustment = adjustRotCurve(rotation.getAsDouble(), 0.7, 0.3);
+                    double rotCurveAdjustment = adjustRotCurve(rotation.getAsDouble(), 0.9, 0.1);
                     SmartDashboard.putNumber("RotCurveAdj", rotCurveAdjustment);
                     
                     return DRIVE_REQUEST

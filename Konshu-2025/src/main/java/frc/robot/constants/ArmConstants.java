@@ -5,7 +5,7 @@ public class ArmConstants {
   // so the PID parameters are in volts
   public static final double kArmP = 50.0; // Output per unit of error in position (volts/rotation)
   public static final double kArmI = 0.0; // Output per unit of integrated error in position (volts/(rotation*s))
-  public static final double kArmD = 5.0; // Output per unit of error in velocity (volts/rotation)
+  public static final double kArmD = 2.0; // Output per unit of error in velocity (volts/rotation)
   public static final double kArmG = -0.375; // Output to overcome gravity (volts) - modified by ArmCosine
   public static final double kArmS = 0.2; // Output to overcome static friction (volts)
   public static final double kArmV = 5.49; // Output per unit of target velocity (volts/rps)
@@ -13,6 +13,8 @@ public class ArmConstants {
 
   public static final double kArmCruiseVelocity = 1.0;
   public static final double kArmAcceleration = 5.5;
+  public static final double kSlowArmCruiseVelocity = 1.0;
+  public static final double kSlowArmAcceleration = 5.5;
   // public static final double kArmJerk = 0.4;
 
   public static final double kArmGearRatio = (50.0 / 8.0) * (48.0 / 20.0) * (48.0 / 14.0); // alpha was

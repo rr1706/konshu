@@ -1,3 +1,4 @@
+
 package frc.robot.constants;
 
 public class ElevatorConstants {
@@ -12,8 +13,8 @@ public class ElevatorConstants {
   public static final double kVElevator = .123; // Output per unit of target velocity (volts/rps)
   public static final double kAElevator = 0.001; // Output per unit of target accelleration (volts/rps/rps)
 
-  public static final double kUpAccelerationElevator = 300.0; // Was 400, changed with new elevator 4/3/2025
-  public static final double kUpVelocityElevator = 80.0; // Was 86, changed wth new elevator 4/3/2025
+  public static final double kUpAccelerationElevator = 250.0; // Was 400, changed with new elevator 4/3/2025
+  public static final double kUpVelocityElevator = 60.0; // Was 86, changed wth new elevator 4/3/2025
   public static final double kUpJerkElevator = 5000;
 
   public static final double kDownAccelerationElevator = 200.0;
@@ -28,7 +29,7 @@ public class ElevatorConstants {
   public static final double kElevatorL4 = 72.0;
   public static final double kElevatorLoadingStation = 0.1;
   public static final double kElevatorProcessor = 5.7;
-  public static final double kElevatorBarge = 69.61;
+  public static final double kElevatorBarge = 72.0;
   public static final double kToss = 24.0;
  
   public static final double kElelvatorGroundAlgae = 15.0;
