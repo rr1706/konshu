@@ -12,6 +12,7 @@ import edu.wpi.first.wpilibj2.command.WaitCommand;
 import edu.wpi.first.wpilibj2.command.WaitUntilCommand;
 import edu.wpi.first.wpilibj2.command.button.CommandGenericHID;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
+import edu.wpi.first.wpilibj2.command.button.Trigger;
 import frc.robot.constants.*;
 import frc.robot.commands.AlgaeIntakeCommand;
 import frc.robot.commands.AlgaeIntakeEndCommand;
@@ -44,9 +45,15 @@ public class RobotContainer {
     public final AlgaeArm m_algaeArm = new AlgaeArm();
     private final Elevator m_elevator = new Elevator();
     private final Arm m_arm = new Arm();
-    private final Funnel m_funnel = new Funnel();
 
     private final SSM m_SSM = new SSM(m_arm, m_elevator, m_coralArm::haveCoral);
+    private final Funnel m_funnel = new Funnel(m_coralArm::haveCoral, () -> {
+        if (m_SSM.getState() == SSM.States.LOADINGSTATION)
+            return true;
+        else
+            return false;
+    });
+
     public final CommandSwerveDrivetrain m_drivetrain;
     public final Climber m_climber = new Climber();
     public final AlgaeIntake m_AlgaeIntake = new AlgaeIntake();
@@ -56,7 +63,6 @@ public class RobotContainer {
     public RobotContainer() {
 
         m_drivetrain = TunerConstants.createDrivetrain();
-
         configureNamedCommands();
         autoChooser = AutoBuilder.buildAutoChooser("4 L4");
         SmartDashboard.putData("Auto Mode", autoChooser);
@@ -74,6 +80,8 @@ public class RobotContainer {
     }
 
     private void configureBindings() {
+        new Trigger(m_coralArm::haveCoral).onTrue(new InstantCommand(()->m_SSM.setState(States.L2)));
+
         driverController.start().onTrue(DriveCommands.resetFieldOrientation(m_drivetrain));
 
         driverController.leftBumper().whileTrue(new AlgaeIntakeCommand(m_algaeArm, m_AlgaeIntake, m_SSM))
@@ -93,9 +101,10 @@ public class RobotContainer {
         driverController.rightTrigger()
                 .onTrue(new ConditionalCommand(new WaitCommand(0.110).andThen(m_algaeArm.spitAlgae()),
                         new ConditionalCommand(m_algaeArm.slowSpitAlgae(),
-                                new ConditionalCommand(new ConditionalCommand(m_coralArm.runCoralCmd(-0.6),m_coralArm.runCoralCmd(-0.225),()->{
-                                    return operatorcontoller2.button(2).getAsBoolean();
-                                }), m_coralArm.runCoralCmd(-0.36),
+                                new ConditionalCommand(new ConditionalCommand(m_coralArm.runCoralCmd(-0.6),
+                                        m_coralArm.runCoralCmd(-0.225), () -> {
+                                            return operatorcontoller2.button(2).getAsBoolean();
+                                        }), m_coralArm.runCoralCmd(-0.36),
                                         () -> {
                                             return m_SSM.getState() == (SSM.States.L1_IN);
                                         }),
@@ -121,9 +130,9 @@ public class RobotContainer {
                 .onFalse(new InstantCommand(() -> m_SSM.setState(States.LOADINGSTATION)));
 
         operatorcontoller2.button(12).whileTrue(m_algaeArm.grabAlgae(0.8)
-            .alongWith(new InstantCommand(() -> m_SSM.ejectStuckAlgae())))
-            .onFalse(m_algaeArm.grabAlgae(0)
-            .alongWith(new InstantCommand(() -> m_SSM.setState(States.LOADINGSTATION))));
+                .alongWith(new InstantCommand(() -> m_SSM.ejectStuckAlgae())))
+                .onFalse(m_algaeArm.grabAlgae(0)
+                        .alongWith(new InstantCommand(() -> m_SSM.setState(States.LOADINGSTATION))));
 
         driverController.leftTrigger().whileTrue(new AutoAlign(
                 m_drivetrain,
@@ -154,7 +163,7 @@ public class RobotContainer {
                         .andThen(m_coralArm.runCoralCmd(-0.40).withTimeout(.2)));
         NamedCommands.registerCommand("GoL4",
                 new InstantCommand(() -> m_SSM.setState(States.L4)));
-                NamedCommands.registerCommand("GoL3",
+        NamedCommands.registerCommand("GoL3",
                 new InstantCommand(() -> m_SSM.setState(States.L3)));
         NamedCommands.registerCommand("GoL2",
                 new InstantCommand(() -> m_SSM.setState(States.L2)));
@@ -207,7 +216,6 @@ public class RobotContainer {
             }
         }, SSM.States.L4, m_SSM));
 
-        
         NamedCommands.registerCommand("AlignBRL3", new AlignInAuto(m_drivetrain, () -> {
             DriverStation.Alliance alliance = DriverStation.getAlliance().orElse(DriverStation.Alliance.Blue);
             if (alliance == DriverStation.Alliance.Blue) {
@@ -329,6 +337,7 @@ public class RobotContainer {
 
     public Command getTeleInitCommand() {
         return new InstantCommand(() -> m_climber.setPosition(ClimberConstants.kDeployPosition))
-                .andThen(m_drivetrain.useMT2(true));
+                .andThen(m_drivetrain.useMT2(true)).andThen(m_funnel.runFunnelIfReady(-0.25).asProxy()
+                        .alongWith(new IntakeFromFunnel(m_coralArm)).asProxy());
     }
 }

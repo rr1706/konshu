@@ -90,6 +90,7 @@ public class AutoAlign extends Command {
         if ((DriverStation.getStickButton(1, ButtonConstants.kL1Left)) &&
                 (DriverStation.getStickButton(1, ButtonConstants.kL1Right))) {
             m_state = SSM.States.L1_IN;
+            m_alignMode = ReefTargetCalculator.AlignMode.ALGAE;
             m_goForPID = false;
             Robot.buttonLog.append("L1_IN");
         } else if (DriverStation.getStickButton(2, ButtonConstants.kBarge)
@@ -172,7 +173,8 @@ public class AutoAlign extends Command {
                     m_state = SSM.States.ALGAEHIGH;
                 else
                     m_state = SSM.States.ALGAELOW;
-            } else {
+            }
+            else {
                 Translation2d robotToGoal = m_pose.getTranslation().minus(currentPose.getTranslation());
                 double[] target_array = { m_pose.getTranslation().getX(), m_pose.getTranslation().getY() };
                 SmartDashboard.putNumberArray("Target", target_array);
@@ -229,7 +231,7 @@ public class AutoAlign extends Command {
                 }
             }
         } else {
-            double rotCurveAdjustment = DriveCommands.adjustRotCurve(m_rotationSupplier.getAsDouble(), 0.7, 0.3);
+            double rotCurveAdjustment = DriveCommands.adjustRotCurve(m_rotationSupplier.getAsDouble(), 0.9, 0.1);
             rotationOutput = DriveCommands.m_slewRot.calculate(
                     -m_rotationSupplier.getAsDouble() * DriveConstants.MAX_ANGULAR_RATE * rotCurveAdjustment);
         }
@@ -241,6 +243,11 @@ public class AutoAlign extends Command {
         }
         m_SSM.setState(m_state, armOffset, elevatorOffset);
 
+        double speedAdj = dist-0.70+0.40;
+
+        if(speedAdj <= 0.25)speedAdj=0.2;
+        else if(speedAdj >=0.7)speedAdj=0.7;
+
         // Set the distance for LEDs
         if (dist <= 0.766)
             m_LED.setLEDScore(true);
@@ -249,11 +256,11 @@ public class AutoAlign extends Command {
 
         // Compute translation speeds from joystick inputs with a custom curve.
         double transAdjustment = adjustInputCurve(m_forwardBackSupplier.getAsDouble(),
-                m_leftRightSupplier.getAsDouble(), 0.7, 0.3);
+                m_leftRightSupplier.getAsDouble(), 0.9, 0.1);
         double velocityX = DriveCommands.m_slewX
-                .calculate(-m_forwardBackSupplier.getAsDouble() * DriveConstants.MAX_SPEED * .7 * transAdjustment);
+                .calculate(-m_forwardBackSupplier.getAsDouble() * DriveConstants.MAX_SPEED * speedAdj * transAdjustment);
         double velocityY = DriveCommands.m_slewY
-                .calculate(-m_leftRightSupplier.getAsDouble() * DriveConstants.MAX_SPEED * .7 * transAdjustment);
+                .calculate(-m_leftRightSupplier.getAsDouble() * DriveConstants.MAX_SPEED * speedAdj * transAdjustment);
 
         // Build and apply the CTRE swerve request.
         SwerveRequest request = baseRequest
