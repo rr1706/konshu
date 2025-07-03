@@ -31,9 +31,9 @@ public class IntakeFromFunnel extends Command {
       if (coralArm.haveCoral()) {
         coralArm.runCoral(0);         // Second detector - stop coral
       } else if (coralArm.startCoral()) {
-        coralArm.runCoral(-0.15);            // First but not second - run slow
+        coralArm.runCoral(-0.8);            // First but not second - run slow
       } else {
-        coralArm.runCoral(-0.28);            // Neither - run fast
+        coralArm.runCoral(-3.2);            // Neither - run fast
       }
   }
 

@@ -16,8 +16,8 @@ public class DriveCommands {
         .withDriveRequestType(DriveRequestType.Velocity);
 
     // These slew rates are updated via updateSlew in SSM.java based on the commanded state
-    public static SlewRateLimiter m_slewX = new SlewRateLimiter(12.0);
-    public static SlewRateLimiter m_slewY = new SlewRateLimiter(12.0);
+    public static SlewRateLimiter m_slewX = new SlewRateLimiter(13.0);
+    public static SlewRateLimiter m_slewY = new SlewRateLimiter(13.0);
     public static SlewRateLimiter m_slewRot = new SlewRateLimiter(36.0);
     
     public static void updateSlew(double x, double y, double r) {
@@ -36,9 +36,9 @@ public class DriveCommands {
                     // double fb = forwardBack.getAsDouble();
                     // SmartDashboard.putNumber("fb", fb);
                     
-                    double transCurveAdjustment = adjustInputCurve(forwardBack.getAsDouble(), leftRight.getAsDouble(),0.9,0.1);
+                    double transCurveAdjustment = adjustInputCurve(forwardBack.getAsDouble(), leftRight.getAsDouble(),0.8,0.2);
                     SmartDashboard.putNumber("TransCurveAdj", transCurveAdjustment);
-                    double rotCurveAdjustment = adjustRotCurve(rotation.getAsDouble(), 0.9, 0.1);
+                    double rotCurveAdjustment = adjustRotCurve(rotation.getAsDouble(), 0.8, 0.2);
                     SmartDashboard.putNumber("RotCurveAdj", rotCurveAdjustment);
                     
                     return DRIVE_REQUEST

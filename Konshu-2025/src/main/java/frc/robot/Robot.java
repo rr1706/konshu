@@ -16,8 +16,6 @@ import com.ctre.phoenix6.SignalLogger;
 // import au.grapplerobotics.CanBridge;
 import com.pathplanner.lib.commands.PathfindingCommand;
 
-import au.grapplerobotics.CanBridge;
-
 /**
  * The methods in this class are called automatically corresponding to each mode, as described in
  * the TimedRobot documentation. If you change the name of this class or the package after creating

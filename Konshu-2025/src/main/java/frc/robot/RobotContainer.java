@@ -80,7 +80,7 @@ public class RobotContainer {
     }
 
     private void configureBindings() {
-        new Trigger(m_coralArm::haveCoral).onTrue(new InstantCommand(()->m_SSM.setState(States.L2)));
+        //new Trigger(m_coralArm::haveCoral).onTrue(new InstantCommand(()->m_SSM.setState(States.L2)));
 
         driverController.start().onTrue(DriveCommands.resetFieldOrientation(m_drivetrain));
 
@@ -101,10 +101,10 @@ public class RobotContainer {
         driverController.rightTrigger()
                 .onTrue(new ConditionalCommand(new WaitCommand(0.110).andThen(m_algaeArm.spitAlgae()),
                         new ConditionalCommand(m_algaeArm.slowSpitAlgae(),
-                                new ConditionalCommand(new ConditionalCommand(m_coralArm.runCoralCmd(-0.6),
-                                        m_coralArm.runCoralCmd(-0.225), () -> {
+                                new ConditionalCommand(new ConditionalCommand(m_coralArm.runCoralCmd(-6.0),
+                                        m_coralArm.runCoralCmd(-2.25), () -> {
                                             return operatorcontoller2.button(2).getAsBoolean();
-                                        }), m_coralArm.runCoralCmd(-0.36),
+                                        }), m_coralArm.runCoralCmd(-3.6),
                                         () -> {
                                             return m_SSM.getState() == (SSM.States.L1_IN);
                                         }),
@@ -148,19 +148,19 @@ public class RobotContainer {
                 new InstantCommand(() -> m_climber.setPosition(ClimberConstants.kDeployPosition)));
         NamedCommands.registerCommand("ScoreL4",
                 (new WaitCommand(.6))
-                        .andThen(m_coralArm.runCoralCmd(-0.40).withTimeout(.2)));
+                        .andThen(m_coralArm.runCoralCmd(-4.0).withTimeout(.2)));
         NamedCommands.registerCommand("ScoreL4Fast",
                 (new WaitCommand(.17))
-                        .andThen(m_coralArm.runCoralCmd(-0.40).withTimeout(.2)));
+                        .andThen(m_coralArm.runCoralCmd(-4.0).withTimeout(.2)));
         NamedCommands.registerCommand("ScoreL4Faster",
                 (new WaitCommand(.07))
-                        .andThen(m_coralArm.runCoralCmd(-0.40).withTimeout(.2)));
+                        .andThen(m_coralArm.runCoralCmd(-4.0).withTimeout(.2)));
         NamedCommands.registerCommand("ScoreL4Final",
                 (new WaitCommand(.17))
-                        .andThen(m_coralArm.runCoralCmd(-0.40).withTimeout(.5)));
+                        .andThen(m_coralArm.runCoralCmd(-4.0).withTimeout(.5)));
         NamedCommands.registerCommand("ScoreL2Fast",
                 (new WaitCommand(.040))
-                        .andThen(m_coralArm.runCoralCmd(-0.40).withTimeout(.2)));
+                        .andThen(m_coralArm.runCoralCmd(-4.0).withTimeout(.2)));
         NamedCommands.registerCommand("GoL4",
                 new InstantCommand(() -> m_SSM.setState(States.L4)));
         NamedCommands.registerCommand("GoL3",
@@ -216,12 +216,12 @@ public class RobotContainer {
             }
         }, SSM.States.L4, m_SSM));
 
-        NamedCommands.registerCommand("AlignBRL3", new AlignInAuto(m_drivetrain, () -> {
+        NamedCommands.registerCommand("AlignBLL3", new AlignInAuto(m_drivetrain, () -> {
             DriverStation.Alliance alliance = DriverStation.getAlliance().orElse(DriverStation.Alliance.Blue);
             if (alliance == DriverStation.Alliance.Blue) {
-                return AutoAlignConstants.BlueAllianceConstants.kBR;
+                return AutoAlignConstants.BlueAllianceConstants.kBL;
             } else {
-                return AutoAlignConstants.RedAllianceConstants.kBR;
+                return AutoAlignConstants.RedAllianceConstants.kBL;
             }
         }, SSM.States.L3, m_SSM));
 

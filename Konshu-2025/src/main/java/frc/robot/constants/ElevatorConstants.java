@@ -5,20 +5,20 @@ public class ElevatorConstants {
 
   // We are using Motion Magic position control with voltage countrol output type,
   // so the PID parameters are in volts
-  public static final double kPElevator = 2.0; // Output per unit of error in position (volts/rotation)
+  public static final double kPElevator = 3.0; // Output per unit of error in position (volts/rotation)
   public static final double kIElevator = 0.0; // Output per unit of integrated error in position (volts/(rotation*s))
   public static final double kDElevator = 0.3; // Output per unit of error in velocity (volts/rotation)
   public static final double kGElevator = 0.38; // Output to overcome gravity (volts) - modified by ArmCosine
-  public static final double kSElevator = .01; // Output to overcome static friction (volts)
+  public static final double kSElevator = .1; // Output to overcome static friction (volts)
   public static final double kVElevator = .123; // Output per unit of target velocity (volts/rps)
   public static final double kAElevator = 0.001; // Output per unit of target accelleration (volts/rps/rps)
 
-  public static final double kUpAccelerationElevator = 250.0; // Was 400, changed with new elevator 4/3/2025
-  public static final double kUpVelocityElevator = 60.0; // Was 86, changed wth new elevator 4/3/2025
-  public static final double kUpJerkElevator = 5000;
+  public static final double kUpAccelerationElevator = 375.0; // Was 400, changed with new elevator 4/3/2025
+  public static final double kUpVelocityElevator = 75.0; // Was 86, changed wth new elevator 4/3/2025
+  public static final double kUpJerkElevator = 10000;
 
   public static final double kDownAccelerationElevator = 200.0;
-  public static final double kDownVelocityElevator = 50.0;
+  public static final double kDownVelocityElevator = 40.0;
   public static final double kDownJerkElevator = 5000;
 
   public static final double kElevatorL1 = 8.6; // These are in inches

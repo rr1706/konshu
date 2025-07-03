@@ -243,10 +243,7 @@ public class AutoAlign extends Command {
         }
         m_SSM.setState(m_state, armOffset, elevatorOffset);
 
-        double speedAdj = dist-0.70+0.40;
-
-        if(speedAdj <= 0.25)speedAdj=0.2;
-        else if(speedAdj >=0.7)speedAdj=0.7;
+        double speedAdj = 0.7;
 
         // Set the distance for LEDs
         if (dist <= 0.766)
