@@ -17,6 +17,7 @@ import frc.robot.constants.*;
 import frc.robot.commands.AlgaeIntakeCommand;
 import frc.robot.commands.AlgaeIntakeEndCommand;
 import frc.robot.commands.AlignInAuto;
+import frc.robot.commands.AlignInPath;
 import frc.robot.commands.AutoAlign;
 import frc.robot.commands.Climb;
 import frc.robot.commands.DriveCommands;
@@ -80,7 +81,8 @@ public class RobotContainer {
     }
 
     private void configureBindings() {
-        //new Trigger(m_coralArm::haveCoral).onTrue(new InstantCommand(()->m_SSM.setState(States.L2)));
+        // new Trigger(m_coralArm::haveCoral).onTrue(new
+        // InstantCommand(()->m_SSM.setState(States.L2)));
 
         driverController.start().onTrue(DriveCommands.resetFieldOrientation(m_drivetrain));
 
@@ -163,8 +165,18 @@ public class RobotContainer {
                         .andThen(m_coralArm.runCoralCmd(-4.0).withTimeout(.2)));
         NamedCommands.registerCommand("GoL4",
                 new InstantCommand(() -> m_SSM.setState(States.L4)));
-        NamedCommands.registerCommand("GoL3",
-                new InstantCommand(() -> m_SSM.setState(States.L3)));
+        // NamedCommands.registerCommand("GoL3",
+        // new InstantCommand(() -> m_SSM.setState(States.L3)));
+        
+        NamedCommands.registerCommand("GoL3", new AlignInPath(() -> m_drivetrain.getState().Pose, () -> {
+            DriverStation.Alliance alliance = DriverStation.getAlliance().orElse(DriverStation.Alliance.Blue);
+            if (alliance == DriverStation.Alliance.Blue) {
+                return AutoAlignConstants.BlueAllianceConstants.kBL;
+            } else {
+                return AutoAlignConstants.RedAllianceConstants.kBL;
+            }
+        }, SSM.States.L3, m_SSM));
+
         NamedCommands.registerCommand("GoL2",
                 new InstantCommand(() -> m_SSM.setState(States.L2)));
         NamedCommands.registerCommand("GoLoadingStationPOS",

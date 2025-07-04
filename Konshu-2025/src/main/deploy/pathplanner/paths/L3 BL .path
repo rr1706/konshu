@@ -29,17 +29,31 @@
     }
   ],
   "rotationTargets": [],
-  "constraintZones": [],
+  "constraintZones": [
+    {
+      "name": "Constraints Zone",
+      "minWaypointRelativePos": 0.8831870357866334,
+      "maxWaypointRelativePos": 1.0,
+      "constraints": {
+        "maxVelocity": 1.0,
+        "maxAcceleration": 3.4,
+        "maxAngularVelocity": 540.0,
+        "maxAngularAcceleration": 720.0,
+        "nominalVoltage": 12.0,
+        "unlimited": false
+      }
+    }
+  ],
   "pointTowardsZones": [],
   "eventMarkers": [
     {
-      "name": "score_point",
+      "name": "go l3",
       "waypointRelativePos": 0.05134189031505179,
       "endWaypointRelativePos": null,
       "command": {
         "type": "named",
         "data": {
-          "name": "GoL4"
+          "name": "GoL3"
         }
       }
     },
@@ -51,6 +65,17 @@
         "type": "named",
         "data": {
           "name": "NoMT2"
+        }
+      }
+    },
+    {
+      "name": "ScoreNow",
+      "waypointRelativePos": 0.904794058068873,
+      "endWaypointRelativePos": null,
+      "command": {
+        "type": "named",
+        "data": {
+          "name": "ScoreL4Faster"
         }
       }
     }
