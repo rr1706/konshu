@@ -2,6 +2,8 @@ package frc.robot.commands;
 
 import java.util.function.Supplier;
 
+import com.ctre.phoenix6.swerve.SwerveModule.DriveRequestType;
+import com.ctre.phoenix6.swerve.SwerveRequest;
 import com.pathplanner.lib.controllers.PPHolonomicDriveController;
 
 import edu.wpi.first.math.controller.PIDController;
@@ -10,21 +12,33 @@ import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.constants.AutoAlignConstants;
+import frc.robot.constants.DriveConstants;
+import frc.robot.subsystems.CommandSwerveDrivetrain;
 import frc.robot.subsystems.SSM;
 
 public class AlignToAngle extends Command {
         private final Supplier<Rotation2d> m_target;
-    private final Supplier<Pose2d> m_drivePose;
+    private final CommandSwerveDrivetrain m_drivetrain;
+    private final double m_xSpeed;
+    private final double m_ySpeed;
+
+        private final SwerveRequest.RobotCentric baseRequest = new SwerveRequest.RobotCentric()
+            .withDeadband(DriveConstants.MAX_SPEED * DriveConstants.DRIVE_DEADBAND)
+            .withRotationalDeadband(DriveConstants.MAX_ANGULAR_RATE * DriveConstants.ROTATION_DEADBAND)
+            .withDriveRequestType(DriveRequestType.Velocity);
 
     private final PIDController rotPID = new PIDController(
             10.0, 0.0, 0.3);
  
-    public AlignToAngle(Supplier<Pose2d> drivePose, Supplier<Rotation2d> target){
+    public AlignToAngle(CommandSwerveDrivetrain drivetrain, Supplier<Rotation2d> target, double xSpeed, double ySpeed){
         m_target = target;
-        m_drivePose = drivePose;
-
+        m_drivetrain = drivetrain;
+        m_xSpeed = xSpeed;
+        m_ySpeed = ySpeed;
         rotPID.enableContinuousInput(-Math.PI, Math.PI);
         rotPID.setTolerance(0.05);
+        addRequirements(m_drivetrain);
+
     }
     @Override
     public void initialize() {
@@ -34,7 +48,7 @@ public class AlignToAngle extends Command {
 
     @Override
     public void execute() {
-        Pose2d currentPose = m_drivePose.get();
+        Pose2d currentPose = m_drivetrain.getState().Pose;
         double currentAngle = currentPose.getRotation().getRadians();
 
         double targetAngle = m_target.get().getRadians();
@@ -42,13 +56,23 @@ public class AlignToAngle extends Command {
 
         double rotationOutput = rotPID.calculate(currentAngle, targetAngle);
 
-        PPHolonomicDriveController.overrideRotationFeedback(() ->
-        rotationOutput);
+        double velocityX = m_xSpeed;
+        double velocityY = m_ySpeed;
+
+        SwerveRequest request = baseRequest
+                .withVelocityX(velocityX)
+                .withVelocityY(velocityY)
+                .withRotationalRate(rotationOutput);
+        m_drivetrain.setControl(request);
 
     }
 
     @Override
     public void end(boolean interrupted) {
-        PPHolonomicDriveController.clearRotationFeedbackOverride();
-    }
+
+        SwerveRequest request = baseRequest
+                .withVelocityX(0.0)
+                .withVelocityY(0.0)
+                .withRotationalRate(0.0);
+        m_drivetrain.setControl(request);    }
 }

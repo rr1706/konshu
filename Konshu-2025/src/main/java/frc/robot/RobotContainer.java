@@ -225,14 +225,14 @@ public class RobotContainer {
         NamedCommands.registerCommand("GoAlgaeLow",
                 new InstantCommand(() -> m_SSM.setState(States.ALGAELOW)));
 
-        NamedCommands.registerCommand("GrabLastAlgae", new InstantCommand(()->m_SSM.setState(States.ALGAELOW)).andThen(new AlignToAngle(()->m_drivetrain.getState().Pose, () -> {
+        NamedCommands.registerCommand("GrabLastAlgae", new InstantCommand(()->m_SSM.setState(States.ALGAELOW)).andThen(new AlignToAngle(m_drivetrain,() -> {
             DriverStation.Alliance alliance = DriverStation.getAlliance().orElse(DriverStation.Alliance.Blue);
             if (alliance == DriverStation.Alliance.Blue) {
                 return AutoAlignConstants.BlueAllianceConstants.kBAlgea;
             } else {
                 return AutoAlignConstants.RedAllianceConstants.kBAlgea;
             }
-        })).withTimeout(1.0));
+        },0.25,-0.15)).alongWith(m_algaeArm.grabAlgae(0.8)).withTimeout(1.0));
 
         NamedCommands.registerCommand("WaitForElevator2",
                 new WaitUntilCommand(m_elevator::atSetpoint).withTimeout(0.5));

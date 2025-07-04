@@ -8,31 +8,31 @@
       },
       "prevControl": null,
       "nextControl": {
-        "x": 2.167057069063799,
-        "y": 6.884812351832002
+        "x": 1.8026114793264503,
+        "y": 7.026723570071815
       },
       "isLocked": false,
       "linkedName": "Path 2 LS 1"
     },
     {
       "anchor": {
-        "x": 3.848053278688525,
-        "y": 5.205788934426229
+        "x": 3.6802254098360656,
+        "y": 5.097899590163934
       },
       "prevControl": {
-        "x": 3.710877816052182,
-        "y": 5.4147934617707465
+        "x": 3.44047131147541,
+        "y": 5.625358606557377
       },
       "nextControl": null,
       "isLocked": false,
-      "linkedName": "L3 BL end"
+      "linkedName": "BR End"
     }
   ],
   "rotationTargets": [],
   "constraintZones": [
     {
       "name": "Constraints Zone",
-      "minWaypointRelativePos": 0.8831870357866334,
+      "minWaypointRelativePos": 0.8021607022282217,
       "maxWaypointRelativePos": 1.0,
       "constraints": {
         "maxVelocity": 4.5,
@@ -58,19 +58,19 @@
       }
     },
     {
-      "name": "go l3",
-      "waypointRelativePos": 0.05134189031505179,
+      "name": "score_point",
+      "waypointRelativePos": 0.05113636363636467,
       "endWaypointRelativePos": null,
       "command": {
         "type": "named",
         "data": {
-          "name": "GoL3"
+          "name": "GoL4"
         }
       }
     },
     {
       "name": "Dont Use MT2",
-      "waypointRelativePos": 0.3033838973162226,
+      "waypointRelativePos": 0.3952922077922082,
       "endWaypointRelativePos": null,
       "command": {
         "type": "named",
@@ -80,19 +80,19 @@
       }
     },
     {
-      "name": "Gol3BL",
-      "waypointRelativePos": 0.7994598244429446,
+      "name": "GoL4BR",
+      "waypointRelativePos": 0.7022282241728597,
       "endWaypointRelativePos": null,
       "command": {
         "type": "named",
         "data": {
-          "name": "GoL3BL"
+          "name": "GoL4BR"
         }
       }
     },
     {
-      "name": "ScoreNow",
-      "waypointRelativePos": 0.904794058068873,
+      "name": "Score",
+      "waypointRelativePos": 0.932,
       "endWaypointRelativePos": null,
       "command": {
         "type": "named",
@@ -112,7 +112,7 @@
   },
   "goalEndState": {
     "velocity": 0,
-    "rotation": -45.0
+    "rotation": -59.99999999999999
   },
   "reversed": false,
   "folder": null,

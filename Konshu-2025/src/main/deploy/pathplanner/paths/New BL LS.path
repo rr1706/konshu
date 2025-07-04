@@ -3,16 +3,16 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 4.998872950819672,
-        "y": 5.277715163934426
+        "x": 3.9799180327868857,
+        "y": 5.265727459016393
       },
       "prevControl": null,
       "nextControl": {
-        "x": 3.953642844460316,
-        "y": 6.106599971829956
+        "x": 3.63224320264144,
+        "y": 5.551026354533734
       },
       "isLocked": false,
-      "linkedName": "CR End"
+      "linkedName": "BL End"
     },
     {
       "anchor": {
@@ -20,26 +20,32 @@
         "y": 7.3768
       },
       "prevControl": {
-        "x": 1.8415934781258145,
-        "y": 7.198695902413402
+        "x": 1.8118574561874055,
+        "y": 7.1952372980130725
       },
       "nextControl": null,
       "isLocked": false,
       "linkedName": "Path 2 LS 1"
     }
   ],
-  "rotationTargets": [
-    {
-      "waypointRelativePos": 0.6230031948881751,
-      "rotationDegrees": -54.0
-    }
-  ],
+  "rotationTargets": [],
   "constraintZones": [],
   "pointTowardsZones": [],
   "eventMarkers": [
     {
+      "name": "Run Funnel",
+      "waypointRelativePos": 0,
+      "endWaypointRelativePos": null,
+      "command": {
+        "type": "named",
+        "data": {
+          "name": "Run Funnel"
+        }
+      }
+    },
+    {
       "name": "MT2",
-      "waypointRelativePos": 0.05134189031505425,
+      "waypointRelativePos": 0.051341890315050154,
       "endWaypointRelativePos": null,
       "command": {
         "type": "named",
@@ -50,8 +56,8 @@
     }
   ],
   "globalConstraints": {
-    "maxVelocity": 4.5,
-    "maxAcceleration": 3.5,
+    "maxVelocity": 4.0,
+    "maxAcceleration": 3.8,
     "maxAngularVelocity": 540.0,
     "maxAngularAcceleration": 720.0,
     "nominalVoltage": 12.0,
@@ -65,7 +71,7 @@
   "folder": null,
   "idealStartingState": {
     "velocity": 0,
-    "rotation": -119.99999999999999
+    "rotation": -59.99999999999999
   },
-  "useDefaultConstraints": true
+  "useDefaultConstraints": false
 }

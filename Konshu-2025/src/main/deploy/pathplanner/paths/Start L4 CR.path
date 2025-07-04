@@ -20,8 +20,8 @@
         "y": 5.277715163934426
       },
       "prevControl": {
-        "x": 5.238627049180328,
-        "y": 5.589395491803279
+        "x": 5.274590163934427,
+        "y": 5.529456967213114
       },
       "nextControl": null,
       "isLocked": false,
@@ -35,8 +35,8 @@
       "minWaypointRelativePos": 0.8048615800135063,
       "maxWaypointRelativePos": 1.0,
       "constraints": {
-        "maxVelocity": 0.75,
-        "maxAcceleration": 2.5,
+        "maxVelocity": 4.5,
+        "maxAcceleration": 1.5,
         "maxAngularVelocity": 540.0,
         "maxAngularAcceleration": 720.0,
         "nominalVoltage": 12.0,
@@ -59,7 +59,7 @@
     },
     {
       "name": "go l4",
-      "waypointRelativePos": 0.7022282241728601,
+      "waypointRelativePos": 0.599594868332212,
       "endWaypointRelativePos": null,
       "command": {
         "type": "named",
@@ -82,7 +82,7 @@
   ],
   "globalConstraints": {
     "maxVelocity": 4.5,
-    "maxAcceleration": 3.4,
+    "maxAcceleration": 3.5,
     "maxAngularVelocity": 540.0,
     "maxAngularAcceleration": 720.0,
     "nominalVoltage": 12.0,

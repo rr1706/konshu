@@ -65,57 +65,19 @@
           "data": {
             "commands": [
               {
-                "type": "named",
-                "data": {
-                  "name": "Run Funnel"
-                }
-              },
-              {
                 "type": "sequential",
                 "data": {
                   "commands": [
                     {
                       "type": "path",
                       "data": {
-                        "pathName": null
+                        "pathName": "New BL LS"
                       }
                     },
                     {
                       "type": "path",
                       "data": {
-                        "pathName": null
-                      }
-                    }
-                  ]
-                }
-              }
-            ]
-          }
-        },
-        {
-          "type": "race",
-          "data": {
-            "commands": [
-              {
-                "type": "named",
-                "data": {
-                  "name": "AlignBRL4"
-                }
-              },
-              {
-                "type": "sequential",
-                "data": {
-                  "commands": [
-                    {
-                      "type": "named",
-                      "data": {
-                        "name": "WaitForElevator"
-                      }
-                    },
-                    {
-                      "type": "named",
-                      "data": {
-                        "name": "ScoreL4Faster"
+                        "pathName": "New L4 BR"
                       }
                     }
                   ]
