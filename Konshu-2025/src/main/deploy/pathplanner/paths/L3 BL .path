@@ -47,6 +47,17 @@
   "pointTowardsZones": [],
   "eventMarkers": [
     {
+      "name": "Run Funnel",
+      "waypointRelativePos": 0,
+      "endWaypointRelativePos": null,
+      "command": {
+        "type": "named",
+        "data": {
+          "name": "Run Funnel"
+        }
+      }
+    },
+    {
       "name": "go l3",
       "waypointRelativePos": 0.05134189031505179,
       "endWaypointRelativePos": null,
@@ -69,20 +80,31 @@
       }
     },
     {
+      "name": "Gol3BL",
+      "waypointRelativePos": 0.7994598244429446,
+      "endWaypointRelativePos": null,
+      "command": {
+        "type": "named",
+        "data": {
+          "name": "GoL3BL"
+        }
+      }
+    },
+    {
       "name": "ScoreNow",
       "waypointRelativePos": 0.904794058068873,
       "endWaypointRelativePos": null,
       "command": {
         "type": "named",
         "data": {
-          "name": "ScoreL4Faster"
+          "name": "Score"
         }
       }
     }
   ],
   "globalConstraints": {
-    "maxVelocity": 4.0,
-    "maxAcceleration": 3.75,
+    "maxVelocity": 4.5,
+    "maxAcceleration": 3.4,
     "maxAngularVelocity": 540.0,
     "maxAngularAcceleration": 720.0,
     "nominalVoltage": 12.0,
@@ -98,5 +120,5 @@
     "velocity": 0,
     "rotation": -54.0
   },
-  "useDefaultConstraints": false
+  "useDefaultConstraints": true
 }

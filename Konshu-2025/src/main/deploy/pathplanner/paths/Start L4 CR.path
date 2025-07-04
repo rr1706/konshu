@@ -20,8 +20,8 @@
         "y": 5.277715163934426
       },
       "prevControl": {
-        "x": 5.224710517063088,
-        "y": 5.384941064132328
+        "x": 5.238627049180328,
+        "y": 5.589395491803279
       },
       "nextControl": null,
       "isLocked": false,
@@ -32,11 +32,11 @@
   "constraintZones": [
     {
       "name": "Constraints Zone",
-      "minWaypointRelativePos": 0.596703296703298,
+      "minWaypointRelativePos": 0.8048615800135063,
       "maxWaypointRelativePos": 1.0,
       "constraints": {
-        "maxVelocity": 4.0,
-        "maxAcceleration": 3.0,
+        "maxVelocity": 0.75,
+        "maxAcceleration": 2.5,
         "maxAngularVelocity": 540.0,
         "maxAngularAcceleration": 720.0,
         "nominalVoltage": 12.0,
@@ -47,8 +47,8 @@
   "pointTowardsZones": [],
   "eventMarkers": [
     {
-      "name": "score_point",
-      "waypointRelativePos": 0.0,
+      "name": "GoL4",
+      "waypointRelativePos": 0.048615800135041104,
       "endWaypointRelativePos": null,
       "command": {
         "type": "named",
@@ -56,10 +56,32 @@
           "name": "GoL4"
         }
       }
+    },
+    {
+      "name": "go l4",
+      "waypointRelativePos": 0.7022282241728601,
+      "endWaypointRelativePos": null,
+      "command": {
+        "type": "named",
+        "data": {
+          "name": "GoL4CR"
+        }
+      }
+    },
+    {
+      "name": "Score",
+      "waypointRelativePos": 0.9561107359891933,
+      "endWaypointRelativePos": null,
+      "command": {
+        "type": "named",
+        "data": {
+          "name": "Score"
+        }
+      }
     }
   ],
   "globalConstraints": {
-    "maxVelocity": 4.0,
+    "maxVelocity": 4.5,
     "maxAcceleration": 3.4,
     "maxAngularVelocity": 540.0,
     "maxAngularAcceleration": 720.0,

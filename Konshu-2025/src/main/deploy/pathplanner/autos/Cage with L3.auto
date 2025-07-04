@@ -9,12 +9,6 @@
           "data": {
             "commands": [
               {
-                "type": "path",
-                "data": {
-                  "pathName": "Start L4 CR"
-                }
-              },
-              {
                 "type": "named",
                 "data": {
                   "name": "MoveClimberOut"
@@ -25,37 +19,36 @@
                 "data": {
                   "name": "NoMT2"
                 }
+              },
+              {
+                "type": "path",
+                "data": {
+                  "pathName": "Start L4 CR"
+                }
               }
             ]
           }
         },
         {
-          "type": "race",
+          "type": "named",
+          "data": {
+            "name": "GoLoadingStationPOS"
+          }
+        },
+        {
+          "type": "sequential",
           "data": {
             "commands": [
               {
-                "type": "named",
+                "type": "path",
                 "data": {
-                  "name": "AlignCRL4"
+                  "pathName": "New CR LS"
                 }
               },
               {
-                "type": "sequential",
+                "type": "path",
                 "data": {
-                  "commands": [
-                    {
-                      "type": "named",
-                      "data": {
-                        "name": "WaitForElevator"
-                      }
-                    },
-                    {
-                      "type": "named",
-                      "data": {
-                        "name": "ScoreL4Faster"
-                      }
-                    }
-                  ]
+                  "pathName": "New L4 BL"
                 }
               }
             ]
@@ -84,83 +77,13 @@
                     {
                       "type": "path",
                       "data": {
-                        "pathName": "CR LS"
+                        "pathName": null
                       }
                     },
                     {
                       "type": "path",
                       "data": {
-                        "pathName": "L4 BL"
-                      }
-                    }
-                  ]
-                }
-              }
-            ]
-          }
-        },
-        {
-          "type": "race",
-          "data": {
-            "commands": [
-              {
-                "type": "named",
-                "data": {
-                  "name": "AlignBLL4"
-                }
-              },
-              {
-                "type": "sequential",
-                "data": {
-                  "commands": [
-                    {
-                      "type": "named",
-                      "data": {
-                        "name": "WaitForElevator"
-                      }
-                    },
-                    {
-                      "type": "named",
-                      "data": {
-                        "name": "ScoreL4Faster"
-                      }
-                    }
-                  ]
-                }
-              }
-            ]
-          }
-        },
-        {
-          "type": "named",
-          "data": {
-            "name": "GoLoadingStationPOS"
-          }
-        },
-        {
-          "type": "race",
-          "data": {
-            "commands": [
-              {
-                "type": "named",
-                "data": {
-                  "name": "Run Funnel"
-                }
-              },
-              {
-                "type": "sequential",
-                "data": {
-                  "commands": [
-                    {
-                      "type": "path",
-                      "data": {
-                        "pathName": "BL LS"
-                      }
-                    },
-                    {
-                      "type": "path",
-                      "data": {
-                        "pathName": "L4 BR"
+                        "pathName": null
                       }
                     }
                   ]
@@ -212,19 +135,13 @@
           "data": {
             "commands": [
               {
-                "type": "named",
-                "data": {
-                  "name": "Run Funnel"
-                }
-              },
-              {
                 "type": "sequential",
                 "data": {
                   "commands": [
                     {
                       "type": "path",
                       "data": {
-                        "pathName": "BR LS"
+                        "pathName": "New BR LS"
                       }
                     },
                     {
@@ -240,35 +157,9 @@
           }
         },
         {
-          "type": "race",
+          "type": "named",
           "data": {
-            "commands": [
-              {
-                "type": "named",
-                "data": {
-                  "name": "AlignBLL3"
-                }
-              },
-              {
-                "type": "sequential",
-                "data": {
-                  "commands": [
-                    {
-                      "type": "named",
-                      "data": {
-                        "name": "WaitForElevator"
-                      }
-                    },
-                    {
-                      "type": "named",
-                      "data": {
-                        "name": "ScoreL4Faster"
-                      }
-                    }
-                  ]
-                }
-              }
-            ]
+            "name": "GrabLastAlgae"
           }
         }
       ]

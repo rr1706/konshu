@@ -20,8 +20,8 @@
         "y": 5.265727459016393
       },
       "prevControl": {
-        "x": 3.8427425701505427,
-        "y": 5.4747319863609105
+        "x": 3.812090163934426,
+        "y": 5.589395491803279
       },
       "nextControl": null,
       "isLocked": false,
@@ -36,7 +36,7 @@
       "maxWaypointRelativePos": 1.0,
       "constraints": {
         "maxVelocity": 0.75,
-        "maxAcceleration": 2.5,
+        "maxAcceleration": 2.0,
         "maxAngularVelocity": 540.0,
         "maxAngularAcceleration": 720.0,
         "nominalVoltage": 12.0,
@@ -46,6 +46,17 @@
   ],
   "pointTowardsZones": [],
   "eventMarkers": [
+    {
+      "name": "Run Funnel",
+      "waypointRelativePos": 0,
+      "endWaypointRelativePos": null,
+      "command": {
+        "type": "named",
+        "data": {
+          "name": "Run Funnel"
+        }
+      }
+    },
     {
       "name": "score_point",
       "waypointRelativePos": 0.05134189031505179,
@@ -65,6 +76,28 @@
         "type": "named",
         "data": {
           "name": "NoMT2"
+        }
+      }
+    },
+    {
+      "name": "GoL4BL",
+      "waypointRelativePos": 0.6968264686022985,
+      "endWaypointRelativePos": null,
+      "command": {
+        "type": "named",
+        "data": {
+          "name": "GoL4BL"
+        }
+      }
+    },
+    {
+      "name": "Score",
+      "waypointRelativePos": 0.9020931802835946,
+      "endWaypointRelativePos": null,
+      "command": {
+        "type": "named",
+        "data": {
+          "name": "Score"
         }
       }
     }
