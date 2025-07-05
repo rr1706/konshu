@@ -164,9 +164,9 @@ public class RobotContainer {
                 (new WaitCommand(.040))
                         .andThen(m_coralArm.runCoralCmd(-4.0).withTimeout(.2)));
         NamedCommands.registerCommand("GoL4",
-                new InstantCommand(() -> m_SSM.setState(States.L4)));
+                new InstantCommand(() -> m_SSM.setState(States.L4,-8.5,3.0)));
         NamedCommands.registerCommand("GoL3",
-        new InstantCommand(() -> m_SSM.setState(States.L3)));
+                new InstantCommand(() -> m_SSM.setState(States.L3,0.0,9.5)));
 
         NamedCommands.registerCommand("GoL3BL", new AlignInPath(() -> m_drivetrain.getState().Pose, () -> {
             DriverStation.Alliance alliance = DriverStation.getAlliance().orElse(DriverStation.Alliance.Blue);
@@ -174,6 +174,15 @@ public class RobotContainer {
                 return AutoAlignConstants.BlueAllianceConstants.kBL;
             } else {
                 return AutoAlignConstants.RedAllianceConstants.kBL;
+            }
+        }, SSM.States.L3, m_SSM));
+
+        NamedCommands.registerCommand("GoL3BR", new AlignInPath(() -> m_drivetrain.getState().Pose, () -> {
+            DriverStation.Alliance alliance = DriverStation.getAlliance().orElse(DriverStation.Alliance.Blue);
+            if (alliance == DriverStation.Alliance.Blue) {
+                return AutoAlignConstants.BlueAllianceConstants.kBR;
+            } else {
+                return AutoAlignConstants.RedAllianceConstants.kBR;
             }
         }, SSM.States.L3, m_SSM));
 
@@ -218,6 +227,7 @@ public class RobotContainer {
                 new InstantCommand(() -> m_SSM.setState(States.L2)));
         NamedCommands.registerCommand("GoLoadingStationPOS",
                 new InstantCommand(() -> m_SSM.setState(States.LOADINGSTATION)));
+
         NamedCommands.registerCommand("UseMT2", m_drivetrain.useMT2(true));
         NamedCommands.registerCommand("NoMT2", m_drivetrain.useMT2(false));
         NamedCommands.registerCommand("Run Funnel",
@@ -234,32 +244,33 @@ public class RobotContainer {
         NamedCommands.registerCommand("GoAlgaeLow",
                 new InstantCommand(() -> m_SSM.setState(States.ALGAELOW)));
 
-        NamedCommands.registerCommand("GrabBAlgae", new InstantCommand(()->m_SSM.setState(States.ALGAELOW)).andThen(new AlignToAngle(m_drivetrain,() -> {
-            DriverStation.Alliance alliance = DriverStation.getAlliance().orElse(DriverStation.Alliance.Blue);
-            if (alliance == DriverStation.Alliance.Blue) {
-                return AutoAlignConstants.BlueAllianceConstants.kBAlgea;
-            } else {
-                return AutoAlignConstants.RedAllianceConstants.kBAlgea;
-            }
-        },0.25,-0.15)).alongWith(m_algaeArm.grabAlgae(0.8)).withTimeout(1.0));
+        NamedCommands.registerCommand("GrabBAlgae",
+                new InstantCommand(() -> m_SSM.setState(States.ALGAELOW)).andThen(new AlignToAngle(m_drivetrain, () -> {
+                    DriverStation.Alliance alliance = DriverStation.getAlliance().orElse(DriverStation.Alliance.Blue);
+                    if (alliance == DriverStation.Alliance.Blue) {
+                        return AutoAlignConstants.BlueAllianceConstants.kBAlgea;
+                    } else {
+                        return AutoAlignConstants.RedAllianceConstants.kBAlgea;
+                    }
+                }, 0.3, -0.15)).alongWith(m_algaeArm.grabAlgae(1.0)).until(() -> m_algaeArm.haveAlgae()));
 
-        NamedCommands.registerCommand("GrabAAlgae", new InstantCommand(()->m_SSM.setState(States.ALGAELOW)).andThen(new AlignToAngle(m_drivetrain,() -> {
-            DriverStation.Alliance alliance = DriverStation.getAlliance().orElse(DriverStation.Alliance.Blue);
-            if (alliance == DriverStation.Alliance.Blue) {
-                return AutoAlignConstants.BlueAllianceConstants.kAAlgea;
-            } else {
-                return AutoAlignConstants.RedAllianceConstants.kAAlgea;
-            }
-        },0.25,-0.15)).alongWith(m_algaeArm.grabAlgae(0.8)).withTimeout(1.0));
+        NamedCommands.registerCommand("GrabAAlgae",
+                new InstantCommand(() -> m_SSM.setState(States.ALGAELOW)).andThen(new AlignToAngle(m_drivetrain, () -> {
+                    DriverStation.Alliance alliance = DriverStation.getAlliance().orElse(DriverStation.Alliance.Blue);
+                    if (alliance == DriverStation.Alliance.Blue) {
+                        return AutoAlignConstants.BlueAllianceConstants.kAAlgea;
+                    } else {
+                        return AutoAlignConstants.RedAllianceConstants.kAAlgea;
+                    }
+                }, 0.25, -0.15)).alongWith(m_algaeArm.grabAlgae(0.8)).withTimeout(1.0));
 
         NamedCommands.registerCommand("WaitForElevator2",
                 new WaitUntilCommand(m_elevator::atSetpoint).withTimeout(0.5));
         NamedCommands.registerCommand("WaitForElevator",
                 new WaitUntilCommand(m_elevator::atSetpoint).alongWith(new WaitCommand(0.100)).withTimeout(0.5));
 
-        NamedCommands.registerCommand("ScorePerp", new InstantCommand(()->m_coralArm.runCoral(-4.0),m_coralArm));
+        NamedCommands.registerCommand("ScorePerp", new InstantCommand(() -> m_coralArm.runCoral(-4.0), m_coralArm));
         NamedCommands.registerCommand("Score", m_coralArm.runCoralCmd(-4.0).withTimeout(.2));
-
 
         NamedCommands.registerCommand("AlignCRL4", new AlignInAuto(m_drivetrain, () -> {
             DriverStation.Alliance alliance = DriverStation.getAlliance().orElse(DriverStation.Alliance.Blue);

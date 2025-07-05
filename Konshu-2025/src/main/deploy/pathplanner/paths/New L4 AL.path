@@ -4,24 +4,24 @@
     {
       "anchor": {
         "x": 1.64,
-        "y": 7.3768
+        "y": 7.377
       },
       "prevControl": null,
       "nextControl": {
-        "x": 2.78342451397996,
-        "y": 5.343220119784739
+        "x": 2.6372950819672134,
+        "y": 4.894108606557377
       },
       "isLocked": false,
       "linkedName": "Path 2 LS 1"
     },
     {
       "anchor": {
-        "x": 3.1527663934426227,
-        "y": 4.210809426229508
+        "x": 3.1887295081967215,
+        "y": 4.222797131147541
       },
       "prevControl": {
-        "x": 2.948975409836066,
-        "y": 4.3666495901639335
+        "x": 2.604049180327869,
+        "y": 4.221118852459016
       },
       "nextControl": null,
       "isLocked": false,
@@ -32,12 +32,12 @@
   "constraintZones": [
     {
       "name": "Constraints Zone",
-      "minWaypointRelativePos": 0.49426063470628323,
+      "minWaypointRelativePos": 0.4019851116625356,
       "maxWaypointRelativePos": 1.0,
       "constraints": {
         "maxVelocity": 4.0,
         "maxAcceleration": 1.0,
-        "maxAngularVelocity": 540.0,
+        "maxAngularVelocity": 360.0,
         "maxAngularAcceleration": 360.0,
         "nominalVoltage": 12.0,
         "unlimited": false
@@ -51,7 +51,7 @@
         "y": 4.190186
       },
       "rotationOffset": 0.0,
-      "minWaypointRelativePos": 0.25,
+      "minWaypointRelativePos": 0.5023632680621202,
       "maxWaypointRelativePos": 1.0,
       "name": "Point Towards Zone"
     }
@@ -92,7 +92,7 @@
     },
     {
       "name": "GoL4AL",
-      "waypointRelativePos": 0.8021607022282147,
+      "waypointRelativePos": 0.6049966239027785,
       "endWaypointRelativePos": null,
       "command": {
         "type": "named",
@@ -103,7 +103,7 @@
     },
     {
       "name": "Score",
-      "waypointRelativePos": 0.9501424501424496,
+      "waypointRelativePos": 0.9291019581363952,
       "endWaypointRelativePos": null,
       "command": {
         "type": "named",
@@ -114,8 +114,8 @@
     }
   ],
   "globalConstraints": {
-    "maxVelocity": 4.5,
-    "maxAcceleration": 3.5,
+    "maxVelocity": 4.0,
+    "maxAcceleration": 3.6,
     "maxAngularVelocity": 540.0,
     "maxAngularAcceleration": 720.0,
     "nominalVoltage": 12.0,

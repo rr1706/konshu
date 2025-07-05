@@ -30,12 +30,6 @@
           }
         },
         {
-          "type": "named",
-          "data": {
-            "name": "GoLoadingStationPOS"
-          }
-        },
-        {
           "type": "sequential",
           "data": {
             "commands": [
@@ -55,12 +49,6 @@
           }
         },
         {
-          "type": "named",
-          "data": {
-            "name": "GoLoadingStationPOS"
-          }
-        },
-        {
           "type": "race",
           "data": {
             "commands": [
@@ -77,19 +65,13 @@
                     {
                       "type": "path",
                       "data": {
-                        "pathName": "New L4 BR"
+                        "pathName": "New L3 BR"
                       }
                     }
                   ]
                 }
               }
             ]
-          }
-        },
-        {
-          "type": "named",
-          "data": {
-            "name": "GoLoadingStationPOS"
           }
         },
         {
@@ -109,7 +91,7 @@
                     {
                       "type": "path",
                       "data": {
-                        "pathName": "L3 BL "
+                        "pathName": "New L3 BL "
                       }
                     }
                   ]
@@ -122,6 +104,12 @@
           "type": "named",
           "data": {
             "name": "GrabBAlgae"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "BACKUP FAST"
           }
         }
       ]

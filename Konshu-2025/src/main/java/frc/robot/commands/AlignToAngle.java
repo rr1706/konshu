@@ -28,7 +28,7 @@ public class AlignToAngle extends Command {
             .withDriveRequestType(DriveRequestType.Velocity);
 
     private final PIDController rotPID = new PIDController(
-            10.0, 0.0, 0.3);
+        10.0, 0.0, 0.2);
  
     public AlignToAngle(CommandSwerveDrivetrain drivetrain, Supplier<Rotation2d> target, double xSpeed, double ySpeed){
         m_target = target;

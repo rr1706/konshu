@@ -3,13 +3,13 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 3.1527663934426227,
-        "y": 4.210809426229508
+        "x": 3.1887295081967215,
+        "y": 4.222797131147541
       },
       "prevControl": null,
       "nextControl": {
-        "x": 2.301,
-        "y": 4.917524590163934
+        "x": 2.336963114754099,
+        "y": 4.929512295081967
       },
       "isLocked": false,
       "linkedName": "AL End"
@@ -17,11 +17,11 @@
     {
       "anchor": {
         "x": 1.64,
-        "y": 7.3768
+        "y": 7.377
       },
       "prevControl": {
-        "x": 2.262,
-        "y": 6.5795
+        "x": 2.2620000000000005,
+        "y": 6.5797
       },
       "nextControl": null,
       "isLocked": false,
@@ -50,8 +50,8 @@
     }
   ],
   "globalConstraints": {
-    "maxVelocity": 4.5,
-    "maxAcceleration": 3.5,
+    "maxVelocity": 4.0,
+    "maxAcceleration": 3.6,
     "maxAngularVelocity": 540.0,
     "maxAngularAcceleration": 720.0,
     "nominalVoltage": 12.0,

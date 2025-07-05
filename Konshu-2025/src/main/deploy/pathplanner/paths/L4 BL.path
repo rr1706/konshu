@@ -4,24 +4,24 @@
     {
       "anchor": {
         "x": 1.64,
-        "y": 7.3768
+        "y": 7.377
       },
       "prevControl": null,
       "nextControl": {
         "x": 2.167057069063799,
-        "y": 6.884812351832002
+        "y": 6.885012351832001
       },
       "isLocked": false,
       "linkedName": "Path 2 LS 1"
     },
     {
       "anchor": {
-        "x": 3.9799180327868857,
-        "y": 5.265727459016393
+        "x": 3.9389999999999996,
+        "y": 5.22425
       },
       "prevControl": {
-        "x": 3.8427425701505427,
-        "y": 5.4747319863609105
+        "x": 3.8018245373636566,
+        "y": 5.433254527344517
       },
       "nextControl": null,
       "isLocked": false,
@@ -70,8 +70,8 @@
     }
   ],
   "globalConstraints": {
-    "maxVelocity": 4.5,
-    "maxAcceleration": 3.5,
+    "maxVelocity": 4.0,
+    "maxAcceleration": 3.6,
     "maxAngularVelocity": 540.0,
     "maxAngularAcceleration": 720.0,
     "nominalVoltage": 12.0,

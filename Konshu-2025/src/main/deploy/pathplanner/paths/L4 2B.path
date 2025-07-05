@@ -4,12 +4,12 @@
     {
       "anchor": {
         "x": 1.64,
-        "y": 7.3768
+        "y": 7.377
       },
       "prevControl": null,
       "nextControl": {
         "x": 2.1680448650639788,
-        "y": 6.750348040802551
+        "y": 6.750548040802551
       },
       "isLocked": false,
       "linkedName": "Path 2 LS 1"

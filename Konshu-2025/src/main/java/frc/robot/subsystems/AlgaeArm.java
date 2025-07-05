@@ -52,7 +52,7 @@ public class AlgaeArm extends SubsystemBase {
         }
 
         public boolean haveAlgae() {
-            return (getAlgaeRollerStatorCurrent() > 35);
+            return (getAlgaeRollerStatorCurrent() > 30);
         }
 
         @Override
