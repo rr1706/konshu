@@ -63,12 +63,6 @@ public class AlgaeArm extends SubsystemBase {
             SmartDashboard.putNumber("Algae Temp", m_AlgaeFX.getAncillaryDeviceTemp().getValueAsDouble());
             
         }
-
-        // public boolean haveAlgae() {
-        //     Debouncer m_debouncer = new Debouncer(0.1, Debouncer.DebounceType.kRising);
-        //     if (m_debouncer.calculate(getAlgaeRollerStatorCurrent() > 35)) return true;
-        //     return false;
-        // }
     }
 
 

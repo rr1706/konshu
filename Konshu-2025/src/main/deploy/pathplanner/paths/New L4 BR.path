@@ -32,7 +32,7 @@
   "constraintZones": [
     {
       "name": "Constraints Zone",
-      "minWaypointRelativePos": 0.8021607022282217,
+      "minWaypointRelativePos": 0.6994301994302028,
       "maxWaypointRelativePos": 1.0,
       "constraints": {
         "maxVelocity": 4.5,
@@ -92,12 +92,12 @@
     },
     {
       "name": "Score",
-      "waypointRelativePos": 0.932,
+      "waypointRelativePos": 0.9539411206077866,
       "endWaypointRelativePos": null,
       "command": {
         "type": "named",
         "data": {
-          "name": "Score"
+          "name": "ScorePerp"
         }
       }
     }

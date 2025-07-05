@@ -3,39 +3,39 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 7.079829545454547,
-        "y": 6.1158
+        "x": 1.64,
+        "y": 7.3768
       },
       "prevControl": null,
       "nextControl": {
-        "x": 5.358504098360656,
-        "y": 5.529456967213114
+        "x": 2.9489754098360654,
+        "y": 4.522489754098359
       },
       "isLocked": false,
-      "linkedName": null
+      "linkedName": "Path 2 LS 1"
     },
     {
       "anchor": {
-        "x": 4.998872950819672,
-        "y": 5.277715163934426
+        "x": 3.1527663934426227,
+        "y": 4.2347848360655735
       },
       "prevControl": {
-        "x": 5.214651639344262,
-        "y": 5.613370901639343
+        "x": 2.565368852459016,
+        "y": 4.198821721311475
       },
       "nextControl": null,
       "isLocked": false,
-      "linkedName": "CR End"
+      "linkedName": "AL End"
     }
   ],
   "rotationTargets": [],
   "constraintZones": [
     {
       "name": "Constraints Zone",
-      "minWaypointRelativePos": 0.6956315289648667,
+      "minWaypointRelativePos": 0.7032288698955391,
       "maxWaypointRelativePos": 1.0,
       "constraints": {
-        "maxVelocity": 4.0,
+        "maxVelocity": 4.5,
         "maxAcceleration": 1.5,
         "maxAngularVelocity": 540.0,
         "maxAngularAcceleration": 720.0,
@@ -47,8 +47,19 @@
   "pointTowardsZones": [],
   "eventMarkers": [
     {
-      "name": "GoL4",
-      "waypointRelativePos": 0.048615800135041104,
+      "name": "Run Funnel",
+      "waypointRelativePos": 0,
+      "endWaypointRelativePos": null,
+      "command": {
+        "type": "named",
+        "data": {
+          "name": "Run Funnel"
+        }
+      }
+    },
+    {
+      "name": "score_point",
+      "waypointRelativePos": 0.054383116883116894,
       "endWaypointRelativePos": null,
       "command": {
         "type": "named",
@@ -58,19 +69,30 @@
       }
     },
     {
-      "name": "go l4",
-      "waypointRelativePos": 0.599594868332212,
+      "name": "Dont Use MT2",
+      "waypointRelativePos": 0.39529220779220964,
       "endWaypointRelativePos": null,
       "command": {
         "type": "named",
         "data": {
-          "name": "GoL4CR"
+          "name": "NoMT2"
+        }
+      }
+    },
+    {
+      "name": "GoL4AL",
+      "waypointRelativePos": 0.6044634377967713,
+      "endWaypointRelativePos": null,
+      "command": {
+        "type": "named",
+        "data": {
+          "name": "GoL4AL"
         }
       }
     },
     {
       "name": "Score",
-      "waypointRelativePos": 0.9520417853751192,
+      "waypointRelativePos": 0.9501424501424496,
       "endWaypointRelativePos": null,
       "command": {
         "type": "named",
@@ -90,13 +112,13 @@
   },
   "goalEndState": {
     "velocity": 0,
-    "rotation": -119.99999999999999
+    "rotation": -2.54
   },
   "reversed": false,
   "folder": null,
   "idealStartingState": {
-    "velocity": 0.0,
-    "rotation": -135.0
+    "velocity": 0,
+    "rotation": -54.0
   },
   "useDefaultConstraints": true
 }

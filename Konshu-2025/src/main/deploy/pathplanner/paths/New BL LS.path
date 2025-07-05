@@ -33,13 +33,13 @@
   "pointTowardsZones": [],
   "eventMarkers": [
     {
-      "name": "Run Funnel",
-      "waypointRelativePos": 0,
+      "name": "Load",
+      "waypointRelativePos": 0.04985754985754849,
       "endWaypointRelativePos": null,
       "command": {
         "type": "named",
         "data": {
-          "name": "Run Funnel"
+          "name": "GoLoadingStationPOS"
         }
       }
     },
@@ -51,6 +51,17 @@
         "type": "named",
         "data": {
           "name": "UseMT2"
+        }
+      }
+    },
+    {
+      "name": "Run Funnel",
+      "waypointRelativePos": 0.49999999999999506,
+      "endWaypointRelativePos": null,
+      "command": {
+        "type": "named",
+        "data": {
+          "name": "Run Funnel"
         }
       }
     }

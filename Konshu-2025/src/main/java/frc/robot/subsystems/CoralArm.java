@@ -6,9 +6,6 @@ import com.ctre.phoenix6.configs.MotorOutputConfigs;
 import com.ctre.phoenix6.hardware.TalonFXS;
 import com.ctre.phoenix6.signals.InvertedValue;
 import com.ctre.phoenix6.signals.MotorArrangementValue;
-import com.thethriftybot.ThriftyNova;
-import com.thethriftybot.ThriftyNova.CurrentType;
-import com.thethriftybot.ThriftyNova.MotorType;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
@@ -16,7 +13,6 @@ import au.grapplerobotics.LaserCan;
 import au.grapplerobotics.ConfigurationFailedException;
 
 public class CoralArm extends SubsystemBase {
-    // private ThriftyNova m_Nova;
     private final TalonFXS m_motor;
     private LaserCan lc1;
     private LaserCan lc2;
@@ -96,12 +92,6 @@ public class CoralArm extends SubsystemBase {
 
     // @Override
     public void periodic() {
-
-        // Call getMeasurement2 only once (in periodic) since it is an expensive call
-        // and
-        // haveCoral is called multiple times per frame (SSM, LED, and
-        // IntakeFromFunnel);
-        // whereas getMeasurement1 is only called once (IntakeFromFunnel command)
         m_haveCoral = getMeasurement2() < 40;
     }
 }

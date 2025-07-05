@@ -32,10 +32,10 @@
   "constraintZones": [
     {
       "name": "Constraints Zone",
-      "minWaypointRelativePos": 0.804861580013506,
+      "minWaypointRelativePos": 0.6994301994302037,
       "maxWaypointRelativePos": 1.0,
       "constraints": {
-        "maxVelocity": 4.5,
+        "maxVelocity": 4.0,
         "maxAcceleration": 1.5,
         "maxAngularVelocity": 540.0,
         "maxAngularAcceleration": 720.0,
@@ -81,7 +81,7 @@
     },
     {
       "name": "GoL4BL",
-      "waypointRelativePos": 0.6968264686022985,
+      "waypointRelativePos": 0.5987654320987671,
       "endWaypointRelativePos": null,
       "command": {
         "type": "named",
@@ -92,12 +92,12 @@
     },
     {
       "name": "Score",
-      "waypointRelativePos": 0.9020931802835946,
+      "waypointRelativePos": 0.9520417853751163,
       "endWaypointRelativePos": null,
       "command": {
         "type": "named",
         "data": {
-          "name": "Score"
+          "name": "ScorePerp"
         }
       }
     }

@@ -12,7 +12,6 @@ import edu.wpi.first.wpilibj2.command.WaitCommand;
 import edu.wpi.first.wpilibj2.command.WaitUntilCommand;
 import edu.wpi.first.wpilibj2.command.button.CommandGenericHID;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
-import edu.wpi.first.wpilibj2.command.button.Trigger;
 import frc.robot.constants.*;
 import frc.robot.commands.AlgaeIntakeCommand;
 import frc.robot.commands.AlgaeIntakeEndCommand;
@@ -205,6 +204,15 @@ public class RobotContainer {
             }
         }, SSM.States.L4, m_SSM));
 
+        NamedCommands.registerCommand("GoL4AL", new AlignInPath(() -> m_drivetrain.getState().Pose, () -> {
+            DriverStation.Alliance alliance = DriverStation.getAlliance().orElse(DriverStation.Alliance.Blue);
+            if (alliance == DriverStation.Alliance.Blue) {
+                return AutoAlignConstants.BlueAllianceConstants.kAL;
+            } else {
+                return AutoAlignConstants.RedAllianceConstants.kAL;
+            }
+        }, SSM.States.L4, m_SSM));
+
         NamedCommands.registerCommand("GoL2",
                 new InstantCommand(() -> m_SSM.setState(States.L2)));
         NamedCommands.registerCommand("GoLoadingStationPOS",
@@ -239,7 +247,7 @@ public class RobotContainer {
         NamedCommands.registerCommand("WaitForElevator",
                 new WaitUntilCommand(m_elevator::atSetpoint).alongWith(new WaitCommand(0.100)).withTimeout(0.5));
 
-        NamedCommands.registerCommand("ScoreByProxy", m_coralArm.runCoralCmd(-4.0).withTimeout(.2).asProxy());
+        NamedCommands.registerCommand("ScorePerp", new InstantCommand(()->m_coralArm.runCoral(-4.0)));
         NamedCommands.registerCommand("Score", m_coralArm.runCoralCmd(-4.0).withTimeout(.2));
 
 
