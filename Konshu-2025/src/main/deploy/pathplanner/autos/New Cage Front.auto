@@ -99,12 +99,6 @@
               }
             ]
           }
-        },
-        {
-          "type": "named",
-          "data": {
-            "name": "GrabLastAlgae"
-          }
         }
       ]
     }

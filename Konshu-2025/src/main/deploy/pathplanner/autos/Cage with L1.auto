@@ -109,19 +109,13 @@
                     {
                       "type": "path",
                       "data": {
-                        "pathName": "L3 BL "
+                        "pathName": "L1 BL "
                       }
                     }
                   ]
                 }
               }
             ]
-          }
-        },
-        {
-          "type": "named",
-          "data": {
-            "name": "GrabBAlgae"
           }
         }
       ]

@@ -212,7 +212,8 @@ public class RobotContainer {
                 return AutoAlignConstants.RedAllianceConstants.kAL;
             }
         }, SSM.States.L4, m_SSM));
-
+        NamedCommands.registerCommand("GoL1",
+                new InstantCommand(() -> m_SSM.setState(States.L1)));
         NamedCommands.registerCommand("GoL2",
                 new InstantCommand(() -> m_SSM.setState(States.L2)));
         NamedCommands.registerCommand("GoLoadingStationPOS",
@@ -233,7 +234,7 @@ public class RobotContainer {
         NamedCommands.registerCommand("GoAlgaeLow",
                 new InstantCommand(() -> m_SSM.setState(States.ALGAELOW)));
 
-        NamedCommands.registerCommand("GrabLastAlgae", new InstantCommand(()->m_SSM.setState(States.ALGAELOW)).andThen(new AlignToAngle(m_drivetrain,() -> {
+        NamedCommands.registerCommand("GrabBAlgae", new InstantCommand(()->m_SSM.setState(States.ALGAELOW)).andThen(new AlignToAngle(m_drivetrain,() -> {
             DriverStation.Alliance alliance = DriverStation.getAlliance().orElse(DriverStation.Alliance.Blue);
             if (alliance == DriverStation.Alliance.Blue) {
                 return AutoAlignConstants.BlueAllianceConstants.kBAlgea;
@@ -242,12 +243,21 @@ public class RobotContainer {
             }
         },0.25,-0.15)).alongWith(m_algaeArm.grabAlgae(0.8)).withTimeout(1.0));
 
+        NamedCommands.registerCommand("GrabAAlgae", new InstantCommand(()->m_SSM.setState(States.ALGAELOW)).andThen(new AlignToAngle(m_drivetrain,() -> {
+            DriverStation.Alliance alliance = DriverStation.getAlliance().orElse(DriverStation.Alliance.Blue);
+            if (alliance == DriverStation.Alliance.Blue) {
+                return AutoAlignConstants.BlueAllianceConstants.kAAlgea;
+            } else {
+                return AutoAlignConstants.RedAllianceConstants.kAAlgea;
+            }
+        },0.25,-0.15)).alongWith(m_algaeArm.grabAlgae(0.8)).withTimeout(1.0));
+
         NamedCommands.registerCommand("WaitForElevator2",
                 new WaitUntilCommand(m_elevator::atSetpoint).withTimeout(0.5));
         NamedCommands.registerCommand("WaitForElevator",
                 new WaitUntilCommand(m_elevator::atSetpoint).alongWith(new WaitCommand(0.100)).withTimeout(0.5));
 
-        NamedCommands.registerCommand("ScorePerp", new InstantCommand(()->m_coralArm.runCoral(-4.0)));
+        NamedCommands.registerCommand("ScorePerp", new InstantCommand(()->m_coralArm.runCoral(-4.0),m_coralArm));
         NamedCommands.registerCommand("Score", m_coralArm.runCoralCmd(-4.0).withTimeout(.2));
 
 

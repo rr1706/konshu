@@ -32,19 +32,30 @@
   "constraintZones": [
     {
       "name": "Constraints Zone",
-      "minWaypointRelativePos": 0.8831870357866334,
+      "minWaypointRelativePos": 0.6995273463875857,
       "maxWaypointRelativePos": 1.0,
       "constraints": {
         "maxVelocity": 4.5,
         "maxAcceleration": 1.5,
         "maxAngularVelocity": 540.0,
-        "maxAngularAcceleration": 720.0,
+        "maxAngularAcceleration": 360.0,
         "nominalVoltage": 12.0,
         "unlimited": false
       }
     }
   ],
-  "pointTowardsZones": [],
+  "pointTowardsZones": [
+    {
+      "fieldPosition": {
+        "x": 4.2412575,
+        "y": 4.784181
+      },
+      "rotationOffset": 0.0,
+      "minWaypointRelativePos": 0.4915597569210028,
+      "maxWaypointRelativePos": 1.0,
+      "name": "Point Towards Zone"
+    }
+  ],
   "eventMarkers": [
     {
       "name": "Run Funnel",
@@ -81,7 +92,7 @@
     },
     {
       "name": "Gol3BL",
-      "waypointRelativePos": 0.7994598244429446,
+      "waypointRelativePos": 0.6968264686023016,
       "endWaypointRelativePos": null,
       "command": {
         "type": "named",
@@ -92,7 +103,7 @@
     },
     {
       "name": "ScoreNow",
-      "waypointRelativePos": 0.904794058068873,
+      "waypointRelativePos": 0.8966914247130329,
       "endWaypointRelativePos": null,
       "command": {
         "type": "named",
