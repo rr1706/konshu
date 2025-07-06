@@ -8,57 +8,59 @@
       },
       "prevControl": null,
       "nextControl": {
-        "x": 6.318,
-        "y": 5.685
+        "x": 7.06875,
+        "y": 5.489999999999999
       },
       "isLocked": false,
       "linkedName": "barge shot 2"
     },
     {
       "anchor": {
-        "x": 9.95475,
-        "y": 5.7995
+        "x": 8.8,
+        "y": 5.64
       },
       "prevControl": {
-        "x": 9.243,
-        "y": 5.71175
+        "x": 7.800000000000001,
+        "y": 5.64
+      },
+      "nextControl": {
+        "x": 9.8,
+        "y": 5.64
+      },
+      "isLocked": false,
+      "linkedName": null
+    },
+    {
+      "anchor": {
+        "x": 11.7585,
+        "y": 4.0259
+      },
+      "prevControl": {
+        "x": 11.544,
+        "y": 4.2209
       },
       "nextControl": null,
       "isLocked": false,
-      "linkedName": null
+      "linkedName": "StealD"
     }
   ],
   "rotationTargets": [
     {
-      "waypointRelativePos": 0.5,
+      "waypointRelativePos": 1.0373443983402466,
       "rotationDegrees": 0.0
     }
   ],
-  "constraintZones": [
-    {
-      "name": "Constraints Zone",
-      "minWaypointRelativePos": 0,
-      "maxWaypointRelativePos": 0.58,
-      "constraints": {
-        "maxVelocity": 0.42,
-        "maxAcceleration": 2.0,
-        "maxAngularVelocity": 540.0,
-        "maxAngularAcceleration": 720.0,
-        "nominalVoltage": 12.0,
-        "unlimited": false
-      }
-    }
-  ],
+  "constraintZones": [],
   "pointTowardsZones": [],
   "eventMarkers": [
     {
       "name": "down",
-      "waypointRelativePos": 0,
+      "waypointRelativePos": 0.0,
       "endWaypointRelativePos": null,
       "command": {
         "type": "named",
         "data": {
-          "name": "GoLoadingStationPOS"
+          "name": "GoAlgaeLow"
         }
       }
     }
@@ -72,7 +74,7 @@
     "unlimited": false
   },
   "goalEndState": {
-    "velocity": 4.0,
+    "velocity": 0.0,
     "rotation": 0.0
   },
   "reversed": false,

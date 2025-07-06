@@ -1,0 +1,109 @@
+{
+  "version": "2025.0",
+  "command": {
+    "type": "sequential",
+    "data": {
+      "commands": [
+        {
+          "type": "parallel",
+          "data": {
+            "commands": [
+              {
+                "type": "named",
+                "data": {
+                  "name": "MoveClimberOut"
+                }
+              },
+              {
+                "type": "named",
+                "data": {
+                  "name": "NoMT2"
+                }
+              },
+              {
+                "type": "path",
+                "data": {
+                  "pathName": "New Start L4 CR"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "type": "sequential",
+          "data": {
+            "commands": [
+              {
+                "type": "path",
+                "data": {
+                  "pathName": "New CR LS"
+                }
+              },
+              {
+                "type": "path",
+                "data": {
+                  "pathName": "New L4 BL"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "type": "race",
+          "data": {
+            "commands": [
+              {
+                "type": "sequential",
+                "data": {
+                  "commands": [
+                    {
+                      "type": "path",
+                      "data": {
+                        "pathName": "New BL LS"
+                      }
+                    },
+                    {
+                      "type": "path",
+                      "data": {
+                        "pathName": "New L4 BR"
+                      }
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        },
+        {
+          "type": "race",
+          "data": {
+            "commands": [
+              {
+                "type": "sequential",
+                "data": {
+                  "commands": [
+                    {
+                      "type": "path",
+                      "data": {
+                        "pathName": "New BR LS"
+                      }
+                    },
+                    {
+                      "type": "path",
+                      "data": {
+                        "pathName": "New L4 AL"
+                      }
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        }
+      ]
+    }
+  },
+  "resetOdom": true,
+  "folder": null,
+  "choreoAuto": false
+}

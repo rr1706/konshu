@@ -3,45 +3,40 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 7.95,
-        "y": 4.5
+        "x": 5.76608606557377,
+        "y": 4.012214368670529
       },
       "prevControl": null,
       "nextControl": {
-        "x": 6.318,
-        "y": 5.685
+        "x": 6.291991974667049,
+        "y": 3.921936395281362
       },
       "isLocked": false,
-      "linkedName": "barge shot 2"
+      "linkedName": "pick up algae 1"
     },
     {
       "anchor": {
-        "x": 9.95475,
-        "y": 5.7995
+        "x": 7.95,
+        "y": 4.5
       },
       "prevControl": {
-        "x": 9.243,
-        "y": 5.71175
+        "x": 7.780849201335635,
+        "y": 4.31591304415791
       },
       "nextControl": null,
       "isLocked": false,
-      "linkedName": null
+      "linkedName": "barge shot 1"
     }
   ],
-  "rotationTargets": [
-    {
-      "waypointRelativePos": 0.5,
-      "rotationDegrees": 0.0
-    }
-  ],
+  "rotationTargets": [],
   "constraintZones": [
     {
       "name": "Constraints Zone",
-      "minWaypointRelativePos": 0,
-      "maxWaypointRelativePos": 0.58,
+      "minWaypointRelativePos": 0.6456834532374066,
+      "maxWaypointRelativePos": 1.0,
       "constraints": {
-        "maxVelocity": 0.42,
-        "maxAcceleration": 2.0,
+        "maxVelocity": 1.0,
+        "maxAcceleration": 3.5,
         "maxAngularVelocity": 540.0,
         "maxAngularAcceleration": 720.0,
         "nominalVoltage": 12.0,
@@ -52,13 +47,24 @@
   "pointTowardsZones": [],
   "eventMarkers": [
     {
-      "name": "down",
-      "waypointRelativePos": 0,
+      "name": "barge_shot",
+      "waypointRelativePos": 0.05287769784172962,
       "endWaypointRelativePos": null,
       "command": {
         "type": "named",
         "data": {
-          "name": "GoLoadingStationPOS"
+          "name": "GoBarge"
+        }
+      }
+    },
+    {
+      "name": "flick",
+      "waypointRelativePos": 0.8500000000000038,
+      "endWaypointRelativePos": null,
+      "command": {
+        "type": "named",
+        "data": {
+          "name": "ThrowAlgae"
         }
       }
     }
@@ -72,14 +78,14 @@
     "unlimited": false
   },
   "goalEndState": {
-    "velocity": 4.0,
-    "rotation": 0.0
+    "velocity": 0,
+    "rotation": -125.00000000000001
   },
   "reversed": false,
   "folder": "Algae Auto",
   "idealStartingState": {
     "velocity": 0,
-    "rotation": -125.00000000000001
+    "rotation": 180.0
   },
   "useDefaultConstraints": false
 }

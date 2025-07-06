@@ -1,0 +1,121 @@
+{
+  "version": "2025.0",
+  "command": {
+    "type": "sequential",
+    "data": {
+      "commands": [
+        {
+          "type": "parallel",
+          "data": {
+            "commands": [
+              {
+                "type": "named",
+                "data": {
+                  "name": "MoveClimberOut"
+                }
+              },
+              {
+                "type": "named",
+                "data": {
+                  "name": "NoMT2"
+                }
+              },
+              {
+                "type": "path",
+                "data": {
+                  "pathName": "New Start L4 EL"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "type": "sequential",
+          "data": {
+            "commands": [
+              {
+                "type": "path",
+                "data": {
+                  "pathName": "New EL LS"
+                }
+              },
+              {
+                "type": "path",
+                "data": {
+                  "pathName": "New L4 FR"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "type": "race",
+          "data": {
+            "commands": [
+              {
+                "type": "sequential",
+                "data": {
+                  "commands": [
+                    {
+                      "type": "path",
+                      "data": {
+                        "pathName": "New FR LS"
+                      }
+                    },
+                    {
+                      "type": "path",
+                      "data": {
+                        "pathName": "New L3 FL"
+                      }
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        },
+        {
+          "type": "race",
+          "data": {
+            "commands": [
+              {
+                "type": "sequential",
+                "data": {
+                  "commands": [
+                    {
+                      "type": "path",
+                      "data": {
+                        "pathName": "New FL LS"
+                      }
+                    },
+                    {
+                      "type": "path",
+                      "data": {
+                        "pathName": "New L3 FR"
+                      }
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "GrabFAlgae"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "Backup Processor"
+          }
+        }
+      ]
+    }
+  },
+  "resetOdom": true,
+  "folder": null,
+  "choreoAuto": false
+}

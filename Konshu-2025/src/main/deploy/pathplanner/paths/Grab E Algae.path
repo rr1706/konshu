@@ -8,40 +8,35 @@
       },
       "prevControl": null,
       "nextControl": {
-        "x": 6.318,
-        "y": 5.685
+        "x": 7.734118852459015,
+        "y": 4.248258196721312
       },
       "isLocked": false,
-      "linkedName": "barge shot 2"
+      "linkedName": "barge shot 1"
     },
     {
       "anchor": {
-        "x": 9.95475,
-        "y": 5.7995
+        "x": 5.148,
+        "y": 2.90375
       },
       "prevControl": {
-        "x": 9.243,
-        "y": 5.71175
+        "x": 5.8575122950819685,
+        "y": 1.8503504098360644
       },
       "nextControl": null,
       "isLocked": false,
-      "linkedName": null
+      "linkedName": "aglae shot 2"
     }
   ],
-  "rotationTargets": [
-    {
-      "waypointRelativePos": 0.5,
-      "rotationDegrees": 0.0
-    }
-  ],
+  "rotationTargets": [],
   "constraintZones": [
     {
       "name": "Constraints Zone",
       "minWaypointRelativePos": 0,
-      "maxWaypointRelativePos": 0.58,
+      "maxWaypointRelativePos": 0,
       "constraints": {
-        "maxVelocity": 0.42,
-        "maxAcceleration": 2.0,
+        "maxVelocity": 4.0,
+        "maxAcceleration": 3.0,
         "maxAngularVelocity": 540.0,
         "maxAngularAcceleration": 720.0,
         "nominalVoltage": 12.0,
@@ -52,13 +47,24 @@
   "pointTowardsZones": [],
   "eventMarkers": [
     {
-      "name": "down",
-      "waypointRelativePos": 0,
+      "name": "pick_up_algae",
+      "waypointRelativePos": 0.05336134453781958,
       "endWaypointRelativePos": null,
       "command": {
         "type": "named",
         "data": {
-          "name": "GoLoadingStationPOS"
+          "name": "GoAlgaeHigh"
+        }
+      }
+    },
+    {
+      "name": "pick_up_algae2",
+      "waypointRelativePos": 0.7521582733812852,
+      "endWaypointRelativePos": null,
+      "command": {
+        "type": "named",
+        "data": {
+          "name": "PickUpAlgae"
         }
       }
     }
@@ -72,8 +78,8 @@
     "unlimited": false
   },
   "goalEndState": {
-    "velocity": 4.0,
-    "rotation": 0.0
+    "velocity": 0.2,
+    "rotation": 119.99999999999999
   },
   "reversed": false,
   "folder": "Algae Auto",

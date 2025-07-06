@@ -1,0 +1,88 @@
+{
+  "version": "2025.0",
+  "waypoints": [
+    {
+      "anchor": {
+        "x": 3.9389999999999996,
+        "y": 2.8278
+      },
+      "prevControl": null,
+      "nextControl": {
+        "x": 3.591325169854554,
+        "y": 2.5425011044826586
+      },
+      "isLocked": false,
+      "linkedName": "FR End"
+    },
+    {
+      "anchor": {
+        "x": 1.64,
+        "y": 0.6748
+      },
+      "prevControl": {
+        "x": 1.811857456187405,
+        "y": 0.8563627019869278
+      },
+      "nextControl": null,
+      "isLocked": false,
+      "linkedName": "Proc LS"
+    }
+  ],
+  "rotationTargets": [],
+  "constraintZones": [],
+  "pointTowardsZones": [],
+  "eventMarkers": [
+    {
+      "name": "Load",
+      "waypointRelativePos": 0.04985754985754849,
+      "endWaypointRelativePos": null,
+      "command": {
+        "type": "named",
+        "data": {
+          "name": "GoLoadingStationPOS"
+        }
+      }
+    },
+    {
+      "name": "MT2",
+      "waypointRelativePos": 0.051341890315050154,
+      "endWaypointRelativePos": null,
+      "command": {
+        "type": "named",
+        "data": {
+          "name": "UseMT2"
+        }
+      }
+    },
+    {
+      "name": "Run Funnel",
+      "waypointRelativePos": 0.49999999999999506,
+      "endWaypointRelativePos": null,
+      "command": {
+        "type": "named",
+        "data": {
+          "name": "Run Funnel"
+        }
+      }
+    }
+  ],
+  "globalConstraints": {
+    "maxVelocity": 4.0,
+    "maxAcceleration": 3.7,
+    "maxAngularVelocity": 540.0,
+    "maxAngularAcceleration": 720.0,
+    "nominalVoltage": 12.0,
+    "unlimited": false
+  },
+  "goalEndState": {
+    "velocity": 0,
+    "rotation": 54.0
+  },
+  "reversed": false,
+  "folder": null,
+  "idealStartingState": {
+    "velocity": 0,
+    "rotation": 59.99999999999999
+  },
+  "useDefaultConstraints": false
+}

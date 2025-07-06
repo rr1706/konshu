@@ -62,25 +62,25 @@
         {
           "type": "path",
           "data": {
-            "pathName": "Grab C Algae"
+            "pathName": "Steal D Algae"
           }
         },
         {
           "type": "named",
           "data": {
-            "name": "GrabCAlgae"
+            "name": "StealDAlgae"
           }
         },
         {
           "type": "path",
           "data": {
-            "pathName": "C Barge Shot"
+            "pathName": "D Steal Barge Shot"
           }
         },
         {
           "type": "path",
           "data": {
-            "pathName": "FinishToFloorAlgae"
+            "pathName": "End Steal"
           }
         }
       ]

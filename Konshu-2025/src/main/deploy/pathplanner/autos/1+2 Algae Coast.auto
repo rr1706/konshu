@@ -17,39 +17,7 @@
               {
                 "type": "path",
                 "data": {
-                  "pathName": "start algae pathh"
-                }
-              }
-            ]
-          }
-        },
-        {
-          "type": "race",
-          "data": {
-            "commands": [
-              {
-                "type": "named",
-                "data": {
-                  "name": "AlignDLL4"
-                }
-              },
-              {
-                "type": "sequential",
-                "data": {
-                  "commands": [
-                    {
-                      "type": "named",
-                      "data": {
-                        "name": "WaitForElevator"
-                      }
-                    },
-                    {
-                      "type": "named",
-                      "data": {
-                        "name": "ScoreL4Faster"
-                      }
-                    }
-                  ]
+                  "pathName": "Start Algae"
                 }
               }
             ]
@@ -58,63 +26,37 @@
         {
           "type": "path",
           "data": {
-            "pathName": "grab algae 1"
+            "pathName": "Grab D Algae"
           }
         },
         {
-          "type": "sequential",
+          "type": "named",
           "data": {
-            "commands": [
-              {
-                "type": "named",
-                "data": {
-                  "name": "WaitForElevator2"
-                }
-              },
-              {
-                "type": "wait",
-                "data": {
-                  "waitTime": 0.3
-                }
-              }
-            ]
+            "name": "GrabDAlgae"
           }
         },
         {
           "type": "path",
           "data": {
-            "pathName": "barge shot 1"
+            "pathName": "D Barge Shot"
           }
         },
         {
           "type": "path",
           "data": {
-            "pathName": "grab algae 2"
+            "pathName": "Grab E Algae"
           }
         },
         {
-          "type": "sequential",
+          "type": "named",
           "data": {
-            "commands": [
-              {
-                "type": "named",
-                "data": {
-                  "name": "WaitForElevator2"
-                }
-              },
-              {
-                "type": "wait",
-                "data": {
-                  "waitTime": 0.3
-                }
-              }
-            ]
+            "name": "GrabEAlgae"
           }
         },
         {
           "type": "path",
           "data": {
-            "pathName": "barge shot 2"
+            "pathName": "E Barge Shot"
           }
         },
         {

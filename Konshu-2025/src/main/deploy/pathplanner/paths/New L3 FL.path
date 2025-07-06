@@ -1,0 +1,124 @@
+{
+  "version": "2025.0",
+  "waypoints": [
+    {
+      "anchor": {
+        "x": 1.64,
+        "y": 0.6748
+      },
+      "prevControl": null,
+      "nextControl": {
+        "x": 3.200149175032911,
+        "y": 2.393354308304965
+      },
+      "isLocked": false,
+      "linkedName": "Proc LS"
+    },
+    {
+      "anchor": {
+        "x": 3.6322745901639335,
+        "y": 2.8938
+      },
+      "prevControl": {
+        "x": 3.44765281155229,
+        "y": 2.6847042515084354
+      },
+      "nextControl": null,
+      "isLocked": false,
+      "linkedName": null
+    }
+  ],
+  "rotationTargets": [],
+  "constraintZones": [
+    {
+      "name": "Constraints Zone",
+      "minWaypointRelativePos": 0.6103983794733234,
+      "maxWaypointRelativePos": 1.0,
+      "constraints": {
+        "maxVelocity": 4.0,
+        "maxAcceleration": 3.0,
+        "maxAngularVelocity": 540.0,
+        "maxAngularAcceleration": 360.0,
+        "nominalVoltage": 12.0,
+        "unlimited": false
+      }
+    }
+  ],
+  "pointTowardsZones": [],
+  "eventMarkers": [
+    {
+      "name": "Run Funnel",
+      "waypointRelativePos": 0,
+      "endWaypointRelativePos": null,
+      "command": {
+        "type": "named",
+        "data": {
+          "name": "Run Funnel"
+        }
+      }
+    },
+    {
+      "name": "score_point",
+      "waypointRelativePos": 0.05113636363636467,
+      "endWaypointRelativePos": null,
+      "command": {
+        "type": "named",
+        "data": {
+          "name": "GoL3"
+        }
+      }
+    },
+    {
+      "name": "Dont Use MT2",
+      "waypointRelativePos": 0.3952922077922082,
+      "endWaypointRelativePos": null,
+      "command": {
+        "type": "named",
+        "data": {
+          "name": "NoMT2"
+        }
+      }
+    },
+    {
+      "name": "GoL3FL",
+      "waypointRelativePos": 0.4992555831265504,
+      "endWaypointRelativePos": null,
+      "command": {
+        "type": "named",
+        "data": {
+          "name": "GoL3FL"
+        }
+      }
+    },
+    {
+      "name": "Score",
+      "waypointRelativePos": 0.87778528021607,
+      "endWaypointRelativePos": null,
+      "command": {
+        "type": "named",
+        "data": {
+          "name": "ScorePerp"
+        }
+      }
+    }
+  ],
+  "globalConstraints": {
+    "maxVelocity": 4.0,
+    "maxAcceleration": 3.6,
+    "maxAngularVelocity": 540.0,
+    "maxAngularAcceleration": 720.0,
+    "nominalVoltage": 12.0,
+    "unlimited": false
+  },
+  "goalEndState": {
+    "velocity": 0,
+    "rotation": 59.99999999999999
+  },
+  "reversed": false,
+  "folder": null,
+  "idealStartingState": {
+    "velocity": 0,
+    "rotation": 54.0
+  },
+  "useDefaultConstraints": true
+}

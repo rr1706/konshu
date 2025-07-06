@@ -8,57 +8,49 @@
       },
       "prevControl": null,
       "nextControl": {
-        "x": 6.318,
-        "y": 5.685
+        "x": 7.234500000000001,
+        "y": 5.158499999999999
       },
       "isLocked": false,
       "linkedName": "barge shot 2"
     },
     {
       "anchor": {
-        "x": 9.95475,
-        "y": 5.7995
+        "x": 5.15,
+        "y": 5.15
       },
       "prevControl": {
-        "x": 9.243,
-        "y": 5.71175
+        "x": 5.41125,
+        "y": 5.4777499999999995
       },
       "nextControl": null,
       "isLocked": false,
-      "linkedName": null
+      "linkedName": "grab algae 3 end"
     }
   ],
-  "rotationTargets": [
-    {
-      "waypointRelativePos": 0.5,
-      "rotationDegrees": 0.0
-    }
-  ],
-  "constraintZones": [
-    {
-      "name": "Constraints Zone",
-      "minWaypointRelativePos": 0,
-      "maxWaypointRelativePos": 0.58,
-      "constraints": {
-        "maxVelocity": 0.42,
-        "maxAcceleration": 2.0,
-        "maxAngularVelocity": 540.0,
-        "maxAngularAcceleration": 720.0,
-        "nominalVoltage": 12.0,
-        "unlimited": false
-      }
-    }
-  ],
+  "rotationTargets": [],
+  "constraintZones": [],
   "pointTowardsZones": [],
   "eventMarkers": [
     {
-      "name": "down",
-      "waypointRelativePos": 0,
+      "name": "pick_up_algae",
+      "waypointRelativePos": 0.09604316546762669,
       "endWaypointRelativePos": null,
       "command": {
         "type": "named",
         "data": {
-          "name": "GoLoadingStationPOS"
+          "name": "GoAlgaeHigh"
+        }
+      }
+    },
+    {
+      "name": "pick_up_algae2",
+      "waypointRelativePos": 0.7521582733812864,
+      "endWaypointRelativePos": null,
+      "command": {
+        "type": "named",
+        "data": {
+          "name": "PickUpAlgae"
         }
       }
     }
@@ -72,8 +64,8 @@
     "unlimited": false
   },
   "goalEndState": {
-    "velocity": 4.0,
-    "rotation": 0.0
+    "velocity": 0.2,
+    "rotation": -119.99999999999999
   },
   "reversed": false,
   "folder": "Algae Auto",

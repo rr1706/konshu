@@ -3,7 +3,6 @@
   "robotLength": 0.88,
   "holonomicMode": true,
   "pathFolders": [
-    "L4 - 3A - 2A - 2B",
     "Algae Auto"
   ],
   "autoFolders": [],

@@ -1,0 +1,124 @@
+{
+  "version": "2025.0",
+  "waypoints": [
+    {
+      "anchor": {
+        "x": 1.64,
+        "y": 0.6748
+      },
+      "prevControl": null,
+      "nextControl": {
+        "x": 2.867267236734955,
+        "y": 1.917890982805274
+      },
+      "isLocked": false,
+      "linkedName": "Proc LS"
+    },
+    {
+      "anchor": {
+        "x": 3.82,
+        "y": 2.8818
+      },
+      "prevControl": {
+        "x": 3.51000123292953,
+        "y": 2.5642987961994654
+      },
+      "nextControl": null,
+      "isLocked": false,
+      "linkedName": null
+    }
+  ],
+  "rotationTargets": [],
+  "constraintZones": [
+    {
+      "name": "Constraints Zone",
+      "minWaypointRelativePos": 0.49528535980149324,
+      "maxWaypointRelativePos": 1.0,
+      "constraints": {
+        "maxVelocity": 4.0,
+        "maxAcceleration": 2.75,
+        "maxAngularVelocity": 540.0,
+        "maxAngularAcceleration": 500.0,
+        "nominalVoltage": 12.0,
+        "unlimited": false
+      }
+    }
+  ],
+  "pointTowardsZones": [],
+  "eventMarkers": [
+    {
+      "name": "Run Funnel",
+      "waypointRelativePos": 0,
+      "endWaypointRelativePos": null,
+      "command": {
+        "type": "named",
+        "data": {
+          "name": "Run Funnel"
+        }
+      }
+    },
+    {
+      "name": "go l3",
+      "waypointRelativePos": 0.05134189031505179,
+      "endWaypointRelativePos": null,
+      "command": {
+        "type": "named",
+        "data": {
+          "name": "GoL3"
+        }
+      }
+    },
+    {
+      "name": "Dont Use MT2",
+      "waypointRelativePos": 0.3033838973162226,
+      "endWaypointRelativePos": null,
+      "command": {
+        "type": "named",
+        "data": {
+          "name": "NoMT2"
+        }
+      }
+    },
+    {
+      "name": "GoL3FR",
+      "waypointRelativePos": 0.4969615124915595,
+      "endWaypointRelativePos": null,
+      "command": {
+        "type": "named",
+        "data": {
+          "name": "GoL3FR"
+        }
+      }
+    },
+    {
+      "name": "ScoreNow",
+      "waypointRelativePos": 0.8823821339950364,
+      "endWaypointRelativePos": null,
+      "command": {
+        "type": "named",
+        "data": {
+          "name": "Score"
+        }
+      }
+    }
+  ],
+  "globalConstraints": {
+    "maxVelocity": 4.0,
+    "maxAcceleration": 3.6,
+    "maxAngularVelocity": 540.0,
+    "maxAngularAcceleration": 720.0,
+    "nominalVoltage": 12.0,
+    "unlimited": false
+  },
+  "goalEndState": {
+    "velocity": 0,
+    "rotation": 45.0
+  },
+  "reversed": false,
+  "folder": null,
+  "idealStartingState": {
+    "velocity": 0,
+    "rotation": 54.0
+  },
+  "useDefaultConstraints": true
+}
