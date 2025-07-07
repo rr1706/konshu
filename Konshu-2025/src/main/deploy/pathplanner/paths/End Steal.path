@@ -3,13 +3,13 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 9.59,
-        "y": 4.5
+        "x": 9.746004098360656,
+        "y": 4.750256147540983
       },
       "prevControl": null,
       "nextControl": {
-        "x": 10.03275,
-        "y": 4.512499999999999
+        "x": 10.188754098360656,
+        "y": 4.7627561475409825
       },
       "isLocked": false,
       "linkedName": "Steal Shot"

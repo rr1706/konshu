@@ -4,12 +4,12 @@
     {
       "anchor": {
         "x": 5.76608606557377,
-        "y": 4.012214368670529
+        "y": 4.02
       },
       "prevControl": null,
       "nextControl": {
-        "x": 6.291991974667049,
-        "y": 3.921936395281362
+        "x": 6.183113383177682,
+        "y": 4.278190541545339
       },
       "isLocked": false,
       "linkedName": "pick up algae 1"
@@ -17,11 +17,11 @@
     {
       "anchor": {
         "x": 7.95,
-        "y": 4.5
+        "y": 4.8
       },
       "prevControl": {
-        "x": 7.780849201335635,
-        "y": 4.31591304415791
+        "x": 7.725887773978748,
+        "y": 4.689213222143619
       },
       "nextControl": null,
       "isLocked": false,
@@ -32,11 +32,11 @@
   "constraintZones": [
     {
       "name": "Constraints Zone",
-      "minWaypointRelativePos": 0.6456834532374066,
+      "minWaypointRelativePos": 0.4996623902768407,
       "maxWaypointRelativePos": 1.0,
       "constraints": {
-        "maxVelocity": 1.0,
-        "maxAcceleration": 3.5,
+        "maxVelocity": 4.0,
+        "maxAcceleration": 2.0,
         "maxAngularVelocity": 540.0,
         "maxAngularAcceleration": 720.0,
         "nominalVoltage": 12.0,
@@ -48,7 +48,7 @@
   "eventMarkers": [
     {
       "name": "barge_shot",
-      "waypointRelativePos": 0.05287769784172962,
+      "waypointRelativePos": 0.09723160027009278,
       "endWaypointRelativePos": null,
       "command": {
         "type": "named",
@@ -59,7 +59,7 @@
     },
     {
       "name": "flick",
-      "waypointRelativePos": 0.8500000000000038,
+      "waypointRelativePos": 0.8021607022282221,
       "endWaypointRelativePos": null,
       "command": {
         "type": "named",
@@ -79,7 +79,7 @@
   },
   "goalEndState": {
     "velocity": 0,
-    "rotation": -125.00000000000001
+    "rotation": -160.0
   },
   "reversed": false,
   "folder": "Algae Auto",

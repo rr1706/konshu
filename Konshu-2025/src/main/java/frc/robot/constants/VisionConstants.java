@@ -39,8 +39,8 @@ public class VisionConstants {
 
             megaTag2TreeMap.put(0.25, 40.0);
             megaTag2TreeMap.put(1.0, 20.0);
-            megaTag2TreeMap.put(2.0, 1.5);
-            megaTag2TreeMap.put(3.0, 1.5);
+            megaTag2TreeMap.put(2.0, 2.0);
+            megaTag2TreeMap.put(3.0, 2.0);
 
         }
         

@@ -74,13 +74,7 @@
         {
           "type": "path",
           "data": {
-            "pathName": "D Steal Barge Shot"
-          }
-        },
-        {
-          "type": "path",
-          "data": {
-            "pathName": "End Steal"
+            "pathName": "D Steal End"
           }
         }
       ]

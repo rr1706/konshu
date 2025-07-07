@@ -18,7 +18,7 @@ public class Elevator extends SubsystemBase {
     private SoftwareLimitSwitchConfigs m_limits;
 
     public Elevator() {
-        m_ElevatorLeftFX.setControl(new Follower(9, true).withUpdateFreqHz(100));
+        m_ElevatorLeftFX.setControl(new Follower(9, true).withUpdateFreqHz(250));
 
         m_ElevatorRightFX.getConfigurator().apply(new CurrentLimitsConfigs()
             .withStatorCurrentLimit(ElevatorConstants.ElevatorCurrents.kStatorCurrent)

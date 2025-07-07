@@ -16,12 +16,12 @@
     },
     {
       "anchor": {
-        "x": 9.59,
-        "y": 4.5
+        "x": 9.746004098360656,
+        "y": 4.750256147540983
       },
       "prevControl": {
-        "x": 9.817310704077302,
-        "y": 4.395933464495637
+        "x": 9.973314802437958,
+        "y": 4.64618961203662
       },
       "nextControl": null,
       "isLocked": false,
@@ -45,30 +45,7 @@
     }
   ],
   "pointTowardsZones": [],
-  "eventMarkers": [
-    {
-      "name": "barge_shot",
-      "waypointRelativePos": 0.052877697841730756,
-      "endWaypointRelativePos": null,
-      "command": {
-        "type": "named",
-        "data": {
-          "name": "GoBarge"
-        }
-      }
-    },
-    {
-      "name": "flick",
-      "waypointRelativePos": 0.8528776978417296,
-      "endWaypointRelativePos": null,
-      "command": {
-        "type": "named",
-        "data": {
-          "name": "ThrowAlgae"
-        }
-      }
-    }
-  ],
+  "eventMarkers": [],
   "globalConstraints": {
     "maxVelocity": 4.0,
     "maxAcceleration": 3.5,

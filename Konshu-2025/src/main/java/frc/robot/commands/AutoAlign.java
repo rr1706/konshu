@@ -47,7 +47,7 @@ public class AutoAlign extends Command {
     private Pose2d m_pose = new Pose2d();
 
     // PID controller for rotation. Tune gains and constraints as needed.
-    private final PIDController rotPID = new PIDController(12.0, 0.0, 0.5);
+    private final PIDController rotPID = new PIDController(10.0, 0.0, 0.3);
 
     // Base CTRE FieldCentric swerve request (using velocity control)
     private final SwerveRequest.FieldCentric baseRequest = new SwerveRequest.FieldCentric()

@@ -9,7 +9,7 @@
       "prevControl": null,
       "nextControl": {
         "x": 2.6372950819672134,
-        "y": 4.894108606557377
+        "y": 5.6013831967213115
       },
       "isLocked": false,
       "linkedName": "Path 2 LS 1"
@@ -17,11 +17,11 @@
     {
       "anchor": {
         "x": 3.1887295081967215,
-        "y": 4.222797131147541
+        "y": 4.246772540983606
       },
       "prevControl": {
-        "x": 2.604049180327869,
-        "y": 4.221118852459016
+        "x": 2.1577868852459017,
+        "y": 4.198821721311475
       },
       "nextControl": null,
       "isLocked": false,
@@ -32,11 +32,11 @@
   "constraintZones": [
     {
       "name": "Constraints Zone",
-      "minWaypointRelativePos": 0.4019851116625356,
+      "minWaypointRelativePos": 0.6022957461174822,
       "maxWaypointRelativePos": 1.0,
       "constraints": {
         "maxVelocity": 4.0,
-        "maxAcceleration": 1.0,
+        "maxAcceleration": 1.5,
         "maxAngularVelocity": 360.0,
         "maxAngularAcceleration": 360.0,
         "nominalVoltage": 12.0,
@@ -44,18 +44,7 @@
       }
     }
   ],
-  "pointTowardsZones": [
-    {
-      "fieldPosition": {
-        "x": 3.7085865,
-        "y": 4.190186
-      },
-      "rotationOffset": 0.0,
-      "minWaypointRelativePos": 0.5023632680621202,
-      "maxWaypointRelativePos": 1.0,
-      "name": "Point Towards Zone"
-    }
-  ],
+  "pointTowardsZones": [],
   "eventMarkers": [
     {
       "name": "Run Funnel",
@@ -103,7 +92,7 @@
     },
     {
       "name": "Score",
-      "waypointRelativePos": 0.9291019581363952,
+      "waypointRelativePos": 0.9480081026333547,
       "endWaypointRelativePos": null,
       "command": {
         "type": "named",
@@ -123,7 +112,7 @@
   },
   "goalEndState": {
     "velocity": 0,
-    "rotation": 0.0
+    "rotation": -6.911227119024704
   },
   "reversed": false,
   "folder": null,

@@ -3,13 +3,13 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 5.78,
-        "y": 3.8511782786885242
+        "x": 5.75,
+        "y": 3.88
       },
       "prevControl": null,
       "nextControl": {
-        "x": 6.026924902090692,
-        "y": 3.8902691053298484
+        "x": 6.089754098360655,
+        "y": 3.7912397540983602
       },
       "isLocked": false,
       "linkedName": "starting algae pathh"
@@ -17,11 +17,11 @@
     {
       "anchor": {
         "x": 5.76608606557377,
-        "y": 4.012214368670529
+        "y": 4.02
       },
       "prevControl": {
-        "x": 6.015750000000001,
-        "y": 3.947
+        "x": 6.041803278688524,
+        "y": 4.030993852459016
       },
       "nextControl": null,
       "isLocked": false,
@@ -29,26 +29,12 @@
     }
   ],
   "rotationTargets": [],
-  "constraintZones": [
-    {
-      "name": "Constraints Zone",
-      "minWaypointRelativePos": 0,
-      "maxWaypointRelativePos": 0,
-      "constraints": {
-        "maxVelocity": 4.0,
-        "maxAcceleration": 2.5,
-        "maxAngularVelocity": 540.0,
-        "maxAngularAcceleration": 720.0,
-        "nominalVoltage": 12.0,
-        "unlimited": false
-      }
-    }
-  ],
+  "constraintZones": [],
   "pointTowardsZones": [],
   "eventMarkers": [
     {
       "name": "pick_up_algae",
-      "waypointRelativePos": 0.05431654676258897,
+      "waypointRelativePos": 0.09993247805536769,
       "endWaypointRelativePos": null,
       "command": {
         "type": "named",
@@ -59,7 +45,7 @@
     },
     {
       "name": "pick_up_algae2",
-      "waypointRelativePos": 0.25431654676259735,
+      "waypointRelativePos": 0.5023632680621158,
       "endWaypointRelativePos": null,
       "command": {
         "type": "named",
@@ -78,7 +64,7 @@
     "unlimited": false
   },
   "goalEndState": {
-    "velocity": 0.5,
+    "velocity": 0.0,
     "rotation": 180.0
   },
   "reversed": false,

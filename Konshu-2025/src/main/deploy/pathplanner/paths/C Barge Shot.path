@@ -8,8 +8,8 @@
       },
       "prevControl": null,
       "nextControl": {
-        "x": 5.947175094221644,
-        "y": 5.711016004001186
+        "x": 5.956822830474376,
+        "y": 5.146973465175437
       },
       "isLocked": false,
       "linkedName": "grab algae 3 end"
@@ -20,8 +20,8 @@
         "y": 5.2
       },
       "prevControl": {
-        "x": 7.84673963381593,
-        "y": 5.427678055103104
+        "x": 7.700131136148513,
+        "y": 5.208096349644564
       },
       "nextControl": null,
       "isLocked": false,
@@ -32,11 +32,11 @@
   "constraintZones": [
     {
       "name": "Constraints Zone",
-      "minWaypointRelativePos": 0.5996402877697873,
+      "minWaypointRelativePos": 0.5995948683322052,
       "maxWaypointRelativePos": 1.0,
       "constraints": {
-        "maxVelocity": 1.0,
-        "maxAcceleration": 3.5,
+        "maxVelocity": 4.0,
+        "maxAcceleration": 2.5,
         "maxAngularVelocity": 540.0,
         "maxAngularAcceleration": 720.0,
         "nominalVoltage": 12.0,
@@ -48,7 +48,7 @@
   "eventMarkers": [
     {
       "name": "barge_shot",
-      "waypointRelativePos": 0.05287769784172676,
+      "waypointRelativePos": 0.09993247805536769,
       "endWaypointRelativePos": null,
       "command": {
         "type": "named",
@@ -59,7 +59,7 @@
     },
     {
       "name": "flick",
-      "waypointRelativePos": 0.84856115107914,
+      "waypointRelativePos": 0.7994598244429404,
       "endWaypointRelativePos": null,
       "command": {
         "type": "named",
@@ -71,7 +71,7 @@
   ],
   "globalConstraints": {
     "maxVelocity": 4.0,
-    "maxAcceleration": 3.5,
+    "maxAcceleration": 3.6,
     "maxAngularVelocity": 540.0,
     "maxAngularAcceleration": 720.0,
     "nominalVoltage": 12.0,
@@ -79,7 +79,7 @@
   },
   "goalEndState": {
     "velocity": 0,
-    "rotation": 125.00000000000001
+    "rotation": -135.0
   },
   "reversed": false,
   "folder": "Algae Auto",
@@ -87,5 +87,5 @@
     "velocity": 0,
     "rotation": -119.99999999999999
   },
-  "useDefaultConstraints": false
+  "useDefaultConstraints": true
 }

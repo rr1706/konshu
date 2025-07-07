@@ -4,12 +4,12 @@
     {
       "anchor": {
         "x": 7.95,
-        "y": 4.5
+        "y": 4.8
       },
       "prevControl": null,
       "nextControl": {
         "x": 7.06875,
-        "y": 5.489999999999999
+        "y": 5.789999999999999
       },
       "isLocked": false,
       "linkedName": "barge shot 2"
@@ -81,7 +81,7 @@
   "folder": "Algae Auto",
   "idealStartingState": {
     "velocity": 0,
-    "rotation": -125.00000000000001
+    "rotation": -160.0
   },
   "useDefaultConstraints": false
 }

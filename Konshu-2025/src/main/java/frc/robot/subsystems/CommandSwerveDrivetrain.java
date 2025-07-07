@@ -253,7 +253,7 @@ public class CommandSwerveDrivetrain extends TunerSwerveDrivetrain implements Su
                 addVisionMeasurement(poseEstimate.pose, timestamp, VecBuilder.fill(VisionConstants.Tag_N1_2.get(ta),
                         VisionConstants.Tag_N1_2.get(ta), VisionConstants.Tag_N3.get(ta)));
             } else if (ta <= 0.5 && ta >= 0.15 && tagCount == 1 && LimelightHelpers.validPoseEstimate(mt2PoseEstimate)
-                    && getState().Speeds.omegaRadiansPerSecond <= 2*Math.PI && !m_useMT2) {
+                    && getState().Speeds.omegaRadiansPerSecond <= 2*Math.PI && m_useMT2) {
                 addVisionMeasurement(mt2PoseEstimate.pose, mt2PoseEstimate.timestampSeconds,
                         VecBuilder.fill(VisionConstants.Tag_N1_2.get(ta),
                                 VisionConstants.Tag_N1_2.get(ta), 999999));
@@ -262,7 +262,7 @@ public class CommandSwerveDrivetrain extends TunerSwerveDrivetrain implements Su
                         VisionConstants.MultTag_N1_2.get(ta), VisionConstants.MultTag_N3.get(ta)));
 
             } else if (ta <= .25 && ta >= 0.10 && tagCount == 2 && LimelightHelpers.validPoseEstimate(mt2PoseEstimate)
-                    && getState().Speeds.omegaRadiansPerSecond <= 2*Math.PI && !m_useMT2) {
+                    && getState().Speeds.omegaRadiansPerSecond <= 2*Math.PI && m_useMT2) {
                 addVisionMeasurement(mt2PoseEstimate.pose, mt2PoseEstimate.timestampSeconds,
                         VecBuilder.fill(VisionConstants.MultTag_N1_2.get(ta),
                                 VisionConstants.MultTag_N1_2.get(ta), 999999));
