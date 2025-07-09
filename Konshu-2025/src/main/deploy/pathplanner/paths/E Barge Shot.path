@@ -3,13 +3,13 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 5.148,
-        "y": 2.90375
+        "x": 5.11875,
+        "y": 2.940112704918032
       },
       "prevControl": null,
       "nextControl": {
-        "x": 6.017827868852459,
-        "y": 3.203842213114754
+        "x": 5.98857786885246,
+        "y": 3.240204918032786
       },
       "isLocked": false,
       "linkedName": "aglae shot 2"
@@ -59,7 +59,7 @@
     },
     {
       "name": "flick",
-      "waypointRelativePos": 0.8048615800135022,
+      "waypointRelativePos": 0.7022282241728578,
       "endWaypointRelativePos": null,
       "command": {
         "type": "named",

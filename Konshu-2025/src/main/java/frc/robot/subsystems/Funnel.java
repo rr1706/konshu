@@ -30,17 +30,17 @@ public class Funnel extends SubsystemBase {
         m_manReady = manipulatorReady;
     }
 
-    public void runCoralIn(double speed) {
-        m_InFX.set(speed);
+    public void runCoralIn(double volts) {
+        m_InFX.setVoltage(volts);
     }
 
-    public Command runFunnelIfReady(double speed) {
+    public Command runFunnelIfReady(double volts) {
         return runEnd(() -> {
             if(m_hasCoral.getAsBoolean() || !m_manReady.getAsBoolean()){
                 stop();
             }
             else{
-                runCoralIn(speed);
+                runCoralIn(volts);
             }
         }, () -> stop());
     }

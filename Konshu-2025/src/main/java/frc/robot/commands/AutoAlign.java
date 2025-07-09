@@ -239,7 +239,7 @@ public class AutoAlign extends Command {
         // Set the state
 
         if ((m_state == SSM.States.BARGE || m_state == SSM.States.TOSS) && DriverStation.getStickAxis(0, 3) >= 0.25) {
-            armOffset = -30.0;
+            armOffset = -7.5;
         }
         m_SSM.setState(m_state, armOffset, elevatorOffset);
 

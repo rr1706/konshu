@@ -17,18 +17,23 @@
     {
       "anchor": {
         "x": 3.1887295081967215,
-        "y": 4.246772540983606
+        "y": 4.25
       },
       "prevControl": {
-        "x": 2.1577868852459017,
-        "y": 4.198821721311475
+        "x": 2.3136270491803277,
+        "y": 4.210809426229508
       },
       "nextControl": null,
       "isLocked": false,
       "linkedName": "AL End"
     }
   ],
-  "rotationTargets": [],
+  "rotationTargets": [
+    {
+      "waypointRelativePos": 0.7334754797441215,
+      "rotationDegrees": -12.385444471279488
+    }
+  ],
   "constraintZones": [
     {
       "name": "Constraints Zone",
@@ -112,7 +117,7 @@
   },
   "goalEndState": {
     "velocity": 0,
-    "rotation": -6.911227119024704
+    "rotation": -4.63546342690266
   },
   "reversed": false,
   "folder": null,

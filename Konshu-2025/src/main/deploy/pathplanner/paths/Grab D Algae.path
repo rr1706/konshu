@@ -3,25 +3,25 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 5.75,
+        "x": 5.73,
         "y": 3.88
       },
       "prevControl": null,
       "nextControl": {
-        "x": 6.089754098360655,
-        "y": 3.7912397540983602
+        "x": 6.057766393442623,
+        "y": 3.887141393442622
       },
       "isLocked": false,
       "linkedName": "starting algae pathh"
     },
     {
       "anchor": {
-        "x": 5.76608606557377,
+        "x": 5.735,
         "y": 4.02
       },
       "prevControl": {
-        "x": 6.041803278688524,
-        "y": 4.030993852459016
+        "x": 6.077766393442623,
+        "y": 4.019006147540983
       },
       "nextControl": null,
       "isLocked": false,
@@ -34,7 +34,7 @@
   "eventMarkers": [
     {
       "name": "pick_up_algae",
-      "waypointRelativePos": 0.09993247805536769,
+      "waypointRelativePos": 0.01620526671168497,
       "endWaypointRelativePos": null,
       "command": {
         "type": "named",
@@ -45,7 +45,7 @@
     },
     {
       "name": "pick_up_algae2",
-      "waypointRelativePos": 0.5023632680621158,
+      "waypointRelativePos": 0.09723160027007749,
       "endWaypointRelativePos": null,
       "command": {
         "type": "named",

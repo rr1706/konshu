@@ -36,15 +36,15 @@ public class ArmConstants {
   public static final double kArmL3 = -29.6;
   public static final double kArmL4 = -6.0;
   public static final double kArmProcessor = 8.0;
-  public static final double kArmBarge = -85.0;
-  public static final double kToss = -85.0;
+  public static final double kArmBarge = -107.5;
+  public static final double kToss = -107.5;
 
   public static final double kArmLoadingStation = -44.0;
   public static final double kArmGroundAlgae = -41.4;
   public static final double kArmAlgeaGrab = -23.9;
 
   public static final double kArmLowerLimit = kArmProcessor; // Degrees from arm horizontal
-  public static final double kArmUpperLimit = -123.4; // Degrees from arm horizontal
+  public static final double kArmUpperLimit = -120.0; // Degrees from arm horizontal
 
   public static final double kMangentOffSet = 0.358224; // Rotations
 

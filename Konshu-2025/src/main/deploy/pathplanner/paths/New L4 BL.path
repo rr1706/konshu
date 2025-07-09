@@ -103,7 +103,7 @@
     },
     {
       "name": "Score",
-      "waypointRelativePos": 0.9161290322580652,
+      "waypointRelativePos": 0.9291019581363943,
       "endWaypointRelativePos": null,
       "command": {
         "type": "named",
