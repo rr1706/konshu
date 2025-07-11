@@ -8,8 +8,8 @@
       },
       "prevControl": null,
       "nextControl": {
-        "x": 2.6372950819672134,
-        "y": 5.6013831967213115
+        "x": 2.565368852459016,
+        "y": 6.056915983606557
       },
       "isLocked": false,
       "linkedName": "Path 2 LS 1"
@@ -17,23 +17,18 @@
     {
       "anchor": {
         "x": 3.1887295081967215,
-        "y": 4.25
+        "y": 4.186834016393442
       },
       "prevControl": {
-        "x": 2.3136270491803277,
-        "y": 4.210809426229508
+        "x": 2.2536885245901637,
+        "y": 4.102920081967213
       },
       "nextControl": null,
       "isLocked": false,
       "linkedName": "AL End"
     }
   ],
-  "rotationTargets": [
-    {
-      "waypointRelativePos": 0.7334754797441215,
-      "rotationDegrees": -12.385444471279488
-    }
-  ],
+  "rotationTargets": [],
   "constraintZones": [
     {
       "name": "Constraints Zone",
@@ -86,7 +81,7 @@
     },
     {
       "name": "GoL4AL",
-      "waypointRelativePos": 0.6049966239027785,
+      "waypointRelativePos": 0.6995273463875793,
       "endWaypointRelativePos": null,
       "command": {
         "type": "named",
@@ -117,7 +112,7 @@
   },
   "goalEndState": {
     "velocity": 0,
-    "rotation": -4.63546342690266
+    "rotation": 0.0
   },
   "reversed": false,
   "folder": null,

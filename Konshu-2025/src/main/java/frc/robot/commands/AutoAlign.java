@@ -47,7 +47,7 @@ public class AutoAlign extends Command {
     private Pose2d m_pose = new Pose2d();
 
     // PID controller for rotation. Tune gains and constraints as needed.
-    private final PIDController rotPID = new PIDController(10.0, 0.0, 0.3);
+    private final PIDController rotPID = new PIDController(12.0, 0.0, 0.3);
 
     // Base CTRE FieldCentric swerve request (using velocity control)
     private final SwerveRequest.FieldCentric baseRequest = new SwerveRequest.FieldCentric()
@@ -239,7 +239,7 @@ public class AutoAlign extends Command {
         // Set the state
 
         if ((m_state == SSM.States.BARGE || m_state == SSM.States.TOSS) && DriverStation.getStickAxis(0, 3) >= 0.25) {
-            armOffset = -7.5;
+            armOffset = -10.0;
         }
         m_SSM.setState(m_state, armOffset, elevatorOffset);
 

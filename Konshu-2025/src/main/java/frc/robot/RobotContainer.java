@@ -85,7 +85,7 @@ public class RobotContainer {
 
     private void configureBindings() {
 
-        configureAutoUp();
+        //configureAutoUp();
 
         driverController.start().onTrue(DriveCommands.resetFieldOrientation(m_drivetrain));
 
@@ -98,13 +98,13 @@ public class RobotContainer {
         driverController.povDown().onTrue(new InstantCommand(() -> m_arm.jogging(true)));
 
         driverController.leftTrigger().onFalse(
-                new InstantCommand(() -> m_funnel.runCoralIn(-3.0)).andThen(new IntakeFromFunnel(m_coralArm)));
+                new InstantCommand(() -> m_funnel.runCoralIn(-4.0)).andThen(new IntakeFromFunnel(m_coralArm)));
         driverController.x().onTrue(new InstantCommand(() -> m_climber.prepClimb())
                 .alongWith(new InstantCommand(() -> m_funnel.runCoralIn(0.0))));
         driverController.b().whileTrue(new Climb(m_climber));
 
         driverController.rightTrigger()
-                .onTrue(new ConditionalCommand(new WaitCommand(0.050).andThen(m_algaeArm.spitAlgae()),
+                .onTrue(new ConditionalCommand(new WaitCommand(0.110).andThen(m_algaeArm.spitAlgae()),
                         new ConditionalCommand(m_algaeArm.slowSpitAlgae(),
                                 new ConditionalCommand(new ConditionalCommand(m_coralArm.runCoralCmd(-4.0),
                                         m_coralArm.runCoralCmd(-2.25), () -> {
@@ -120,14 +120,14 @@ public class RobotContainer {
                             return m_SSM.getState() == SSM.States.BARGE || m_SSM.getState() == SSM.States.TOSS;
                         }))
                 .onFalse(
-                        new InstantCommand(() -> m_funnel.runCoralIn(-3.0)).andThen(new IntakeFromFunnel(m_coralArm)));
+                        new InstantCommand(() -> m_funnel.runCoralIn(-4.0)).andThen(new IntakeFromFunnel(m_coralArm)));
 
         operatorcontoller1.button(9).onTrue(m_algaeArm.grabAlgae(0.8));
         operatorcontoller2.button(1).onTrue(m_algaeArm.grabAlgae(0.8));
 
         driverController.a().onTrue(new InstantCommand(() -> m_funnel.runCoralIn(2.0)))
                 .onFalse(
-                        new InstantCommand(() -> m_funnel.runCoralIn(-3.0))
+                        new InstantCommand(() -> m_funnel.runCoralIn(-4.0))
                                 .andThen(new IntakeFromFunnel(m_coralArm)));
 
         operatorcontoller2.button(11).whileTrue(m_algaeArm.grabAlgae(.8)
@@ -283,13 +283,13 @@ public class RobotContainer {
         NamedCommands.registerCommand("UseMT2", m_drivetrain.useMT2(true));
         NamedCommands.registerCommand("NoMT2", m_drivetrain.useMT2(false));
         NamedCommands.registerCommand("Run Funnel",
-                new InstantCommand(() -> m_funnel.runCoralIn(-3.0)).alongWith(new IntakeFromFunnel(m_coralArm)));
+                new InstantCommand(() -> m_funnel.runCoralIn(-4.0)).alongWith(new IntakeFromFunnel(m_coralArm)));
         NamedCommands.registerCommand("PickUpAlgae", m_algaeArm.grabAlgae(.8));
         NamedCommands.registerCommand("ThrowAlgae",
-                new InstantCommand(() -> m_SSM.setState(States.BARGE, -7.5, -2.0)).andThen(new WaitCommand(.110))
+                new InstantCommand(() -> m_SSM.setState(States.BARGE, -10.0, -2.0)).andThen(new WaitCommand(.110))
                         .andThen(m_algaeArm.spitAlgae().withTimeout(0.250)));
         NamedCommands.registerCommand("GoBarge",
-                new InstantCommand(() -> m_SSM.setState(States.BARGE,22.5,-2.0)));
+                new InstantCommand(() -> m_SSM.setState(States.BARGE,20.0,-2.0)));
         NamedCommands.registerCommand("GoAlgaeHigh",
                 new InstantCommand(() -> m_SSM.setState(States.ALGAEHIGH)));
         NamedCommands.registerCommand("GoAlgaeLow",
@@ -524,7 +524,7 @@ public class RobotContainer {
 
     public Command getTeleInitCommand() {
         return new InstantCommand(() -> m_climber.setPosition(ClimberConstants.kDeployPosition))
-                .andThen(m_drivetrain.useMT2(true)).andThen(m_funnel.runFunnelIfReady(-3.0).asProxy()
+                .andThen(m_drivetrain.useMT2(true)).andThen(m_funnel.runFunnelIfReady(-4.0).asProxy()
                         .alongWith(new IntakeFromFunnel(m_coralArm)).asProxy());
     }
 

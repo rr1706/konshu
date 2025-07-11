@@ -53,8 +53,8 @@ public class AlgaeIntake extends SubsystemBase{
 
         m_algaeintakeFX.setNeutralMode(NeutralModeValue.Brake); 
         
-        m_algaeintakeSRX.setMaxCurrent(CurrentType.STATOR, 20);
-        m_algaeintakeSRX.setNTLogging(true); // apply the config settings; this selects the quadrature encoder
+        m_algaeintakeSRX.setMaxCurrent(CurrentType.STATOR, 25);
+        m_algaeintakeSRX.setNTLogging(true); 
     }
     
     public double getPosition() {      //Inches

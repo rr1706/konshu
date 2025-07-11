@@ -17,8 +17,8 @@ public class ElevatorConstants {
   public static final double kUpVelocityElevator = 65.0; // Was 86, changed wth new elevator 4/3/2025
   public static final double kUpJerkElevator = 10000;
 
-  public static final double kDownAccelerationElevator = 225.0;
-  public static final double kDownVelocityElevator = 55.0;
+  public static final double kDownAccelerationElevator = 200.0;
+  public static final double kDownVelocityElevator = 50.0;
   public static final double kDownJerkElevator = 5000;
 
   public static final double kElevatorL1 = 8.6; // These are in inches
@@ -27,7 +27,7 @@ public class ElevatorConstants {
   public static final double kElevatorL2 = 22.00;
   public static final double kElevatorL3 =kElevatorL2+15.87;
   public static final double kElevatorL4 = 72.0;
-  public static final double kElevatorLoadingStation = 0.1;
+  public static final double kElevatorLoadingStation = 0.5;
   public static final double kElevatorProcessor = 5.7;
   public static final double kElevatorBarge = 70.0;
   public static final double kToss = 24.0;

@@ -18,7 +18,7 @@ public class AlignInPath extends Command {
     private final SSM m_ssm;
 
     private final PIDController rotPID = new PIDController(
-            10.0, 0.0, 0.2);
+            12.0, 0.0, 0.3);
 
     public AlignInPath(Supplier<Pose2d> drivePose, Supplier<Translation2d> target, SSM.States state, SSM ssm) {
         m_target = target;

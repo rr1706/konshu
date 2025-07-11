@@ -14,6 +14,7 @@ import com.thethriftybot.ThriftyNova.CurrentType;
 import com.thethriftybot.ThriftyNova.MotorType;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.constants.ClimberConstants;
 
@@ -86,6 +87,10 @@ public Climber() {
     public void prepClimb() {
         setPosition(ClimberConstants.kClimbPosition);
         m_NovaRight.set(0.4);
+    }
+
+    public Command runWheels(){
+        return runOnce(()->m_NovaRight.set(0.2));
     }
 
     public void setVoltage(double voltage){

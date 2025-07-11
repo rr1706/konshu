@@ -18,7 +18,7 @@ public class AlignInAuto extends Command {
     private final SSM.States m_state;
     private final SSM m_ssm;
     private final PIDController rotPID = new PIDController(
-            15.0, 0.0, 0.5);
+            12.0, 0.0, 0.3);
 
     // Base CTRE FieldCentric swerve request (using velocity control)
     private final SwerveRequest.RobotCentric baseRequest = new SwerveRequest.RobotCentric()
