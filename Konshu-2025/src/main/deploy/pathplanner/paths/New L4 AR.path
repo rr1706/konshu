@@ -8,8 +8,8 @@
       },
       "prevControl": null,
       "nextControl": {
-        "x": 2.6373084695295486,
-        "y": 3.1576860160611617
+        "x": 2.5652964867193715,
+        "y": 1.9947887922496874
       },
       "isLocked": false,
       "linkedName": "Proc LS"
@@ -17,11 +17,11 @@
     {
       "anchor": {
         "x": 3.1887295081967215,
-        "y": 3.8288
+        "y": 3.8648
       },
       "prevControl": {
-        "x": 2.604049166797946,
-        "y": 3.8304735584832565
+        "x": 2.2534878514462955,
+        "y": 3.9487288000552754
       },
       "nextControl": null,
       "isLocked": false,
@@ -32,11 +32,11 @@
   "constraintZones": [
     {
       "name": "Constraints Zone",
-      "minWaypointRelativePos": 0.4019851116625356,
+      "minWaypointRelativePos": 0.6084367245657575,
       "maxWaypointRelativePos": 1.0,
       "constraints": {
         "maxVelocity": 4.0,
-        "maxAcceleration": 1.0,
+        "maxAcceleration": 1.5,
         "maxAngularVelocity": 360.0,
         "maxAngularAcceleration": 360.0,
         "nominalVoltage": 12.0,
@@ -44,18 +44,7 @@
       }
     }
   ],
-  "pointTowardsZones": [
-    {
-      "fieldPosition": {
-        "x": 3.7085865,
-        "y": 3.8618
-      },
-      "rotationOffset": 0.0,
-      "minWaypointRelativePos": 0.5023632680621202,
-      "maxWaypointRelativePos": 1.0,
-      "name": "Point Towards Zone"
-    }
-  ],
+  "pointTowardsZones": [],
   "eventMarkers": [
     {
       "name": "Run Funnel",

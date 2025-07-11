@@ -8,8 +8,8 @@
       },
       "prevControl": null,
       "nextControl": {
-        "x": 3.591325169854554,
-        "y": 2.5425011044826586
+        "x": 3.5911303489239987,
+        "y": 2.5423412361473874
       },
       "isLocked": false,
       "linkedName": "FR End"
@@ -20,8 +20,8 @@
         "y": 0.6748
       },
       "prevControl": {
-        "x": 1.811857456187405,
-        "y": 0.8563627019869278
+        "x": 1.8118574561874052,
+        "y": 0.856362701986928
       },
       "nextControl": null,
       "isLocked": false,
@@ -68,7 +68,7 @@
   ],
   "globalConstraints": {
     "maxVelocity": 4.0,
-    "maxAcceleration": 3.7,
+    "maxAcceleration": 3.8,
     "maxAngularVelocity": 540.0,
     "maxAngularAcceleration": 720.0,
     "nominalVoltage": 12.0,
