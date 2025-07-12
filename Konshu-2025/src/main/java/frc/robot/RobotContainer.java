@@ -86,7 +86,8 @@ public class RobotContainer {
     private void configureBindings() {
 
         new Trigger(m_funnel::coralJam)
-                .onTrue(new InstantCommand(() -> m_funnel.runCoralIn(2.0))).onFalse(new InstantCommand(() -> m_funnel.runCoralIn(-4.0)));
+                .onTrue(new InstantCommand(() -> m_funnel.runCoralIn(2.0)))
+                .onFalse(new InstantCommand(() -> m_funnel.runCoralIn(-4.0)));
 
         // configureAutoUp();
 
@@ -158,6 +159,25 @@ public class RobotContainer {
                 new InstantCommand(() -> m_SSM.setState(States.L4, -8.5, 3.0)));
         NamedCommands.registerCommand("GoL3",
                 new InstantCommand(() -> m_SSM.setState(States.L3, 0.0, 9.5)));
+
+        NamedCommands.registerCommand("ScoreL4",
+                (new WaitCommand(.6))
+                        .andThen(m_coralArm.runCoralCmd(-0.40).withTimeout(.2)));
+        NamedCommands.registerCommand("ScoreL4Fast",
+                (new WaitCommand(.17))
+                        .andThen(m_coralArm.runCoralCmd(-0.40).withTimeout(.2)));
+        NamedCommands.registerCommand("ScoreL4Faster",
+                (new WaitCommand(.07))
+                        .andThen(m_coralArm.runCoralCmd(-0.40).withTimeout(.2)));
+        NamedCommands.registerCommand("ScoreL4Final",
+                (new WaitCommand(.17))
+                        .andThen(m_coralArm.runCoralCmd(-0.40).withTimeout(.5)));
+        NamedCommands.registerCommand("ScoreL2Fast",
+                (new WaitCommand(.040))
+                        .andThen(m_coralArm.runCoralCmd(-0.40).withTimeout(.2)));
+
+        NamedCommands.registerCommand("GoL4Old",
+                new InstantCommand(() -> m_SSM.setState(States.L4)));
 
         NamedCommands.registerCommand("GoL3FL", new AlignInPath(() -> m_drivetrain.getState().Pose, () -> {
             DriverStation.Alliance alliance = DriverStation.getAlliance().orElse(DriverStation.Alliance.Blue);
@@ -556,5 +576,43 @@ public class RobotContainer {
 
         gotCoral.and(L1UP).onTrue(new InstantCommand(() -> m_SSM.setState(States.L1, 0.0, 0.0)));
 
-    }
-}
+        
+    
+
+    
+
+    
+            
+    
+        
+    
+    
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
