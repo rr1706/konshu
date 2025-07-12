@@ -409,6 +409,7 @@ public class RobotContainer {
         NamedCommands.registerCommand("ScorePerp", new InstantCommand(() -> m_coralArm.runCoral(-4.0), m_coralArm));
         NamedCommands.registerCommand("Score", m_coralArm.runCoralCmd(-4.0).withTimeout(.2));
 
+
         NamedCommands.registerCommand("AlignCRL4", new AlignInAuto(m_drivetrain, () -> {
             DriverStation.Alliance alliance = DriverStation.getAlliance().orElse(DriverStation.Alliance.Blue);
             if (alliance == DriverStation.Alliance.Blue) {
@@ -436,12 +437,13 @@ public class RobotContainer {
             }
         }, SSM.States.L4, m_SSM));
 
-        NamedCommands.registerCommand("AlignBLL3", new AlignInAuto(m_drivetrain, () -> {
+        
+        NamedCommands.registerCommand("AlignBRL3", new AlignInAuto(m_drivetrain, () -> {
             DriverStation.Alliance alliance = DriverStation.getAlliance().orElse(DriverStation.Alliance.Blue);
             if (alliance == DriverStation.Alliance.Blue) {
-                return AutoAlignConstants.BlueAllianceConstants.kBL;
+                return AutoAlignConstants.BlueAllianceConstants.kBR;
             } else {
-                return AutoAlignConstants.RedAllianceConstants.kBL;
+                return AutoAlignConstants.RedAllianceConstants.kBR;
             }
         }, SSM.States.L3, m_SSM));
 
@@ -576,7 +578,8 @@ public class RobotContainer {
 
         gotCoral.and(L1UP).onTrue(new InstantCommand(() -> m_SSM.setState(States.L1, 0.0, 0.0)));
 
-        
+    }
+}
     
 
     
