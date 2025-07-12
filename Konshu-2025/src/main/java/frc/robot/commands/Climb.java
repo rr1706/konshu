@@ -16,7 +16,7 @@ public class Climb extends Command {
     public void initialize() {
         // TODO Auto-generated method stub
         super.initialize();
-        m_climber.setVoltage(-5.0);
+        m_climber.setVoltage(-8.0);
         m_climber.stopMinion();
     }
 
@@ -25,7 +25,7 @@ public class Climb extends Command {
         // TODO Auto-generated method stub
         super.execute();
         if(m_climber.getPose() < 16.0){
-            m_climber.setVoltage(-3.5);
+            m_climber.setVoltage(-5.0);
         }
     }
 

@@ -3,13 +3,13 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 1.64,
-        "y": 0.6748
+        "x": 1.5584016393442621,
+        "y": 0.5665471311475403
       },
       "prevControl": null,
       "nextControl": {
-        "x": 2.886331575341927,
-        "y": 1.515144807773417
+        "x": 2.8047332146861894,
+        "y": 1.4068919389209578
       },
       "isLocked": false,
       "linkedName": "Proc LS"
@@ -36,7 +36,7 @@
       "maxWaypointRelativePos": 1.0,
       "constraints": {
         "maxVelocity": 4.5,
-        "maxAcceleration": 1.5,
+        "maxAcceleration": 1.6,
         "maxAngularVelocity": 540.0,
         "maxAngularAcceleration": 360.0,
         "nominalVoltage": 12.0,

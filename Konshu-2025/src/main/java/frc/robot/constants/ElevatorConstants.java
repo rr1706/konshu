@@ -24,9 +24,9 @@ public class ElevatorConstants {
   public static final double kElevatorL1 = 8.6; // These are in inches
   public static final double kElevatorL1Interim = 3.0; // Waypoint to arm inside the elevator
   public static final double kElevatorL1IN = kElevatorL1Interim; // Arm inside the elevator
-  public static final double kElevatorL2 = 22.00;
-  public static final double kElevatorL3 =kElevatorL2+15.87;
-  public static final double kElevatorL4 = 72.0;
+  public static final double kElevatorL2 = 22.25;
+  public static final double kElevatorL3 =kElevatorL2+15.87+0.25;
+  public static final double kElevatorL4 = 72.25;
   public static final double kElevatorLoadingStation = 0.5;
   public static final double kElevatorProcessor = 5.7;
   public static final double kElevatorBarge = 70.0;

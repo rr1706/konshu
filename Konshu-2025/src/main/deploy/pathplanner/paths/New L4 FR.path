@@ -3,25 +3,25 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 1.64,
-        "y": 0.6748
+        "x": 1.5584016393442621,
+        "y": 0.5665471311475403
       },
       "prevControl": null,
       "nextControl": {
-        "x": 2.9834942261920485,
-        "y": 1.8525565863490767
+        "x": 2.9018958655363107,
+        "y": 1.7443037174966172
       },
       "isLocked": false,
       "linkedName": "Proc LS"
     },
     {
       "anchor": {
-        "x": 3.9389999999999996,
-        "y": 2.8278
+        "x": 3.955942622950819,
+        "y": 2.8082479508196716
       },
       "prevControl": {
-        "x": 3.6952499999999997,
-        "y": 2.5840499999999995
+        "x": 3.7121926229508193,
+        "y": 2.5644979508196712
       },
       "nextControl": null,
       "isLocked": false,
@@ -32,7 +32,7 @@
   "constraintZones": [
     {
       "name": "Constraints Zone",
-      "minWaypointRelativePos": 0.6004962779156351,
+      "minWaypointRelativePos": 0.7805536799459808,
       "maxWaypointRelativePos": 1.0,
       "constraints": {
         "maxVelocity": 4.0,
@@ -48,7 +48,7 @@
     {
       "fieldPosition": {
         "x": 4.2412575,
-        "y": 3.2678
+        "y": 3.258
       },
       "rotationOffset": 0.0,
       "minWaypointRelativePos": 0.49727047146402414,
