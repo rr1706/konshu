@@ -1,0 +1,71 @@
+{
+  "version": "2025.0",
+  "waypoints": [
+    {
+      "anchor": {
+        "x": 5.303999999999999,
+        "y": 2.9524999999999992
+      },
+      "prevControl": null,
+      "nextControl": {
+        "x": 4.258688641014439,
+        "y": 2.123556782692683
+      },
+      "isLocked": false,
+      "linkedName": "ER END"
+    },
+    {
+      "anchor": {
+        "x": 1.5823770491803275,
+        "y": 0.6144979508196718
+      },
+      "prevControl": {
+        "x": 1.7836774112488194,
+        "y": 0.7923434780054475
+      },
+      "nextControl": null,
+      "isLocked": false,
+      "linkedName": "Loading Station"
+    }
+  ],
+  "rotationTargets": [
+    {
+      "waypointRelativePos": 0.6158785755983657,
+      "rotationDegrees": 54.0
+    }
+  ],
+  "constraintZones": [],
+  "pointTowardsZones": [],
+  "eventMarkers": [
+    {
+      "name": "MT2",
+      "waypointRelativePos": 0.05288461538461578,
+      "endWaypointRelativePos": null,
+      "command": {
+        "type": "named",
+        "data": {
+          "name": "UseMT2"
+        }
+      }
+    }
+  ],
+  "globalConstraints": {
+    "maxVelocity": 4.0,
+    "maxAcceleration": 3.6,
+    "maxAngularVelocity": 540.0,
+    "maxAngularAcceleration": 720.0,
+    "nominalVoltage": 12.0,
+    "unlimited": false
+  },
+  "goalEndState": {
+    "velocity": 0,
+    "rotation": 54.0
+  },
+  "reversed": false,
+  "folder": null,
+  "idealStartingState": {
+    "velocity": 0,
+    "rotation": 119.99999999999999
+  },
+  "useDefaultConstraints": true
+}

@@ -3,29 +3,29 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 3.9389999999999996,
-        "y": 5.224
+        "x": 1.5823770491803275,
+        "y": 0.6144979508196718
       },
       "prevControl": null,
       "nextControl": {
-        "x": 3.591325169854554,
-        "y": 5.509298895517341
+        "x": 2.109391028656209,
+        "y": 1.106441077682431
       },
       "isLocked": false,
-      "linkedName": "BL End"
+      "linkedName": "Loading Station"
     },
     {
       "anchor": {
-        "x": 1.6183401639344261,
-        "y": 7.423514344262295
+        "x": 3.9679303278688525,
+        "y": 2.7842725409836064
       },
       "prevControl": {
-        "x": 1.790197620121832,
-        "y": 7.241951642275367
+        "x": 3.830755721300733,
+        "y": 2.5752674517803014
       },
       "nextControl": null,
       "isLocked": false,
-      "linkedName": "Path 2 LS 1"
+      "linkedName": "L4 K"
     }
   ],
   "rotationTargets": [],
@@ -33,42 +33,31 @@
   "pointTowardsZones": [],
   "eventMarkers": [
     {
-      "name": "Load",
-      "waypointRelativePos": 0.04985754985754849,
+      "name": "score_point",
+      "waypointRelativePos": 0.04674796747967752,
       "endWaypointRelativePos": null,
       "command": {
         "type": "named",
         "data": {
-          "name": "GoLoadingStationPOS"
+          "name": "GoL4"
         }
       }
     },
     {
-      "name": "MT2",
-      "waypointRelativePos": 0.051341890315050154,
+      "name": "Dont Use MT2",
+      "waypointRelativePos": 0.2987637362637345,
       "endWaypointRelativePos": null,
       "command": {
         "type": "named",
         "data": {
-          "name": "UseMT2"
-        }
-      }
-    },
-    {
-      "name": "Run Funnel",
-      "waypointRelativePos": 0.49999999999999506,
-      "endWaypointRelativePos": null,
-      "command": {
-        "type": "named",
-        "data": {
-          "name": "Run Funnel"
+          "name": "NoMT2"
         }
       }
     }
   ],
   "globalConstraints": {
     "maxVelocity": 4.0,
-    "maxAcceleration": 3.8,
+    "maxAcceleration": 3.75,
     "maxAngularVelocity": 540.0,
     "maxAngularAcceleration": 720.0,
     "nominalVoltage": 12.0,
@@ -76,13 +65,13 @@
   },
   "goalEndState": {
     "velocity": 0,
-    "rotation": -54.0
+    "rotation": 59.99999999999999
   },
   "reversed": false,
   "folder": null,
   "idealStartingState": {
     "velocity": 0,
-    "rotation": -59.99999999999999
+    "rotation": 54.0
   },
   "useDefaultConstraints": false
 }

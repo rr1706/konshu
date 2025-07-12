@@ -3,16 +3,16 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 3.9389999999999996,
-        "y": 5.224
+        "x": 5.31375,
+        "y": 5.10725
       },
       "prevControl": null,
       "nextControl": {
-        "x": 3.591325169854554,
-        "y": 5.509298895517341
+        "x": 4.268519893640644,
+        "y": 5.93613480789553
       },
       "isLocked": false,
-      "linkedName": "BL End"
+      "linkedName": "CL End"
     },
     {
       "anchor": {
@@ -20,32 +20,26 @@
         "y": 7.423514344262295
       },
       "prevControl": {
-        "x": 1.790197620121832,
-        "y": 7.241951642275367
+        "x": 1.8199336420602408,
+        "y": 7.245410246675696
       },
       "nextControl": null,
       "isLocked": false,
       "linkedName": "Path 2 LS 1"
     }
   ],
-  "rotationTargets": [],
+  "rotationTargets": [
+    {
+      "waypointRelativePos": 0.6230031948881751,
+      "rotationDegrees": -54.0
+    }
+  ],
   "constraintZones": [],
   "pointTowardsZones": [],
   "eventMarkers": [
     {
-      "name": "Load",
-      "waypointRelativePos": 0.04985754985754849,
-      "endWaypointRelativePos": null,
-      "command": {
-        "type": "named",
-        "data": {
-          "name": "GoLoadingStationPOS"
-        }
-      }
-    },
-    {
       "name": "MT2",
-      "waypointRelativePos": 0.051341890315050154,
+      "waypointRelativePos": 0.05134189031505425,
       "endWaypointRelativePos": null,
       "command": {
         "type": "named",
@@ -53,22 +47,11 @@
           "name": "UseMT2"
         }
       }
-    },
-    {
-      "name": "Run Funnel",
-      "waypointRelativePos": 0.49999999999999506,
-      "endWaypointRelativePos": null,
-      "command": {
-        "type": "named",
-        "data": {
-          "name": "Run Funnel"
-        }
-      }
     }
   ],
   "globalConstraints": {
     "maxVelocity": 4.0,
-    "maxAcceleration": 3.8,
+    "maxAcceleration": 3.6,
     "maxAngularVelocity": 540.0,
     "maxAngularAcceleration": 720.0,
     "nominalVoltage": 12.0,
@@ -82,7 +65,7 @@
   "folder": null,
   "idealStartingState": {
     "velocity": 0,
-    "rotation": -59.99999999999999
+    "rotation": -119.99999999999999
   },
-  "useDefaultConstraints": false
+  "useDefaultConstraints": true
 }
