@@ -37,7 +37,7 @@ public class Funnel extends SubsystemBase {
     }
 
     public boolean coralJam(){
-        return m_debounceJam.calculate(m_InFX.getStatorCurrent().getValueAsDouble() >= 25.0);
+        return m_debounceJam.calculate(m_InFX.getStatorCurrent().getValueAsDouble() >= 30.0);
     }
     public Command runFunnelIfReady(double volts) {
         return runEnd(() -> {
