@@ -1,7 +1,5 @@
 package frc.robot;
 
-import java.lang.Thread.State;
-
 import com.pathplanner.lib.auto.AutoBuilder;
 import com.pathplanner.lib.auto.NamedCommands;
 import edu.wpi.first.wpilibj.DriverStation;

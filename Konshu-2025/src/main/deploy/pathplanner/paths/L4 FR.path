@@ -3,16 +3,16 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 1.5823770491803275,
-        "y": 0.6144979508196718
+        "x": 1.5584016393442621,
+        "y": 0.5665471311475403
       },
       "prevControl": null,
       "nextControl": {
-        "x": 2.109391028656209,
-        "y": 1.106441077682431
+        "x": 2.085415618820144,
+        "y": 1.0584902580102993
       },
       "isLocked": false,
-      "linkedName": "Loading Station"
+      "linkedName": "Proc LS"
     },
     {
       "anchor": {

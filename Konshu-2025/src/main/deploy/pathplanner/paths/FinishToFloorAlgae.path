@@ -8,20 +8,20 @@
       },
       "prevControl": null,
       "nextControl": {
-        "x": 7.549637731609652,
-        "y": 5.475467568620227
+        "x": 7.351500000000001,
+        "y": 5.399749999999999
       },
       "isLocked": false,
       "linkedName": "barge3"
     },
     {
       "anchor": {
-        "x": 5.9219262295081965,
-        "y": 6.63232581967213
+        "x": 2.925,
+        "y": 7.34975
       },
       "prevControl": {
-        "x": 6.16038934944501,
-        "y": 6.557256915124368
+        "x": 3.163463119936815,
+        "y": 7.274681095452238
       },
       "nextControl": null,
       "isLocked": false,
@@ -45,8 +45,8 @@
     }
   ],
   "globalConstraints": {
-    "maxVelocity": 2.0,
-    "maxAcceleration": 3.6,
+    "maxVelocity": 4.0,
+    "maxAcceleration": 5.0,
     "maxAngularVelocity": 540.0,
     "maxAngularAcceleration": 720.0,
     "nominalVoltage": 12.0,
@@ -54,7 +54,7 @@
   },
   "goalEndState": {
     "velocity": 0,
-    "rotation": -135.0
+    "rotation": -126.32682595212013
   },
   "reversed": false,
   "folder": "Algae Auto",
