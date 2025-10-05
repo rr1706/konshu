@@ -3,37 +3,32 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 5.047,
-        "y": 2.822
+        "x": 4.988,
+        "y": 2.8328
       },
       "prevControl": null,
       "nextControl": {
-        "x": 3.293362232699331,
-        "y": 1.6324648106528918
+        "x": 4.32064668283208,
+        "y": 2.2200394023234096
       },
       "isLocked": false,
       "linkedName": "EL End"
     },
     {
       "anchor": {
-        "x": 1.5584016393442621,
-        "y": 0.5665471311475403
+        "x": 1.667,
+        "y": 0.663
       },
       "prevControl": {
-        "x": 1.7575888005423237,
-        "y": 0.7183365366277763
+        "x": 1.937130438202542,
+        "y": 0.8759918927013484
       },
       "nextControl": null,
       "isLocked": false,
       "linkedName": "Proc LS"
     }
   ],
-  "rotationTargets": [
-    {
-      "waypointRelativePos": 0.7493775933609989,
-      "rotationDegrees": 54.0
-    }
-  ],
+  "rotationTargets": [],
   "constraintZones": [],
   "pointTowardsZones": [],
   "eventMarkers": [
@@ -61,7 +56,7 @@
     },
     {
       "name": "Run Funnel",
-      "waypointRelativePos": 0.4981006647673206,
+      "waypointRelativePos": 0.8011363636363653,
       "endWaypointRelativePos": null,
       "command": {
         "type": "named",
@@ -73,7 +68,7 @@
   ],
   "globalConstraints": {
     "maxVelocity": 4.0,
-    "maxAcceleration": 3.95,
+    "maxAcceleration": 3.75,
     "maxAngularVelocity": 540.0,
     "maxAngularAcceleration": 720.0,
     "nominalVoltage": 12.0,
@@ -87,7 +82,7 @@
   "folder": null,
   "idealStartingState": {
     "velocity": 0,
-    "rotation": 123.68999999999998
+    "rotation": 119.99999999999999
   },
-  "useDefaultConstraints": false
+  "useDefaultConstraints": true
 }

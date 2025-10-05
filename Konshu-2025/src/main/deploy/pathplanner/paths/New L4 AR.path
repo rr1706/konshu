@@ -3,25 +3,25 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 1.5584016393442621,
-        "y": 0.5665471311475403
+        "x": 1.667,
+        "y": 0.663
       },
       "prevControl": null,
       "nextControl": {
-        "x": 2.4836981260636337,
-        "y": 1.8865359233972279
+        "x": 2.575870146860073,
+        "y": 2.0401183885732372
       },
       "isLocked": false,
       "linkedName": "Proc LS"
     },
     {
       "anchor": {
-        "x": 3.1887295081967215,
-        "y": 3.8648
+        "x": 3.208,
+        "y": 3.862
       },
       "prevControl": {
-        "x": 2.2534878514462955,
-        "y": 3.9487288000552754
+        "x": 2.486,
+        "y": 3.862
       },
       "nextControl": null,
       "isLocked": false,
@@ -32,11 +32,11 @@
   "constraintZones": [
     {
       "name": "Constraints Zone",
-      "minWaypointRelativePos": 0.6084367245657575,
+      "minWaypointRelativePos": 0.6004962779156339,
       "maxWaypointRelativePos": 1.0,
       "constraints": {
         "maxVelocity": 4.0,
-        "maxAcceleration": 1.5,
+        "maxAcceleration": 1.0,
         "maxAngularVelocity": 360.0,
         "maxAngularAcceleration": 360.0,
         "nominalVoltage": 12.0,
@@ -44,7 +44,18 @@
       }
     }
   ],
-  "pointTowardsZones": [],
+  "pointTowardsZones": [
+    {
+      "fieldPosition": {
+        "x": 3.71,
+        "y": 3.862
+      },
+      "rotationOffset": 0.0,
+      "minWaypointRelativePos": 0.5985111662531022,
+      "maxWaypointRelativePos": 1.0,
+      "name": "Point Towards Zone"
+    }
+  ],
   "eventMarkers": [
     {
       "name": "Run Funnel",
@@ -70,7 +81,7 @@
     },
     {
       "name": "Dont Use MT2",
-      "waypointRelativePos": 0.39529220779220964,
+      "waypointRelativePos": 0.4991883116883128,
       "endWaypointRelativePos": null,
       "command": {
         "type": "named",
@@ -92,7 +103,7 @@
     },
     {
       "name": "Score",
-      "waypointRelativePos": 0.9291019581363952,
+      "waypointRelativePos": 0.9472402597402578,
       "endWaypointRelativePos": null,
       "command": {
         "type": "named",
@@ -104,7 +115,7 @@
   ],
   "globalConstraints": {
     "maxVelocity": 4.0,
-    "maxAcceleration": 3.5,
+    "maxAcceleration": 3.75,
     "maxAngularVelocity": 540.0,
     "maxAngularAcceleration": 720.0,
     "nominalVoltage": 12.0,

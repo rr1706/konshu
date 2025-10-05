@@ -3,13 +3,13 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 1.5584016393442621,
-        "y": 0.5665471311475403
+        "x": 1.6678,
+        "y": 0.66125
       },
       "prevControl": null,
       "nextControl": {
-        "x": 2.085458708408061,
-        "y": 1.0585347793155386
+        "x": 2.2751332993676385,
+        "y": 1.1766757553378162
       },
       "isLocked": false,
       "linkedName": "Proc LS"
@@ -20,8 +20,8 @@
         "y": 2.7258
       },
       "prevControl": {
-        "x": 3.96261961933087,
-        "y": 2.5167954726554824
+        "x": 3.912372658554461,
+        "y": 2.5603526210479863
       },
       "nextControl": null,
       "isLocked": false,
@@ -29,21 +29,7 @@
     }
   ],
   "rotationTargets": [],
-  "constraintZones": [
-    {
-      "name": "Constraints Zone",
-      "minWaypointRelativePos": 0.6995273463875857,
-      "maxWaypointRelativePos": 1.0,
-      "constraints": {
-        "maxVelocity": 4.5,
-        "maxAcceleration": 2.5,
-        "maxAngularVelocity": 540.0,
-        "maxAngularAcceleration": 360.0,
-        "nominalVoltage": 12.0,
-        "unlimited": false
-      }
-    }
-  ],
+  "constraintZones": [],
   "pointTowardsZones": [],
   "eventMarkers": [
     {
@@ -81,7 +67,7 @@
     },
     {
       "name": "ScoreNow",
-      "waypointRelativePos": 0.9345037137069553,
+      "waypointRelativePos": 0.9478908188585614,
       "endWaypointRelativePos": null,
       "command": {
         "type": "named",
@@ -93,7 +79,7 @@
   ],
   "globalConstraints": {
     "maxVelocity": 4.0,
-    "maxAcceleration": 3.5,
+    "maxAcceleration": 3.75,
     "maxAngularVelocity": 540.0,
     "maxAngularAcceleration": 720.0,
     "nominalVoltage": 12.0,

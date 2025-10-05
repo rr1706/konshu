@@ -3,25 +3,25 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 1.6183401639344261,
-        "y": 7.423514344262295
+        "x": 1.6672500000000001,
+        "y": 7.38875
       },
       "prevControl": null,
       "nextControl": {
-        "x": 2.8646676785279714,
-        "y": 6.583163513946104
+        "x": 3.036991374926709,
+        "y": 6.295652116479352
       },
       "isLocked": false,
       "linkedName": "Path 2 LS 1"
     },
     {
       "anchor": {
-        "x": 3.668237704918033,
-        "y": 5.145850409836064
+        "x": 3.706,
+        "y": 5.055
       },
       "prevControl": {
-        "x": 3.5123975409836072,
-        "y": 5.481506147540982
+        "x": 3.581,
+        "y": 5.271506350946109
       },
       "nextControl": null,
       "isLocked": false,
@@ -35,8 +35,8 @@
       "minWaypointRelativePos": 0.5488833746898282,
       "maxWaypointRelativePos": 1.0,
       "constraints": {
-        "maxVelocity": 4.5,
-        "maxAcceleration": 1.5,
+        "maxVelocity": 4.0,
+        "maxAcceleration": 2.0,
         "maxAngularVelocity": 540.0,
         "maxAngularAcceleration": 360.0,
         "nominalVoltage": 12.0,
@@ -51,7 +51,7 @@
         "y": 4.618883
       },
       "rotationOffset": 0.0,
-      "minWaypointRelativePos": 0.49925558312655044,
+      "minWaypointRelativePos": 0.4992555831265556,
       "maxWaypointRelativePos": 1.0,
       "name": "Point Towards Zone"
     }
@@ -115,7 +115,7 @@
   ],
   "globalConstraints": {
     "maxVelocity": 4.0,
-    "maxAcceleration": 3.5,
+    "maxAcceleration": 3.75,
     "maxAngularVelocity": 540.0,
     "maxAngularAcceleration": 720.0,
     "nominalVoltage": 12.0,
