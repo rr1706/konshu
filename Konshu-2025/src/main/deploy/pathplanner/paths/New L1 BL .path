@@ -3,13 +3,13 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 1.6183401639344261,
-        "y": 7.423514344262295
+        "x": 1.6672500000000001,
+        "y": 7.38875
       },
       "prevControl": null,
       "nextControl": {
-        "x": 2.145397232998226,
-        "y": 6.931526696094297
+        "x": 2.1943070690638002,
+        "y": 6.896762351832002
       },
       "isLocked": false,
       "linkedName": "Path 2 LS 1"
@@ -29,21 +29,7 @@
     }
   ],
   "rotationTargets": [],
-  "constraintZones": [
-    {
-      "name": "Constraints Zone",
-      "minWaypointRelativePos": 0.6995273463875857,
-      "maxWaypointRelativePos": 1.0,
-      "constraints": {
-        "maxVelocity": 4.5,
-        "maxAcceleration": 2.5,
-        "maxAngularVelocity": 540.0,
-        "maxAngularAcceleration": 360.0,
-        "nominalVoltage": 12.0,
-        "unlimited": false
-      }
-    }
-  ],
+  "constraintZones": [],
   "pointTowardsZones": [],
   "eventMarkers": [
     {
@@ -81,7 +67,7 @@
     },
     {
       "name": "ScoreNow",
-      "waypointRelativePos": 0.9345037137069553,
+      "waypointRelativePos": 0.9498759305210911,
       "endWaypointRelativePos": null,
       "command": {
         "type": "named",
@@ -93,7 +79,7 @@
   ],
   "globalConstraints": {
     "maxVelocity": 4.0,
-    "maxAcceleration": 3.4,
+    "maxAcceleration": 3.75,
     "maxAngularVelocity": 540.0,
     "maxAngularAcceleration": 720.0,
     "nominalVoltage": 12.0,

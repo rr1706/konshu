@@ -16,16 +16,16 @@
     },
     {
       "anchor": {
-        "x": 1.5823770491803275,
-        "y": 0.6144979508196718
+        "x": 1.6678,
+        "y": 0.66125
       },
       "prevControl": {
-        "x": 1.705331782517062,
-        "y": 0.832172325862056
+        "x": 1.7907547333367344,
+        "y": 0.8789243750423842
       },
       "nextControl": null,
       "isLocked": false,
-      "linkedName": "Loading Station"
+      "linkedName": "Proc LS"
     }
   ],
   "rotationTargets": [],

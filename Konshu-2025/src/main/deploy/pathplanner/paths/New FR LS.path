@@ -3,25 +3,25 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 3.955942622950819,
-        "y": 2.8082479508196716
+        "x": 3.991,
+        "y": 2.833
       },
       "prevControl": null,
       "nextControl": {
-        "x": 3.6080729718748183,
-        "y": 2.522789186967059
+        "x": 3.716067070848203,
+        "y": 2.582408929791956
       },
       "isLocked": false,
       "linkedName": "FR End"
     },
     {
       "anchor": {
-        "x": 1.5584016393442621,
-        "y": 0.5665471311475403
+        "x": 1.667,
+        "y": 0.6628
       },
       "prevControl": {
-        "x": 1.7302590955316675,
-        "y": 0.7481098331344683
+        "x": 1.8626493229507912,
+        "y": 0.8184320739079736
       },
       "nextControl": null,
       "isLocked": false,
@@ -56,7 +56,7 @@
     },
     {
       "name": "Run Funnel",
-      "waypointRelativePos": 0.49999999999999506,
+      "waypointRelativePos": 0.7946428571428562,
       "endWaypointRelativePos": null,
       "command": {
         "type": "named",
@@ -68,7 +68,7 @@
   ],
   "globalConstraints": {
     "maxVelocity": 4.0,
-    "maxAcceleration": 3.9,
+    "maxAcceleration": 3.75,
     "maxAngularVelocity": 540.0,
     "maxAngularAcceleration": 720.0,
     "nominalVoltage": 12.0,
@@ -84,5 +84,5 @@
     "velocity": 0,
     "rotation": 59.99999999999999
   },
-  "useDefaultConstraints": false
+  "useDefaultConstraints": true
 }

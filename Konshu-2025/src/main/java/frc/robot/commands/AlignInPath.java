@@ -74,15 +74,15 @@ public class AlignInPath extends Command {
 
         m_ssm.setState(m_state, armOffset, elevatorOffset);
 
-        double rotationOutput = rotPID.calculate(currentAngle, targetAngle);
+        // double rotationOutput = rotPID.calculate(currentAngle, targetAngle);
 
-        PPHolonomicDriveController.overrideRotationFeedback(() ->
-        rotationOutput);
+        // PPHolonomicDriveController.overrideRotationFeedback(() ->
+        // rotationOutput);
 
     }
 
     @Override
     public void end(boolean interrupted) {
-        PPHolonomicDriveController.clearRotationFeedbackOverride();
+        // PPHolonomicDriveController.clearRotationFeedbackOverride();
     }
 }

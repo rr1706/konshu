@@ -3,25 +3,25 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 1.5584016393442621,
-        "y": 0.5665471311475403
+        "x": 1.667,
+        "y": 0.6628
       },
       "prevControl": null,
       "nextControl": {
-        "x": 2.9018958655363107,
-        "y": 1.7443037174966172
+        "x": 3.2273247247207983,
+        "y": 1.3197899188153233
       },
       "isLocked": false,
       "linkedName": "Proc LS"
     },
     {
       "anchor": {
-        "x": 3.955942622950819,
-        "y": 2.8082479508196716
+        "x": 3.991,
+        "y": 2.833
       },
       "prevControl": {
-        "x": 3.7121926229508193,
-        "y": 2.5644979508196712
+        "x": 3.866,
+        "y": 2.616493649053891
       },
       "nextControl": null,
       "isLocked": false,
@@ -32,11 +32,11 @@
   "constraintZones": [
     {
       "name": "Constraints Zone",
-      "minWaypointRelativePos": 0.7805536799459808,
+      "minWaypointRelativePos": 0.6030844155844188,
       "maxWaypointRelativePos": 1.0,
       "constraints": {
         "maxVelocity": 4.0,
-        "maxAcceleration": 1.5,
+        "maxAcceleration": 2.0,
         "maxAngularVelocity": 540.0,
         "maxAngularAcceleration": 360.0,
         "nominalVoltage": 12.0,
@@ -81,7 +81,7 @@
     },
     {
       "name": "Dont Use MT2",
-      "waypointRelativePos": 0.3033838973162226,
+      "waypointRelativePos": 0.5024350649350668,
       "endWaypointRelativePos": null,
       "command": {
         "type": "named",
@@ -103,7 +103,7 @@
     },
     {
       "name": "Score",
-      "waypointRelativePos": 0.9161290322580652,
+      "waypointRelativePos": 0.9472402597402593,
       "endWaypointRelativePos": null,
       "command": {
         "type": "named",
@@ -115,7 +115,7 @@
   ],
   "globalConstraints": {
     "maxVelocity": 4.0,
-    "maxAcceleration": 3.4,
+    "maxAcceleration": 3.75,
     "maxAngularVelocity": 540.0,
     "maxAngularAcceleration": 720.0,
     "nominalVoltage": 12.0,

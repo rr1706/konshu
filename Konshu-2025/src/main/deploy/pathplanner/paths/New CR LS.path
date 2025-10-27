@@ -3,37 +3,32 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 4.998872950819672,
-        "y": 5.277715163934426
+        "x": 4.988,
+        "y": 5.219
       },
       "prevControl": null,
       "nextControl": {
-        "x": 3.2452293669602597,
-        "y": 6.467241778343306
+        "x": 4.320370010514838,
+        "y": 5.832023083339147
       },
       "isLocked": false,
       "linkedName": "CR End"
     },
     {
       "anchor": {
-        "x": 1.6183401639344261,
-        "y": 7.423514344262295
+        "x": 1.6672500000000001,
+        "y": 7.38875
       },
       "prevControl": {
-        "x": 1.817527228553112,
-        "y": 7.271724812044893
+        "x": 1.9375825188372477,
+        "y": 7.1755983756617105
       },
       "nextControl": null,
       "isLocked": false,
       "linkedName": "Path 2 LS 1"
     }
   ],
-  "rotationTargets": [
-    {
-      "waypointRelativePos": 0.7493775933609989,
-      "rotationDegrees": -54.0
-    }
-  ],
+  "rotationTargets": [],
   "constraintZones": [],
   "pointTowardsZones": [],
   "eventMarkers": [
@@ -61,7 +56,7 @@
     },
     {
       "name": "Run Funnel",
-      "waypointRelativePos": 0.4981006647673206,
+      "waypointRelativePos": 0.747394540942931,
       "endWaypointRelativePos": null,
       "command": {
         "type": "named",
@@ -73,7 +68,7 @@
   ],
   "globalConstraints": {
     "maxVelocity": 4.0,
-    "maxAcceleration": 3.8,
+    "maxAcceleration": 3.75,
     "maxAngularVelocity": 540.0,
     "maxAngularAcceleration": 720.0,
     "nominalVoltage": 12.0,
@@ -89,5 +84,5 @@
     "velocity": 0,
     "rotation": -119.99999999999999
   },
-  "useDefaultConstraints": false
+  "useDefaultConstraints": true
 }

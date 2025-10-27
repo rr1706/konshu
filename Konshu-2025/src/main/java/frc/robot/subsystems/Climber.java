@@ -106,7 +106,7 @@ public Climber() {
     }
 
     public void Climb() {
-        m_climberRightFx.setVoltage(-6.0);
+        m_climberRightFx.setVoltage(-4.5);
         m_NovaRight.setPercent(0);
     }
 

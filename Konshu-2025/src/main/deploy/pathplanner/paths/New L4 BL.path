@@ -3,25 +3,25 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 1.6183401639344261,
-        "y": 7.423514344262295
+        "x": 1.6672500000000001,
+        "y": 7.38875
       },
       "prevControl": null,
       "nextControl": {
-        "x": 2.9618401639344274,
-        "y": 6.2457643442622945
+        "x": 3.2278409797735836,
+        "y": 6.731660578247078
       },
       "isLocked": false,
       "linkedName": "Path 2 LS 1"
     },
     {
       "anchor": {
-        "x": 3.9319672131147536,
-        "y": 5.2897028688524586
+        "x": 3.991,
+        "y": 5.219
       },
       "prevControl": {
-        "x": 3.6882172131147537,
-        "y": 5.533452868852459
+        "x": 3.866,
+        "y": 5.435506350946111
       },
       "nextControl": null,
       "isLocked": false,
@@ -32,11 +32,11 @@
   "constraintZones": [
     {
       "name": "Constraints Zone",
-      "minWaypointRelativePos": 0.6004962779156351,
+      "minWaypointRelativePos": 0.5985111662530967,
       "maxWaypointRelativePos": 1.0,
       "constraints": {
         "maxVelocity": 4.0,
-        "maxAcceleration": 1.5,
+        "maxAcceleration": 2.0,
         "maxAngularVelocity": 540.0,
         "maxAngularAcceleration": 360.0,
         "nominalVoltage": 12.0,
@@ -81,7 +81,7 @@
     },
     {
       "name": "Dont Use MT2",
-      "waypointRelativePos": 0.3033838973162226,
+      "waypointRelativePos": 0.5985111662530955,
       "endWaypointRelativePos": null,
       "command": {
         "type": "named",
@@ -103,7 +103,7 @@
     },
     {
       "name": "Score",
-      "waypointRelativePos": 0.9291019581363943,
+      "waypointRelativePos": 0.9498759305210911,
       "endWaypointRelativePos": null,
       "command": {
         "type": "named",
@@ -115,7 +115,7 @@
   ],
   "globalConstraints": {
     "maxVelocity": 4.0,
-    "maxAcceleration": 3.4,
+    "maxAcceleration": 3.75,
     "maxAngularVelocity": 540.0,
     "maxAngularAcceleration": 720.0,
     "nominalVoltage": 12.0,
