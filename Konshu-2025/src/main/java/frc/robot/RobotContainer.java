@@ -149,6 +149,14 @@ public class RobotContainer {
                 () -> driverController.getRightX(),
                 m_SSM, m_LED));
 
+        operatorcontoller1.button(ButtonConstants.kL1Left).and(operatorcontoller2.button(ButtonConstants.kCoralA)).
+                onTrue(new InstantCommand (() -> m_SSM.setState(States.L1)));
+        operatorcontoller1.button(ButtonConstants.kL2Left).and(operatorcontoller2.button(ButtonConstants.kCoralA)).
+                onTrue(new InstantCommand (() -> m_SSM.setState(States.L2)));
+        operatorcontoller1.button(ButtonConstants.kL3Left).and(operatorcontoller2.button(ButtonConstants.kCoralA)).
+                onTrue(new InstantCommand (() -> m_SSM.setState(States.L3)));
+        operatorcontoller1.button(ButtonConstants.kL4Left).and(operatorcontoller2.button(ButtonConstants.kCoralA)).
+                onTrue(new InstantCommand (() -> m_SSM.setState(States.L4)));
     }
 
     public void configureNamedCommands() {
