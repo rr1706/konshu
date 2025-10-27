@@ -25,7 +25,7 @@ public class Climb extends Command {
         // TODO Auto-generated method stub
         super.execute();
         if(m_climber.getPose() < 16.0){
-            m_climber.setVoltage(-5.0);
+            m_climber.setVoltage(-6.0);
         }
     }
 

@@ -62,6 +62,7 @@ public class RobotContainer {
     private final LED m_LED = new LED(m_coralArm::haveCoral, m_algaeArm::haveAlgae);
     private final SendableChooser<Command> autoChooser;
 
+
     public RobotContainer() {
 
         m_drivetrain = TunerConstants.createDrivetrain();
@@ -84,7 +85,7 @@ public class RobotContainer {
     private void configureBindings() {
 
         new Trigger(m_funnel::coralJam)
-                .onTrue(new InstantCommand(() -> m_funnel.runCoralIn(2.0)))
+                .onTrue(new InstantCommand(() -> m_funnel.runCoralIn(1.0)))
                 .onFalse(new InstantCommand(() -> m_funnel.runCoralIn(-4.0)));
 
         // configureAutoUp();

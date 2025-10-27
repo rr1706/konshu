@@ -81,7 +81,7 @@
     },
     {
       "name": "Score",
-      "waypointRelativePos": 0.9459057071960287,
+      "waypointRelativePos": 0.980418636056717,
       "endWaypointRelativePos": null,
       "command": {
         "type": "named",
@@ -93,7 +93,7 @@
   ],
   "globalConstraints": {
     "maxVelocity": 4.0,
-    "maxAcceleration": 3.75,
+    "maxAcceleration": 3.85,
     "maxAngularVelocity": 540.0,
     "maxAngularAcceleration": 720.0,
     "nominalVoltage": 12.0,

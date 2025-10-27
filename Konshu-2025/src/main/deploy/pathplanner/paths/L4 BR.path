@@ -3,13 +3,13 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 1.6672500000000001,
-        "y": 7.38875
+        "x": 1.642,
+        "y": 7.438
       },
       "prevControl": null,
       "nextControl": {
-        "x": 1.8298614793264505,
-        "y": 7.038673570071815
+        "x": 1.8046114793264503,
+        "y": 7.087923570071815
       },
       "isLocked": false,
       "linkedName": "Path 2 LS 1"
@@ -57,7 +57,7 @@
   ],
   "globalConstraints": {
     "maxVelocity": 4.0,
-    "maxAcceleration": 3.75,
+    "maxAcceleration": 3.85,
     "maxAngularVelocity": 540.0,
     "maxAngularAcceleration": 720.0,
     "nominalVoltage": 12.0,

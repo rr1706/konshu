@@ -17,8 +17,8 @@ public class AlignInPath extends Command {
     private final SSM.States m_state;
     private final SSM m_ssm;
 
-    private final PIDController rotPID = new PIDController(
-            12.0, 0.0, 0.3);
+    // private final PIDController rotPID = new PIDController(
+    //         12.0, 0.0, 0.3);
 
     public AlignInPath(Supplier<Pose2d> drivePose, Supplier<Translation2d> target, SSM.States state, SSM ssm) {
         m_target = target;
@@ -26,8 +26,8 @@ public class AlignInPath extends Command {
         m_state = state;
         m_ssm = ssm;
 
-        rotPID.enableContinuousInput(-Math.PI, Math.PI);
-        rotPID.setTolerance(0.05);
+        //rotPID.enableContinuousInput(-Math.PI, Math.PI);
+        //rotPID.setTolerance(0.05);
     }
 
     @Override
@@ -39,12 +39,12 @@ public class AlignInPath extends Command {
     @Override
     public void execute() {
         Pose2d currentPose = m_drivePose.get();
-        double currentAngle = currentPose.getRotation().getRadians();
+        //double currentAngle = currentPose.getRotation().getRadians();
 
         Translation2d target = m_target.get();
 
-        Translation2d robotToGoal = target.minus(currentPose.getTranslation());
-        double targetAngle = robotToGoal.getAngle().getRadians();
+        //Translation2d robotToGoal = target.minus(currentPose.getTranslation());
+        //double targetAngle = robotToGoal.getAngle().getRadians();
         double elevatorOffset = 0.0;
         double armOffset = 0.0;
         double dist = target.getDistance(currentPose.getTranslation()); // Distance to post from robot

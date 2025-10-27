@@ -3,13 +3,13 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 1.6678,
-        "y": 0.66125
+        "x": 1.585,
+        "y": 0.642
       },
       "prevControl": null,
       "nextControl": {
-        "x": 2.2909795147420144,
-        "y": 2.021833154176904
+        "x": 2.2081795147420147,
+        "y": 2.0025831541769046
       },
       "isLocked": false,
       "linkedName": "Proc LS"
