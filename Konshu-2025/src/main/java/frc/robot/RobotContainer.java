@@ -157,6 +157,10 @@ public class RobotContainer {
                 onTrue(new InstantCommand (() -> m_SSM.setState(States.L3)));
         operatorcontoller1.button(ButtonConstants.kL4Left).and(operatorcontoller2.button(ButtonConstants.kCoralA)).
                 onTrue(new InstantCommand (() -> m_SSM.setState(States.L4)));
+        operatorcontoller1.button(ButtonConstants.kHighAlgae).and(operatorcontoller2.button(ButtonConstants.kCoralA)).
+                onTrue(new InstantCommand(()-> m_SSM.setState(States.ALGAEHIGH)));
+        operatorcontoller2.button(ButtonConstants.kLowAlgae).and(operatorcontoller2.button(ButtonConstants.kCoralA)).
+                onTrue(new InstantCommand(()-> m_SSM.setState(States.ALGAELOW)));
     }
 
     public void configureNamedCommands() {
