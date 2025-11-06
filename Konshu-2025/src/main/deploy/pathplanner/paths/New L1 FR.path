@@ -9,7 +9,7 @@
       "prevControl": null,
       "nextControl": {
         "x": 2.1923332993676388,
-        "y": 1.1574257553378164
+        "y": 1.1574257553378162
       },
       "isLocked": false,
       "linkedName": "Proc LS"
@@ -79,7 +79,7 @@
   ],
   "globalConstraints": {
     "maxVelocity": 4.0,
-    "maxAcceleration": 3.85,
+    "maxAcceleration": 3.0,
     "maxAngularVelocity": 540.0,
     "maxAngularAcceleration": 720.0,
     "nominalVoltage": 12.0,

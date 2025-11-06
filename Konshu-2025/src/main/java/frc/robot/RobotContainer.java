@@ -62,7 +62,6 @@ public class RobotContainer {
     private final LED m_LED = new LED(m_coralArm::haveCoral, m_algaeArm::haveAlgae);
     private final SendableChooser<Command> autoChooser;
 
-
     public RobotContainer() {
 
         m_drivetrain = TunerConstants.createDrivetrain();
@@ -103,7 +102,7 @@ public class RobotContainer {
         driverController.leftTrigger().onFalse(
                 new InstantCommand(() -> m_funnel.runCoralIn(-4.0)).andThen(new IntakeFromFunnel(m_coralArm)));
         driverController.x().onTrue(new InstantCommand(() -> m_climber.prepClimb())
-                .alongWith(new InstantCommand(() -> m_funnel.runCoralIn(0.0))));
+                .alongWith(new InstantCommand(() -> m_funnel.runCoralIn(0.0))).alongWith(m_climber.runWheels()));
         driverController.b().whileTrue(new Climb(m_climber));
 
         driverController.rightTrigger()
@@ -149,18 +148,22 @@ public class RobotContainer {
                 () -> driverController.getRightX(),
                 m_SSM, m_LED));
 
-        operatorcontoller1.button(ButtonConstants.kL1Left).and(operatorcontoller2.button(ButtonConstants.kCoralA)).
-                onTrue(new InstantCommand (() -> m_SSM.setState(States.L1)));
-        operatorcontoller1.button(ButtonConstants.kL2Left).and(operatorcontoller2.button(ButtonConstants.kCoralA)).
-                onTrue(new InstantCommand (() -> m_SSM.setState(States.L2)));
-        operatorcontoller1.button(ButtonConstants.kL3Left).and(operatorcontoller2.button(ButtonConstants.kCoralA)).
-                onTrue(new InstantCommand (() -> m_SSM.setState(States.L3)));
-        operatorcontoller1.button(ButtonConstants.kL4Left).and(operatorcontoller2.button(ButtonConstants.kCoralA)).
-                onTrue(new InstantCommand (() -> m_SSM.setState(States.L4)));
-        operatorcontoller1.button(ButtonConstants.kHighAlgae).and(operatorcontoller2.button(ButtonConstants.kCoralA)).
-                onTrue(new InstantCommand(()-> m_SSM.setState(States.ALGAEHIGH)));
-        operatorcontoller2.button(ButtonConstants.kLowAlgae).and(operatorcontoller2.button(ButtonConstants.kCoralA)).
-                onTrue(new InstantCommand(()-> m_SSM.setState(States.ALGAELOW)));
+        operatorcontoller1.button(ButtonConstants.kL1Left).and(operatorcontoller2.button(ButtonConstants.kCoralA))
+                .onTrue(new InstantCommand(() -> m_SSM.setState(States.L1)));
+        // Button Board Backup for L1 Elevator.
+        operatorcontoller1.button(ButtonConstants.kL2Left).and(operatorcontoller2.button(ButtonConstants.kCoralA))
+                .onTrue(new InstantCommand(() -> m_SSM.setState(States.L2)));
+        // Button Board Backup for L2 Elevator.
+        operatorcontoller1.button(ButtonConstants.kL3Left).and(operatorcontoller2.button(ButtonConstants.kCoralA))
+                .onTrue(new InstantCommand(() -> m_SSM.setState(States.L3)));
+        // Button Board Backup for L3 Elevator.
+        operatorcontoller1.button(ButtonConstants.kL4Left).and(operatorcontoller2.button(ButtonConstants.kCoralA))
+                .onTrue(new InstantCommand(() -> m_SSM.setState(States.L4)));
+
+        operatorcontoller1.button(ButtonConstants.kHighAlgae).and(operatorcontoller2.button(ButtonConstants.kCoralA))
+                .onTrue(new InstantCommand(() -> m_SSM.setState(States.ALGAEHIGH)));
+        operatorcontoller2.button(ButtonConstants.kLowAlgae).and(operatorcontoller2.button(ButtonConstants.kCoralA))
+                .onTrue(new InstantCommand(() -> m_SSM.setState(States.ALGAELOW)));
     }
 
     public void configureNamedCommands() {
@@ -169,7 +172,7 @@ public class RobotContainer {
         NamedCommands.registerCommand("GoL4",
                 new InstantCommand(() -> m_SSM.setState(States.L4, -8.5, 3.0)));
         NamedCommands.registerCommand("GoL3",
-                new InstantCommand(() -> m_SSM.setState(States.L3, 0.0, 9.5)));
+                new InstantCommand(() -> m_SSM.setState(States.L3, 0.0, 0.0)));
 
         NamedCommands.registerCommand("ScoreL4",
                 (new WaitCommand(.6))
@@ -223,6 +226,23 @@ public class RobotContainer {
                 return AutoAlignConstants.BlueAllianceConstants.kBR;
             } else {
                 return AutoAlignConstants.RedAllianceConstants.kBR;
+            }
+        }, SSM.States.L3, m_SSM));
+        NamedCommands.registerCommand("GoL3AL", new AlignInPath(() -> m_drivetrain.getState().Pose, () -> {
+            DriverStation.Alliance alliance = DriverStation.getAlliance().orElse(DriverStation.Alliance.Blue);
+            if (alliance == DriverStation.Alliance.Blue) {
+                return AutoAlignConstants.BlueAllianceConstants.kAL;
+            } else {
+                return AutoAlignConstants.RedAllianceConstants.kAL;
+            }
+        }, SSM.States.L3, m_SSM));
+
+        NamedCommands.registerCommand("GoL3AR", new AlignInPath(() -> m_drivetrain.getState().Pose, () -> {
+            DriverStation.Alliance alliance = DriverStation.getAlliance().orElse(DriverStation.Alliance.Blue);
+            if (alliance == DriverStation.Alliance.Blue) {
+                return AutoAlignConstants.BlueAllianceConstants.kAR;
+            } else {
+                return AutoAlignConstants.RedAllianceConstants.kAR;
             }
         }, SSM.States.L3, m_SSM));
 

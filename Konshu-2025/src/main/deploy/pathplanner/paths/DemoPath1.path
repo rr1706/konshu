@@ -3,79 +3,76 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 3.991,
-        "y": 2.833
+        "x": 1.642,
+        "y": 7.438
       },
       "prevControl": null,
       "nextControl": {
-        "x": 3.716067070848203,
-        "y": 2.582408929791956
+        "x": 2.2677542947441705,
+        "y": 6.7477921647995265
       },
       "isLocked": false,
-      "linkedName": "FR End"
+      "linkedName": "Path 2 LS 1"
     },
     {
       "anchor": {
-        "x": 1.585,
-        "y": 0.642
+        "x": 3.706,
+        "y": 5.055
       },
       "prevControl": {
-        "x": 1.7806493229507911,
-        "y": 0.7976320739079736
+        "x": 3.5241674360279145,
+        "y": 5.226571905273962
       },
       "nextControl": null,
       "isLocked": false,
-      "linkedName": "Proc LS"
+      "linkedName": "BR End"
     }
   ],
   "rotationTargets": [],
-  "constraintZones": [
+  "constraintZones": [],
+  "pointTowardsZones": [
     {
-      "name": "Constraints Zone",
-      "minWaypointRelativePos": 0,
-      "maxWaypointRelativePos": 0.4969615124915593,
-      "constraints": {
-        "maxVelocity": 4.0,
-        "maxAcceleration": 4.0,
-        "maxAngularVelocity": 540.0,
-        "maxAngularAcceleration": 720.0,
-        "nominalVoltage": 12.0,
-        "unlimited": false
-      }
+      "fieldPosition": {
+        "x": 3.957,
+        "y": 4.619
+      },
+      "rotationOffset": 0.0,
+      "minWaypointRelativePos": 0.25,
+      "maxWaypointRelativePos": 0.75,
+      "name": "Point Towards Zone"
     }
   ],
-  "pointTowardsZones": [],
   "eventMarkers": [
     {
-      "name": "Load",
-      "waypointRelativePos": 0.04985754985754849,
-      "endWaypointRelativePos": null,
-      "command": {
-        "type": "named",
-        "data": {
-          "name": "GoLoadingStationPOS"
-        }
-      }
-    },
-    {
-      "name": "MT2",
-      "waypointRelativePos": 0.051341890315050154,
-      "endWaypointRelativePos": null,
-      "command": {
-        "type": "named",
-        "data": {
-          "name": "UseMT2"
-        }
-      }
-    },
-    {
       "name": "Run Funnel",
-      "waypointRelativePos": 0.7946428571428562,
+      "waypointRelativePos": 0.0,
       "endWaypointRelativePos": null,
       "command": {
         "type": "named",
         "data": {
           "name": "Run Funnel"
+        }
+      }
+    },
+    {
+      "name": "GoL3",
+      "waypointRelativePos": 0.45644834571235704,
+      "endWaypointRelativePos": null,
+      "command": {
+        "type": "named",
+        "data": {
+          "name": "GoL3BR"
+        }
+      }
+    },
+    {
+      "name": "score_point",
+      "waypointRelativePos": 0.95,
+      "endWaypointRelativePos": null,
+      "command": {
+        "type": "named",
+        "data": {
+          "name": "ScorePerp"
         }
       }
     }
@@ -90,13 +87,13 @@
   },
   "goalEndState": {
     "velocity": 0,
-    "rotation": 54.0
+    "rotation": -59.99999999999999
   },
   "reversed": false,
   "folder": null,
   "idealStartingState": {
     "velocity": 0,
-    "rotation": 59.99999999999999
+    "rotation": -54.0
   },
   "useDefaultConstraints": true
 }

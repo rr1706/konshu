@@ -90,9 +90,8 @@ public Climber() {
     }
 
     public Command runWheels(){
-        return runOnce(()->m_NovaRight.set(0.2));
-    }
-
+        return runOnce(()->m_NovaRight.set(0.4));
+    }=
     public void setVoltage(double voltage){
         m_climberRightFx.setVoltage(voltage);
     }

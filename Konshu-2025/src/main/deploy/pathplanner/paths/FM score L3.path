@@ -3,40 +3,40 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 5.1067622950819676,
-        "y": 5.121875
+        "x": 1.642,
+        "y": 7.438
       },
       "prevControl": null,
       "nextControl": {
-        "x": 5.913585125556343,
-        "y": 5.118848465175437
+        "x": 1.7132924006337387,
+        "y": 7.187095979457632
       },
       "isLocked": false,
-      "linkedName": "grab algae 3 end"
+      "linkedName": "Path 2 LS 1"
     },
     {
       "anchor": {
-        "x": 7.95,
-        "y": 5.2
+        "x": 3.208,
+        "y": 4.19
       },
       "prevControl": {
-        "x": 7.700131136148513,
-        "y": 5.208096349644564
+        "x": 2.6032500000000005,
+        "y": 4.337
       },
       "nextControl": null,
       "isLocked": false,
-      "linkedName": "barge3"
+      "linkedName": "AL End"
     }
   ],
   "rotationTargets": [],
   "constraintZones": [
     {
       "name": "Constraints Zone",
-      "minWaypointRelativePos": 0.5995948683322052,
-      "maxWaypointRelativePos": 1.0,
+      "minWaypointRelativePos": 0,
+      "maxWaypointRelativePos": 0,
       "constraints": {
         "maxVelocity": 4.0,
-        "maxAcceleration": 2.25,
+        "maxAcceleration": 1.8,
         "maxAngularVelocity": 540.0,
         "maxAngularAcceleration": 720.0,
         "nominalVoltage": 12.0,
@@ -44,27 +44,49 @@
       }
     }
   ],
-  "pointTowardsZones": [],
+  "pointTowardsZones": [
+    {
+      "fieldPosition": {
+        "x": 3.71,
+        "y": 4.19
+      },
+      "rotationOffset": 0.0,
+      "minWaypointRelativePos": 0.6104218362282903,
+      "maxWaypointRelativePos": 0.7890818858560771,
+      "name": "Point Towards Zone"
+    }
+  ],
   "eventMarkers": [
     {
-      "name": "barge_shot",
-      "waypointRelativePos": 0.09993247805536769,
+      "name": "Run Funnel",
+      "waypointRelativePos": 0,
       "endWaypointRelativePos": null,
       "command": {
         "type": "named",
         "data": {
-          "name": "GoBarge"
+          "name": "Run Funnel"
         }
       }
     },
     {
-      "name": "flick",
-      "waypointRelativePos": 0.6995273463875825,
+      "name": "GoL3FL",
+      "waypointRelativePos": 0.2808912896691444,
       "endWaypointRelativePos": null,
       "command": {
         "type": "named",
         "data": {
-          "name": "ThrowAlgae"
+          "name": "GoL3AL"
+        }
+      }
+    },
+    {
+      "name": "score_point",
+      "waypointRelativePos": 0.9507089804186324,
+      "endWaypointRelativePos": null,
+      "command": {
+        "type": "named",
+        "data": {
+          "name": "ScorePerp"
         }
       }
     }
@@ -79,13 +101,13 @@
   },
   "goalEndState": {
     "velocity": 0,
-    "rotation": -135.0
+    "rotation": 0.0
   },
   "reversed": false,
-  "folder": "Algae Auto",
+  "folder": null,
   "idealStartingState": {
     "velocity": 0,
-    "rotation": -119.99999999999999
+    "rotation": -54.0
   },
   "useDefaultConstraints": true
 }
