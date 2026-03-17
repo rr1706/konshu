@@ -23,7 +23,7 @@
               {
                 "type": "path",
                 "data": {
-                  "pathName": "New Start L4 EL"
+                  "pathName": "New Start L4 CR"
                 }
               }
             ]
@@ -36,13 +36,13 @@
               {
                 "type": "path",
                 "data": {
-                  "pathName": "New EL LS"
+                  "pathName": "New CR LS"
                 }
               },
               {
                 "type": "path",
                 "data": {
-                  "pathName": "New L4 FR"
+                  "pathName": "New L4 BL"
                 }
               }
             ]
@@ -59,13 +59,13 @@
                     {
                       "type": "path",
                       "data": {
-                        "pathName": "New FR LS"
+                        "pathName": "New BL LS"
                       }
                     },
                     {
                       "type": "path",
                       "data": {
-                        "pathName": "New L3 FL"
+                        "pathName": "New L4 BR"
                       }
                     }
                   ]
@@ -85,13 +85,13 @@
                     {
                       "type": "path",
                       "data": {
-                        "pathName": "New FL LS"
+                        "pathName": "New BR LS"
                       }
                     },
                     {
                       "type": "path",
                       "data": {
-                        "pathName": "New L3 FR"
+                        "pathName": "DemoPath1"
                       }
                     }
                   ]
@@ -101,15 +101,61 @@
           }
         },
         {
-          "type": "named",
+          "type": "race",
           "data": {
-            "name": "GrabFAlgae"
+            "commands": [
+              {
+                "type": "sequential",
+                "data": {
+                  "commands": [
+                    {
+                      "type": "path",
+                      "data": {
+                        "pathName": "New BR LS"
+                      }
+                    },
+                    {
+                      "type": "path",
+                      "data": {
+                        "pathName": "New L4 AL"
+                      }
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        },
+        {
+          "type": "race",
+          "data": {
+            "commands": [
+              {
+                "type": "sequential",
+                "data": {
+                  "commands": [
+                    {
+                      "type": "path",
+                      "data": {
+                        "pathName": "FM load super cool"
+                      }
+                    },
+                    {
+                      "type": "path",
+                      "data": {
+                        "pathName": "FM score L3"
+                      }
+                    }
+                  ]
+                }
+              }
+            ]
           }
         },
         {
           "type": "path",
           "data": {
-            "pathName": "Backup Processor"
+            "pathName": "New Path"
           }
         }
       ]

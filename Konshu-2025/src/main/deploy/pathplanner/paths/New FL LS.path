@@ -3,25 +3,25 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 3.716,
-        "y": 2.9778
+        "x": 3.706,
+        "y": 2.997
       },
       "prevControl": null,
       "nextControl": {
-        "x": 3.418885446757844,
-        "y": 2.6345232279170143
+        "x": 3.434921601707054,
+        "y": 2.720801698088256
       },
       "isLocked": false,
       "linkedName": "FL End"
     },
     {
       "anchor": {
-        "x": 1.64,
-        "y": 0.6748
+        "x": 1.585,
+        "y": 0.642
       },
       "prevControl": {
-        "x": 1.7629539543124721,
-        "y": 0.8924748150772763
+        "x": 1.7769319698360995,
+        "y": 0.8431122048878052
       },
       "nextControl": null,
       "isLocked": false,
@@ -29,7 +29,21 @@
     }
   ],
   "rotationTargets": [],
-  "constraintZones": [],
+  "constraintZones": [
+    {
+      "name": "Constraints Zone",
+      "minWaypointRelativePos": 0,
+      "maxWaypointRelativePos": 0.49966239027684156,
+      "constraints": {
+        "maxVelocity": 4.0,
+        "maxAcceleration": 4.0,
+        "maxAngularVelocity": 540.0,
+        "maxAngularAcceleration": 720.0,
+        "nominalVoltage": 12.0,
+        "unlimited": false
+      }
+    }
+  ],
   "pointTowardsZones": [],
   "eventMarkers": [
     {
@@ -56,7 +70,7 @@
     },
     {
       "name": "Run Funnel",
-      "waypointRelativePos": 0.5000000000000012,
+      "waypointRelativePos": 0.8011363636363613,
       "endWaypointRelativePos": null,
       "command": {
         "type": "named",
@@ -68,7 +82,7 @@
   ],
   "globalConstraints": {
     "maxVelocity": 4.0,
-    "maxAcceleration": 3.8,
+    "maxAcceleration": 3.0,
     "maxAngularVelocity": 540.0,
     "maxAngularAcceleration": 720.0,
     "nominalVoltage": 12.0,
@@ -84,5 +98,5 @@
     "velocity": 0,
     "rotation": 59.99999999999999
   },
-  "useDefaultConstraints": false
+  "useDefaultConstraints": true
 }

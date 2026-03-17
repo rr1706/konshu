@@ -94,10 +94,10 @@ public final class AutoAlignConstants {
     public static void SetUpElevatorAutoAlignConstantsL4() {
         ElevatorAutoAlignL4.put(0.49, 0.0);
         ElevatorAutoAlignL4.put(0.49, 0.0);
-        ElevatorAutoAlignL4.put(0.6, 1.5);
-        ElevatorAutoAlignL4.put(0.72, 3.0);
-        ElevatorAutoAlignL4.put(0.84, 3.0);
-        ElevatorAutoAlignL4.put(1.0, 3.0);
+        ElevatorAutoAlignL4.put(0.6, 2.0);
+        ElevatorAutoAlignL4.put(0.72, 4.0);
+        ElevatorAutoAlignL4.put(0.84, 4.0);
+        ElevatorAutoAlignL4.put(1.0, 4.0);
     }
 
     // Interpolation lookup table to vary arm angle with target distance
@@ -132,10 +132,10 @@ public final class AutoAlignConstants {
     public static void SetUpArmAutoAlignConstantsL4() {
         ArmAutoAlignL4.put(0.49, 0.0);
         ArmAutoAlignL4.put(0.49, 0.0);
-        ArmAutoAlignL4.put(0.66, -5.8);
-        ArmAutoAlignL4.put(0.69, -8.5);
-        ArmAutoAlignL4.put(0.84, -8.5);
-        ArmAutoAlignL4.put(1.0, -8.5);
+        ArmAutoAlignL4.put(0.66, -6.5);
+        ArmAutoAlignL4.put(0.69, -9.5);
+        ArmAutoAlignL4.put(0.84, -9.5);
+        ArmAutoAlignL4.put(1.0, -9.5);
     }
 
 public static final class ReefAprilTags {

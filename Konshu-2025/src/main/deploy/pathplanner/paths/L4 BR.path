@@ -1,0 +1,77 @@
+{
+  "version": "2025.0",
+  "waypoints": [
+    {
+      "anchor": {
+        "x": 1.642,
+        "y": 7.438
+      },
+      "prevControl": null,
+      "nextControl": {
+        "x": 1.8046114793264503,
+        "y": 7.087923570071815
+      },
+      "isLocked": false,
+      "linkedName": "Path 2 LS 1"
+    },
+    {
+      "anchor": {
+        "x": 3.706,
+        "y": 5.055
+      },
+      "prevControl": {
+        "x": 3.5094755026052673,
+        "y": 5.2401435170988915
+      },
+      "nextControl": null,
+      "isLocked": false,
+      "linkedName": "BR End"
+    }
+  ],
+  "rotationTargets": [],
+  "constraintZones": [],
+  "pointTowardsZones": [],
+  "eventMarkers": [
+    {
+      "name": "score_point",
+      "waypointRelativePos": 0.05113636363636467,
+      "endWaypointRelativePos": null,
+      "command": {
+        "type": "named",
+        "data": {
+          "name": "GoL4Old"
+        }
+      }
+    },
+    {
+      "name": "Dont Use MT2",
+      "waypointRelativePos": 0.3952922077922082,
+      "endWaypointRelativePos": null,
+      "command": {
+        "type": "named",
+        "data": {
+          "name": "NoMT2"
+        }
+      }
+    }
+  ],
+  "globalConstraints": {
+    "maxVelocity": 4.0,
+    "maxAcceleration": 3.0,
+    "maxAngularVelocity": 540.0,
+    "maxAngularAcceleration": 720.0,
+    "nominalVoltage": 12.0,
+    "unlimited": false
+  },
+  "goalEndState": {
+    "velocity": 0,
+    "rotation": -59.99999999999999
+  },
+  "reversed": false,
+  "folder": null,
+  "idealStartingState": {
+    "velocity": 0,
+    "rotation": -54.0
+  },
+  "useDefaultConstraints": true
+}

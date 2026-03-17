@@ -1,0 +1,91 @@
+{
+  "version": "2025.0",
+  "waypoints": [
+    {
+      "anchor": {
+        "x": 1.585,
+        "y": 0.642
+      },
+      "prevControl": null,
+      "nextControl": {
+        "x": 2.2081795147420147,
+        "y": 2.0025831541769046
+      },
+      "isLocked": false,
+      "linkedName": "Proc LS"
+    },
+    {
+      "anchor": {
+        "x": 3.135,
+        "y": 3.8272028688524586
+      },
+      "prevControl": {
+        "x": 2.6065056818181818,
+        "y": 3.4083960506706408
+      },
+      "nextControl": null,
+      "isLocked": false,
+      "linkedName": "AR End"
+    }
+  ],
+  "rotationTargets": [],
+  "constraintZones": [
+    {
+      "name": "Constraints Zone",
+      "minWaypointRelativePos": 0.8001373626373587,
+      "maxWaypointRelativePos": 1.0,
+      "constraints": {
+        "maxVelocity": 4.0,
+        "maxAcceleration": 3.0,
+        "maxAngularVelocity": 540.0,
+        "maxAngularAcceleration": 720.0,
+        "nominalVoltage": 12.0,
+        "unlimited": false
+      }
+    }
+  ],
+  "pointTowardsZones": [],
+  "eventMarkers": [
+    {
+      "name": "score_point",
+      "waypointRelativePos": 0.04945799457994737,
+      "endWaypointRelativePos": null,
+      "command": {
+        "type": "named",
+        "data": {
+          "name": "GoL4Old"
+        }
+      }
+    },
+    {
+      "name": "Dont Use MT2",
+      "waypointRelativePos": 0.4004120879120886,
+      "endWaypointRelativePos": null,
+      "command": {
+        "type": "named",
+        "data": {
+          "name": "NoMT2"
+        }
+      }
+    }
+  ],
+  "globalConstraints": {
+    "maxVelocity": 4.0,
+    "maxAcceleration": 3.9,
+    "maxAngularVelocity": 540.0,
+    "maxAngularAcceleration": 720.0,
+    "nominalVoltage": 12.0,
+    "unlimited": false
+  },
+  "goalEndState": {
+    "velocity": 0,
+    "rotation": 2.5448043798131583
+  },
+  "reversed": false,
+  "folder": null,
+  "idealStartingState": {
+    "velocity": 0,
+    "rotation": 54.0
+  },
+  "useDefaultConstraints": false
+}

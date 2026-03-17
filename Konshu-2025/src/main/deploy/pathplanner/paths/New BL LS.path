@@ -3,25 +3,25 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 3.9389999999999996,
-        "y": 5.224
+        "x": 3.991,
+        "y": 5.219
       },
       "prevControl": null,
       "nextControl": {
-        "x": 3.591325169854554,
-        "y": 5.509298895517341
+        "x": 3.7159008603557924,
+        "y": 5.46974596662276
       },
       "isLocked": false,
       "linkedName": "BL End"
     },
     {
       "anchor": {
-        "x": 1.64,
-        "y": 7.377
+        "x": 1.642,
+        "y": 7.438
       },
       "prevControl": {
-        "x": 1.8118574561874057,
-        "y": 7.195437298013072
+        "x": 1.8376504291690754,
+        "y": 7.2823693167593335
       },
       "nextControl": null,
       "isLocked": false,
@@ -29,7 +29,21 @@
     }
   ],
   "rotationTargets": [],
-  "constraintZones": [],
+  "constraintZones": [
+    {
+      "name": "Constraints Zone",
+      "minWaypointRelativePos": 0,
+      "maxWaypointRelativePos": 0.502363268062128,
+      "constraints": {
+        "maxVelocity": 4.0,
+        "maxAcceleration": 4.0,
+        "maxAngularVelocity": 540.0,
+        "maxAngularAcceleration": 720.0,
+        "nominalVoltage": 12.0,
+        "unlimited": false
+      }
+    }
+  ],
   "pointTowardsZones": [],
   "eventMarkers": [
     {
@@ -68,7 +82,7 @@
   ],
   "globalConstraints": {
     "maxVelocity": 4.0,
-    "maxAcceleration": 3.8,
+    "maxAcceleration": 3.0,
     "maxAngularVelocity": 540.0,
     "maxAngularAcceleration": 720.0,
     "nominalVoltage": 12.0,
@@ -84,5 +98,5 @@
     "velocity": 0,
     "rotation": -59.99999999999999
   },
-  "useDefaultConstraints": false
+  "useDefaultConstraints": true
 }

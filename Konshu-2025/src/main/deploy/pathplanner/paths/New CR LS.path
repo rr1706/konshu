@@ -3,38 +3,47 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 5.0468237704918035,
-        "y": 5.229764344262294
+        "x": 4.988,
+        "y": 5.219
       },
       "prevControl": null,
       "nextControl": {
-        "x": 3.293180186632391,
-        "y": 6.419290958671174
+        "x": 4.320370010514838,
+        "y": 5.832023083339147
       },
       "isLocked": false,
       "linkedName": "CR End"
     },
     {
       "anchor": {
-        "x": 1.64,
-        "y": 7.377
+        "x": 1.642,
+        "y": 7.438
       },
       "prevControl": {
-        "x": 1.8391870646186859,
-        "y": 7.225210467782598
+        "x": 1.9123325188372475,
+        "y": 7.22484837566171
       },
       "nextControl": null,
       "isLocked": false,
       "linkedName": "Path 2 LS 1"
     }
   ],
-  "rotationTargets": [
+  "rotationTargets": [],
+  "constraintZones": [
     {
-      "waypointRelativePos": 0.7493775933609989,
-      "rotationDegrees": -54.0
+      "name": "Constraints Zone",
+      "minWaypointRelativePos": 0,
+      "maxWaypointRelativePos": 0.49696151249155657,
+      "constraints": {
+        "maxVelocity": 4.0,
+        "maxAcceleration": 4.0,
+        "maxAngularVelocity": 540.0,
+        "maxAngularAcceleration": 720.0,
+        "nominalVoltage": 12.0,
+        "unlimited": false
+      }
     }
   ],
-  "constraintZones": [],
   "pointTowardsZones": [],
   "eventMarkers": [
     {
@@ -61,7 +70,7 @@
     },
     {
       "name": "Run Funnel",
-      "waypointRelativePos": 0.4981006647673206,
+      "waypointRelativePos": 0.747394540942931,
       "endWaypointRelativePos": null,
       "command": {
         "type": "named",
@@ -73,7 +82,7 @@
   ],
   "globalConstraints": {
     "maxVelocity": 4.0,
-    "maxAcceleration": 3.8,
+    "maxAcceleration": 3.0,
     "maxAngularVelocity": 540.0,
     "maxAngularAcceleration": 720.0,
     "nominalVoltage": 12.0,
@@ -87,7 +96,7 @@
   "folder": null,
   "idealStartingState": {
     "velocity": 0,
-    "rotation": -123.6900675259797
+    "rotation": -119.99999999999999
   },
-  "useDefaultConstraints": false
+  "useDefaultConstraints": true
 }

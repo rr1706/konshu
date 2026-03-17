@@ -86,10 +86,6 @@ public class AlignInAuto extends Command {
 
         m_ssm.setState(m_state, armOffset, elevatorOffset);
 
-        //SmartDashboard.putNumber("Target Angle", targetAngle);
-        //double differenceinAngle = targetAngle - currentAngle;
-        //SmartDashboard.putNumber("Difference In Angle", DifferenceinAngle);
-
         double rotationOutput = rotPID.calculate(currentAngle, targetAngle);
         SmartDashboard.putNumber("Auto Rot Out", rotationOutput);
 

@@ -3,38 +3,47 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 5.047,
-        "y": 2.822
+        "x": 4.988,
+        "y": 2.8328
       },
       "prevControl": null,
       "nextControl": {
-        "x": 3.293362232699331,
-        "y": 1.6324648106528916
+        "x": 4.32064668283208,
+        "y": 2.2200394023234096
       },
       "isLocked": false,
       "linkedName": "EL End"
     },
     {
       "anchor": {
-        "x": 1.64,
-        "y": 0.6748
+        "x": 1.59,
+        "y": 0.642
       },
       "prevControl": {
-        "x": 1.8391871611980615,
-        "y": 0.826589405480236
+        "x": 1.860130438202542,
+        "y": 0.8549918927013483
       },
       "nextControl": null,
       "isLocked": false,
       "linkedName": "Proc LS"
     }
   ],
-  "rotationTargets": [
+  "rotationTargets": [],
+  "constraintZones": [
     {
-      "waypointRelativePos": 0.7493775933609989,
-      "rotationDegrees": 54.0
+      "name": "Constraints Zone",
+      "minWaypointRelativePos": 0,
+      "maxWaypointRelativePos": 0.49696151249155696,
+      "constraints": {
+        "maxVelocity": 4.0,
+        "maxAcceleration": 4.0,
+        "maxAngularVelocity": 540.0,
+        "maxAngularAcceleration": 720.0,
+        "nominalVoltage": 12.0,
+        "unlimited": false
+      }
     }
   ],
-  "constraintZones": [],
   "pointTowardsZones": [],
   "eventMarkers": [
     {
@@ -61,7 +70,7 @@
     },
     {
       "name": "Run Funnel",
-      "waypointRelativePos": 0.4981006647673206,
+      "waypointRelativePos": 0.8011363636363653,
       "endWaypointRelativePos": null,
       "command": {
         "type": "named",
@@ -73,7 +82,7 @@
   ],
   "globalConstraints": {
     "maxVelocity": 4.0,
-    "maxAcceleration": 3.8,
+    "maxAcceleration": 3.0,
     "maxAngularVelocity": 540.0,
     "maxAngularAcceleration": 720.0,
     "nominalVoltage": 12.0,
@@ -87,7 +96,7 @@
   "folder": null,
   "idealStartingState": {
     "velocity": 0,
-    "rotation": 123.68999999999998
+    "rotation": 119.99999999999999
   },
-  "useDefaultConstraints": false
+  "useDefaultConstraints": true
 }
